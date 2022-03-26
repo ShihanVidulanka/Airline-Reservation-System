@@ -1,0 +1,13 @@
+body{
+    background: url("../../img/background.jpg") center fixed;
+}
+.search{
+    max-width: 50%;
+    margin: auto;
+}
+table{
+    background-color: rgb(231, 228, 250);
+}
+.opt{
+    float: right;
+}
