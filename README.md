@@ -11,6 +11,7 @@ a varying seating capacity that is consistent among the model. As the first stag
 B would fly on routes covering CGK and DPS (Indonesia), BIA and HRI (Sri Lanka), DEL,
 BOM, MAA (India), BKK and DMK (Thailand), SIN (Singapore). Multiple flights will be created
 covering these destinations.
+
 In B systems, a flight has a designated origin and a destination. For an example BIA → BKK
 is considered as one flight. It is also referred to as a route, yet currently B does not offer transit
 / transfer flights. Hence only two locations are related to a given flight, B would pre-define a
@@ -28,6 +29,7 @@ overbook the seats as other airlines. Once a seat is selected, a booking is crea
 booking is considered completed after payments. Payments will not be handled by the system.
 A ticket is allocated when the booking is completed. The prices may vary depending on the
 traveler class (Economy, Business or Platinum).
+
 The management of B has hired your team to provide expert consultation on database design
 for their new airline reservation system. It encapsulate all the above features. Additionally they
 need to create space for the database to expand in future when new airports are added to the
@@ -35,9 +37,10 @@ supported destinations. Airports must have an airport code which is universally 
 the city of airport location must be stored. Locations must be defined in a hierarchical manner.
 Ex: Sri Lanka → Colombo → BIA, USA → New York State → New York City → JFK.
 Depending on the location, the levels of hierarchy may vary.
+
 Further, the management require the system to produce the following reports,
-● Given a flight no, all passengers travelling in it (next immediate flight) below age 18,
+>Given a flight no, all passengers travelling in it (next immediate flight) below age 18,
 above age 18
-● Given a date range, number of passengers travelling to a given destination
-● Given a date range, number of bookings by each passenger type
-● Given origin and destination, all past flights, states, passenger counts data
+>Given a date range, number of passengers travelling to a given destination
+> Given a date range, number of bookings by each passenger type
+> Given origin and destination, all past flights, states, passenger counts data
