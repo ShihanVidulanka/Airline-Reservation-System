@@ -51,7 +51,7 @@
                                 <li><a class="scrollTo" data-scrollTo="blog" href="#">Destinations</a></li>
 
                                 <li><a class="scrollTo" data-scrollTo="about" href="#">Contact Us</a></li>
-                                <li><a class="scrollTo" href="#">Log In</a></li>
+                                <li><a class="scrollTo" href="login.php">Log In</a></li>
                             </ul>
                         </nav><!-- / #primary-nav -->
                     </div>
@@ -187,8 +187,8 @@
                         </ul>
                     </div>
                 </div>
-                
-                <div class="col-md-6">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
                     <div class="contact-info">
                         <div class="footer-heading">
                             <h4>Contact Information</h4>
