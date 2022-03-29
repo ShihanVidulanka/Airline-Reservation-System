@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/flight_dispatcher_home.css">
+    <link rel="stylesheet" href="css/admin_create_user.css">
     <title>Create User</title>
 </head>
 
@@ -26,13 +26,13 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="flight_dispatcher_home.php">Home</a>
+                        <a class="nav-link active" href="admin_home_page.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="flight_dispatcher_flight_details.php">Create User</a>
+                        <a class="nav-link " href="admin_create_user.php">Create User</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="flight_dispatcher_add_new_flight.php">View User</a>
+                        <a class="nav-link" href="admin_view_user.php">View User</a>
                     </li>
                 </ul>
 
@@ -47,26 +47,14 @@
 
     <!-- create a form  -->
     <div class="container p-3">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" onchange="populate(this.id, '')">
-                Select User Type
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Airline Administrator</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Flight Dispatcher</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Operation Agent</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Registered Passenger</a></li>
-            </ul>
-
-            <form action="">
-                
-            </form>
-        </div>
+        <select name="" id="list" onchange="populate()">
+            <option value="none" selected disabled hidden>Select a User</option>
+            <option value="aa">Airline Administrator</option>
+            <option value="fd">Flight Dispatcher</option>
+            <option value="oa">Operation Agent</option>
+        </select>
     </div>
-
+    <script src="js/admin_create_user.js"></script>
 </body>
 
 </html>

@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/admin_home.css">
-    <title>Home</title>
+    <title>Create Operation Agent</title>
 </head>
 
 <body>
@@ -41,76 +41,18 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="admin_view_user.php">View User</a>
+                        <a class="nav-link" href="admin_view_user.php">View User</a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Logout</a>
+                        <a class="nav-link" aria-current="page" href="#">Logout</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-    <div class="container pt-5">
-        <div class="wrapper p-3">
-            <h1 id="heading" class="mb-4">Admin</h1>
-
-            <div class="row mb-3">
-                <div class="col-sm-4">
-                    <p>Account Number</p>
-                </div>
-                <div class="col-sm-2">
-                    <p>:</p>
-                </div>
-                <div class="col-sm-6">
-                    <p>AD-190097J</p>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-sm-4">
-                    <p>Name</p>
-                </div>
-                <div class="col-sm-2">
-                    <p>:</p>
-                </div>
-                <div class="col-sm-6">
-                    <p>Sahan DC</p>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-sm-4">
-                    <p>Aiport Code</p>
-                </div>
-                <div class="col-sm-2">
-                    <p>:</p>
-                </div>
-                <div class="col-sm-6">
-                    <p>SLPP-6969</p>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-sm-4">
-                    <label for="plane" class="form-label">Phone Number</label>
-                </div>
-                <div class="col-sm-2">
-                    <p>:</p>
-                </div>
-                <div class="col-sm-6">
-                    <p>0718949089</p>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-    </table>
-
 </body>
 
 </html>
