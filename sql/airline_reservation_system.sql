@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2022 at 10:38 AM
+-- Generation Time: Mar 30, 2022 at 02:22 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -87,7 +87,8 @@ CREATE TABLE `booking` (
   `passenger_id` int(15) NOT NULL,
   `booking_time` datetime NOT NULL DEFAULT current_timestamp(),
   `ticket_price` float NOT NULL,
-  `seat_no` int(3) NOT NULL
+  `seat_no` int(3) NOT NULL,
+  `seat_type` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
