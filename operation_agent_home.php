@@ -26,10 +26,10 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="flight_dispatcher_home.php">Home</a>
+                        <a class="nav-link active" href="operation_agent_home.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="">Flight Details</a>
+                        <a class="nav-link " href="operation_agent_view_passenger.php">Passenger Details</Details></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">Add New Flight</a>
