@@ -1,3 +1,5 @@
+<<?php include_once('include/login.inc.php')?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,10 +28,10 @@
             </div>
 
             <!-- Login Form -->
-            <form>
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Enter Your Username">
-                <input type="password" id="password" class="fadeIn third" name="login" placeholder="Enther the Password">
-                <input type="submit" class="fadeIn fourth" value="Log In">
+            <form method="post">
+                <input type="text" id="username" class="fadeIn second" name="username" placeholder="Enter Your Username">
+                <input type="password" id="password" class="fadeIn third" name="password" placeholder="Enther the Password">
+                <input type="submit" name="login" id="submit" class="fadeIn fourth" value="Log In">
             </form>
 
             <!-- Remind Passowrd -->
