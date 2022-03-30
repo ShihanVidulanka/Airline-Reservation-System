@@ -1,5 +1,5 @@
 <?php 
-include_once("./class/model/dbh.php");
+require_once("./class/model/dbh.php");
 
 class Login_Model extends Dbh{
     protected function getUser($username, $password){
