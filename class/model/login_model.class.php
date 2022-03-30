@@ -34,8 +34,8 @@ class Login_Model extends Dbh{
                     $_SESSION["username"] = $user["username"];
                     $_SESSION["account_type"] = $user["account_type"];
                     $_SESSION["account_no"] = $user["account_no"];
-                    header("location: airline_administrator_home.php");
-                    exit();
+                    // header("location: airline_administrator_home.php");
+                    return $userType;
                     break;
 
                 case '1':
