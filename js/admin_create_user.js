@@ -13,7 +13,7 @@ function ShowRadioButtonDiv (IdBaseName, NumberOfButtons) {
 }
 
 $(document).ready(function() {
-    var maxField = 10; //Input fields increment limitation
+    var maxField = 5; //Input fields increment limitation
     var addButton = $('.add_button_aa'); //Add button selector
     var wrapper = $('#aa_p'); //Input field wrapper
     var fieldHTML = '<div><input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Phone Number:" value="" /><div class="valid-feedback">Valid Number</div><div class="invalid-feedback">Invalid Number</div><a href="javascript:void(0);" class="remove_button"><img src="img/remove_icon.png"/></a></div>'; //New input field html 
@@ -37,7 +37,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    var maxField = 10; //Input fields increment limitation
+    var maxField = 5; //Input fields increment limitation
     var addButton = $('.add_button_fd'); //Add button selector
     var wrapper = $('#fd_p'); //Input field wrapper
     var fieldHTML = '<div><input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Phone Number:" value="" /><div class="valid-feedback">Valid Number</div><div class="invalid-feedback">Invalid Number</div><a href="javascript:void(0);" class="remove_button"><img src="img/remove_icon.png"/></a></div>'; //New input field html 
@@ -61,7 +61,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    var maxField = 10; //Input fields increment limitation
+    var maxField = 5; //Input fields increment limitation
     var addButton = $('.add_button_oa'); //Add button selector
     var wrapper = $('#oa_p'); //Input field wrapper
     var fieldHTML = '<div><input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Phone Number:" value="" /><div class="valid-feedback">Valid Number</div><div class="invalid-feedback">Invalid Number</div><a href="javascript:void(0);" class="remove_button"><img src="img/remove_icon.png"/></a></div>'; //New input field html 
