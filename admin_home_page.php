@@ -26,28 +26,19 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="admin_home_page.php">Home</a>
+                        <a class="nav-link active" href="admin_home_page.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Create User
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="admin_create_airline_administrator.php">Airline Administrator</a></li>
-                                <li><a class="dropdown-item" href="admin_create_flight_dispatcher.php">FlightDispatcher</a></li>
-                                <li><a class="dropdown-item" href="admin_create_operation_agent.php">Operation Agent</a></li>
-                            </ul>
-                        </div>
+                        <a class="nav-link " href="admin_create_user.php">Create User</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="admin_view_user.php">View User</a>
+                        <a class="nav-link" href="admin_view_user.php">View User</a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Logout</a>
+                        <a class="nav-link" aria-current="page" href="#">Logout</a>
                     </li>
                 </ul>
             </div>
