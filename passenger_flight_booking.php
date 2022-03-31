@@ -25,13 +25,16 @@
             <a class="nav-link" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Flight Details</a>
+            <a class="nav-link active" href="passenger_flight_booking.php">Flight Details</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="passenger_booking_details.php">Booking Details</a>
           </li>
         </ul>
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Logout</a>
+            <a class="nav-link" aria-current="page" href="include/logout.inc.php">Logout</a>
           </li>
         </ul>
       </div>
@@ -140,7 +143,7 @@
             <td>08:00 a.m.</td>
             <td><button class="btn btn-primary">Book This Flight</button></td>
           </tr>
-          
+
 
         </tbody>
       </table>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2022 at 08:08 AM
+-- Generation Time: Mar 30, 2022 at 02:22 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -87,7 +87,8 @@ CREATE TABLE `booking` (
   `passenger_id` int(15) NOT NULL,
   `booking_time` datetime NOT NULL DEFAULT current_timestamp(),
   `ticket_price` float NOT NULL,
-  `seat_no` int(3) NOT NULL
+  `seat_no` int(3) NOT NULL,
+  `seat_type` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -120,7 +121,6 @@ CREATE TABLE `flight_dispatcher` (
   `account_no` int(15) NOT NULL,
   `user_id` int(20) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `phone_number` varchar(20) NOT NULL,
   `airport_code` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -128,8 +128,8 @@ CREATE TABLE `flight_dispatcher` (
 -- Dumping data for table `flight_dispatcher`
 --
 
-INSERT INTO `flight_dispatcher` (`account_no`, `user_id`, `name`, `phone_number`, `airport_code`) VALUES
-(1, 4, 'sahan caldera', '', 'BIA');
+INSERT INTO `flight_dispatcher` (`account_no`, `user_id`, `name`, `airport_code`) VALUES
+(1, 4, 'sahan caldera', 'BIA');
 
 -- --------------------------------------------------------
 
@@ -143,7 +143,7 @@ CREATE TABLE `guest` (
   `name` varchar(50) NOT NULL,
   `age` int(3) NOT NULL,
   `passport_number` varchar(25) NOT NULL,
-  `phone_number` varchar(20) NOT NULL,
+  `phone_no` int(20) NOT NULL,
   `state` int(1) NOT NULL,
   `created_date_time` datetime NOT NULL DEFAULT current_timestamp(),
   `passenger_id` int(15) NOT NULL
@@ -153,8 +153,8 @@ CREATE TABLE `guest` (
 -- Dumping data for table `guest`
 --
 
-INSERT INTO `guest` (`guest_no`, `NIC`, `name`, `age`, `passport_number`, `phone_number`, `state`, `created_date_time`, `passenger_id`) VALUES
-(1, '987654321V', 'Yasith Heshan', 24, '0987654321-1234567890', '', 0, '2022-03-30 10:34:55', 2);
+INSERT INTO `guest` (`guest_no`, `NIC`, `name`, `age`, `passport_number`, `phone_no`, `state`, `created_date_time`, `passenger_id`) VALUES
+(1, '987654321V', 'Yasith Heshan', 24, '0987654321-1234567890', 0, 0, '2022-03-30 10:34:55', 2);
 
 -- --------------------------------------------------------
 
@@ -166,7 +166,6 @@ CREATE TABLE `operations_agent` (
   `account_no` int(15) NOT NULL,
   `user_id` int(20) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `phone_number` varchar(20) NOT NULL,
   `state` int(1) NOT NULL,
   `airport_code` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -175,8 +174,8 @@ CREATE TABLE `operations_agent` (
 -- Dumping data for table `operations_agent`
 --
 
-INSERT INTO `operations_agent` (`account_no`, `user_id`, `name`, `phone_number`, `state`, `airport_code`) VALUES
-(1, 3, 'Sathira LIyanapathirana', '', 0, 'CMB');
+INSERT INTO `operations_agent` (`account_no`, `user_id`, `name`, `state`, `airport_code`) VALUES
+(1, 3, 'Sathira LIyanapathirana', 0, 'CMB');
 
 -- --------------------------------------------------------
 
@@ -210,7 +209,6 @@ CREATE TABLE `registered_passenger` (
   `name` varchar(50) NOT NULL,
   `age` int(3) NOT NULL,
   `passport_number` varchar(25) NOT NULL,
-  `phone_number` varchar(20) NOT NULL,
   `category` int(1) NOT NULL,
   `state` int(1) NOT NULL,
   `passenger_id` int(15) NOT NULL
@@ -220,8 +218,8 @@ CREATE TABLE `registered_passenger` (
 -- Dumping data for table `registered_passenger`
 --
 
-INSERT INTO `registered_passenger` (`account_no`, `user_id`, `NIC`, `name`, `age`, `passport_number`, `phone_number`, `category`, `state`, `passenger_id`) VALUES
-(1, 2, '123456789V', 'Harshani Bandara', 22, '1234567890-0987654321', '', 2, 0, 1);
+INSERT INTO `registered_passenger` (`account_no`, `user_id`, `NIC`, `name`, `age`, `passport_number`, `category`, `state`, `passenger_id`) VALUES
+(1, 2, '123456789V', 'Harshani Bandara', 22, '1234567890-0987654321', 2, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -266,7 +264,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`ID`, `username`, `password`, `account_type`) VALUES
 (1, 'Admin', '$2y$10$XwxseSnyw782C4n9CxsN/e8choRcyfKkXtVJQtDfMhkvN12ZL9Dfa', 0),
 (2, 'HarshaniBandara', '$2y$10$XwxseSnyw782C4n9CxsN/e8choRcyfKkXtVJQtDfMhkvN12ZL9Dfa', 3),
-(3, 'SathhiraLLyanapathirana', '$2y$10$XwxseSnyw782C4n9CxsN/e8choRcyfKkXtVJQtDfMhkvN12ZL9Dfa', 1),
+(3, 'SathiraLyanapathirana', '$2y$10$XwxseSnyw782C4n9CxsN/e8choRcyfKkXtVJQtDfMhkvN12ZL9Dfa', 1),
 (4, 'SahanCaldera', '$2y$10$XwxseSnyw782C4n9CxsN/e8choRcyfKkXtVJQtDfMhkvN12ZL9Dfa', 2);
 
 --

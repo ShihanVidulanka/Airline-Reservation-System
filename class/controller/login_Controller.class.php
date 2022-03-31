@@ -1,5 +1,6 @@
 <?php
-include_once('./class/model/login_model.class.php');
+require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
+
 
 class Login_Controller extends Login_Model
 {
@@ -29,7 +30,7 @@ class Login_Controller extends Login_Model
                 header("location: airline_administrator_home.php");
                 break;
             case '1':
-                header("location: operation_agent_home");
+                header("location: operation_agent_home.php");
                 break;
             case '2':
                 header("location: flight_dispatcher_home.php");

@@ -1,3 +1,11 @@
+<?php 
+
+session_start();
+
+// print_r($_SESSION);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +49,7 @@
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Logout</a>
+                        <a class="nav-link" aria-current="page" href="include/logout.inc.php">Logout</a>
                     </li>
                 </ul>
             </div>
