@@ -1,8 +1,18 @@
 <?php 
 
+// include_once('./class/model/login_model.class.php');
+require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 session_start();
 
+if (!isset($_SESSION['ID'])) {
+    header("Location: login.php");
+    return;
+}
+
+$flight_dispatcher_view = new Flight_Dispatcher_View();
+$details = $flight_dispatcher_view->getHomeDetails();
 // print_r($_SESSION);
+// print_r($details);
 
 ?>
 
@@ -58,17 +68,17 @@ session_start();
 
     <div class="container pt-5">
         <div class="wrapper p-3">
-            <h1 id="heading" class="mb-4">Home</h1>
+            <h1 id="heading" class="mb-4">Welcome Home <?php echo $details['username'] ?></h1>
 
             <div class="row mb-3">
                 <div class="col-sm-4">
-                    <p>Account Number</p>
+                    <p>Account No.</p>
                 </div>
                 <div class="col-sm-2">
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>19568-DEF</p>
+                    <p><?php echo $details['ID']; ?></p>
                 </div>
             </div>
 
@@ -80,7 +90,7 @@ session_start();
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>Sathira L.</p>
+                    <p><?php echo $details['name']; ?></p>
                 </div>
             </div>
 
@@ -92,19 +102,19 @@ session_start();
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>SLPP-6969</p>
+                    <p><?php echo $details['airport_name']; ?></p>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-sm-4">
-                    <label for="plane" class="form-label">Phone Number</label>
+                    <p>Phone Number</p>
                 </div>
                 <div class="col-sm-2">
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>0719955178</p>
+                    <p><?php echo $details['telephone_numbers'] ?></p>
                 </div>
             </div>
 
