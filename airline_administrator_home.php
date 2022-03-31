@@ -33,10 +33,10 @@
                     
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=""></a>
+                        <a class="nav-link" href="airline_administrator_create_user.php">Create User</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=""></a>
+                        <a class="nav-link" href="airline_administrator_view_user.php">View User</a>
                     </li>
                 </ul>
 
