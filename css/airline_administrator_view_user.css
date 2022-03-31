@@ -1,12 +1,12 @@
 *{
     box-sizing: border-box;
 }
-body{
+/* body{
     
     background: url("../img/background.jpg") center fixed;
     background-size: cover;
 
-}
+} */
 
 #heading{
     text-align: center;
