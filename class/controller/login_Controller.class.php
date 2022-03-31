@@ -39,7 +39,7 @@ class Login_Controller extends Login_Model
                 header("location: main_page.php");
                 break;
             default:
-                header("location: login.php?error=NoUser");
+                // header("location: login.php?error=NoUser");
                 break;
         }
     }
