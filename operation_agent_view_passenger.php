@@ -12,8 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/flight_dispatcher_home.css">
-    <title>Home</title>
+    <link rel="stylesheet" href="css/operation_agent_view_passenger.css">
+    <title>View Passenger</title>
 </head>
 
 <body>
@@ -68,7 +68,8 @@
                     <td>@mdo</td>
                     <td>colombo</td>
                     <td><button type="button" class="btn btn-info">View</button></td>
-                    <td><button type="button" class="btn btn-danger">Delete</button></td>
+                    <td><button type="button" class="btn btn-danger"onclick="document.getElementById('id01').style.display='block'">Delete</button></td>
+                    
                 </tr>
                 <tr>
                     <th scope="row">2</th>
@@ -77,8 +78,8 @@
                     <td>@fat</td>
                     <td>japan</td>
                     <td><button type="button" class="btn btn-info">View</button></td>
-                    <td><button type="button" class="btn btn-danger">Delete</button></td>
-
+                    <td><button type="button" class="btn btn-danger"onclick="document.getElementById('id01').style.display='block'">Delete</button></td>
+                    
                 </tr>
                 <tr>
                 <th scope="row">3</th>
@@ -87,7 +88,8 @@
                     <td>@twitter</td>
                     <td>india</td>
                     <td><button type="button" class="btn btn-info">View</button></td>
-                    <td><button type="button" class="btn btn-danger">Delete</button></td>
+                    <td><button type="button" class="btn btn-danger"onclick="document.getElementById('id01').style.display='block'">Delete</button></td>
+                    
                 </tr>
                 <tr>
                 <th scope="row">1</th>
@@ -96,7 +98,8 @@
                     <td>@mdo</td>
                     <td>colombo</td>
                     <td><button type="button" class="btn btn-info">View</button></td>
-                    <td><button type="button" class="btn btn-danger">Delete</button></td>
+                    <td><button type="button" class="btn btn-danger"onclick="document.getElementById('id01').style.display='block'">Delete</button></td>
+                    
                 </tr>
                 <tr>
                     <th scope="row">2</th>
@@ -105,7 +108,8 @@
                     <td>@fat</td>
                     <td>japan</td>
                     <td><button type="button" class="btn btn-info">View</button></td>
-                    <td><button type="button" class="btn btn-danger">Delete</button></td>
+                    <td><button type="button" class="btn btn-danger"onclick="document.getElementById('id01').style.display='block'">Delete</button></td>
+                    
                 </tr>
                 <tr>
                 <th scope="row">3</th>
@@ -114,15 +118,42 @@
                     <td>@twitter</td>
                     <td>india</td>
                     <td><button type="button" class="btn btn-info">View</button></td>
-                    <td><button type="button" class="btn btn-danger">Delete</button></td>
+
+                    <td><button type="button" class="btn btn-danger"onclick="document.getElementById('id01').style.display='block'">Delete</button></td>
+                    
                 </tr>
             </tbody>
         </table>
         </div>
     </div>   
+<!--pop up delete confirm-->
+    <div id="id01" class="modal">
+    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <form class="modal-content" action="/action_page.php">
+        <div class="container">
+        <h1>Delete Account</h1>
+        <p>Are you sure you want to delete your account?</p>
 
-   
+        <div class="clearfix">
+            <button type="button" class="cancelbtn">Cancel</button>
+            <button type="button" class="deletebtn">Delete</button>
+        </div>
+        </div>
+    </form>
+    </div>   
 
 </body>
 
 </html>
+
+<script>
+// Get the  delete modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
