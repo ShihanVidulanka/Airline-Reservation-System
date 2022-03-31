@@ -1,6 +1,6 @@
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/class/model/dbh.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
 class Login_Model extends Dbh{
     public function getUser($username, $password){
