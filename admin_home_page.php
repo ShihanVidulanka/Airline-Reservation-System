@@ -1,3 +1,9 @@
+<?php
+require_once('include/db.inc.php');
+require_once('include/autoloader.inc.php');
+require_once('include/additional.inc.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,7 +106,6 @@
         </div>
 
     </div>
-    </table>
 
 </body>
 

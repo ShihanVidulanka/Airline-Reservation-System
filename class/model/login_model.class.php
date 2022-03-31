@@ -1,23 +1,28 @@
 <?php 
-require_once("./class/model/dbh.php");
+require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
 class Login_Model extends Dbh{
-    protected function getUser($username, $password){
-        $query = "SELECT * FROM user WHERE username='{$username}';";
-        $result_set = mysqli_query($this->connect(), $query);
+    public function getUser($username, $password){
+        $query = "SELECT * FROM user WHERE username=:username;";
+        $result_set = $this->connect()->prepare($query);
+        $result_set->bindParam(':username',$username);
+        $result_set->execute();
         echo "hello";
         if (!$result_set) {
-            //echo $result_set;
+            echo $result_set;
             header("location: login.php?error=ConnectionFails1");
             exit();
         }
 
-        if (!mysqli_num_rows($result_set) == 1) {
+       
+        if(!$result_set->rowCount()==1){
             header("location: login.php?error=UserNotFound1");
             exit();
         }
 
-        $user = mysqli_fetch_assoc($result_set);
+        $user = $result_set->fetch();
+        print_array($user);
         $userType = $user['account_type'];
         $hashedPassword = $user['password'];
         $checkPassword = password_verify($password, $hashedPassword);
@@ -28,16 +33,17 @@ class Login_Model extends Dbh{
         }
         elseif ($checkPassword == true) {
             // When Password is verified
-
-            $query2 =  "SELECT phone_no FROM telephone_no WHERE user_id ={$user["ID"]}";
-            $result_set2 = mysqli_query($this->connect(), $query2);
-
+            $query2 =  "SELECT phone_no FROM telephone_no WHERE user_id =:ID";
+            $result_set2 = $this->connect()->prepare($query2);
+            $result_set2->bindParam(':ID',$user['ID']);
+            $result_set2->execute();
+            
             if (!($result_set2) ) {
                 header("location: login.php?error=ConnectionFail2");
                 exit();
             }
             $array_Tp_no = array();
-            while ($user_tp = mysqli_fetch_assoc($result_set2)) {
+            while ($user_tp = $result_set2->fetch()) {
                 array_push($array_Tp_no, $user_tp['phone_no']);
             }
 
@@ -48,37 +54,39 @@ class Login_Model extends Dbh{
                     $_SESSION["username"] = $user["username"];
                     $_SESSION["account_type"] = $user["account_type"];
                     $_SESSION["TP_no"] = $array_Tp_no;
-                    // header("location: airline_administrator_home.php");
+                    header("location: airline_administrator_home.php");
                     return $userType;
                     break;
 
                 case '1':
-                    $query3 = "SELECT * FROM operations_agent WHERE user_id ={$user["ID"]}";
+                    $query3 = "SELECT * FROM operations_agent WHERE user_id =:ID";
                     break;
 
                 case '2':
-                    $query3 = "SELECT * FROM flight_dispatcher WHERE user_id={$user["ID"]}";
+                    $query3 = "SELECT * FROM flight_dispatcher WHERE user_id=:ID";
                     break;
 
                 case '3':            
-                    $query3 = "SELECT * FROM registered_passenger WHERE user_id={$user["ID"]}";
+                    $query3 = "SELECT * FROM registered_passenger WHERE user_id=:ID";
                     break;
                 default:
                     header("location: login.php?error=UserNotFound2");
                     break;
             }
-            $result_set3 = mysqli_query($this->connect(), $query3);
+            $result_set3 = $this->connect()->prepare($query3);
+            $result_set3->bindParam(':ID',$user['ID']);
+            $result_set3->execute();
             if (!$result_set3) {
                 header("location: login.php?error=ConnectionFail3");
                 exit();
             }
 
-            if (!mysqli_num_rows($result_set3) == 1) {
+            if(!$result_set3->rowCount()==1){
                 header("location: login.php?error=UserNotFound3");
                 exit();
             }
 
-            $user_details = mysqli_fetch_assoc($result_set3);
+            $user_details = $result_set3->fetch();
 
             session_start();
             $_SESSION["ID"] = $user["ID"];
