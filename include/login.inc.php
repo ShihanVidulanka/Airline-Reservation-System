@@ -1,6 +1,5 @@
 <<?php 
-include_once('./class/controller/login_Controller.class.php');
-include_once('db.inc.php');
+require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 if (isset($_SESSION['login'])) {
     header("Location: main_page.php");
 }
