@@ -32,12 +32,7 @@
                         <a class="nav-link active" href="operation_agent_view_passenger.php">Passenger Details</Details></a>
                     
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Add New Flight</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Add New Airport</a>
-                    </li>
+                    
                 </ul>
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -48,10 +43,83 @@
             </div>
         </div>
     </nav>
+   
+    <div class="container xxl">
+        <div class="wrapper ">
+        <h1>Passengers</h1>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">NO</th>
+                <th scope="col">First NAME</th>
+                <th scope="col">Last NAME</th>
+                <th scope="col">PASSPORT ID</th>
+                <th scope="col">DESTINATION</th>
+                <th scope="col">VIEW</th>
+                <th scope="col">DELETE </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="row">1</th>
+                    <td>Sahan</td>
+                    <td>Caldera</td>
+                    <td>@mdo</td>
+                    <td>colombo</td>
+                    <td><button type="button" class="btn btn-info">View</button></td>
+                    <td><button type="button" class="btn btn-danger">Delete</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Shihan</td>
+                    <td>Vidukanka</td>
+                    <td>@fat</td>
+                    <td>japan</td>
+                    <td><button type="button" class="btn btn-info">View</button></td>
+                    <td><button type="button" class="btn btn-danger">Delete</button></td>
 
-    
-
-       
+                </tr>
+                <tr>
+                <th scope="row">3</th>
+                    <td>Sathira</td>
+                    <td>liyanapathirana</td>
+                    <td>@twitter</td>
+                    <td>india</td>
+                    <td><button type="button" class="btn btn-info">View</button></td>
+                    <td><button type="button" class="btn btn-danger">Delete</button></td>
+                </tr>
+                <tr>
+                <th scope="row">1</th>
+                    <td>Harshani </td>
+                    <td>Bandara</td>
+                    <td>@mdo</td>
+                    <td>colombo</td>
+                    <td><button type="button" class="btn btn-info">View</button></td>
+                    <td><button type="button" class="btn btn-danger">Delete</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>japan</td>
+                    <td><button type="button" class="btn btn-info">View</button></td>
+                    <td><button type="button" class="btn btn-danger">Delete</button></td>
+                </tr>
+                <tr>
+                <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>theek</td>
+                    <td>@twitter</td>
+                    <td>india</td>
+                    <td><button type="button" class="btn btn-info">View</button></td>
+                    <td><button type="button" class="btn btn-danger">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>   
 
    
 

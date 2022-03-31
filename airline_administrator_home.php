@@ -48,7 +48,64 @@
             </div>
         </div>
     </nav>
+    <div class="container pt-5">
+        <div class="wrapper p-3">
+            <h1 id="heading" class="mb-4">Home</h1>
 
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <p>Account Number</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p>19568-DEF</p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <p>Name</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p>harshani bandara</p>
+                </div>
+            </div>
+
+        
+
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <label for="plane" class="form-label">Phone Number</label>
+                </div>
+                <div class="col-sm-2">
+                    <p>:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p>0719955178</p>
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <label for="plane" class="form-label">user id</label>
+                </div>
+                <div class="col-sm-2">
+                    <p>:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p>admin-001</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    </table>
     
 
        
