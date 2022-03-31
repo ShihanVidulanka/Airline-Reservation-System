@@ -20,6 +20,19 @@ class Flight_Dispatcher_Model extends Dbh{
         $account_no = $stmt->fetch(PDO::FETCH_ASSOC)['account_no'];
         return $account_no;
     }
+
+    //Get details of flights from a given airport,date and a time 
+    protected function getFlightsFromGivenDateAndTime($airport_code, $date, $time){
+        $query = "SELECT * FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND origin='{$airport_code}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}'))";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
+        $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $details;
+    }
+
+    protected function getTailNumber(){
+    }
+
 }
 
 ?>

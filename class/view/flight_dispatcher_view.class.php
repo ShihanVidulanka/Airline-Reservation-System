@@ -28,8 +28,12 @@ class Flight_Dispatcher_View extends Flight_Dispatcher_Model{
 
     public function formatTelephoneNos($telephoneNosArray){
         $string=implode("<br>",$telephoneNosArray);
-        // echo $string;
         return $string;
+    }
+
+    public function getFlightDetails(){
+        $flight_details = $this->flight_dispatcher_controller->getFlightDetails();
+        return $flight_details;
     }
 
 

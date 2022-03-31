@@ -78,7 +78,7 @@ $details = $flight_dispatcher_view->getHomeDetails();
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p><?php echo $details['ID']; ?></p>
+                    <p>Flight Dispatcher <?php echo $details['ID']; ?></p>
                 </div>
             </div>
 

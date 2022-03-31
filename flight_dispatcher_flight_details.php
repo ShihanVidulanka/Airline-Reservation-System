@@ -1,3 +1,18 @@
+<?php
+
+// include_once('./class/model/login_model.class.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
+session_start();
+
+if (!isset($_SESSION['ID'])) {
+  header("Location: login.php");
+  return;
+}
+
+$flight_dispatcher_view = new Flight_Dispatcher_View();
+$flight_details = $flight_dispatcher_view->getFlightDetails();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,6 +69,8 @@
     </div>
 
     <div class="wrapper p-5">
+
+
       <table class="table table-striped">
         <thead>
           <tr>
@@ -70,68 +87,25 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>A310</td>
-            <td>U.S.A.</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td>5h</td>
-            <td><button class="btn btn-primary">Cancel</button></td>
-          </tr>
-          <tr>
-            <td>B310</td>
-            <td>Japan</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td>5h</td>
-            <td><button class="btn btn-primary">Cancel</button></td>
-          </tr>
-          <tr>
-            <td>C310</td>
-            <td>China</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td>5h</td>
-            <td><button class="btn btn-primary">Cancel</button></td>
-          </tr>
-          <tr>
-            <td>D310</td>
-            <td>Japan</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td>5h</td>
-            <td><button class="btn btn-primary">Cancel</button></td>
-          </tr>
-          <tr>
-            <td>D320</td>
-            <td>Japan</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>14-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td>5h</td>
-            <td><button class="btn btn-primary">Cancel</button></td>
-          </tr>
           
-
+            <?php
+            foreach ($flight_details as $value) {
+              echo '<tr>';
+              echo '<td>'. $value['tail_no'] . "</td>";
+              echo '<td>'. $value['origin'] . "</td>";
+              echo '<td>'. $value['destination'] . "</td>";
+              echo '<td>'. $value['economy_price'] . "</td>";
+              echo '<td>'. $value['business_price'] . "</td>";
+              echo '<td>'. $value['platinum_price'] . "</td>";
+              echo '<td>'. $value['departure_date'] . "</td>";
+              echo '<td>'. $value['departure_time'] . "</td>";
+              echo '<td>'. $value['flight_time'] . "</td>";
+              echo '<td><button class="btn btn-primary">Cancel</button></td>';
+              echo '</tr>';
+            }
+            ?>
+            
+          
         </tbody>
       </table>
 
