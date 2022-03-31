@@ -1,3 +1,16 @@
+<?php
+
+// require_once $_SERVER['DOCUMENT_ROOT']."Airline-Reservation-System/include/autoloader.inc.php";
+// require_once $_SERVER['DOCUMENT_ROOT']."Airline-Reservation-System/include/additional.inc.php";
+
+// session_start();
+
+// if (!isset($_SESSION['ID'])) {
+//     header("Location: login.php");
+//     return;
+// }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +43,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="airline_administrator_generate_report.php">Generate Reports</Details></a>
-                    
+
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="airline_administrator_create_user.php">Create User</a>
@@ -72,11 +85,11 @@
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>harshani bandara</p>
+                    <p>Admin</p>
                 </div>
             </div>
 
-        
+
 
             <div class="row mb-3">
                 <div class="col-sm-4">
@@ -89,7 +102,7 @@
                     <p>0719955178</p>
                 </div>
             </div>
-            
+
             <div class="row mb-3">
                 <div class="col-sm-4">
                     <label for="plane" class="form-label">user id</label>
@@ -106,11 +119,11 @@
 
     </div>
     </table>
-    
 
-       
 
-   
+
+
+
 
 </body>
 
