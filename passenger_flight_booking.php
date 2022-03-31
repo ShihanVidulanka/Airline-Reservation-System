@@ -8,7 +8,7 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="css/flight_details.css">
+  <link rel="stylesheet" href="css/passenger_flight_booking.css">
   <title>Flight Details</title>
 </head>
 
@@ -22,7 +22,7 @@
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="passenger_home.php">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="passenger_flight_booking.php">Flight Details</a>
@@ -75,7 +75,7 @@
             <td>$400</td>
             <td>13-02-2022</td>
             <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary">Book This Flight</button></td>
+            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
           </tr>
           <tr>
             <td>B310</td>
@@ -86,7 +86,7 @@
             <td>$400</td>
             <td>13-02-2022</td>
             <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary">Book This Flight</button></td>
+            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
           </tr>
           <tr>
             <td>C310</td>
@@ -97,7 +97,7 @@
             <td>$400</td>
             <td>13-02-2022</td>
             <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary">Book This Flight</button></td>
+            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
           </tr>
           <tr>
             <td>D310</td>
@@ -108,7 +108,7 @@
             <td>$400</td>
             <td>13-02-2022</td>
             <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary">Book This Flight</button></td>
+            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
           </tr>
           <tr>
             <td>D320</td>
@@ -119,7 +119,7 @@
             <td>$400</td>
             <td>14-02-2022</td>
             <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary">Book This Flight</button></td>
+            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
           </tr>
           <tr>
             <td>D330</td>
@@ -130,7 +130,7 @@
             <td>$400</td>
             <td>13-02-2022</td>
             <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary">Book This Flight</button></td>
+            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
           </tr>
           <tr>
             <td>D310</td>
@@ -141,7 +141,7 @@
             <td>$400</td>
             <td>13-02-2022</td>
             <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary">Book This Flight</button></td>
+            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
           </tr>
 
 

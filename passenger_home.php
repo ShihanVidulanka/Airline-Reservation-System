@@ -2,18 +2,14 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/admin_home.css">
-    <title>Home</title>
+    <link rel="stylesheet" href="css/passenger_home.css">
+    <title>Passenger Home</title>
 </head>
 
 <body>
@@ -26,13 +22,13 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="admin_home_page.php">Home</a>
+                        <a class="nav-link active" href="passenger_home.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="admin_create_user.php">Create User</a>
+                        <a class="nav-link" href="passenger_flight_booking.php">Flight Details</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="admin_view_user.php">View User</a>
+                        <a class="nav-link" href="passenger_booking_details.php">Booking Details</a>
                     </li>
                 </ul>
 
@@ -47,7 +43,7 @@
 
     <div class="container pt-5">
         <div class="wrapper p-3">
-            <h1 id="heading" class="mb-4">Admin</h1>
+            <h1 id="heading" class="mb-4">Welcome Passenger!</h1>
 
             <div class="row mb-3">
                 <div class="col-sm-4">
@@ -57,7 +53,19 @@
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>AD-190097J</p>
+                    <p>RP-190097J</p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <p>NIC Number</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p>200001801361</p>
                 </div>
             </div>
 
@@ -69,19 +77,55 @@
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>Sahan DC</p>
+                    <p>Sahan Caldera</p>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-sm-4">
-                    <p>Aiport Code</p>
+                    <p>Age</p>
                 </div>
                 <div class="col-sm-2">
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>SLPP-6969</p>
+                    <p>22</p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <p>Passport Number</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p>123456789</p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <p>Category</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p>Platinum</p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <p>State</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p>Colombo</p>
                 </div>
             </div>
 
@@ -100,7 +144,6 @@
         </div>
 
     </div>
-
 </body>
 
 </html>
