@@ -15,7 +15,6 @@ class Login_Model extends Dbh{
             exit();
         }
 
-       
         if(!$result_set->rowCount()==1){
             header("location: login.php?error=UserNotFound1");
             exit();

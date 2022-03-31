@@ -18,7 +18,7 @@
       $folder = "/controller";
     }else if(strcmp($className,"Dbh")==0){
       $folder="/model";
-      $classExtention=".php";
+      $classExtention=".class.php";
     }
     
     else{
