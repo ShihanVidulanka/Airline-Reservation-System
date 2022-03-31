@@ -8,7 +8,7 @@
     $folder = "";
     $classExtention = ".class.php";
 
-  echo $className." ".end($classNameParts)."<br>";
+  // echo $className." ".end($classNameParts)."<br>";
     if(strcmp(end($classNameParts),"Model")==0){
       $folder = "/model";
     }else if(strcmp(end($classNameParts),"View")==0){
