@@ -35,7 +35,7 @@
             <a class="nav-link active" href="flight_dispatcher_add_new_flight.php">Add New Flight</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="flight_dispatcher_add_new_destination.php">Add New Airport</a>
+            <a class="nav-link" href="flight_dispatcher_add_new_airport.php">Add New Airport</a>
           </li>
         </ul>
 
