@@ -40,9 +40,9 @@
                 <div class="row mb-3">
                     <div class="col-sm-6">
                         <label for="username" class="form-label" >Username:</label>
-                        <input required class="form-control" type="text" name="username" id="username"  placeholder="Enter User Username">
-                        <div class="valid-feedback">Valid Username</div>
-                        <div class="invalid-feedback">Invalid Username</div>
+                        <input oninput="checkUserName();" required class="form-control" type="text" name="username" id="username" placeholder="Enter User Username">
+                        <div id="valid" class="valid-feedback">Valid Username</div>
+                        <div id="invalid" class="invalid-feedback">Invalid Username</div>
                     </div>
                     <div class="col-sm-6">
                         <label for="password" class="form-label">Password:</label>
