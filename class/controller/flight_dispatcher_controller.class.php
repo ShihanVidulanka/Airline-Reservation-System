@@ -38,5 +38,10 @@ class Flight_Dispatcher_Controller extends Flight_Dispatcher_Model{
         return $details;
     }
 
+    public function cancelFlight($flight_id){
+        $this->cancelFlightFromModel($flight_id);
+        return;
+    }
+
 
 }

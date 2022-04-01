@@ -23,7 +23,7 @@ class Flight_Dispatcher_Model extends Dbh{
 
     //Get details of flights from a given origin,date and a time 
     protected function getFlightsFromGivenDateAndTime($airport_code, $date, $time){
-        $query = "SELECT * FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND origin='{$airport_code}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}'))";
+        $query = "SELECT * FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND state=0 AND origin='{$airport_code}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}'))";
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
         $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -32,7 +32,7 @@ class Flight_Dispatcher_Model extends Dbh{
 
     //get list of destinations from a given origin,date and a time 
     protected function getDestinationsFromGivenDateAndTime($airport_code, $date, $time){
-        $query = "SELECT DISTINCT destination FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND origin='{$airport_code}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}')) order by destination";
+        $query = "SELECT DISTINCT destination FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND state=0 AND origin='{$airport_code}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}')) order by destination";
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
         $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -41,13 +41,19 @@ class Flight_Dispatcher_Model extends Dbh{
 
     //get details of flights from a given origin,destination, date and a time 
     protected function getFlightsFromDestination($origin, $destination, $date, $time){
-        $query = "SELECT * FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND destination='{$destination}' AND origin='{$origin}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}'))";
+        $query = "SELECT * FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND state=0 AND destination='{$destination}' AND origin='{$origin}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}'))";
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
         $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $details;
     }
 
+    //cancel a specific flight by ID
+    protected function cancelFlightFromModel($flight_id){
+        $query = "UPDATE flight SET flight.state = 1 WHERE flight.id = {$flight_id}";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
+    }
 }
 
 ?>

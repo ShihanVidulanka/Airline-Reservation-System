@@ -1,3 +1,9 @@
+// Onclick function for the relavant button
+function clickView(arg, path) { 
+    post(path, {
+        variablePass1: arg
+    });
+}
 //
 /**
 * Dynamically creates form elements and adds to $_POST
