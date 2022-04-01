@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/addi
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
 class Login_Model extends Dbh{
-    public function getUser($username, $password){
+    protected function getUser($username, $password){
         $query = "SELECT * FROM user WHERE username=:username;";
         $result_set = $this->connect()->prepare($query);
         $result_set->bindParam(':username',$username);

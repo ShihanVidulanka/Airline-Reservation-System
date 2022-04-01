@@ -21,7 +21,7 @@
     <div class="container pt-3">
         <div class="wrapper p-3">
             <h1 id="heading" class="mb-4">Sign Up</h1>
-            <form action="" class="was-validated">
+            <form action="include/signup.inc.php" class="was-validated" method="post">
                 <div class="row mb-3">
                     <div class="col-sm-6">
                         <label for="first_name" class="form-label" >First Name:</label>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 <div class="btn-group">
-                    <button class="btn btn-primary buttons">Sign Up</button>
+                    <button type="submit" name="submit" class="btn btn-primary buttons" value="Sign Up">Sign Up</button>
                     <button class="btn btn-primary buttons">Exit</button>
                 </div>
             </form>
