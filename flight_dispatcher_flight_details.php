@@ -10,7 +10,10 @@ if (!isset($_SESSION['ID'])) {
 }
 
 $flight_dispatcher_view = new Flight_Dispatcher_View();
+
 $flight_details = $flight_dispatcher_view->getFlightDetails();
+$destinations = $flight_dispatcher_view->getDestinations();
+
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +66,13 @@ $flight_details = $flight_dispatcher_view->getFlightDetails();
 
     <div class="search">
       <form class="d-flex mb-3">
-        <input class="form-control me-2" type="text" placeholder="Search Your Destination" />
+        <select class="select" data-mdb-filter="true">
+          <?php 
+          foreach ($destinations as $destination) {
+            echo "<option value='{$destination['destination']}'>".$destination['destination']."</option>";
+          }
+          ?>
+        </select>
         <button class="btn btn-primary" type="button">Search</button>
       </form>
     </div>
@@ -87,25 +96,25 @@ $flight_details = $flight_dispatcher_view->getFlightDetails();
           </tr>
         </thead>
         <tbody>
-          
-            <?php
-            foreach ($flight_details as $value) {
-              echo '<tr>';
-              echo '<td>'. $value['tail_no'] . "</td>";
-              echo '<td>'. $value['origin'] . "</td>";
-              echo '<td>'. $value['destination'] . "</td>";
-              echo '<td>'. $value['economy_price'] . "</td>";
-              echo '<td>'. $value['business_price'] . "</td>";
-              echo '<td>'. $value['platinum_price'] . "</td>";
-              echo '<td>'. $value['departure_date'] . "</td>";
-              echo '<td>'. $value['departure_time'] . "</td>";
-              echo '<td>'. $value['flight_time'] . "</td>";
-              echo '<td><button class="btn btn-primary">Cancel</button></td>';
-              echo '</tr>';
-            }
-            ?>
-            
-          
+
+          <?php
+          foreach ($flight_details as $value) {
+            echo '<tr>';
+            echo '<td>' . $value['tail_no'] . "</td>";
+            echo '<td>' . $value['origin'] . "</td>";
+            echo '<td>' . $value['destination'] . "</td>";
+            echo '<td>' . $value['economy_price'] . "</td>";
+            echo '<td>' . $value['business_price'] . "</td>";
+            echo '<td>' . $value['platinum_price'] . "</td>";
+            echo '<td>' . $value['departure_date'] . "</td>";
+            echo '<td>' . $value['departure_time'] . "</td>";
+            echo '<td>' . $value['flight_time'] . "</td>";
+            echo '<td><button class="btn btn-primary">Cancel</button></td>';
+            echo '</tr>';
+          }
+          ?>
+
+
         </tbody>
       </table>
 

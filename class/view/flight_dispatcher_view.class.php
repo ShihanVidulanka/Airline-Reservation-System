@@ -36,6 +36,11 @@ class Flight_Dispatcher_View extends Flight_Dispatcher_Model{
         return $flight_details;
     }
 
+    public function getDestinations(){
+        $destinations = $this->flight_dispatcher_controller->getDestinations();
+        return $destinations;
+    }
+
 
 }
 

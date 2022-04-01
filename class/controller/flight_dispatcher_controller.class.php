@@ -24,5 +24,12 @@ class Flight_Dispatcher_Controller extends Flight_Dispatcher_Model{
         return $details;
     }
 
+    public function getDestinations(){
+        $date = $this->getCurrentDate();
+        $time = $this->getCurrentTime();
+        $details = $this->getDestinationsFromGivenDateAndTime($_SESSION['airport_code'], $date, $time);
+        return $details;
+    }
+
 
 }
