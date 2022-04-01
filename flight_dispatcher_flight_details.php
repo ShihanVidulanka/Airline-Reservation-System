@@ -1,3 +1,21 @@
+<?php
+
+// include_once('./class/model/login_model.class.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
+session_start();
+
+if (!isset($_SESSION['ID'])) {
+  header("Location: login.php");
+  return;
+}
+
+$flight_dispatcher_view = new Flight_Dispatcher_View();
+
+$flight_details = $flight_dispatcher_view->getFlightDetails($_GET['show']);
+$destinations = $flight_dispatcher_view->getDestinations();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,13 +43,13 @@
             <a class="nav-link" href="flight_dispatcher_home.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="flight_dispatcher_flight_details.php">Flight Details</a>
+            <a class="nav-link active" href="flight_dispatcher_flight_details.php?show=none">Flight Details</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="flight_dispatcher_add_new_flight.php">Add New Flight</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="flight_dispatcher_add_new_destination.php">Add New Airport</a>
+            <a class="nav-link " href="flight_dispatcher_add_new_airport.php">Add New Airport</a>
           </li>
         </ul>
 
@@ -47,13 +65,22 @@
   <div class="container p-3">
 
     <div class="search">
-      <form class="d-flex mb-3">
-        <input class="form-control me-2" type="text" placeholder="Search Your Destination" />
-        <button class="btn btn-primary" type="button">Search</button>
+      <form class="d-flex mb-3" action="include/flight_dispatcher_filter_destination.inc.php" method="POST">
+        <select class="select" data-mdb-filter="true" name="dropdown">
+          <option value="default" selected disabled hidden>--- Choose a destination ---</option>
+          <?php
+          foreach ($destinations as $destination) {
+            echo "<option value='{$destination['destination']}'>" . $destination['destination'] . "</option>";
+          }
+          ?>
+        </select>
+        <button class="btn btn-primary" type="submit" name='search'>Search</button>
       </form>
     </div>
 
     <div class="wrapper p-5">
+
+
       <table class="table table-striped">
         <thead>
           <tr>
@@ -70,67 +97,24 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>A310</td>
-            <td>U.S.A.</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td>5h</td>
-            <td><button class="btn btn-primary">Cancel</button></td>
-          </tr>
-          <tr>
-            <td>B310</td>
-            <td>Japan</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td>5h</td>
-            <td><button class="btn btn-primary">Cancel</button></td>
-          </tr>
-          <tr>
-            <td>C310</td>
-            <td>China</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td>5h</td>
-            <td><button class="btn btn-primary">Cancel</button></td>
-          </tr>
-          <tr>
-            <td>D310</td>
-            <td>Japan</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td>5h</td>
-            <td><button class="btn btn-primary">Cancel</button></td>
-          </tr>
-          <tr>
-            <td>D320</td>
-            <td>Japan</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>14-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td>5h</td>
-            <td><button class="btn btn-primary">Cancel</button></td>
-          </tr>
-          
+
+          <?php
+          foreach ($flight_details as $value) {
+            echo '<tr>';
+            echo '<td>' . $value['tail_no'] . "</td>";
+            echo '<td>' . $value['origin'] . "</td>";
+            echo '<td>' . $value['destination'] . "</td>";
+            echo '<td>' . $value['economy_price'] . "</td>";
+            echo '<td>' . $value['business_price'] . "</td>";
+            echo '<td>' . $value['platinum_price'] . "</td>";
+            echo '<td>' . $value['departure_date'] . "</td>";
+            echo '<td>' . $value['departure_time'] . "</td>";
+            echo '<td>' . $value['flight_time'] . "</td>";
+            echo "<td><a class=\"btn btn-sm btn-primary\" href=\"include/flight_dispatcher_cancel_flight.inc.php?id={$value['id']}\">Cancel</a></td>";
+            echo '</tr>';
+          }
+          ?>
+
 
         </tbody>
       </table>
