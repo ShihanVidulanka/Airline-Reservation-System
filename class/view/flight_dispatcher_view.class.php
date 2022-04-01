@@ -62,9 +62,14 @@ class Flight_Dispatcher_View extends Flight_Dispatcher_Model
             echo '<div class="alert alert-danger" role="alert">';
             echo "<p>{$error}</p>";
             echo '</div>';
-        }
-            
-        
-        
+        } 
+    }
+
+    public function getTailNos(){
+        return $this->getTailNosFromModel();
+    }
+
+    public function getDestinationsWithoutOrigin($origin){
+        return $this->getDestinationsFromModel($origin);
     }
 }

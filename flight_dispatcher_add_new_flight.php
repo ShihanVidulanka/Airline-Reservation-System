@@ -1,3 +1,20 @@
+<?php
+
+// include_once('./class/model/login_model.class.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
+session_start();
+
+if (!isset($_SESSION['ID'])) {
+  header("Location: login.php");
+  return;
+}
+
+$view = new Flight_Dispatcher_View();
+$tail_nos = $view->getTailNos();
+$destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
+// print_r($destinations);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,77 +68,72 @@
   <div class="container pt-5">
     <div class="wrapper p-3">
       <h1 id="heading" class="mb-4">Add New Flight</h1>
-      <form action="" class="was-validated">
+      <form action="" method="POST">
         <div class="row mb-3">
+
           <div class="col-sm-4">
-            <label for="plane" class="form-label">Plane ID</label>
-            <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter User Plane ID:">
-            <div class="valid-feedback">Valid Plane ID</div>
-            <div class="invalid-feedback">Invalid Plane ID</div>
-          </div>
-          <div class="col-sm-4">
-            <label for="destination" class="form-label">Origin:</label>
-            <select required class="form-control" name="" id="">
-              <option value="">Select the Origine</option>
-              <option value="">Country 01</option>
-              <option value="">Country 02</option>
+            <label class="form-label">Airplane Tail No.</label>
+            <select required class="form-control" name="tail_no" id="">
+              <option value="" selected hidden disabled>-Select the Airplane Tail No-</option>
+              <?php
+              foreach ($tail_nos as $tail_no) {
+                echo "<option value='{$tail_no['tail_no']}'>" . $tail_no['tail_no'] . "</option>";
+              }
+              ?>
             </select>
-            <div class="valid-feedback">Valid Destination</div>
-            <div class="invalid-feedback">Invalid Destination</div>
           </div>
-          <div class="col-sm-4">
-            <label for="destination" class="form-label">Destination:</label>
-            <select required class="form-control" name="" id="">
-              <option value="">Select the Destination</option>
-              <option value="">Country 01</option>
-              <option value="">Country 02</option>
+
+          <div class="col-sm-8">
+            <label class="form-label">Destination</label>
+            <select required class="form-control" name="destination">
+              <option value="" selected hidden disabled>-Select the Destination-</option>
+              <?php
+              foreach ($destinations as $destination) {
+                echo "<option value='{$destination['name']}'>" . $destination['name'] . "</option>";
+              }
+              ?>
             </select>
-            <div class="valid-feedback">Valid Destination</div>
-            <div class="invalid-feedback">Invalid Destination</div>
           </div>
+
         </div>
 
         <div class="row mb-3">
+
           <div class="col-sm-4">
-            <label for="telephone" class="form-label">Economy Price:</label>
-            <input required class="form-control" type="text" name="time" id="telephone" placeholder="Enter Time:">
-            <div class="valid-feedback">Valid Price</div>
-            <div class="invalid-feedback">Invalid Price</div>
+            <label class="form-label">Economy Class Price</label>
+            <input required class="form-control" type="text" name="economy_price" placeholder="Enter the Price">
           </div>
+
           <div class="col-sm-4">
-            <label for="telephone" class="form-label">Business Price:</label>
-            <input required class="form-control" type="text" name="time" id="telephone" placeholder="Enter Time:">
-            <div class="valid-feedback">Valid Price</div>
-            <div class="invalid-feedback">Invalid Price</div>
+            <label class="form-label">Business Class Price</label>
+            <input required class="form-control" type="text" name="business_price" placeholder="Enter the Price">
           </div>
+
           <div class="col-sm-4">
-            <label for="telephone" class="form-label">Platinum Price:</label>
-            <input required class="form-control" type="text" name="time" id="telephone" placeholder="Enter Time:">
-            <div class="valid-feedback">Valid Price</div>
-            <div class="invalid-feedback">Invalid Price</div>
+            <label class="form-label">Platinum Class Price</label>
+            <input required class="form-control" type="text" name="platinum_price" placeholder="Enter the Price">
           </div>
+
         </div>
 
         <div class="row mb-3">
+
           <div class="col-sm-6">
-            <label for="date" class="form-label">Date:</label>
-            <input required class="form-control" type="date" name="date" id="date" placeholder="Enter Date:">
-            <div class="valid-feedback">Valid Date</div>
-            <div class="invalid-feedback">Invalid Date</div>
+            <label for="date" class="form-label">Departure Date/Time</label>
+            <input required class="form-control" type="datetime-local" name="departure_date_time" placeholder="Enter the Date/Time">
           </div>
+
           <div class="col-sm-6">
-            <label for="telephone" class="form-label">Time:</label>
-            <input required class="form-control" type="time" name="time" id="telephone" placeholder="Enter Time:">
-            <div class="valid-feedback">Valid Time</div>
-            <div class="invalid-feedback">Invalid Timer</div>
+            <label for="telephone" class="form-label">Apprx. Arrival Date/Time</label>
+            <input required class="form-control" type="datetime-local" name="arrival_date_time" placeholder="Enter the Time/Date">
           </div>
+
         </div>
 
 
 
         <div class="btn-group">
-          <button class="btn btn-primary buttons">Create</button>
-          <button class="btn btn-primary buttons">Exit</button>
+          <button class="btn btn-primary buttons">Add</button>
         </div>
       </form>
     </div>
