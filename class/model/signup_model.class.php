@@ -33,17 +33,19 @@ class SignUp_Model extends Dbh{
             $query3 = "INSERT INTO registered_passenger(
                                                     user_id,
                                                     NIC,
-                                                    name,
-                                                    age,
+                                                    first_name,
+                                                    last_name,
+                                                    dob,
                                                     passport_number,
                                                     category,
                                                     state,
                                                     passenger_id)
                                     VALUES(
-                                        :user_id,
-                                        :NIC,
-                                        :name,
-                                        :age,
+                                         :user_id,
+                                         :NIC,
+                                         :first_name,
+                                         :last_name,
+                                         :dob,
                                          :passport_number,
                                          :category,
                                          :state,
@@ -54,14 +56,27 @@ class SignUp_Model extends Dbh{
             $stmt3->execute(array(
                 ':user_id'=>$user_id,
                 ':NIC'=>$details['NIC'],
-                ':name'=>$details['name'],
-                ':age'=>$details['age'],
+                ':first_name'=>$details['first_name'],
+                ':last_name'=>$details['last_name'],
+                ':dob'=>$details['dob'],
                 ':passport_number'=>$details['passport_number'],
                 ':category'=>$details['category'],
                 ':state'=>$details['state'],
                 ':passenger_id'=>$passenger_id
             ));
             $stmt3->closeCursor();
+
+            $query4="INSERT INTO telephone_no(user_id,phone_no) VALUES(:user_id,:phone_no)";
+            foreach ($details['telephone_numbers'] as  $tpno) {
+                echo $tpno."<br>";
+                $stmt4=$db->prepare($query4);
+                $stmt4->execute(
+                    array(
+                        ':user_id'=>$user_id,
+                        ':phone_no'=>$tpno)
+                    );
+                $stmt4->closeCursor();
+            }
             $db->commit();
 
         } catch (PDOException $e) {
@@ -72,18 +87,4 @@ class SignUp_Model extends Dbh{
 
     }
 }
-$SignUp_Model = new SignUp_Model();
-$SignUp_Model->createRegisteredPassenger(
-    array(
-        'username'=>'sisirajayalath',
-        'hashed_password'=>'abcd',
-        'account_type'=>3,
-        'passenger_type'=>0,
-        'NIC'=>'972661180v',
-        'name'=>'Sisira Jayalath',
-        'age'=>25,
-        'passport_number'=>'012345',
-        'category'=>2,
-        'state'=>0,
-    )
-);
+

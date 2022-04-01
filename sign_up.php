@@ -22,6 +22,7 @@
         <div class="wrapper p-3">
             <h1 id="heading" class="mb-4">Sign Up</h1>
             <form action="include/signup.inc.php" class="was-validated" method="post">
+
                 <div class="row mb-3">
                     <div class="col-sm-6">
                         <label for="first_name" class="form-label" >First Name:</label>
@@ -37,11 +38,33 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <label for="username" class="form-label" >Username:</label>
+                        <input required class="form-control" type="text" name="username" id="username"  placeholder="Enter User Username">
+                        <div class="valid-feedback">Valid Username</div>
+                        <div class="invalid-feedback">Invalid Username</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="password" class="form-label">Password:</label>
+                        <input required class="form-control" type="text" name="password" id="password" placeholder="Enter User Password">
+                        <div class="valid-feedback">Valid Password</div>
+                        <div class="invalid-feedback">Invalid Password</div>
+                    </div>
+                </div>
+                
+            
+                <div class="row mb-3">
+                    <div class="col-sm-6">
                         <label for="nic" class="form-label">National Identity Card No:</label>
-                        <input required class="form-control" type="text" name="nic" id="nic" placeholder="Enter Your NIC No:">
+                        <input required class="form-control" type="text" name="NIC" id="nic" placeholder="Enter Your NIC No:">
                         <div class="valid-feedback">Valid NIC No</div>
                         <div class="invalid-feedback">Invalid NIC No</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="passport_number" class="form-label">Passport Number:</label>
+                        <input required class="form-control" type="text" name="passport_number" id="passport_number" placeholder="Enter User passport Number">
+                        <div class="valid-feedback">Valid Passport Number</div>
+                        <div class="invalid-feedback">Invalid Passport Number</div>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -52,6 +75,25 @@
                         <div class="invalid-feedback">Invalid Address</div>
                     </div>
                 </div>
+
+                <div class="row mb-3">
+                    <div class="col-sm-6">
+                    <label for="telephone" class="form-label">Telephone Number:</label>
+                        <div class="input-group mb-3">
+                            <input required class="form-control" type="tel" name="telephone" id="telephone" placeholder="Enter Your Telephone No:">
+                            <button type="button" class="btn btn-primary btn-outline-secondry" onclick="addtelephone();">Add</button>
+                        </div>
+                        <div class="valid-feedback">Valid Telephone number</div>
+                        <div class="invalid-feedback">Invalid Telephone number</div>
+                    </div>
+                    <div class="col-sm-6">
+                    <label for="telephone_numbers" class="form-label">Telephone Numbers List:</label>
+                    <select name="" id="telephone_numbers_list" class="form-control" multiple disabled></select>
+                    </div>
+                </div>
+                <input type="text" id="telephone_numbers" class="form-control" hidden name="telephone_numbers">
+
+
                 <div class="row mb-3">
                     <div class="col-sm-6">
                         <label for="dob" class="form-label">Date Of Birth:</label>
@@ -60,20 +102,16 @@
                         <div class="invalid-feedback">Invalid Date of Birth</div>
                     </div>
                     <div class="col-sm-6">
-                        <label for="telephone" class="form-label">Telephone Number:</label>
-                        <input required class="form-control" type="tel" name="telephone" id="telephone" placeholder="Enter Your NIC No:">
-                        <div class="valid-feedback">Valid Telephone number</div>
-                        <div class="invalid-feedback">Invalid Telephone number</div>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-12">
+
                         <label for="email" class="form-label">Email:</label>
                         <input class="form-control" type="email" name="email" id="email" placeholder="Enter Your Email Addressemail:">
                         <div class="valid-feedback">Valid Email</div>
                         <div class="invalid-feedback">Invalid Email</div>
+
+
                     </div>
                 </div>
+                
                 <div class="btn-group">
                     <button type="submit" name="submit" class="btn btn-primary buttons" value="Sign Up">Sign Up</button>
                     <button class="btn btn-primary buttons">Exit</button>
@@ -82,6 +120,8 @@
         </div>
         
     </div>
+
+    <script src="js/signup.js"></script>
     
 </body>
 </html>
