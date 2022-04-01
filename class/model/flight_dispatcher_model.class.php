@@ -71,4 +71,22 @@ class Flight_Dispatcher_Model extends Dbh{
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
     }
+
+    //get all the tail nos of available airplanes
+    protected function getTailNosFromModel(){
+        $query = "SELECT tail_no FROM airplane WHERE in_service=0;";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
+        $tail_nos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $tail_nos;
+    }
+
+    //get all the destinations except origin
+    protected function getDestinationsFromModel($origin){
+        $query = "SELECT name FROM airport WHERE airport_code!='{$origin}' order by name;";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
+        $tail_nos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $tail_nos;
+    }
 }
