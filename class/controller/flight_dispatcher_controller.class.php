@@ -43,5 +43,33 @@ class Flight_Dispatcher_Controller extends Flight_Dispatcher_Model{
         return;
     }
 
+    public function getAirportDetails($airport_code){
+        return $this->getAirportDetailsFromModel($airport_code);
+    }
+
+    public function checkDuplicateAirports($airport_code){
+        $airport_details = $this->getAirportDetails($airport_code);
+        if (empty($airport_details))
+            return true;
+        else
+            return false;
+    }
+
+    public function validateAirportCode($airport_code){
+        if (strlen($airport_code)!=3)
+            return 'Length of Airport Code should be 3';
+        elseif(preg_match('~[0-9]+~', $airport_code))
+            return 'Remove Numbers in the Airport Code';
+        elseif(preg_match('/[a-z]/', $airport_code))
+            return 'No Lowercase Letters should be included in Airport Code';
+        else
+            return 'SUCCESS';
+    }
+
+    public function addAirport($airport_code, $airport_name, $country, $province, $city){
+        $this->addFlightFromModel($airport_code, $airport_name, $country, $province, $city);
+        return;
+    }
+
 
 }

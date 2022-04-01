@@ -54,6 +54,21 @@ class Flight_Dispatcher_Model extends Dbh{
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
     }
-}
 
-?>
+    //return aiport details usning airport code
+    protected function getAirportDetailsFromModel($airport_code){
+        $query = "SELECT * FROM airport where airport_code='{$airport_code}' ";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
+        $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $details;
+    }
+
+    //add new row to Flight table using Airport Code
+    protected function addFlightFromModel($airport_code, $airport_name, $country, $province, $city){
+        $query = "INSERT INTO airport(airport_code, name, city, province, country) VALUES ('{$airport_code}', '{$airport_name}', '{$country}', '{$province}', '{$city}' ) ";
+        echo $query;
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
+    }
+}

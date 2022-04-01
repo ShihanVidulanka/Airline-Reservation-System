@@ -66,8 +66,8 @@ $destinations = $flight_dispatcher_view->getDestinations();
 
     <div class="search">
       <form class="d-flex mb-3" action="include/flight_dispatcher_filter_destination.inc.php" method="POST">
-        <select class="select" data-mdb-filter="true" name="dropdown">
-          <option value="default" selected disabled hidden>--- Choose a destination ---</option>
+        <select required class="select" data-mdb-filter="true" name="dropdown">
+          <option value="" selected disabled hidden>--- Choose a destination ---</option>
           <?php
           foreach ($destinations as $destination) {
             echo "<option value='{$destination['destination']}'>" . $destination['destination'] . "</option>";

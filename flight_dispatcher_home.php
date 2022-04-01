@@ -11,9 +11,6 @@ if (!isset($_SESSION['ID'])) {
 
 $flight_dispatcher_view = new Flight_Dispatcher_View();
 $details = $flight_dispatcher_view->getHomeDetails();
-// print_r($_SESSION);
-// print_r($details);
-
 ?>
 
 <!DOCTYPE html>
@@ -90,7 +87,7 @@ $details = $flight_dispatcher_view->getHomeDetails();
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p><?php echo $details['name']; ?></p>
+                    <p><?php echo $details['first_name']." ".$details['last_name']; ?></p>
                 </div>
             </div>
 
