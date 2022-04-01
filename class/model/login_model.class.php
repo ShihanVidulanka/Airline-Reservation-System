@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/addi
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
 class Login_Model extends Dbh{
-    public function getUser($username, $password){
+    protected function getUser($username, $password){
         $query = "SELECT * FROM user WHERE username=:username;";
         $result_set = $this->connect()->prepare($query);
         $result_set->bindParam(':username',$username);
@@ -15,7 +15,6 @@ class Login_Model extends Dbh{
             exit();
         }
 
-       
         if(!$result_set->rowCount()==1){
             header("location: login.php?error=UserNotFound1");
             exit();
@@ -92,7 +91,9 @@ class Login_Model extends Dbh{
             $_SESSION["ID"] = $user["ID"];
             $_SESSION["username"] = $user["username"];
             $_SESSION["account_type"] = $user["account_type"];
-            $_SESSION["name"] = $user_details["name"];
+            $_SESSION["first_name"] = $user_details["first_name"];
+            $_SESSION["last_name"] = $user_details["last_name"];
+
             $_SESSION["TP_no"] = $array_Tp_no;
 
             switch ($userType) {

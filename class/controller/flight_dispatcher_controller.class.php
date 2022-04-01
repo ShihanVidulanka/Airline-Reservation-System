@@ -5,7 +5,43 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 
 class Flight_Dispatcher_Controller extends Flight_Dispatcher_Model{
     
+    public function getCurrentDate(){
+        date_default_timezone_set('Asia/Colombo');
+        $date = date('y-m-d');
+        return $date;
+    }
+
+    public function getCurrentTime(){
+        date_default_timezone_set('Asia/Colombo');
+        $time = date('H:i:s');
+        return $time;
+    }
+
+    public function getFlightDetails(){
+        $date = $this->getCurrentDate();
+        $time = $this->getCurrentTime();
+        $details = $this->getFlightsFromGivenDateAndTime($_SESSION['airport_code'], $date, $time);
+        return $details;
+    }
+
+    public function getDestinations(){
+        $date = $this->getCurrentDate();
+        $time = $this->getCurrentTime();
+        $details = $this->getDestinationsFromGivenDateAndTime($_SESSION['airport_code'], $date, $time);
+        return $details;
+    }
+
+    public function getFlightDetailsFromDestination($destination){
+        $date = $this->getCurrentDate();
+        $time = $this->getCurrentTime();
+        $details = $this->getFlightsFromDestination($_SESSION['airport_code'], $destination, $date, $time);
+        return $details;
+    }
+
+    public function cancelFlight($flight_id){
+        $this->cancelFlightFromModel($flight_id);
+        return;
+    }
+
 
 }
-
-?>

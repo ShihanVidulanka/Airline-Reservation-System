@@ -47,13 +47,13 @@ $details = $flight_dispatcher_view->getHomeDetails();
                         <a class="nav-link active" href="flight_dispatcher_home.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="flight_dispatcher_flight_details.php">Flight Details</a>
+                        <a class="nav-link " href="flight_dispatcher_flight_details.php?show=none">Flight Details</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="flight_dispatcher_add_new_flight.php">Add New Flight</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="flight_dispatcher_add_new_destination.php">Add New Airport</a>
+                        <a class="nav-link" href="flight_dispatcher_add_new_airport.php">Add New Airport</a>
                     </li>
                 </ul>
 
@@ -78,7 +78,7 @@ $details = $flight_dispatcher_view->getHomeDetails();
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p><?php echo $details['ID']; ?></p>
+                    <p>Flight Dispatcher <?php echo $details['ID']; ?></p>
                 </div>
             </div>
 
