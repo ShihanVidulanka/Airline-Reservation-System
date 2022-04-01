@@ -31,8 +31,12 @@ class Flight_Dispatcher_View extends Flight_Dispatcher_Model{
         return $string;
     }
 
-    public function getFlightDetails(){
-        $flight_details = $this->flight_dispatcher_controller->getFlightDetails();
+    public function getFlightDetails($show){
+        if ($show=='none') {
+            $flight_details = $this->flight_dispatcher_controller->getFlightDetails(); 
+        }else{
+            $flight_details = $this->flight_dispatcher_controller->getFlightDetailsFromDestination($show);  
+        }
         return $flight_details;
     }
 
@@ -43,5 +47,3 @@ class Flight_Dispatcher_View extends Flight_Dispatcher_Model{
 
 
 }
-
-?>

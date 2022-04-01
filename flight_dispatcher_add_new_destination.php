@@ -28,7 +28,7 @@
             <a class="nav-link" href="flight_dispatcher_home.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="flight_dispatcher_flight_details.php">Flight Details</a>
+            <a class="nav-link " href="flight_dispatcher_flight_details.php?show=none">Flight Details</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="flight_dispatcher_add_new_flight.php">Add New Flight</a>

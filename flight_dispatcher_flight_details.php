@@ -11,7 +11,7 @@ if (!isset($_SESSION['ID'])) {
 
 $flight_dispatcher_view = new Flight_Dispatcher_View();
 
-$flight_details = $flight_dispatcher_view->getFlightDetails();
+$flight_details = $flight_dispatcher_view->getFlightDetails($_GET['show']);
 $destinations = $flight_dispatcher_view->getDestinations();
 
 ?>
@@ -43,7 +43,7 @@ $destinations = $flight_dispatcher_view->getDestinations();
             <a class="nav-link" href="flight_dispatcher_home.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="flight_dispatcher_flight_details.php">Flight Details</a>
+            <a class="nav-link active" href="flight_dispatcher_flight_details.php?show=none">Flight Details</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="flight_dispatcher_add_new_flight.php">Add New Flight</a>
@@ -65,15 +65,16 @@ $destinations = $flight_dispatcher_view->getDestinations();
   <div class="container p-3">
 
     <div class="search">
-      <form class="d-flex mb-3">
-        <select class="select" data-mdb-filter="true">
-          <?php 
+      <form class="d-flex mb-3" action="include/flight_dispatcher_filter_destination.inc.php" method="POST">
+        <select class="select" data-mdb-filter="true" name="dropdown">
+          <option value="default" selected disabled hidden>--- Choose a destination ---</option>
+          <?php
           foreach ($destinations as $destination) {
-            echo "<option value='{$destination['destination']}'>".$destination['destination']."</option>";
+            echo "<option value='{$destination['destination']}'>" . $destination['destination'] . "</option>";
           }
           ?>
         </select>
-        <button class="btn btn-primary" type="button">Search</button>
+        <button class="btn btn-primary" type="submit" name='search'>Search</button>
       </form>
     </div>
 

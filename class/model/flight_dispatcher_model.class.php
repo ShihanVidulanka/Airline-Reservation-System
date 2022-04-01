@@ -39,6 +39,15 @@ class Flight_Dispatcher_Model extends Dbh{
         return $details;
     }
 
+    //get details of flights from a given origin,destination, date and a time 
+    protected function getFlightsFromDestination($origin, $destination, $date, $time){
+        $query = "SELECT * FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND destination='{$destination}' AND origin='{$origin}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}'))";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
+        $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $details;
+    }
+
 }
 
 ?>
