@@ -39,7 +39,7 @@ class Login_Controller extends Login_Model
                 header("location: main_page.php");
                 break;
             default:
-                // header("location: login.php?error=NoUser");
+                header("location: login.php?error=userNotfound");
                 break;
         }
     }
@@ -47,7 +47,7 @@ class Login_Controller extends Login_Model
     // Error handling methods
     private function checkEmptyField()
     {
-        // for executive handle company_id and company_name seperately by getting the user type       
+        // check if username and password empty.     
         if (empty($this->username) || empty($this->password)) {
             $result = false;
         } else {
