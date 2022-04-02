@@ -3,6 +3,19 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/addi
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
 class SignUp_Model extends Dbh{
+
+    protected function check_username($username){
+        $db=$this->connect();
+        $query = "SELECT COUNT(ID) FROM user WHERE username=:username";
+        $stmt=$db->prepare($query);
+        $stmt->execute(
+            array(':username'=>$username)
+        );
+        $count=$stmt->fetch()['COUNT(ID)'];
+        if($count!=0){
+            echo "Username already used";
+        }
+    }
     protected function createRegisteredPassenger($details){
         try {
             $db = $this->connect();

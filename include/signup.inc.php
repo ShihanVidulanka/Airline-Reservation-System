@@ -3,15 +3,13 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/addi
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
 
-if(isset($_GET['username'])){
-    $cum=new Check_Username_Model;
-    $cum->check_username($_GET['username']);
-    // echo "hii";
+if(isset($_POST['username_'])){
+    $signup_controller=new SignUp_Controller;
+    $signup_controller->checkUsernameFromModel($_POST['username_']);
 }
 if(isset($_POST['submit'])){
     $_POST['telephone_numbers']=rtrim($_POST['telephone_numbers'],',');
     $_POST['telephone_numbers']=explode(",",$_POST['telephone_numbers']);
-    // print_array($_POST);
 
     $signUp_Controller = new SignUp_Controller();
     $registered_passenger = new Registered_Passenger();

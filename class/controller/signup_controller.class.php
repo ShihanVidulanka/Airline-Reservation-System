@@ -19,4 +19,7 @@ class SignUp_Controller extends Signup_Model{
         );
         $this->createRegisteredPassenger($details);
     }
+    public function checkUsernameFromModel($username){
+        $this->check_username(remove_unnessaries($username,1));
+    }
 }
