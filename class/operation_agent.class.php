@@ -4,23 +4,24 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 
  class Operation_Agent{
 
-    private $account_no;
+   
     private $user_name;
     private $user_id;
-    private $name;
+    private $first_name;
+    private $second_name;
     private $state;
     private $airport_code;
+    private $telephone_nos;
 
-
-    public function __construct($account_no,$user_name,$user_id,$name,$state,$airport_code)
+    public function __construct($user_name,$user_id,$first_name,$second_name,$state,$airport_code,$telephone_nos)
     {
-        $this->setAccount_no($account_no);
-        $this->setUser_id($user_name);
+        $this->setUser_name($user_name);
         $this->setUser_id($user_id);
-        $this->setName($name);
+        $this->setFirst_name($first_name);
+        $this->setSecond_name($second_name);
         $this->setState($state);
         $this->setAirport_code($airport_code);
-        
+        $this->setTelephone_nos($telephone_nos);
         
     }
     //getters
@@ -28,13 +29,9 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
     {
         return $this->user_id;
     }
-    public function getName()
+    public function getUser_name()
     {
-        return $this->name;
-    }
-    public function getAccount_no()
-    {
-        return $this->account_no;
+        return $this->user_name;
     }
     public function getState()
     {
@@ -44,30 +41,24 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
     {
         return $this->airport_code;
     }
-    public function getUser_name()
+    public function getFirst_name()
     {
-        return $this->user_name;
+        return $this->first_name;
     }
-
-
+    public function getSecond_name()
+    {
+        return $this->second_name;
+    }
+    public function getTelephone_nos()
+    {
+        return $this->telephone_nos;
+    }
 
     //setters
 
-    public function setAccount_no($account_no)
-    {
-        $this->account_no = $account_no;
-
-        return $this;
-    }
     public function setUser_id($user_id)
     {
         $this->user_id = $user_id;
-
-        return $this;
-    }
-    public function setName($name)
-    {
-        $this->name = $name;
 
         return $this;
     }
@@ -83,19 +74,27 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 
         return $this;
     }
-
-    /**
-     * Get the value of user_name
-     */ 
-    
-    /**
-     * Set the value of user_name
-     *
-     * @return  self
-     */ 
     public function setUser_name($user_name)
     {
         $this->user_name = $user_name;
+
+        return $this;
+    }
+    public function setSecond_name($second_name)
+    {
+        $this->second_name = $second_name;
+
+        return $this;
+    }    
+    public function setFirst_name($first_name)
+    {
+        $this->first_name = $first_name;
+
+        return $this;
+    }
+    public function setTelephone_nos($telephone_nos)
+    {
+        $this->telephone_nos = $telephone_nos;
 
         return $this;
     }

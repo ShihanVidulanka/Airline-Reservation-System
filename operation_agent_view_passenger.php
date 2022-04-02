@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/operation_agent_view_passenger.css">
-    <title>View Passenger</title>
+    <title>Operation Agent View Passenger</title>
 </head>
 
 <body>

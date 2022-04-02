@@ -1,3 +1,25 @@
+<?php 
+
+// include_once('./class/model/login_model.class.php');
+require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
+session_start();
+
+if (!isset($_SESSION['ID'])) {
+    header("Location: login.php");
+    return;
+}
+//echo $_SESSION['ID'];
+$operation_agent_view = new Operation_Agent_View();
+$details = $operation_agent_view->getHomeDetails();
+
+$name=$details['first_name']." ".$details['second_name'];
+$user_name=$details['username'];
+$user_id=$details['ID'];
+$airport_name=$details['airport_name'];
+$tp=$details['telephone_numbers'];
+//echo $name;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,8 +34,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/flight_dispatcher_home.css">
-    <title>Home</title>
+    <link rel="stylesheet" href="css/operation_agent_view_passenger.css">
+    <title>Operation Agent Home</title>
 </head>
 
 <body>
@@ -54,7 +76,7 @@
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>19568-DEF</p>
+                    <p><?php echo $user_id;?></p>
                 </div>
             </div>
 
@@ -66,43 +88,43 @@
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>harshani bandara</p>
+                    <p><?php echo $name;?></p>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-sm-4">
-                    <p>Aiport Code</p>
+                    <p>User Name</p>
                 </div>
                 <div class="col-sm-2">
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>SLPP-6969</p>
+                    <p><?php echo $user_name;?></p>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-sm-4">
-                    <label for="plane" class="form-label">Phone Number</label>
+                    <label for="plane" class="form-label">Phone Numbers</label>
                 </div>
                 <div class="col-sm-2">
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>0719955178</p>
+                    <p><?php echo $tp;?></p>
                 </div>
             </div>
             
             <div class="row mb-3">
                 <div class="col-sm-4">
-                    <label for="plane" class="form-label">state</label>
+                    <label for="plane" class="form-label">Aiport name</label>
                 </div>
                 <div class="col-sm-2">
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>colombo</p>
+                    <p><?php echo $airport_name;?></p>
                 </div>
             </div>
 
