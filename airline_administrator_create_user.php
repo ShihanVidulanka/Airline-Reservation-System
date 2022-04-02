@@ -25,7 +25,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="airline_administrator_home.php">Home</a>
                     </li>
@@ -52,13 +52,13 @@
 
     <!-- create a form  -->
     <div class="container p-3">
-        <FORM STYLE="padding-left:5px">
-            <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />Add New Airline Administrator<BR>
-            <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName2" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />Add New Flight Dispatcher<BR>
-            <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName3" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />Add New Operations Agent<BR>
+        <form STYLE="padding-left:5px">
+            <!-- <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />Add New Airline Administrator<BR> -->
+            <input TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 2)" />Add New Flight Dispatcher<br>
+            <input TYPE="radio" NAME="RadioGroupName" ID="GroupName2" ONCLICK="ShowRadioButtonDiv('GroupName', 2)" />Add New Operations Agent<br>
         </FORM>
 
-        <DIV ID="GroupName1Div" STYLE="display:none;">
+        <!-- <DIV ID="GroupName1Div" STYLE="display:none;">
             <div class="container pt-5">
                 <div class="wrapper p-3">
                     <h1 id="heading" class="mb-4">New Airline Administrator</h1>
@@ -82,25 +82,29 @@
                         </div>
                         <div class="btn-group">
                             <button class="btn btn-primary buttons">Create</button>
-                            <!-- <button class="btn btn-primary buttons">Exit</button> -->
                         </div>
                     </form>
                 </div>
             </div>
-        </DIV>
-        <DIV ID="GroupName2Div" STYLE="display:none;">
+        </DIV> -->
+        <div ID="GroupName1Div" STYLE="display:none;">
             <div class="container pt-5">
                 <div class="wrapper p-3">
                     <h1 id="heading" class="mb-4">New Flight Dispatcher</h1>
                     <form action="" class="was-validated">
                         <div class="row mb-3">
                             <div class="col-sm-4">
-                                <label for="plane" class="form-label">Name</label>
-                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter User Name:">
+                                <label for="plane" class="form-label">First Name</label>
+                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter User First Name:">
                                 <div class="valid-feedback">Valid Name</div>
                                 <div class="invalid-feedback">Invalid Name</div>
                             </div>
-
+                            <div class="col-sm-4">
+                                <label for="plane" class="form-label">Last Name</label>
+                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter User Last Name:">
+                                <div class="valid-feedback">Valid Name</div>
+                                <div class="invalid-feedback">Invalid Name</div>
+                            </div>
                             <div class="col-sm-4">
                                 <label for="plane" class="form-label">Airport Code</label>
                                 <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Airport Code:">
@@ -109,7 +113,7 @@
                             </div>
 
                         </div>
-                        <div class="row mb-3">
+                        <!-- <div class="row mb-3">
                             <div class="col-sm-4" id="fd_p">
                                 <label for="plane" class="form-label">Phone Number</label>
                                 <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Phone Number:">
@@ -117,7 +121,23 @@
                                 <div class="invalid-feedback">Invalid Number</div>
                                 <a href="javascript:void(0);" class="add_button_fd" title="Add field"><img src="img/add_icon.png" /></a>
                             </div>
+                        </div> -->
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <label for="telephone" class="form-label">Telephone Number:</label>
+                                <div class="input-group mb-3">
+                                    <input required class="form-control" type="tel" name="telephone" id="telephone" placeholder="Enter Your Telephone No:">
+                                    <button type="button" class="btn btn-primary btn-outline-secondry" onclick="addtelephone();">Add</button>
+                                </div>
+                                <div class="valid-feedback">Valid Telephone number</div>
+                                <div class="invalid-feedback">Invalid Telephone number</div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="telephone_numbers" class="form-label">Telephone Numbers List:</label>
+                                <select name="" id="telephone_numbers_list" class="form-control" multiple disabled></select>
+                            </div>
                         </div>
+                        <input type="text" id="telephone_numbers" class="form-control" hidden name="telephone_numbers">
                         <div class="btn-group">
                             <button class="btn btn-primary buttons">Create</button>
                             <!-- <button class="btn btn-primary buttons">Exit</button> -->
@@ -125,36 +145,43 @@
                     </form>
                 </div>
             </div>
-        </DIV>
-        <DIV ID="GroupName3Div" STYLE="display:none;">
+        </div>
+        <div ID="GroupName2Div" STYLE="display:none;">
             <div class="container pt-5">
                 <div class="wrapper p-3">
                     <h1 id="heading" class="mb-4">New Operations Agent</h1>
                     <form action="" class="was-validated">
                         <div class="row mb-3">
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="plane" class="form-label">Name</label>
                                 <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter User Name:">
                                 <div class="valid-feedback">Valid Name</div>
                                 <div class="invalid-feedback">Invalid Name</div>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
+                                <label for="plane" class="form-label">Last Name</label>
+                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter User Last Name:">
+                                <div class="valid-feedback">Valid Name</div>
+                                <div class="invalid-feedback">Invalid Name</div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
                                 <label for="plane" class="form-label">Airport Code</label>
                                 <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Airport Code:">
                                 <div class="valid-feedback">Valid Airport Code</div>
                                 <div class="invalid-feedback">Invalid Airport Code</div>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="plane" class="form-label">State</label>
                                 <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter State:">
                                 <div class="valid-feedback">Valid State</div>
                                 <div class="invalid-feedback">Invalid State</div>
                             </div>
-
                         </div>
-                        <div class="row mb-3">
+                        <!-- <div class="row mb-3">
                             <div class="col-sm-4" id="oa_p">
                                 <label for="plane" class="form-label">Phone Number</label>
                                 <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Phone Number:">
@@ -162,7 +189,23 @@
                                 <div class="invalid-feedback">Invalid Number</div>
                                 <a href="javascript:void(0);" class="add_button_oa" title="Add field"><img src="img/add_icon.png" /></a>
                             </div>
+                        </div> -->
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <label for="telephone" class="form-label">Telephone Number:</label>
+                                <div class="input-group mb-3">
+                                    <input required class="form-control" type="tel" name="telephone" id="telephone" placeholder="Enter Your Telephone No:">
+                                    <button type="button" class="btn btn-primary btn-outline-secondry" onclick="addtelephone();">Add</button>
+                                </div>
+                                <div class="valid-feedback">Valid Telephone number</div>
+                                <div class="invalid-feedback">Invalid Telephone number</div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="telephone_numbers" class="form-label">Telephone Numbers List:</label>
+                                <select name="" id="telephone_numbers_list" class="form-control" multiple disabled></select>
+                            </div>
                         </div>
+                        <input type="text" id="telephone_numbers" class="form-control" hidden name="telephone_numbers">
                         <div class="btn-group">
                             <button class="btn btn-primary buttons">Create</button>
                             <!-- <button class="btn btn-primary buttons">Exit</button> -->
@@ -170,9 +213,11 @@
                     </form>
                 </div>
             </div>
-        </DIV>
+        </div>
     </div>
+
     <script src="js/admin_create_user.js"></script>
+
 </body>
 
 </html>
