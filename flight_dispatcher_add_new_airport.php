@@ -52,6 +52,9 @@ $view = new Flight_Dispatcher_View();
           <li class="nav-item">
             <a class="nav-link active" href="flight_dispatcher_add_new_airport.php">Add New Airport</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="flight_dispatcher_add_new_airplane.php">Add New Airplane</a>
+          </li>
         </ul>
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -345,7 +348,7 @@ $view = new Flight_Dispatcher_View();
 
           <div class="col-sm-4">
             <label for="destination" class="form-label">Province/State:</label>
-            <input required class="form-control" type="text" name="province"" placeholder=" Enter Province or State">
+            <input required class="form-control" type="text" name="province" placeholder=" Enter Province or State">
           </div>
 
           <div class="col-sm-4">

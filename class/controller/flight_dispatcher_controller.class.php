@@ -117,7 +117,6 @@ class Flight_Dispatcher_Controller extends Flight_Dispatcher_Model
         $flight_time = $this->getFlightTime($departure_date_time_string, $arrival_date_time_string);
         echo $flight_time;
         
-
         if (is_numeric($economy_price) == false || $economy_price < 0) {
             echo 'inside';
             $error = 'Invalid Economy Seat Price';
@@ -135,5 +134,34 @@ class Flight_Dispatcher_Controller extends Flight_Dispatcher_Model
             echo 'time';
             $error = 'Invalid Flight T. :Flight T. should be less than 24hrs';
         }
+    }
+
+    public function addNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats){
+        $this->addNewAirplaneFromModel($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats);
+    }
+
+    public function validateAddNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats){
+        if (strpos($tail_no, '-')==false) {
+            $error = "Invalid Tail No: Should Contain '-' character";
+        }elseif (is_numeric($no_platinum_seats) == false || $no_platinum_seats < 0 || $no_platinum_seats>900) {
+            $error = 'Invalid Economy Seat Price';
+        } elseif (is_numeric($no_economy_seats) == false || $no_economy_seats < 0 || $no_economy_seats>900) {
+            $error = 'Invalid Economy Seat Price';
+        } elseif (is_numeric($no_business_seats) == false || $no_business_seats < 0 || $no_business_seats>900) {
+            $error = 'Invalid Economy Seat Price';
+        } else {
+            $tail_splitted = explode("-",$tail_no);
+            if(!ctype_upper($tail_splitted[0]) || !ctype_digit($tail_splitted[1])){
+                $error = 'Incorrect Format: Tail No. should be like AZ-3245'; 
+            }elseif (count($tail_splitted)!=2 || strlen($tail_splitted[0])>2 || strlen($tail_splitted[0])<0 || strlen($tail_splitted[1])!=4) {
+                $error = 'Invalid Tail No. Length';
+            }
+            else{
+                $error = 'SUCCESS';
+                $this->addNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats);
+            }
+        }
+        echo $error;
+        return $error;
     }
 }

@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 // include_once('./class/model/login_model.class.php');
-require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
 session_start();
 
 if (!isset($_SESSION['ID'])) {
@@ -52,6 +52,9 @@ $details = $flight_dispatcher_view->getHomeDetails();
                     <li class="nav-item">
                         <a class="nav-link" href="flight_dispatcher_add_new_airport.php">Add New Airport</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="flight_dispatcher_add_new_airplane.php">Add New Airplane</a>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -87,7 +90,7 @@ $details = $flight_dispatcher_view->getHomeDetails();
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p><?php echo $details['first_name']." ".$details['last_name']; ?></p>
+                    <p><?php echo $details['first_name'] . " " . $details['last_name']; ?></p>
                 </div>
             </div>
 
