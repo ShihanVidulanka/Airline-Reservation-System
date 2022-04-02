@@ -68,7 +68,7 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
   <div class="container pt-5">
     <div class="wrapper p-3">
       <h1 id="heading" class="mb-4">Add New Flight</h1>
-      <form action="" method="POST">
+      <form action="include/flight_dispatcher_add_new_flight.inc.php" method="POST">
         <div class="row mb-3">
 
           <div class="col-sm-4">
@@ -133,7 +133,7 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
 
 
         <div class="btn-group">
-          <button class="btn btn-primary buttons">Add</button>
+          <button class="btn btn-primary buttons" name='submit' type="submit">Add</button>
         </div>
       </form>
     </div>

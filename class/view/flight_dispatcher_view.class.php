@@ -54,7 +54,7 @@ class Flight_Dispatcher_View extends Flight_Dispatcher_Model
     public function showError($error)
     {
         if ($error == 'SUCCESS'){
-            echo '<div class="alert alert-sucess" role="alert">';
+            echo '<div class="alert alert-success" role="alert">';
             echo "<p>{$error}</p>";
             echo '</div>';
         } 
