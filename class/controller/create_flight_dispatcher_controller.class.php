@@ -21,4 +21,25 @@ class CreateFlightDispatcher_Controller extends CreateFlightDispatcher_Model{
         $this->check_username(remove_unnessaries($username, 1));
     }
 }
+
+class CreateOperationsAgent_Ccontroller extends CreateOperartionsAgent_Model{
+    public function createOperationsAgentFromModel(Operations_Agent $operations_Agent){
+        $details = array(
+            'username'=>remove_unnessaries($operations_Agent->getUsername()),
+            'hashed_password'=>"abcd",  // Question
+            'account_type'=>2,
+            'first_name'=>remove_unnessaries($operations_Agent->getFirstName()),
+            'last_name'=>remove_unnessaries($operations_Agent->getLastName()),
+            'state'=>remove_unnessaries($operations_Agent->getState()),
+            'airport_code'=>remove_unnessaries($operations_Agent->getAirportCode()),
+            'telephone_numbers'=>$operations_Agent->getTelephoneNo()
+        );
+
+        $this->createOperationsAgent($details);
+    }
+
+    public function checkUsernameFromModel($username) {
+        $this->check_username(remove_unnessaries($username, 1));
+    }
+}
 ?>
