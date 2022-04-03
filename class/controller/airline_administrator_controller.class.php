@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/addi
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
 //Used flight_dispatcher.class.php created by Sathira I think.
-class AirlineAdministrator_Controller extends AirlineAdministrator_Model{
+class Airline_Administrator_Controller extends Airline_Administrator_Model{
     public function createFlightDispatcherFromModel(Flight_Dispatcher $flight_Dispatcher){
         $details = array(
             'username'=>remove_unnessaries($flight_Dispatcher->getUsername()),

@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/addi
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
 // This class is for creating a new flight dispatcher and operations agent used by airline administrator
-class AirlineAdministrator_Model extends Dbh{
+class Airline_Administrator_Model extends Dbh{
     protected function check_username($username){
         $db=$this->connect();
         $query = "SELECT COUNT(ID) FROM user WHERE username=:username";
