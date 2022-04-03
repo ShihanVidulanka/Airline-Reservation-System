@@ -9,7 +9,7 @@ if (!isset($_SESSION['ID'])) {
     return;
 }
 
-$view = new Flight_Dispatcher_View();
+$view = new AirlineAdministrator_Controller();
 
 ?>
 
@@ -41,19 +41,20 @@ $view = new Flight_Dispatcher_View();
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="flight_dispatcher_home.php">Home</a>
+                        <a class="nav-link" href="airline_administrator_home.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="flight_dispatcher_flight_details.php?show=none">Flight Details</a>
+                        <a class="nav-link" href="airline_administrator_generate_report.php">Generate Reports</Details></a>
+
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="flight_dispatcher_add_new_flight.php">Add New Flight</a>
+                        <a class="nav-link" href="airline_administrator_create_user.php">Create User</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="flight_dispatcher_add_new_airport.php">Add New Airport</a>
+                        <a class="nav-link" href="airline_administrator_view_user.php">View User</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="flight_dispatcher_add_new_airplane.php">Add New Airplane</a>
+                        <a class="nav-link active" href="airline_administrator_add_new_airplane.php">Add New Airplane</a>
                     </li>
                 </ul>
 
@@ -69,11 +70,11 @@ $view = new Flight_Dispatcher_View();
     <div class="container pt-5">
         <div class="wrapper p-3">
 
-            <?php
-            if (isset($_GET['error'])) {
-                $view->showError($_GET['error']);
-            }
-            ?>
+            <!-- <?php
+                    if (isset($_GET['error'])) {
+                        // $view->showError($_GET['error']);
+                    }
+                    ?> -->
 
             <h1 id="heading" class="mb-4">Add New Airport</h1>
             <form action="include/flight_dispatcher_add_new_airplane.inc.php" method="POST">
@@ -98,7 +99,7 @@ $view = new Flight_Dispatcher_View();
 
                 <div class="row mb-3">
 
-                    
+
 
                     <div class="col-sm-4">
                         <label for="destination" class="form-label">No. of Platinum Seats</label>

@@ -1,14 +1,16 @@
-<?php
+<?php 
 
-// require_once $_SERVER['DOCUMENT_ROOT']."Airline-Reservation-System/include/autoloader.inc.php";
-// require_once $_SERVER['DOCUMENT_ROOT']."Airline-Reservation-System/include/additional.inc.php";
+// include_once('./class/model/login_model.class.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
+session_start();
 
-// session_start();
+if (isset($_SESSION['ID'])) {
+    header("Location: login.php?");
+    return;
+}
 
-// if (!isset($_SESSION['ID'])) {
-//     header("Location: login.php");
-//     return;
-// }
+// print_r($_SESSION);
+
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +53,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="airline_administrator_view_user.php">View User</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="airline_administrator_add_new_airplane.php">Add New Airplane</a>
+                    </li>
+
                 </ul>
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

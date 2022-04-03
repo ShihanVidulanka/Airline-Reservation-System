@@ -52,9 +52,9 @@ $details = $flight_dispatcher_view->getHomeDetails();
                     <li class="nav-item">
                         <a class="nav-link" href="flight_dispatcher_add_new_airport.php">Add New Airport</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="flight_dispatcher_add_new_airplane.php">Add New Airplane</a>
-                    </li>
+                    </li> -->
                 </ul>
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
