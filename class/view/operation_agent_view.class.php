@@ -9,7 +9,7 @@
 
         public function __construct()
         {
-            $this->operation_agent= new Operation_Agent($_SESSION["username"],$_SESSION["ID"],
+            $this->operation_agent= new Operations_Agent($_SESSION["username"],$_SESSION["ID"],
             $_SESSION["first_name"] ,$_SESSION["last_name"], $_SESSION['state'],$_SESSION['airport_code'],$_SESSION['TP_no']);
             
             $this->operation_agent_controller= new Operation_Agent_Controller();

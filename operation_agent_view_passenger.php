@@ -1,3 +1,17 @@
+<?php 
+
+// include_once('./class/model/login_model.class.php');
+require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
+session_start();
+
+if (!isset($_SESSION['ID'])) {
+    header("Location: login.php");
+    return;
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/operation_agent_view_passenger.css">
+    <!-- <link rel="stylesheet" href="css/operation_agent_view_passenger.css"> -->
     <title>Operation Agent View Passenger</title>
 </head>
 
@@ -29,7 +43,7 @@
                         <a class="nav-link" href="operation_agent_home.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="operation_agent_view_passenger.php">Passenger Details</Details></a>
+                        <a class="nav-link active" href="operation_agent_view_passengers_flight.php">Passenger Details</Details></a>
                     
                     </li>
                     
@@ -71,46 +85,7 @@
                     <td><button type="button" class="btn btn-danger"onclick="document.getElementById('id01').style.display='block'">Delete</button></td>
                     
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Shihan</td>
-                    <td>Vidukanka</td>
-                    <td>@fat</td>
-                    <td>japan</td>
-                    <td><button type="button" class="btn btn-info">View</button></td>
-                    <td><button type="button" class="btn btn-danger"onclick="document.getElementById('id01').style.display='block'">Delete</button></td>
-                    
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                    <td>Sathira</td>
-                    <td>liyanapathirana</td>
-                    <td>@twitter</td>
-                    <td>india</td>
-                    <td><button type="button" class="btn btn-info">View</button></td>
-                    <td><button type="button" class="btn btn-danger"onclick="document.getElementById('id01').style.display='block'">Delete</button></td>
-                    
-                </tr>
-                <tr>
-                <th scope="row">1</th>
-                    <td>Harshani </td>
-                    <td>Bandara</td>
-                    <td>@mdo</td>
-                    <td>colombo</td>
-                    <td><button type="button" class="btn btn-info">View</button></td>
-                    <td><button type="button" class="btn btn-danger"onclick="document.getElementById('id01').style.display='block'">Delete</button></td>
-                    
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>japan</td>
-                    <td><button type="button" class="btn btn-info">View</button></td>
-                    <td><button type="button" class="btn btn-danger"onclick="document.getElementById('id01').style.display='block'">Delete</button></td>
-                    
-                </tr>
+                
                 <tr>
                 <th scope="row">3</th>
                     <td>Larry</td>
@@ -142,6 +117,9 @@
     </form>
     </div>   
 
+
+
+    
 </body>
 
 </html>

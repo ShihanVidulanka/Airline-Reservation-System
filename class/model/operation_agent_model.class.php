@@ -27,6 +27,9 @@ class Operation_Agent_Model extends Dbh{
         $airport_name = $stmt->fetch(PDO::FETCH_ASSOC)['name'];
         return $airport_name;
     }
+    protected function getFlightDetails(){
+        $query="SELECT ";
+    }
 
 }
 ?>
