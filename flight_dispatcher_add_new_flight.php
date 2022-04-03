@@ -46,7 +46,7 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
             <a class="nav-link" href="flight_dispatcher_home.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="flight_dispatcher_flight_details.php?show=none">Flight Details</a>
+            <a class="nav-link " href="flight_dispatcher_flight_details.php">Flight Details</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="flight_dispatcher_add_new_flight.php">Add New Flight</a>
@@ -54,9 +54,9 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
           <li class="nav-item">
             <a class="nav-link" href="flight_dispatcher_add_new_airport.php">Add New Airport</a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="flight_dispatcher_add_new_airplane.php">Add New Airplane</a>
-          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="flight_dispatcher_confirm_arrival.php">Confirm Arrival</a>
+          </li>
         </ul>
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

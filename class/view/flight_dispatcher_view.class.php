@@ -35,12 +35,21 @@ class Flight_Dispatcher_View extends Flight_Dispatcher_Model
         return $string;
     }
 
-    public function getFlightDetails($show)
+    public function getOutgoingFlightDetails()
     {
-        if ($show == 'none') {
-            $flight_details = $this->flight_dispatcher_controller->getFlightDetails();
+        if (!isset($_GET['show_d'])) {
+            $flight_details = $this->flight_dispatcher_controller->getOutgoingFlightDetails();
         } else {
-            $flight_details = $this->flight_dispatcher_controller->getFlightDetailsFromDestination($show);
+            $flight_details = $this->flight_dispatcher_controller->getOutgoingFlightDetailsFromDestination($_GET['show_d']);
+        }
+        return $flight_details;
+    }
+
+    public function getIncomingFlightDetails(){
+        if (!isset($_GET['show_o'])) {
+            $flight_details = $this->flight_dispatcher_controller->getIncomingFlightDetails();
+        } else {
+            $flight_details = $this->flight_dispatcher_controller->getIncomingFlightDetailsFromDestination($_GET['show_o']);
         }
         return $flight_details;
     }
@@ -49,6 +58,12 @@ class Flight_Dispatcher_View extends Flight_Dispatcher_Model
     {
         $destinations = $this->flight_dispatcher_controller->getDestinations();
         return $destinations;
+    }
+
+    public function getOrigins()
+    {
+        $origins = $this->flight_dispatcher_controller->getOrigins();
+        return $origins;
     }
 
     public function showError($error)

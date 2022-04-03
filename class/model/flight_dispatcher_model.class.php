@@ -25,9 +25,26 @@ class Flight_Dispatcher_Model extends Dbh
     }
 
     //Get details of flights from a given origin,date and a time 
-    protected function getFlightsFromGivenDateAndTime($airport_code, $date, $time)
+    protected function getOutgoingFlightsFromGivenDateAndTime($airport_code, $date, $time)
     {
-        $query = "SELECT * FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND state=0 AND origin='{$airport_code}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}'))";
+        $query = "SELECT flight.id, airplane.tail_no, flight.origin, flight.destination, flight.economy_price, flight.business_price, 
+            flight.platinum_price, flight.departure_date, flight.departure_time, flight.flight_time FROM flight JOIN 
+            airplane where airplane.ID=flight.airplane_id AND state=0 AND origin='{$airport_code}' AND ( departure_date>'{$date}' 
+            OR (departure_date='{$date}' AND departure_time>'{$time}')) ORDER BY departure_date, departure_time";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
+        $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $details;
+    }
+
+    //Get details of flights from a given destination,date and a time 
+    protected function getIncomingFlightsFromGivenDateAndTime($airport_code, $date, $time)
+    {
+        $query = "SELECT flight.id, airplane.tail_no, flight.origin, flight.destination, flight.economy_price, flight.business_price, 
+            flight.platinum_price, flight.departure_date, flight.departure_time, flight.flight_time FROM flight JOIN airplane 
+            where airplane.ID=flight.airplane_id AND state=0 AND destination='{$airport_code}' AND ( departure_date>'{$date}' OR 
+            (departure_date='{$date}' AND departure_time>'{$time}')) ORDER BY departure_date, departure_time";
+        // echo $query;
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
         $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -37,7 +54,31 @@ class Flight_Dispatcher_Model extends Dbh
     //get list of destinations from a given origin,date and a time 
     protected function getDestinationsFromGivenDateAndTime($airport_code, $date, $time)
     {
-        $query = "SELECT DISTINCT destination FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND state=0 AND origin='{$airport_code}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}')) order by destination";
+        $query = "SELECT DISTINCT destination FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND state=0 AND origin='{$airport_code}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}')) order by origin";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
+        $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $details;
+    }
+
+    //get list of destinations from a given origin,date and a time 
+    protected function getOriginsFromGivenDateAndTime($airport_code, $date, $time)
+    {
+        $query = "SELECT DISTINCT origin FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND state=0 AND destination='{$airport_code}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}')) order by destination";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
+        $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $details;
+    }
+
+    //duplicate of below function
+    //get details of flights from a given origin,destination, date and a time 
+    protected function getOutgoingFlightsFromDestination($origin, $destination, $date, $time)
+    {
+        $query = "SELECT flight.id, airplane.tail_no, flight.origin, flight.destination, flight.economy_price, flight.business_price, 
+            flight.platinum_price, flight.departure_date, flight.departure_time, flight.flight_time
+            FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND state=0 AND destination='{$destination}' 
+            AND origin='{$origin}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}'))";
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
         $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -45,9 +86,13 @@ class Flight_Dispatcher_Model extends Dbh
     }
 
     //get details of flights from a given origin,destination, date and a time 
-    protected function getFlightsFromDestination($origin, $destination, $date, $time)
+    protected function getIncomingFlightsFromDestination($origin, $destination, $date, $time)
     {
-        $query = "SELECT * FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND state=0 AND destination='{$destination}' AND origin='{$origin}' AND ( departure_date>'{$date}' OR (departure_date='{$date}' AND departure_time>'{$time}'))";
+        $query = "SELECT flight.id, airplane.tail_no, flight.origin, flight.destination, flight.economy_price, flight.business_price, 
+            flight.platinum_price, flight.departure_date, flight.departure_time, flight.flight_time
+            FROM flight JOIN airplane where airplane.ID=flight.airplane_id AND flight.state=0 AND 
+            flight.destination='{$destination}' AND flight.origin='{$origin}' AND ( flight.departure_date>'{$date}' OR 
+            (flight.departure_date='{$date}' AND flight.departure_time>'{$time}'))";
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
         $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -58,6 +103,14 @@ class Flight_Dispatcher_Model extends Dbh
     protected function cancelFlightFromModel($flight_id)
     {
         $query = "UPDATE flight SET flight.state = 1 WHERE flight.id = {$flight_id}";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
+    }
+
+    //Confirm arrival of a flight by ID
+    protected function confirmArrivalFromModel($flight_id)
+    {
+        $query = "UPDATE flight SET flight.state = 2 WHERE flight.id = {$flight_id}";
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
     }
@@ -120,5 +173,4 @@ class Flight_Dispatcher_Model extends Dbh
         $code = $stmt->fetch(PDO::FETCH_ASSOC)['airport_code'];
         return $code;
     }
-
 }

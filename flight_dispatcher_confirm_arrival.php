@@ -10,7 +10,6 @@ if (!isset($_SESSION['ID'])) {
 }
 
 $flight_dispatcher_view = new Flight_Dispatcher_View();
-$details = $flight_dispatcher_view->getHomeDetails();
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +27,7 @@ $details = $flight_dispatcher_view->getHomeDetails();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/flight_dispatcher_home.css">
-    <title>Home</title>
+    <title>Confirm Arrival</title>
 </head>
 
 <body>
@@ -41,10 +40,10 @@ $details = $flight_dispatcher_view->getHomeDetails();
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="flight_dispatcher_home.php">Home</a>
+                        <a class="nav-link" href="flight_dispatcher_home.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="flight_dispatcher_flight_details.php">Flight Details</a>
+                        <a class="nav-link " href="flight_dispatcher_flight_details.php?show=none">Flight Details</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="flight_dispatcher_add_new_flight.php">Add New Flight</a>
@@ -53,7 +52,7 @@ $details = $flight_dispatcher_view->getHomeDetails();
                         <a class="nav-link" href="flight_dispatcher_add_new_airport.php">Add New Airport</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="flight_dispatcher_confirm_arrival.php">Confirm Arrival</a>
+                        <a class="nav-link active" href="flight_dispatcher_confirm_arrival.php">Confirm Arrival</a>
                     </li>
                 </ul>
 
@@ -65,63 +64,6 @@ $details = $flight_dispatcher_view->getHomeDetails();
             </div>
         </div>
     </nav>
-
-    <div class="container pt-5">
-        <div class="wrapper p-3">
-            <h1 id="heading" class="mb-4">Welcome Home <?php echo $details['username'] ?></h1>
-
-            <div class="row mb-3">
-                <div class="col-sm-4">
-                    <p>Account No.</p>
-                </div>
-                <div class="col-sm-2">
-                    <p>:</p>
-                </div>
-                <div class="col-sm-6">
-                    <p>Flight Dispatcher <?php echo $details['ID']; ?></p>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-sm-4">
-                    <p>Name</p>
-                </div>
-                <div class="col-sm-2">
-                    <p>:</p>
-                </div>
-                <div class="col-sm-6">
-                    <p><?php echo $details['first_name'] . " " . $details['last_name']; ?></p>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-sm-4">
-                    <p>Aiport Code</p>
-                </div>
-                <div class="col-sm-2">
-                    <p>:</p>
-                </div>
-                <div class="col-sm-6">
-                    <p><?php echo $details['airport_name']; ?></p>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-sm-4">
-                    <p>Phone Number</p>
-                </div>
-                <div class="col-sm-2">
-                    <p>:</p>
-                </div>
-                <div class="col-sm-6">
-                    <p><?php echo $details['telephone_numbers'] ?></p>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-    </table>
 
 </body>
 

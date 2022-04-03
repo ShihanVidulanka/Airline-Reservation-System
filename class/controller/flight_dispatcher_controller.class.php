@@ -20,11 +20,18 @@ class Flight_Dispatcher_Controller extends Flight_Dispatcher_Model
         return $time;
     }
 
-    public function getFlightDetails()
+    public function getOutgoingFlightDetails()
     {
         $date = $this->getCurrentDate();
         $time = $this->getCurrentTime();
-        $details = $this->getFlightsFromGivenDateAndTime($_SESSION['airport_code'], $date, $time);
+        $details = $this->getOutgoingFlightsFromGivenDateAndTime($_SESSION['airport_code'], $date, $time);
+        return $details;
+    }
+
+    public function getIncomingFlightDetails(){
+        $date = $this->getCurrentDate();
+        $time = $this->getCurrentTime();
+        $details = $this->getIncomingFlightsFromGivenDateAndTime($_SESSION['airport_code'], $date, $time);
         return $details;
     }
 
@@ -36,17 +43,38 @@ class Flight_Dispatcher_Controller extends Flight_Dispatcher_Model
         return $details;
     }
 
-    public function getFlightDetailsFromDestination($destination)
+    public function getOrigins()
     {
         $date = $this->getCurrentDate();
         $time = $this->getCurrentTime();
-        $details = $this->getFlightsFromDestination($_SESSION['airport_code'], $destination, $date, $time);
+        $details = $this->getOriginsFromGivenDateAndTime($_SESSION['airport_code'], $date, $time);
+        return $details;
+    }
+
+    public function getOutgoingFlightDetailsFromDestination($destination)
+    {
+        $date = $this->getCurrentDate();
+        $time = $this->getCurrentTime();
+        $details = $this->getOutgoingFlightsFromDestination($_SESSION['airport_code'], $destination, $date, $time);
+        return $details;
+    }
+
+    public function getIncomingFlightDetailsFromDestination($origin)
+    {
+        $date = $this->getCurrentDate();
+        $time = $this->getCurrentTime();
+        $details = $this->getIncomingFlightsFromDestination($origin, $_SESSION['airport_code'], $date, $time);
         return $details;
     }
 
     public function cancelFlight($flight_id)
     {
         $this->cancelFlightFromModel($flight_id);
+        return;
+    }
+
+    public function confirmArrival($flight_id){
+        $this->confirmArrivalFromModel($flight_id);
         return;
     }
 

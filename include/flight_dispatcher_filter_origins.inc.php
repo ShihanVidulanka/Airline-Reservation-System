@@ -4,15 +4,15 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
 session_start();
 
-if (isset($_POST['search'])){
+if (isset($_POST['searchOrigin'])){
     
-
-    if (!isset($_POST['dropdown'])) {
+    if (!isset($_POST['dropdownOrigin'])) {
         header("Location: ../flight_dispatcher_flight_details.php");
         return;
     }else{
-        $destination = htmlentities($_POST['dropdown']);
-        header("Location: ../flight_dispatcher_flight_details.php?show_d={$destination}");
+        $origin = htmlentities($_POST['dropdownOrigin']);
+        header("Location: ../flight_dispatcher_flight_details.php?show_o={$origin}");
         return;
     }
 }
+?>

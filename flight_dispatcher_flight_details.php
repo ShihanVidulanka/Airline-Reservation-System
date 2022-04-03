@@ -11,9 +11,12 @@ if (!isset($_SESSION['ID'])) {
 
 $flight_dispatcher_view = new Flight_Dispatcher_View();
 
-$flight_details = $flight_dispatcher_view->getFlightDetails($_GET['show']);
+$outgoing_flight_details = $flight_dispatcher_view->getOutgoingFlightDetails();
+$incoming_flight_details = $flight_dispatcher_view->getIncomingFlightDetails();
 $destinations = $flight_dispatcher_view->getDestinations();
+$origins = $flight_dispatcher_view->getOrigins();
 
+// print_r($outgoing_flight_details);
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +46,7 @@ $destinations = $flight_dispatcher_view->getDestinations();
             <a class="nav-link" href="flight_dispatcher_home.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="flight_dispatcher_flight_details.php?show=none">Flight Details</a>
+            <a class="nav-link active" href="flight_dispatcher_flight_details.php">Flight Details</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="flight_dispatcher_add_new_flight.php">Add New Flight</a>
@@ -51,9 +54,9 @@ $destinations = $flight_dispatcher_view->getDestinations();
           <li class="nav-item">
             <a class="nav-link " href="flight_dispatcher_add_new_airport.php">Add New Airport</a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="flight_dispatcher_add_new_airplane.php">Add New Airplane</a>
-          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="flight_dispatcher_confirm_arrival.php">Confirm Arrival</a>
+          </li>
         </ul>
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -66,7 +69,7 @@ $destinations = $flight_dispatcher_view->getDestinations();
   </nav>
 
   <div class="container p-3">
-
+    <p class="h2 text-danger">Destination Details</p>
     <div class="search">
       <form class="d-flex mb-3" action="include/flight_dispatcher_filter_destination.inc.php" method="POST">
         <select required class="select" data-mdb-filter="true" name="dropdown">
@@ -102,7 +105,7 @@ $destinations = $flight_dispatcher_view->getDestinations();
         <tbody>
 
           <?php
-          foreach ($flight_details as $value) {
+          foreach ($outgoing_flight_details as $value) {
             echo '<tr>';
             echo '<td>' . $value['tail_no'] . "</td>";
             echo '<td>' . $value['origin'] . "</td>";
@@ -113,7 +116,67 @@ $destinations = $flight_dispatcher_view->getDestinations();
             echo '<td>' . $value['departure_date'] . "</td>";
             echo '<td>' . $value['departure_time'] . "</td>";
             echo '<td>' . $value['flight_time'] . "</td>";
-            echo "<td><a class=\"btn btn-sm btn-primary\" href=\"include/flight_dispatcher_cancel_flight.inc.php?id={$value['id']}\">Cancel</a></td>";
+            echo "<td><a class=\"btn btn-sm btn-primary\" href=\"include/flight_dispatcher_cancel_flight.inc.php?id_d={$value['id']}\">Cancel</a></td>";
+            echo '</tr>';
+          }
+          ?>
+
+
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+  <div class="container p-3">
+    <p class="h2 text-danger">Arrival Details</p>
+    <div class="search">
+      <form class="d-flex mb-3" action="include/flight_dispatcher_filter_origins.inc.php" method="POST">
+        <select required class="select" data-mdb-filter="true" name="dropdownOrigin">
+          <option value="" selected disabled hidden>--- Choose a origins ---</option>
+          <?php
+          foreach ($origins as $origin) {
+            echo "<option value='{$origin['origin']}'>" . $origin['origin'] . "</option>";
+          }
+          ?>
+        </select>
+        <button class="btn btn-primary" type="submit" name='searchOrigin'>Search</button>
+      </form>
+    </div>
+
+    <div class="wrapper p-5">
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Air Plane NO</th>
+            <th>Origine</th>
+            <th>Destination</th>
+            <th>Economy Price</th>
+            <th>Buisiness Price</th>
+            <th>Platinum Price</th>
+            <th>Departure Date</th>
+            <th>Departure Time</th>
+            <th>Flight Time</th>
+            <th>Cancel</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <?php
+          foreach ($incoming_flight_details as $value) {
+            echo '<tr>';
+            echo '<td>' . $value['tail_no'] . "</td>";
+            echo '<td>' . $value['origin'] . "</td>";
+            echo '<td>' . $value['destination'] . "</td>";
+            echo '<td>' . $value['economy_price'] . "</td>";
+            echo '<td>' . $value['business_price'] . "</td>";
+            echo '<td>' . $value['platinum_price'] . "</td>";
+            echo '<td>' . $value['departure_date'] . "</td>";
+            echo '<td>' . $value['departure_time'] . "</td>";
+            echo '<td>' . $value['flight_time'] . "</td>";
+            echo "<td><a class=\"btn btn-sm btn-primary\" href=\"include/flight_dispatcher_arrived_flight.inc.php?id_o={$value['id']}\">Arrived</a></td>";
             echo '</tr>';
           }
           ?>

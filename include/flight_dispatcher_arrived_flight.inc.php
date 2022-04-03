@@ -4,11 +4,11 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
 session_start();
 
-if (isset($_GET['id_d'])){
+if (isset($_GET['id_o'])){
     $controller =  new Flight_Dispatcher_Controller();
-    $flight_id = htmlentities($_GET['id_d']);
+    $flight_id = htmlentities($_GET['id_o']);
 
-    $controller->cancelFlight($flight_id);
+    $controller->confirmArrival($flight_id);
     header("Location: ../flight_dispatcher_flight_details.php");
     return;
 }
