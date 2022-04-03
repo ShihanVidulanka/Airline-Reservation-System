@@ -15,12 +15,12 @@ class Login_Model extends Dbh{
 
         if (!$result_set) {
             echo $result_set;
-            header("location: login.php?error=ConnectionFails1");
+            header("location: ../login.php?error=ConnectionFails1");
             exit();
         }
 
         if(!$result_set->rowCount()==1){
-            header("location: login.php?error=UserNotFound1");
+            header("location: ../login.php?error=UserNotFound1");
             exit();
         }
 
@@ -32,7 +32,7 @@ class Login_Model extends Dbh{
         $checkPassword = password_verify($password, $hashedPassword);
 
         if ($checkPassword == false) {
-            header("location: login.php?error=WrongPassword");
+            header("location: ../login.php?error=WrongPassword");
             exit();
         }
         elseif ($checkPassword == true) {
@@ -44,7 +44,7 @@ class Login_Model extends Dbh{
             $result_set2->execute();
             
             if (!($result_set2) ) {
-                header("location: login.php?error=ConnectionFail2");
+                header("location: ../login.php?error=ConnectionFail2");
                 exit();
             }
             $array_Tp_no = array();
@@ -52,15 +52,16 @@ class Login_Model extends Dbh{
                 array_push($array_Tp_no, $user_tp['phone_no']);
             }
 
+            
             //get the special details of user according to the user type.
             switch ($userType) {
                 case '0':
+                    session_start();
                     $user_details = $user;
                     $_SESSION["ID"] = $user["ID"];
                     $_SESSION["username"] = $user["username"];
                     $_SESSION["account_type"] = $user["account_type"];
                     $_SESSION["TP_no"] = $array_Tp_no;
-                    // header("location: airline_administrator_home.php");
                     return $userType;
                     break;
 
@@ -76,7 +77,7 @@ class Login_Model extends Dbh{
                     $query3 = "SELECT * FROM registered_passenger WHERE user_id=:ID";
                     break;
                 default:
-                    header("location: login.php?error=UserNotFound2");
+                    header("location: ../login.php?error=UserNotFound2");
                     break;
             }
 
@@ -84,12 +85,12 @@ class Login_Model extends Dbh{
             $result_set3->bindParam(':ID',$user['ID']);
             $result_set3->execute();
             if (!$result_set3) {
-                header("location: login.php?error=ConnectionFail3");
+                header("location: ../login.php?error=ConnectionFail3");
                 exit();
             }
 
             if(!$result_set3->rowCount()==1){
-                header("location: login.php?error=UserNotFound3");
+                header("location: ../login.php?error=UserNotFound3");
                 exit();
             }
 
@@ -125,7 +126,7 @@ class Login_Model extends Dbh{
                     $_SESSION["passenger_id"] = $user_details["passenger_id"];
                     break;
                 default:
-                    header("location: login.php?error=UserNotFound4");
+                    header("location: ../login.php?error=UserNotFound4");
                     break;
             }
             return $userType;   //return the user type if user found.
