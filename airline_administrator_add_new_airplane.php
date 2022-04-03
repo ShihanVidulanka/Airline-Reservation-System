@@ -4,10 +4,10 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
 session_start();
 
-// if (!isset($_SESSION['ID'])) {
-//     header("Location: login.php");
-//     return;
-// }
+if (!isset($_SESSION['ID'])) {
+    header("Location: login.php");
+    return;
+}
 
 $view = new Airline_Administrator_View();
 ?>

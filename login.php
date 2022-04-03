@@ -1,4 +1,10 @@
-<<?php include_once('include/login.inc.php')?>
+<<?php 
+
+
+// include_once('include/login.inc.php');
+session_start();
+print_r($_SESSION);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +34,7 @@
             </div>
 
             <!-- Login Form -->
-            <form method="post">
+            <form method="post" action="include/login.inc.php">
                 <input type="text" id="username" class="fadeIn second" name="username" placeholder="Enter Your Username">
                 <input type="password" id="password" class="fadeIn third" name="password" placeholder="Enther the Password">
                 <input type="submit" name="login" id="submit" class="fadeIn fourth" value="Log In">

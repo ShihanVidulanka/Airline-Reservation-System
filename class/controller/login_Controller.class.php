@@ -27,19 +27,19 @@ class Login_Controller extends Login_Model
 
         switch ($userTypeVal) { // Complete this wthen users are done
             case '0':
-                header("location: airline_administrator_home.php");
+                header("location: ../airline_administrator_home.php");
                 break;
             case '1':
-                header("location: operation_agent_home.php");
+                header("location: ../operation_agent_home.php");
                 break;
             case '2':
-                header("location: flight_dispatcher_home.php");
+                header("location: ../flight_dispatcher_home.php");
                 break;
             case '3':
-                header("location: main_page.php");
+                header("location: ../main_page.php");
                 break;
             default:
-                header("location: login.php?error=userNotfound");
+                header("location: ../login.php?error=userNotfound");
                 break;
         }
     }
