@@ -121,12 +121,4 @@ class Flight_Dispatcher_Model extends Dbh
         return $code;
     }
 
-    //add new row to airplane table
-    public function addNewAirplaneFromModel($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats)
-    {
-        $query = "INSERT INTO airplane(tail_no, model, no_platinum_seats, no_economy_seats, no_business_seats, in_service)
-             VALUES ( '{$tail_no}', '{$model}', '{$no_platinum_seats}', '{$no_economy_seats}', '{$no_business_seats}', 0)";
-        $stmt = $this->connect()->prepare($query);
-        $stmt->execute();
-    }
 }

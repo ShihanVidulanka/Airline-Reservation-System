@@ -4,13 +4,12 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
 session_start();
 
-if (!isset($_SESSION['ID'])) {
-    header("Location: login.php");
-    return;
-}
+// if (!isset($_SESSION['ID'])) {
+//     header("Location: login.php");
+//     return;
+// }
 
-$view = new AirlineAdministrator_Controller();
-
+$view = new Airline_Administrator_View();
 ?>
 
 <!DOCTYPE html>
@@ -70,14 +69,14 @@ $view = new AirlineAdministrator_Controller();
     <div class="container pt-5">
         <div class="wrapper p-3">
 
-            <!-- <?php
-                    if (isset($_GET['error'])) {
-                        // $view->showError($_GET['error']);
-                    }
-                    ?> -->
+            <?php
+            if (isset($_GET['error'])) {
+                $view->showError($_GET['error']);
+            }
+            ?>
 
             <h1 id="heading" class="mb-4">Add New Airport</h1>
-            <form action="include/flight_dispatcher_add_new_airplane.inc.php" method="POST">
+            <form action="include/airline_administrator_add_new_airplane.inc.php" method="POST">
 
                 <div class="row mb-3">
 
@@ -98,8 +97,6 @@ $view = new AirlineAdministrator_Controller();
                 </div>
 
                 <div class="row mb-3">
-
-
 
                     <div class="col-sm-4">
                         <label for="destination" class="form-label">No. of Platinum Seats</label>

@@ -71,6 +71,18 @@ class Airline_Administrator_Model extends Dbh{
             $db->rollBack();
             die($e->getMessage());
         }
+
+        
+    }
+
+    
+    //add new row to airplane table
+    public function addNewAirplaneFromModel($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats)
+    {
+        $query = "INSERT INTO airplane(tail_no, model, no_platinum_seats, no_economy_seats, no_business_seats, in_service)
+             VALUES ( '{$tail_no}', '{$model}', '{$no_platinum_seats}', '{$no_economy_seats}', '{$no_business_seats}', 0)";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
     }
 
     // protected function createFlightDispatcher($details){

@@ -6,7 +6,7 @@ session_start();
 
 if (isset($_POST['submit'])) {
     
-    $controller = new Flight_Dispatcher_Controller();
+    $controller = new Airline_Administrator_Controller();
     $tail_no = htmlentities($_POST['tail_no']);
     $model = htmlentities($_POST['model']);
     $no_platinum_seats = htmlentities($_POST['no_platinum_seats']);
@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
     // print_r($_POST);
 
     $error = $controller->validateAddNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats);
-    header("Location: ../flight_dispatcher_add_new_airplane.php?error={$error}");
+    header("Location: ../airline_administrator_add_new_airplane.php?error={$error}");
     return;
 }
 
