@@ -13,7 +13,21 @@ class SignUp_Model extends Dbh{
         );
         $count=$stmt->fetch()['COUNT(ID)'];
         if($count!=0){
-            echo "Username already used";
+            echo "error";
+        }
+    }
+
+    protected function check_tpno($phone_no){
+       
+        $db=$this->connect();
+        $query = "SELECT COUNT(telephone_id) FROM telephone_no WHERE phone_no=:phone_no";
+        $stmt=$db->prepare($query);
+        $stmt->execute(
+            array(':phone_no'=>$phone_no)
+        );
+        $count=$stmt->fetch()['COUNT(telephone_id)'];
+        if($count!=0){
+            echo "error";
         }
     }
     protected function createRegisteredPassenger($details){

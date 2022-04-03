@@ -7,6 +7,10 @@ if(isset($_POST['username_'])){
     $signup_controller=new SignUp_Controller;
     $signup_controller->checkUsernameFromModel($_POST['username_']);
 }
+if(isset($_POST['tpno_'])){
+    $signup_controller=new SignUp_Controller;
+    $signup_controller->checkTp_noFromModel($_POST['tpno_']);
+}
 if(isset($_POST['submit'])){
     $_POST['telephone_numbers']=rtrim($_POST['telephone_numbers'],',');
     $_POST['telephone_numbers']=explode(",",$_POST['telephone_numbers']);

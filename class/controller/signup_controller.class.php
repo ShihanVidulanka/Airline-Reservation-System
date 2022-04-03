@@ -22,4 +22,9 @@ class SignUp_Controller extends Signup_Model{
     public function checkUsernameFromModel($username){
         $this->check_username(remove_unnessaries($username,1));
     }
+    public function checkTp_noFromModel($phone_no){
+        $this->check_tpno(remove_unnessaries($phone_no));
+    }
 }
+// $signup_ctrl = new SignUp_Controller();
+// $signup_ctrl->checkTp_noFromModel('07147484853');

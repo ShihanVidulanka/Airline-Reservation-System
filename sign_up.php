@@ -41,8 +41,7 @@
                     <div class="col-sm-6">
                         <label for="username" class="form-label" >Username:</label>
                         <input oninput="checkUserName();" required class="form-control" type="text" name="username" id="username" placeholder="Enter User Username">
-                        <div id="valid" class="valid-feedback">Valid Username</div>
-                        <div id="invalid" class="invalid-feedback">Invalid Username</div>
+                        <div Id="username_val"></div>
                     </div>
                     <div class="col-sm-6">
                         <label for="password" class="form-label">Password:</label>
@@ -80,11 +79,10 @@
                     <div class="col-sm-6">
                     <label for="telephone" class="form-label">Telephone Number:</label>
                         <div class="input-group mb-3">
-                            <input required class="form-control" type="tel" name="telephone" id="telephone" placeholder="Enter Your Telephone No:">
-                            <button type="button" class="btn btn-primary btn-outline-secondry" onclick="addtelephone();">Add</button>
+                            <input required class="form-control" type="tel" name="telephone" id="telephone" placeholder="Enter Your Telephone No:" oninput="checkTpNo() ">
+                            <button type="button" id="add" class="btn btn-primary btn-outline-secondry" onclick="addtelephone();">Add</button>
                         </div>
-                        <div class="valid-feedback">Valid Telephone number</div>
-                        <div class="invalid-feedback">Invalid Telephone number</div>
+                        <div Id="telephone_val"></div>
                     </div>
                     <div class="col-sm-6">
                     <label for="telephone_numbers" class="form-label">Telephone Numbers List:</label>
