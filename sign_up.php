@@ -56,13 +56,13 @@
                         <div Id="passport_number_val" class="m-3"></div>
                     </div>
                 </div>
-                <div class="row mb-3">
+                <!-- <div class="row mb-3">
                     <div class="col-sm-12">
                         <label for="address" class="form-label">Address:</label>
                         <textarea required class="form-control"  name="address" id="address" placeholder="Enter Your Address:"></textarea>
                         <div Id="address_val" class="m-3"></div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="row mb-3">
                     <div class="col-sm-6">

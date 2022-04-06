@@ -4,7 +4,7 @@ var username = document.getElementById('username');
 var password = document.getElementById('password');
 // var NIC = document.getElementById('NIC');
 var passport_number = document.getElementById('passport_number')
-var address = document.getElementById('address');
+// var address = document.getElementById('address');
 var telephone=document.getElementById('telephone');
 var dob = document.getElementById('dob');
 var email = document.getElementById('email');
@@ -17,7 +17,7 @@ first_name.addEventListener("input",function(){first_nameListner()});
 last_name.addEventListener("input",function(){last_nameListner()});
 username.addEventListener('input',function(){usernameListner()});
 password.addEventListener('input',function(){passwordListner()});
-address.addEventListener('input',function(){addressListner()});
+// address.addEventListener('input',function(){addressListner()});
 telephone.addEventListener('input',function(){telephoneListner()});
 passport_number.addEventListener('input',function(){passport_numberListner()});
 dob.addEventListener('input',function(){dobListner()});
@@ -68,16 +68,16 @@ function passwordListner(){
   }
 }
 
-function addressListner(){
-  let errormsg = document.getElementById('address_val');
-  if(validateAddress(address.value)){
-    errormsg.innerHTML = 'Valid Address!';
-    errormsg.style.color = 'green';
-  }else{
-    errormsg.innerHTML = 'Invalid Address!';
-    errormsg.style.color = 'red';
-  }
-}
+// function addressListner(){
+//   let errormsg = document.getElementById('address_val');
+//   if(validateAddress(address.value)){
+//     errormsg.innerHTML = 'Valid Address!';
+//     errormsg.style.color = 'green';
+//   }else{
+//     errormsg.innerHTML = 'Invalid Address!';
+//     errormsg.style.color = 'red';
+//   }
+// }
 
 function telephoneListner(){
   let errormsg = document.getElementById('telephone_val');
@@ -312,9 +312,9 @@ function validatepassport_number(passport_number){
   return (pattern.test(passport_number));
 }
 //address validation
-function validateAddress(address){
-  return address.length>0;
-}
+// function validateAddress(address){
+//   return address.length>0;
+// }
 //date of birth validation
 function validateDate(date){
   let dob = new Date(date);

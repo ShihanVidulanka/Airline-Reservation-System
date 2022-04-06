@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2022 at 10:45 AM
+-- Generation Time: Apr 06, 2022 at 12:00 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -231,7 +231,6 @@ CREATE TABLE `registered_passenger` (
   `last_name` varchar(50) NOT NULL,
   `dob` date NOT NULL,
   `passport_number` varchar(25) NOT NULL,
-  `email` varchar(30) DEFAULT NULL,
   `category` int(1) NOT NULL,
   `is_deleted` int(1) NOT NULL DEFAULT 0,
   `passenger_id` int(15) NOT NULL
@@ -241,8 +240,8 @@ CREATE TABLE `registered_passenger` (
 -- Dumping data for table `registered_passenger`
 --
 
-INSERT INTO `registered_passenger` (`account_no`, `user_id`, `first_name`, `last_name`, `dob`, `passport_number`, `email`, `category`, `is_deleted`, `passenger_id`) VALUES
-(1, 2, 'Harshani', 'Bandara', '1998-03-25', '1234567890-0987654321', NULL, 2, 0, 1);
+INSERT INTO `registered_passenger` (`account_no`, `user_id`, `first_name`, `last_name`, `dob`, `passport_number`, `category`, `is_deleted`, `passenger_id`) VALUES
+(1, 2, 'Harshani', 'Bandara', '1998-03-25', '1234567890-0987654321', 2, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -277,6 +276,7 @@ CREATE TABLE `user` (
   `ID` int(20) NOT NULL,
   `username` varchar(25) NOT NULL,
   `password` varchar(60) NOT NULL,
+  `email` varchar(30) NOT NULL,
   `account_type` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=REDUNDANT;
 
@@ -284,11 +284,11 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`ID`, `username`, `password`, `account_type`) VALUES
-(1, 'Admin', '$2y$10$XwxseSnyw782C4n9CxsN/e8choRcyfKkXtVJQtDfMhkvN12ZL9Dfa', 0),
-(2, 'HarshaniBandara', '$2y$10$XwxseSnyw782C4n9CxsN/e8choRcyfKkXtVJQtDfMhkvN12ZL9Dfa', 3),
-(3, 'SathiraLyanapathirana', '$2y$10$XwxseSnyw782C4n9CxsN/e8choRcyfKkXtVJQtDfMhkvN12ZL9Dfa', 1),
-(4, 'SahanCaldera', '$2y$10$XwxseSnyw782C4n9CxsN/e8choRcyfKkXtVJQtDfMhkvN12ZL9Dfa', 2);
+INSERT INTO `user` (`ID`, `username`, `password`, `email`, `account_type`) VALUES
+(1, 'Admin', '$2y$10$XwxseSnyw782C4n9CxsN/e8choRcyfKkXtVJQtDfMhkvN12ZL9Dfa', '', 0),
+(2, 'HarshaniBandara', '$2y$10$XwxseSnyw782C4n9CxsN/e8choRcyfKkXtVJQtDfMhkvN12ZL9Dfa', '', 3),
+(3, 'SathiraLyanapathirana', '$2y$10$XwxseSnyw782C4n9CxsN/e8choRcyfKkXtVJQtDfMhkvN12ZL9Dfa', '', 1),
+(4, 'SahanCaldera', '$2y$10$XwxseSnyw782C4n9CxsN/e8choRcyfKkXtVJQtDfMhkvN12ZL9Dfa', '', 2);
 
 --
 -- Indexes for dumped tables

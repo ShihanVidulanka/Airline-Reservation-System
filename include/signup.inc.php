@@ -32,6 +32,7 @@ if(isset($_POST['submit'])){
     $registered_passenger->setCategory(0);
     $registered_passenger->setState(0);
     $registered_passenger->setTelephone_numbers($_POST['telephone_numbers']);
+    $registered_passenger->setEmail($_POST['email']);
 
     $signUp_Controller->createRegisteredPassengerFromModel($registered_passenger);
 }

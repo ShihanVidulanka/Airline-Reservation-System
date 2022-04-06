@@ -35,12 +35,13 @@ class SignUp_Model extends Dbh{
             $db = $this->connect();
             $db->beginTransaction();
 
-            $query1 = "INSERT INTO user(username,password,account_type)
-                        VALUES(:username,:password,:account_type)";
+            $query1 = "INSERT INTO user(username,password,email,account_type)
+                        VALUES(:username,:password,:email,:account_type)";
             $stmt = $db->prepare($query1);
             $stmt->execute(array(
                                 ':username'=>$details['username'],
                                 ':password'=>$details['hashed_password'],
+                                ':email'=>$details['email'],
                                 ':account_type'=>$details['account_type']
             ));
             $user_id = $db->lastInsertId();
