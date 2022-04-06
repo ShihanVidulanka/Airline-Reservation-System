@@ -10,7 +10,7 @@ class Registered_Passenger extends User{
    private $dob;
    private $passport_number;
    private $category;
-   private $state;
+   private $is_deleted;
    private $telephone_numbers;
 
     // public function setUsername($username){$this->username=$username;}
@@ -23,7 +23,7 @@ class Registered_Passenger extends User{
     public function setDob($dob){$this->dob=$dob;}
     public function setPassport_number($passport_number){$this->passport_number=$passport_number;}
     public function setCategory($category){$this->category=$category;}
-    public function setState($state){$this->state=$state;}
+    public function setIs_deleted($is_deleted){$this->is_deleted=$is_deleted;}
     public function setTelephone_numbers($telephone_numbers){$this->telephone_numbers=$telephone_numbers;}
 
     // public function getUsername(){return $this->username;}
@@ -36,7 +36,7 @@ class Registered_Passenger extends User{
     public function getDob(){return $this->dob;}
     public function getPassport_number(){return $this->passport_number;}
     public function getCategory(){return $this->category;}
-    public function getState(){return $this->state;}
+    public function getIs_deleted(){return $this->is_deleted;}
     public function getTelephone_numbers(){return $this->telephone_numbers;}
 
 }

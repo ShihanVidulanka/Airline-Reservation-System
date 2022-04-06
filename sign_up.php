@@ -42,18 +42,23 @@
                         <div Id="username_val" class="m-3"></div>
                     </div>
                     <div class="col-sm-6">
-                        <label for="password" class="form-label">Password:</label>
-                        <input required class="form-control" type="text" name="password" id="password" placeholder="Enter User Password">
-                        <div Id="password_val" class="m-3"></div>
+                        <label for="passport_number" class="form-label">Passport Number:</label>
+                        <input onchange="checkPassportNo()" required class="form-control" type="text" name="passport_number" id="passport_number" placeholder="Enter User passport Number">
+                        <div Id="passport_number_val" class="m-3"></div>
                     </div>
                 </div>
                 
             
                 <div class="row mb-3">
-                    <div class="col-sm-12">
-                        <label for="passport_number" class="form-label">Passport Number:</label>
-                        <input onchange="checkPassportNo()" required class="form-control" type="text" name="passport_number" id="passport_number" placeholder="Enter User passport Number">
-                        <div Id="passport_number_val" class="m-3"></div>
+                    <div class="col-sm-6">
+                        <label for="password" class="form-label">Password:</label>
+                        <input required class="form-control" type="text" name="password" id="password" placeholder="Enter User Password">
+                        <div Id="password_val" class="m-3"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="password" class="form-label">Retype Password:</label>
+                        <input required class="form-control" type="text" name="retypepwd" id="retypepwd" placeholder="Enter User Password">
+                        <div Id="retypepassword_val" class="m-3"></div>
                     </div>
                 </div>
                 <!-- <div class="row mb-3">
@@ -96,11 +101,11 @@
 
                     </div>
                 </div>
-                <!-- <input type="text" name="submit" value="submit" hidden> -->
+                <!-- <input type="text" name="submit_" value="submit" hidden> -->
                 
                 <div class="btn-group">
                     <button onclick="checkAll();" type="button" class="btn btn-primary buttons" value="Sign Up">Sign Up</button>
-                    <button class="btn btn-primary buttons">Exit</button>
+                    <a class="btn btn-primary buttons" href="login.php">Exit</a>
                 </div>
             </form>
         </div>

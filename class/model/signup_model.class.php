@@ -65,7 +65,7 @@ class SignUp_Model extends Dbh{
                                                     dob,
                                                     passport_number,
                                                     category,
-                                                    state,
+                                                    is_deleted,
                                                     passenger_id)
                                     VALUES(
                                          :user_id,
@@ -74,7 +74,7 @@ class SignUp_Model extends Dbh{
                                          :dob,
                                          :passport_number,
                                          :category,
-                                         :state,
+                                         :is_deleted,
                                          :passenger_id)";
             echo $passenger_id."<br>";
             // $stmt3 = $db->prepare($query3);
@@ -86,7 +86,7 @@ class SignUp_Model extends Dbh{
                 ':dob'=>$details['dob'],
                 ':passport_number'=>$details['passport_number'],
                 ':category'=>$details['category'],
-                ':state'=>$details['state'],
+                ':is_deleted'=>$details['is_deleted'],
                 ':passenger_id'=>$passenger_id
             ));
             $stmt3->closeCursor();
@@ -103,6 +103,7 @@ class SignUp_Model extends Dbh{
                 $stmt4->closeCursor();
             }
             $db->commit();
+            header("location: ../login.php?error=signup_successful");
 
         } catch (PDOException $e) {
             $db->rollBack();

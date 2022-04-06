@@ -2,10 +2,12 @@ var first_name = document.getElementById('first_name');
 var last_name = document.getElementById('last_name');
 var username = document.getElementById('username');
 var password = document.getElementById('password');
+var retypepwd = document.getElementById('retypepwd')
 // var NIC = document.getElementById('NIC');
 var passport_number = document.getElementById('passport_number')
 // var address = document.getElementById('address');
 var telephone=document.getElementById('telephone');
+var telephone_numbers = document.getElementById('telephone_numbers');
 var dob = document.getElementById('dob');
 var email = document.getElementById('email');
 
@@ -17,6 +19,7 @@ first_name.addEventListener("input",function(){first_nameListner()});
 last_name.addEventListener("input",function(){last_nameListner()});
 username.addEventListener('input',function(){usernameListner()});
 password.addEventListener('input',function(){passwordListner()});
+retypepwd.addEventListener('input',function(){passwordListner(1)});
 // address.addEventListener('input',function(){addressListner()});
 telephone.addEventListener('input',function(){telephoneListner()});
 passport_number.addEventListener('input',function(){passport_numberListner()});
@@ -57,9 +60,17 @@ function usernameListner(){
   }
 }
 
-function passwordListner(){
-  let errormsg = document.getElementById('password_val');
-  if(validatePassword(password.value)){
+function passwordListner(retype=0){
+  let errormsg;
+  let element;
+  if(retype==1){
+     errormsg = document.getElementById('retypepassword_val');
+     element = retypepwd;
+  }else{
+     errormsg = document.getElementById('password_val');
+     element=password;
+  }
+  if(validatePassword(element.value)){
     errormsg.innerHTML = 'Valid Password!';
     errormsg.style.color = 'green';
   }else{
@@ -129,17 +140,21 @@ function emailListner(){
 }
 
 function addtelephone(){
-
     let telephone = document.getElementById('telephone');
-    if(validateTelphoneNumber(telephone.value)){
-    let telephone_number_list = document.getElementById('telephone_numbers_list');
-    let telephone_numbers = document.getElementById('telephone_numbers');
+    let errormsg = document.getElementById('telephone_val');
 
-    let option = document.createElement("option");
-    option.text = telephone.value;
-    // console.log(option.text);
-    telephone_number_list.appendChild(option);
-    telephone_numbers.value+=telephone.value+',';
+    if(validateTelphoneNumber(telephone.value)){
+      let telephone_number_list = document.getElementById('telephone_numbers_list');
+      let option = document.createElement("option");
+      option.text = telephone.value;
+      // console.log(option.text);
+      telephone_number_list.appendChild(option);
+      telephone_numbers.value+=telephone.value+',';
+      telephone.value='';
+    }else{
+      errormsg.innerHTML = 'Invalid telephone!';
+      errormsg.style.color = 'red';
+      document.getElementById('add').disabled = true;
     }
 }
 
@@ -194,7 +209,6 @@ function checkPassportNo() {
             errormsg.innerHTML='passport_number is already used!'
             errormsg.style.color = 'red';
             usedPassportNo=true;
-            
           }else{
             usedPassportNo=false;
             if(validatepassport_number(passport_number)){
@@ -230,10 +244,24 @@ function checkAll(){
     error_count++;
     usernameListner();
   }
-  if(!validatePassword(password.value)){
+  if(!(validatePassword(password.value) && validatePassword(retypepwd.value) && (password.value==retypepwd.value))){
     error_count++;
+    console.log('password');
     passwordListner();
+    passwordListner(1);
+    if(password.value!=retypepwd.value){
+      document.getElementById('retypepassword_val').innerHTML='Passwords are not equal!';
+      document.getElementById('password_val').innerHTML='Passwords are not equal!';
+      document.getElementById('retypepassword_val').style.color='red';
+      document.getElementById('password_val').style.color='red';
+    }
 
+  }
+  if(telephone_numbers.value==''){
+    error_count++;
+    console.log('telephone');
+    document.getElementById('telephone_val').innerHTML='Empty telephone number!';
+    document.getElementById('telephone_val').style.color='red';
   }
   // if(!validateNIC(NIC.value)){
   //   error_count++;
