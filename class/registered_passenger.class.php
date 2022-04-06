@@ -1,5 +1,5 @@
 <?php
-class Registered_Passenger{
+class Registered_Passenger extends User{
    private $username;
    private $password;
    private $account_type;
@@ -13,9 +13,9 @@ class Registered_Passenger{
    private $state;
    private $telephone_numbers;
 
-    public function setUsername($username){$this->username=$username;}
-    public function setPassword($password){$this->password=$password;}
-    public function setAccount_type($account_type){$this->account_type=$account_type;}
+    // public function setUsername($username){$this->username=$username;}
+    // public function setPassword($password){$this->password=$password;}
+    // public function setAccount_type($account_type){$this->account_type=$account_type;}
     public function setPassenger_type($passenger_type){$this->passenger_type=$passenger_type;}
     public function setNIC($NIC){$this->NIC=$NIC;}
     public function setFirst_name($first_name){$this->first_name=$first_name;}
@@ -26,9 +26,9 @@ class Registered_Passenger{
     public function setState($state){$this->state=$state;}
     public function setTelephone_numbers($telephone_numbers){$this->telephone_numbers=$telephone_numbers;}
 
-    public function getUsername(){return $this->username;}
-    public function getPassword(){return $this->password;}
-    public function getAccount_type(){return $this->account_type;}
+    // public function getUsername(){return $this->username;}
+    // public function getPassword(){return $this->password;}
+    // public function getAccount_type(){return $this->account_type;}
     public function getPassenger_type(){return $this->passenger_type;}
     public function getNIC(){return $this->NIC;}
     public function getFirst_name(){return $this->first_name;}

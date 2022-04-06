@@ -2,14 +2,16 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
+// print_array($_POST);
+
 
 if(isset($_POST['username_'])){
     $signup_controller=new SignUp_Controller;
     $signup_controller->checkUsernameFromModel($_POST['username_']);
 }
-if(isset($_POST['tpno_'])){
+if(isset($_POST['passport_number_'])){
     $signup_controller=new SignUp_Controller;
-    $signup_controller->checkTp_noFromModel($_POST['tpno_']);
+    $signup_controller->checkPassportNoFromModel($_POST['passport_number_']);
 }
 if(isset($_POST['submit'])){
     $_POST['telephone_numbers']=rtrim($_POST['telephone_numbers'],',');
@@ -22,7 +24,7 @@ if(isset($_POST['submit'])){
     $registered_passenger->setPassword($_POST['password']);
     $registered_passenger->setAccount_type(3);
     $registered_passenger->setPassenger_type(0);
-    $registered_passenger->setNIC($_POST['NIC']);
+    // $registered_passenger->setNIC($_POST['NIC']);
     $registered_passenger->setFirst_name($_POST['first_name']);
     $registered_passenger->setLast_name($_POST['last_name']);
     $registered_passenger->setDob($_POST['dob']);
@@ -30,6 +32,7 @@ if(isset($_POST['submit'])){
     $registered_passenger->setCategory(0);
     $registered_passenger->setState(0);
     $registered_passenger->setTelephone_numbers($_POST['telephone_numbers']);
+    $registered_passenger->setEmail($_POST['email']);
 
     $signUp_Controller->createRegisteredPassengerFromModel($registered_passenger);
 }
