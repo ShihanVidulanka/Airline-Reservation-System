@@ -8,7 +8,7 @@ class SignUp_Controller extends Signup_Model{
             'hashed_password'=>remove_unnessaries($registeredPassenger->getPassword(),1),
             'account_type'=>$registeredPassenger->getAccount_type(),
             'passenger_type'=>$registeredPassenger->getPassenger_type(),
-            'NIC'=>remove_unnessaries($registeredPassenger->getNIC()),
+            // 'NIC'=>remove_unnessaries($registeredPassenger->getNIC()),
             'first_name'=>remove_unnessaries($registeredPassenger->getFirst_name()),
             'last_name'=>remove_unnessaries($registeredPassenger->getLast_name()),
             'dob'=>$registeredPassenger->getDob(),
@@ -22,9 +22,10 @@ class SignUp_Controller extends Signup_Model{
     public function checkUsernameFromModel($username){
         $this->check_username(remove_unnessaries($username,1));
     }
-    public function checkTp_noFromModel($phone_no){
-        $this->check_tpno(remove_unnessaries($phone_no));
+    public function checkPassportNoFromModel($phone_no){
+        $this->checkPassportNo(remove_unnessaries($phone_no));
     }
 }
 // $signup_ctrl = new SignUp_Controller();
 // $signup_ctrl->checkTp_noFromModel('07147484853');
+// $signup_ctrl->checkPassportNoFromModel('ab1234567');

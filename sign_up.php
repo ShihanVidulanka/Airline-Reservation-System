@@ -21,57 +21,46 @@
     <div class="container pt-3">
         <div class="wrapper p-3">
             <h1 id="heading" class="mb-4">Sign Up</h1>
-            <form action="include/signup.inc.php" class="was-validated" method="post">
+            <form id="signup_form" action="include/signup.inc.php" class="was-validated" method="post">
 
                 <div class="row mb-3">
                     <div class="col-sm-6">
                         <label for="first_name" class="form-label" >First Name:</label>
                         <input required class="form-control" type="text" name="first_name" id="first_name"  placeholder="Enter User First Name">
-                        <div class="valid-feedback">Valid First Name</div>
-                        <div class="invalid-feedback">Invalid First Name</div>
+                        <div id="first_name_val" class="m-3"></div>
                     </div>
                     <div class="col-sm-6">
                         <label for="last_name" class="form-label">Last Name:</label>
                         <input required class="form-control" type="text" name="last_name" id="last_name" placeholder="Enter User Last Name">
-                        <div class="valid-feedback">Valid Last Name</div>
-                        <div class="invalid-feedback">Invalid Last Name</div>
+                        <div id="last_name_val" class="m-3"></div>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-6">
                         <label for="username" class="form-label" >Username:</label>
-                        <input oninput="checkUserName();" required class="form-control" type="text" name="username" id="username" placeholder="Enter User Username">
-                        <div Id="username_val"></div>
+                        <input onchange="checkUserName();" required class="form-control" type="text" name="username" id="username" placeholder="Enter User Username">
+                        <div Id="username_val" class="m-3"></div>
                     </div>
                     <div class="col-sm-6">
                         <label for="password" class="form-label">Password:</label>
                         <input required class="form-control" type="text" name="password" id="password" placeholder="Enter User Password">
-                        <div class="valid-feedback">Valid Password</div>
-                        <div class="invalid-feedback">Invalid Password</div>
+                        <div Id="password_val" class="m-3"></div>
                     </div>
                 </div>
                 
             
                 <div class="row mb-3">
-                    <div class="col-sm-6">
-                        <label for="nic" class="form-label">National Identity Card No:</label>
-                        <input required class="form-control" type="text" name="NIC" id="nic" placeholder="Enter Your NIC No:">
-                        <div class="valid-feedback">Valid NIC No</div>
-                        <div class="invalid-feedback">Invalid NIC No</div>
-                    </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <label for="passport_number" class="form-label">Passport Number:</label>
-                        <input required class="form-control" type="text" name="passport_number" id="passport_number" placeholder="Enter User passport Number">
-                        <div class="valid-feedback">Valid Passport Number</div>
-                        <div class="invalid-feedback">Invalid Passport Number</div>
+                        <input onchange="checkPassportNo()" required class="form-control" type="text" name="passport_number" id="passport_number" placeholder="Enter User passport Number">
+                        <div Id="passport_number_val" class="m-3"></div>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-12">
                         <label for="address" class="form-label">Address:</label>
                         <textarea required class="form-control"  name="address" id="address" placeholder="Enter Your Address:"></textarea>
-                        <div class="valid-feedback">Valid Address</div>
-                        <div class="invalid-feedback">Invalid Address</div>
+                        <div Id="address_val" class="m-3"></div>
                     </div>
                 </div>
 
@@ -79,10 +68,10 @@
                     <div class="col-sm-6">
                     <label for="telephone" class="form-label">Telephone Number:</label>
                         <div class="input-group mb-3">
-                            <input required class="form-control" type="tel" name="telephone" id="telephone" placeholder="Enter Your Telephone No:" oninput="checkTpNo() ">
+                            <input required class="form-control" type="tel" name="telephone" id="telephone" placeholder="Enter Your Telephone No:">
                             <button type="button" id="add" class="btn btn-primary btn-outline-secondry" onclick="addtelephone();">Add</button>
                         </div>
-                        <div Id="telephone_val"></div>
+                        <div Id="telephone_val" class="m-3"></div>
                     </div>
                     <div class="col-sm-6">
                     <label for="telephone_numbers" class="form-label">Telephone Numbers List:</label>
@@ -96,22 +85,21 @@
                     <div class="col-sm-6">
                         <label for="dob" class="form-label">Date Of Birth:</label>
                         <input required class="form-control" type="date" name="dob" id="dob" placeholder="Enter Your Date Of Birth:">
-                        <div class="valid-feedback">Valid Date of Birth</div>
-                        <div class="invalid-feedback">Invalid Date of Birth</div>
+                        <div Id="dob_val" class="m-3"></div>
                     </div>
                     <div class="col-sm-6">
 
                         <label for="email" class="form-label">Email:</label>
                         <input class="form-control" type="email" name="email" id="email" placeholder="Enter Your Email Addressemail:">
-                        <div class="valid-feedback">Valid Email</div>
-                        <div class="invalid-feedback">Invalid Email</div>
+                        <div Id="email_val" class="m-3"></div>
 
 
                     </div>
                 </div>
+                <!-- <input type="text" name="submit" value="submit" hidden> -->
                 
                 <div class="btn-group">
-                    <button type="submit" name="submit" class="btn btn-primary buttons" value="Sign Up">Sign Up</button>
+                    <button onclick="checkAll();" type="button" class="btn btn-primary buttons" value="Sign Up">Sign Up</button>
                     <button class="btn btn-primary buttons">Exit</button>
                 </div>
             </form>

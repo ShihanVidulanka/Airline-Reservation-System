@@ -6,7 +6,7 @@ class SignUp_Model extends Dbh{
 
     protected function check_username($username){
         $db=$this->connect();
-        $query = "SELECT COUNT(ID) FROM user WHERE username=:username";
+        $query = "SELECT COUNT(ID) FROM user WHERE BINARY username=:username";
         $stmt=$db->prepare($query);
         $stmt->execute(
             array(':username'=>$username)
@@ -17,15 +17,15 @@ class SignUp_Model extends Dbh{
         }
     }
 
-    protected function check_tpno($phone_no){
+    protected function checkPassportNo($passport_number){
        
         $db=$this->connect();
-        $query = "SELECT COUNT(telephone_id) FROM telephone_no WHERE phone_no=:phone_no";
+        $query = "SELECT COUNT(account_no) FROM  registered_passenger WHERE BINARY passport_number=:passport_number";
         $stmt=$db->prepare($query);
         $stmt->execute(
-            array(':phone_no'=>$phone_no)
+            array(':passport_number'=>$passport_number)
         );
-        $count=$stmt->fetch()['COUNT(telephone_id)'];
+        $count=$stmt->fetch()['COUNT(account_no)'];
         if($count!=0){
             echo "error";
         }
@@ -59,7 +59,6 @@ class SignUp_Model extends Dbh{
 
             $query3 = "INSERT INTO registered_passenger(
                                                     user_id,
-                                                    NIC,
                                                     first_name,
                                                     last_name,
                                                     dob,
@@ -69,7 +68,6 @@ class SignUp_Model extends Dbh{
                                                     passenger_id)
                                     VALUES(
                                          :user_id,
-                                         :NIC,
                                          :first_name,
                                          :last_name,
                                          :dob,
@@ -82,7 +80,6 @@ class SignUp_Model extends Dbh{
             $stmt3 = $db->prepare($query3);
             $stmt3->execute(array(
                 ':user_id'=>$user_id,
-                ':NIC'=>$details['NIC'],
                 ':first_name'=>$details['first_name'],
                 ':last_name'=>$details['last_name'],
                 ':dob'=>$details['dob'],
