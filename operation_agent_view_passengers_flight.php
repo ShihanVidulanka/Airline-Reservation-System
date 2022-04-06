@@ -8,6 +8,10 @@ if (!isset($_SESSION['ID'])) {
     header("Location: login.php");
     return;
 }
+$operation_agent_view = new Operation_Agent_View();
+$arrived_flight_details =$operation_agent_view->arrivedFlightDetails();
+$departure_flight_details=$operation_agent_view->departureFlightDetails();
+
 
 
 ?>
@@ -26,7 +30,7 @@ if (!isset($_SESSION['ID'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="css/operation_agent_view_passenger.css"> -->
+    <link rel="stylesheet" href="css/operation_agent_view_passengers_flight_details.css">
     <title>Operation Agent View Passengers flight</title>
 </head>
 
@@ -76,19 +80,26 @@ if (!isset($_SESSION['ID'])) {
                         <th scope="col">View </th>
                         </tr>
                     </thead>
+                    <?php foreach ($arrived_flight_details as $value) {
+                    ?>
+
                     <tbody>
                         <tr>
-                        <th scope="row">1</th>
-                            <td>Sahan</td>
-                            <td>Caldera</td>
-                            <td>@mdo</td>
-                            <td>colombo</td>
+                        <th scope="row"><?php echo $value['id']?></th>
+                            <td><?php echo $value['origin']?></td>
+                            <td><?php echo $value['destination']?></td>
+                            <td><?php echo $value['departure_time']?></td>
+                            <td><?php echo $value['departure_date']?></td>
                             <td><button type="button" class="btn btn-info">View</button></td>
                             
                         </tr>
-                    </tbody>
+                    </tbody><?php } ?>
                 </table>
             </div>
+
+
+
+            
             <div class="col-lg-6">
                 <h3>Departure Flights</h3>
                     <table class="table table-striped">
@@ -102,18 +113,22 @@ if (!isset($_SESSION['ID'])) {
                             <th scope="col">View </th>
                             </tr>
                         </thead>
+                        <?php foreach ($departure_flight_details as $value){?>
                         <tbody>
                             <tr>
-                            <th scope="row">1</th>
-                                <td>Sahan</td>
-                                <td>Caldera</td>
-                                <td>@mdo</td>
-                                <td>colombo</td>
-                                <td><button type="button" class="btn btn-info">View</button></td>
+                            <th scope="row"><?php echo $value['id']?></th>
+                                
+                                <td><?php echo $value['origin']?></td>
+                                <td><?php echo $value['destination']?></td>
+                                <td><?php echo $value['departure_time']?></td>
+                                <td><?php echo $value['departure_date']?></td>
+                                <td><button type="button" class="btn btn-info">View </button></td>
                                 
                             </tr>
                         </tbody>
+                        <?php }?>
                     </table>
+            </div>
             </div>
         </div>
     <div>

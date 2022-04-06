@@ -24,6 +24,20 @@ body{
     border-radius: 10px;
     overflow: auto;
 }
+.wrapper1{
+    background-color: rgba(183, 199, 213,0.8);
+    font-weight: bold;
+    margin:100px auto;
+    border-radius: 10px;
+    overflow: auto;
+}
+.container{
+  background-color: rgba(183, 199, 213,0.8);
+  font-weight: bold;
+  margin:100px auto;
+  border-radius: 10px;
+  overflow: auto;  
+}
 button {
     background-color: #04AA6D;
     color: white;
