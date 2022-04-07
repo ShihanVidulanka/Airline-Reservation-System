@@ -1,10 +1,10 @@
 <?php
 class Registered_Passenger extends User{
-   private $username;
-   private $password;
-   private $account_type;
+//    private $username;
+//    private $password;
+//    private $account_type;
    private $passenger_type;
-   private $NIC;
+//    private $NIC;
    private $first_name;
    private $last_name;
    private $dob;
