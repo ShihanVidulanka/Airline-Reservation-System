@@ -28,6 +28,6 @@ class Passenger_View extends Passenger_Model{
     }
 }
 
-$pc = new Passenger_View();
-$rp=$pc->getRegisteredPassenger('HarshaniBandara');
-print_array($rp);
+// $pc = new Passenger_View();
+// $rp=$pc->getRegisteredPassenger('HarshaniBandara');
+// print_array($rp);
