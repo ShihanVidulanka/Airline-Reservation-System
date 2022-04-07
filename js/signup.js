@@ -329,14 +329,14 @@ function validatePassword(password){
   let pattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
   return (pattern.test(password));
 }
-//nic validation
-function validateNIC(nic){
-  let pattern = /^([0-9]{9}[x|X|v|V]|[0-9]{12})$/;
-  return (pattern.test(nic));
-}
+// //nic validation
+// function validateNIC(nic){
+//   let pattern = /^([0-9]{9}[x|X|v|V]|[0-9]{12})$/;
+//   return (pattern.test(nic));
+// }
 //passport number validation
 function validatepassport_number(passport_number){
-  let pattern = /[a-zA-Z]{2}[0-9]{7}/;
+  let pattern = /^[A-PR-WYa-pr-wy][1-9]\d\s?\d{4}[1-9]$/;
   return (pattern.test(passport_number));
 }
 //address validation

@@ -1,3 +1,14 @@
+<?php
+// session_start();
+require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
+session_start();
+$errors = array();
+if(isset($_SESSION['errors'])){
+    $errors = $_SESSION['errors'];
+    unset($_SESSION['errors']);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +34,16 @@
             <h1 id="heading" class="mb-4">Sign Up</h1>
             <form id="signup_form" action="include/signup.inc.php" class="was-validated" method="post">
 
+                    <?php
+                        if(!empty($errors)){
+                            echo '<div class="alert alert-danger errors" role="alert">';
+                            foreach ($errors as $error) {
+                                echo " <p>".$error."</P>";
+                            }
+                            echo "</div>";
+                        }
+                    ?>
+                       
                 <div class="row mb-3">
                     <div class="col-sm-6">
                         <label for="first_name" class="form-label" >First Name:</label>
@@ -52,12 +73,12 @@
                 <div class="row mb-3">
                     <div class="col-sm-6">
                         <label for="password" class="form-label">Password:</label>
-                        <input required class="form-control" type="text" name="password" id="password" placeholder="Enter User Password">
+                        <input required class="form-control" type="password" name="password" id="password" placeholder="Enter User Password">
                         <div Id="password_val" class="m-3"></div>
                     </div>
                     <div class="col-sm-6">
                         <label for="password" class="form-label">Retype Password:</label>
-                        <input required class="form-control" type="text" name="retypepwd" id="retypepwd" placeholder="Enter User Password">
+                        <input required class="form-control" type="password" name="retypepwd" id="retypepwd" placeholder="Enter User Password Again">
                         <div Id="retypepassword_val" class="m-3"></div>
                     </div>
                 </div>
