@@ -54,9 +54,9 @@ $origins = $flight_dispatcher_view->getOrigins();
           <li class="nav-item">
             <a class="nav-link " href="flight_dispatcher_add_new_airport.php">Add New Airport</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="flight_dispatcher_confirm_arrival.php">Confirm Arrival</a>
-          </li>
+          </li> -->
         </ul>
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -159,7 +159,7 @@ $origins = $flight_dispatcher_view->getOrigins();
             <th>Departure Date</th>
             <th>Departure Time</th>
             <th>Flight Time</th>
-            <th>Cancel</th>
+            <th>Arrived</th>
           </tr>
         </thead>
         <tbody>
