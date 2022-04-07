@@ -116,7 +116,7 @@ $origins = $flight_dispatcher_view->getOrigins();
             echo '<td>' . $value['departure_date'] . "</td>";
             echo '<td>' . $value['departure_time'] . "</td>";
             echo '<td>' . $value['flight_time'] . "</td>";
-            echo "<td><a class=\"btn btn-sm btn-primary\" href=\"include/flight_dispatcher_cancel_flight.inc.php?id_d={$value['id']}\">Cancel</a></td>";
+            echo "<td><a class=\"btn btn-sm btn-danger\" href=\"include/flight_dispatcher_cancel_flight.inc.php?id_d={$value['id']}\">Cancel</a></td>";
             echo '</tr>';
           }
           ?>
