@@ -13,7 +13,7 @@ if(isset($_POST['passport_number_'])){
     $signup_controller=new SignUp_Controller;
     $signup_controller->checkPassportNoFromModel($_POST['passport_number_']);
 }
-if(isset($_POST['submit'])){
+if(isset($_POST['username'])){
     $_POST['telephone_numbers']=rtrim($_POST['telephone_numbers'],',');
     $_POST['telephone_numbers']=explode(",",$_POST['telephone_numbers']);
 
@@ -30,7 +30,7 @@ if(isset($_POST['submit'])){
     $registered_passenger->setDob($_POST['dob']);
     $registered_passenger->setPassport_number($_POST['passport_number']);
     $registered_passenger->setCategory(0);
-    $registered_passenger->setState(0);
+    $registered_passenger->setIs_deleted(0);
     $registered_passenger->setTelephone_numbers($_POST['telephone_numbers']);
     $registered_passenger->setEmail($_POST['email']);
 

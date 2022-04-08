@@ -30,3 +30,6 @@ label.form-label{
 .buttons{
     width: 125px;;
 }
+.errors{
+    text-align: center;
+}

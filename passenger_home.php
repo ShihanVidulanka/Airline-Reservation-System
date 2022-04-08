@@ -1,3 +1,23 @@
+<?php
+    session_start();
+    require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
+    // print_array($_SESSION);
+    $passenger_view = new Passenger_View();
+    $registered_passenger = $passenger_view->getRegisteredPassenger(remove_unnessaries($_SESSION['username'],1));
+    // print_array($registered_passenger);
+
+    $first_name=$registered_passenger->getFirst_name();
+    $last_name=$registered_passenger->getLast_name();
+    $full_name = $first_name." ".$last_name;
+    $username=$registered_passenger->getUsername();
+    $dob=$registered_passenger->getDob();
+    $telephone_numbers=$registered_passenger->getTelephone_numbers();
+    $passport_number=$registered_passenger->getPassport_number();
+    $category=$registered_passenger->getCategory();
+    $email = $registered_passenger->getEmail();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,29 +63,17 @@
 
     <div class="container pt-5">
         <div class="wrapper p-3">
-            <h1 id="heading" class="mb-4">Welcome Passenger!</h1>
+            <h1 id="heading" class="mb-4">Welcome <?php echo $first_name;?>!</h1>
 
             <div class="row mb-3">
                 <div class="col-sm-4">
-                    <p>Account Number</p>
+                    <p>User Name</p>
                 </div>
                 <div class="col-sm-2">
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>RP-190097J</p>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-sm-4">
-                    <p>NIC Number</p>
-                </div>
-                <div class="col-sm-2">
-                    <p>:</p>
-                </div>
-                <div class="col-sm-6">
-                    <p>200001801361</p>
+                    <p><?php echo $username;?></p>
                 </div>
             </div>
 
@@ -77,19 +85,7 @@
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>Sahan Caldera</p>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-sm-4">
-                    <p>Age</p>
-                </div>
-                <div class="col-sm-2">
-                    <p>:</p>
-                </div>
-                <div class="col-sm-6">
-                    <p>22</p>
+                    <p><?php echo $full_name;?></p>
                 </div>
             </div>
 
@@ -101,7 +97,37 @@
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>123456789</p>
+                    <p><?php echo $passport_number;?></p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <p>Age</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>:</p>
+                </div>
+                <div class="col-sm-6">
+                    <?php
+                    $timezoneId = 'Asia/Jayapura';
+                    date_default_timezone_set($timezoneId);
+                    $today = date("Y-m-d");
+                    $age=date_diff(date_create($dob), date_create($today));
+                    ?>
+                    <p><?php echo $age->format('%y')?></p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <p>Passport Number</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p><?php echo $passport_number; ?></p>
                 </div>
             </div>
 
@@ -113,31 +139,35 @@
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>Platinum</p>
+                    <p><?php echo $category; ?></p>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-sm-4">
-                    <p>State</p>
+                    <p>Telephone</p>
                 </div>
                 <div class="col-sm-2">
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>Colombo</p>
+                    <?php
+                        foreach ($telephone_numbers as $tpno) {
+                            echo "<p>".$tpno."</p>";
+                        }
+                    ?>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-sm-4">
-                    <label for="plane" class="form-label">Phone Number</label>
+                    <label for="plane" class="form-label">Email</label>
                 </div>
                 <div class="col-sm-2">
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p>0718949089</p>
+                    <p><?php echo $email;?></p>
                 </div>
             </div>
 

@@ -4,6 +4,14 @@ function print_array($array){
     print_r($array);
     echo "</pre>";
 }
+
+function encryptPassword($password){
+   return password_hash($password,PASSWORD_DEFAULT);  
+}
+
+function checkThePassword($password,$hashed_password){
+    return password_verify($password,$hashed_password);
+}
 function remove_unnessaries($data,$password=0)
 {
     if ($password==0){

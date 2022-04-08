@@ -36,7 +36,7 @@ class Login_Controller extends Login_Model
                 header("location: ../flight_dispatcher_home.php");
                 break;
             case '3':
-                header("location: ../main_page.php");
+                header("location: ../passenger_home.php");
                 break;
             default:
                 header("location: ../login.php?error=userNotfound");
