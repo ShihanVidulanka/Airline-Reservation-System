@@ -47,7 +47,7 @@ $departure_flight_details=$operation_agent_view->departureFlightDetails();
                         <a class="nav-link" href="operation_agent_home.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="operation_agent_view_passengers_flight.php">Passenger Details</Details></a>
+                        <a class="nav-link active" href="operation_agent_view_passengers_flight.php">Flight Details of Passengers</Details></a>
                     
                     </li>
                     
@@ -80,20 +80,21 @@ $departure_flight_details=$operation_agent_view->departureFlightDetails();
                         <th scope="col">View </th>
                         </tr>
                     </thead>
-                    <?php foreach ($arrived_flight_details as $value) {
-                    ?>
-
                     <tbody>
-                        <tr>
-                        <th scope="row"><?php echo $value['id']?></th>
-                            <td><?php echo $value['origin']?></td>
-                            <td><?php echo $value['destination']?></td>
-                            <td><?php echo $value['departure_time']?></td>
-                            <td><?php echo $value['departure_date']?></td>
-                            <td><button type="button" class="btn btn-info">View</button></td>
-                            
-                        </tr>
-                    </tbody><?php } ?>
+                        <?php
+                        foreach ($arrived_flight_details  as $value) {
+                            echo '<tr>';
+                            echo '<td>' . $value['id'] . "</td>";
+                            echo '<td>' . $value['origin'] . "</td>";
+                            echo '<td>' . $value['destination'] . "</td>";
+                            echo '<td>' . $value['departure_time'] . "</td>";
+                            echo '<td>' . $value['departure_date'] . "</td>";
+                            echo "<td><a class=\"btn btn-sm btn-info\" href=\"include/operation_agent_view_passengers_flight.inc.php?id_o={$value['id']}\">view</a></td>";
+                            echo '</tr>';
+                        }
+                        ?>
+                    </tbody>
+
                 </table>
             </div>
 
@@ -114,19 +115,44 @@ $departure_flight_details=$operation_agent_view->departureFlightDetails();
                             </tr>
                         </thead>
                         <?php foreach ($departure_flight_details as $value){?>
+
+
+
+
                         <tbody>
                             <tr>
-                            <th scope="row"><?php echo $value['id']?></th>
+                                
+                            <form class="d-flex mb-3" action="include/operation_agent_view_passengers_flight.inc.php" method="GET">
+                            <th scope="row"name='id'><?php echo $value['id']?></th>
                                 
                                 <td><?php echo $value['origin']?></td>
                                 <td><?php echo $value['destination']?></td>
                                 <td><?php echo $value['departure_time']?></td>
                                 <td><?php echo $value['departure_date']?></td>
-                                <td><button type="button" class="btn btn-info">View </button></td>
-                                
+                                <td><button type="button" class="btn btn-info"name="view">View </button></td>
+                                <td><input type = "submit" value='view' name='view'/></td>
+                            </form>
                             </tr>
                         </tbody>
+
+
                         <?php }?>
+                        <tbody>
+                        <?php
+                        foreach ($departure_flight_details  as $value) {
+                            echo '<tr>';
+                            echo '<td>' . $value['id'] . "</td>";
+                            echo '<td>' . $value['origin'] . "</td>";
+                            echo '<td>' . $value['destination'] . "</td>";
+                            echo '<td>' . $value['departure_time'] . "</td>";
+                            echo '<td>' . $value['departure_date'] . "</td>";
+                            echo "<td><a class=\"btn btn-sm btn-info\" href=\"include/operation_agent_view_passengers_flight.inc.php?id_o={$value['id']}&origin={$value['origin']}&destination={$value['destination']}&departure_time={$value['departure_time']}&departure_date={$value['departure_date']}\">view</a></td>";
+                            echo '</tr>';
+                        }
+                        ?>
+                        </tbody>
+
+
                     </table>
             </div>
             </div>

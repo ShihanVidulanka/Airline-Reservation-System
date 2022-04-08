@@ -41,9 +41,11 @@
         public function departureFlightDetails(){
             return $this->operation_agent_controller->departureflightdetails();
         }
-        public function showPassengers(){
-            $passenger_details=$this->operation_agent_controller->getPassenger_details();
+        public function showPassengers($flight_id){
+            $passenger_details=$this->operation_agent_controller->getPassenger_details($flight_id);
             return $passenger_details;
         }
+
+        
     }
 ?>

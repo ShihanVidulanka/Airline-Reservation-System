@@ -6,9 +6,9 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 class Operation_Agent_Controller extends Operation_Agent_Model{
 
 
-    function getPassenger_details()
+    function getPassenger_details($flight_id)
     {
-        $passenger_details=$this->getPassenger_details();
+        $passenger_details=$this->getPassengers_details($flight_id);
         return $passenger_details;
     }
 
@@ -40,7 +40,7 @@ class Operation_Agent_Controller extends Operation_Agent_Model{
         $details = $this->getdepartureflightdetails($_SESSION['airport_code'], $date, $time);
         return $details;
     }
-
+    
     
 
 }

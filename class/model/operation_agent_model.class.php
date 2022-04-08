@@ -4,12 +4,23 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
 class Operation_Agent_Model extends Dbh{
-    function getPassenger_details(){
-        $query="SELECT passenger_id from passenger";
+    function getPassengers_details($flight_id){
+        $query = "SELECT flight_id,booking.passenger_id,booking.booking_time,registered_passenger.first_name,registered_passenger.last_name,
+        registered_passenger.passport_number,registered_passenger.dob
+        FROM booking JOIN registered_passenger where booking.passenger_id=registered_passenger.passenger_id  AND flight_id='{$flight_id}'";
+        
+        $stmt=$this->connect()->prepare($query);
+        
+        $stmt->execute();
+        $passenger_details=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        // echo $passenger_details;
+        return $passenger_details;
+    }
+    function remove_passenger($id){
+        $query="UPDATE booking set state=1 where passenger_id=$id";
         $stmt=$this->connect()->prepare($query);
         $stmt->execute();
-        $passenger_id=$stmt->fetch(PDO::FETCH_ASSOC)['passenger_id'];
-        return $passenger_id;
+        
     }
 
     protected function getOperationAgentNo($userID){
