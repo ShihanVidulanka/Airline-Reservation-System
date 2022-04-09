@@ -3,6 +3,10 @@
   require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
   $flight_view = new Flight_View();
   $flights= $flight_view->getFlightDetailsFromModel();
+  $destinations = $flight_view->getDestinations();
+  if(isset($_POST['submit'])){
+    $flights= $flight_view->getFlightDetailsFromModel($_POST['destination']);
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +18,7 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="css/passenger_flight_booking.css">
+  <!-- <link rel="stylesheet" href="css/passenger_flight_booking.css"> -->
   <title>Flight Details</title>
 </head>
 
@@ -50,9 +54,19 @@
   <div class="container p-3">
 
     <div class="search">
-      <form class="d-flex mb-3">
-        <input class="form-control me-2" type="text" placeholder="Search Your Destination" />
-        <button class="btn btn-primary" type="button">Search</button>
+      <form class="d-flex mb-3" action="passenger_flight_booking.php" method="post">
+        <!-- <input class="form-control me-2" type="text" placeholder="Search Your Destination" /> -->
+        <select name="destination" id="destination" class="form-control me-2">
+          <option value="">Select Your Destination</option>
+        <?php
+            foreach ($destinations as $destination) {
+              $option=$destination['airport_code'].'-'.$destination['name'].'-'.$destination['country'];
+              // print_array($destination);
+              echo '<option value="'.$destination['airport_code'].'">'.$option.'</option>';
+            }
+          ?>
+        </select>
+        <button name="submit" type="submit" value="Search" class="btn btn-primary">Search</button>
       </form>
     </div>
 
@@ -68,13 +82,14 @@
             <th>Platinum Price</th>
             <th>Departure Date</th>
             <th>Departure Time</th>
-            <th>Flight Time</th>>
+            <th>Flight Time</th>
             <th>Book</th>
           </tr>
         </thead>
         <tbody>
-          <?php
+        <?php
             foreach ($flights as $flight) {
+
               echo "<tr>";
                 
                 echo '<td>'.$flight->getAirplane_id().'</td>';  
@@ -86,23 +101,25 @@
                 echo '<td>'.$flight->getDeparture_date().'</td>';  
                 echo '<td>'.$flight->getDeparture_time().'</td>';  
                 echo '<td>'.$flight->getFlight_time().'</td>';  
-                echo '<td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>'; 
+                echo '<td><button class="btn btn-primary" onclick="sendFlightId('.$flight->getId().');">Book this Flight</button></td>'; 
               echo "</tr>";
+              // echo "<input id='id_{$flight->getId()}' value='{$flight->getId()}'>";
+
               
             }
           ?>
-          <tr>
-          
-          </tr>
-         
-
-
         </tbody>
       </table>
+      <!-- <a href="passenger_seat_reservation.php" class="button">Book This Flight</a> -->
+
+      <form id="flight_id_form" action="passenger_seat_reservation.php" method="post" hidden>
+        <input type="text" name='flight_id' id='flight_id'>
+      </form>
 
     </div>
 
   </div>
+  <script src="js/passenger_flight_booking.js"></script>
 </body>
 
 </html>

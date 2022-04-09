@@ -6,8 +6,9 @@ class Flight_View extends Flight_Model{
         return $airport_view->getAirportsFromModel();
     }
 
-    public function getFlightDetailsFromModel(){
-        $flight_details=$this->getFlightDetails();
+    public function getFlightDetailsFromModel($destination=null){
+
+        $flight_details=$this->getFlightDetails($destination);
         $flights = array();
         foreach ($flight_details as $flight) {
              $flight_ = new Flight();
