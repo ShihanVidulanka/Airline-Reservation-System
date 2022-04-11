@@ -4,22 +4,24 @@ function sendFlightId(id){
     document.getElementById('flight_id_form').submit();
 }
 
-function checkPassportNo() {
-    let passport_number=document.getElementById('passport_number').value;
-    let errormsg = document.getElementById('passport_number_val')
+var destination = document.getElementById('destination');
+destination.addEventListener('change',function(){changeTable()});
 
-    // console.log(passport_number);
-    if (passport_number.length == 0) {
-      return;
-    } else {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
+function changeTable(){
+  let table = document.getElementById('flightTable');
 
-        }
-      };
-      xhttp.open("POST", "include/signup.inc.php", true);
-      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send("passport_number_="+passport_number);
+  console.log(destination.value);
+  if(destination.value==''){
+      table.innerHTML = this.responseText;
+  }else{
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+      table.innerHTML = this.responseText;
+      }
+  };
+  xhttp.open("POST", "include/passenger_flight_booking.inc.php", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("destination="+destination.value);
   }
 }

@@ -2,7 +2,6 @@
   require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
   require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
   $flight_view = new Flight_View();
-  $flights= $flight_view->getFlightDetailsFromModel();
   $destinations = $flight_view->getDestinations();
   if(isset($_POST['submit'])){
     $flights= $flight_view->getFlightDetailsFromModel($_POST['destination']);
@@ -18,11 +17,11 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- <link rel="stylesheet" href="css/passenger_flight_booking.css"> -->
+  <link rel="stylesheet" href="css/passenger_flight_booking.css">
   <title>Flight Details</title>
 </head>
 
-<body>
+<body onload="changeTable();">
   <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">B Airline</a>
@@ -55,18 +54,16 @@
 
     <div class="search">
       <form class="d-flex mb-3" action="passenger_flight_booking.php" method="post">
-        <!-- <input class="form-control me-2" type="text" placeholder="Search Your Destination" /> -->
         <select name="destination" id="destination" class="form-control me-2">
-          <option value="">Select Your Destination</option>
+          <option value="all">Select Your Destination</option>
+          <option value="all">All</option>
         <?php
             foreach ($destinations as $destination) {
               $option=$destination['airport_code'].'-'.$destination['name'].'-'.$destination['country'];
-              // print_array($destination);
               echo '<option value="'.$destination['airport_code'].'">'.$option.'</option>';
             }
           ?>
         </select>
-        <button name="submit" type="submit" value="Search" class="btn btn-primary">Search</button>
       </form>
     </div>
 
@@ -86,31 +83,8 @@
             <th>Book</th>
           </tr>
         </thead>
-        <tbody>
-        <?php
-            foreach ($flights as $flight) {
-
-              echo "<tr>";
-                
-                echo '<td>'.$flight->getAirplane_id().'</td>';  
-                echo '<td>'.$flight->getOrigin().'</td>';  
-                echo '<td>'.$flight->getDestination().'.</td>';  
-                echo '<td>'.$flight->getEconomy_price().'</td>';  
-                echo '<td>'.$flight->getBusiness_price().'</td>';
-                echo '<td>'.$flight->getPlatinum_price().'</td>';  
-                echo '<td>'.$flight->getDeparture_date().'</td>';  
-                echo '<td>'.$flight->getDeparture_time().'</td>';  
-                echo '<td>'.$flight->getFlight_time().'</td>';  
-                echo '<td><button class="btn btn-primary" onclick="sendFlightId('.$flight->getId().');">Book this Flight</button></td>'; 
-              echo "</tr>";
-              // echo "<input id='id_{$flight->getId()}' value='{$flight->getId()}'>";
-
-              
-            }
-          ?>
-        </tbody>
+        <tbody id="flightTable"></tbody>
       </table>
-      <!-- <a href="passenger_seat_reservation.php" class="button">Book This Flight</a> -->
 
       <form id="flight_id_form" action="passenger_seat_reservation.php" method="post" hidden>
         <input type="text" name='flight_id' id='flight_id'>
