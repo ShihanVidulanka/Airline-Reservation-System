@@ -85,6 +85,7 @@ $view = new Airline_Administrator_View();
                         <input required class="form-control" type="text" name="tail_no" placeholder="Enter Airplane Tail No.">
                     </div>
 
+                    //-------------Error----------------------------------------------------------------------
                     <div class="col-sm-6">
                         <label for="model" class="form-label">Model:</label>
                         <select required name="model" class="form-control" id="model">
@@ -104,12 +105,12 @@ $view = new Airline_Administrator_View();
                     </div>
 
                     <div class="col-sm-4">
-                        <label for="destination" class="form-label">No. of Platinum Seats</label>
+                        <label for="destination" class="form-label">No. of Economy Seats</label>
                         <input required class="form-control" type="text" name="no_economy_seats" placeholder="Enter No. of Economy Seats">
                     </div>
 
                     <div class="col-sm-4">
-                        <label for="destination" class="form-label">No. of Platinum Seats</label>
+                        <label for="destination" class="form-label">No. of Business Seats</label>
                         <input required class="form-control" type="text" name="no_business_seats" placeholder="Enter No. of Business Seats">
                     </div>
 

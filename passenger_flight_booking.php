@@ -1,3 +1,12 @@
+<?php
+  require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
+  require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
+  $flight_view = new Flight_View();
+  $destinations = $flight_view->getDestinations();
+  if(isset($_POST['submit'])){
+    $flights= $flight_view->getFlightDetailsFromModel($_POST['destination']);
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +21,7 @@
   <title>Flight Details</title>
 </head>
 
-<body>
+<body onload="changeTable();">
   <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">B Airline</a>
@@ -44,9 +53,17 @@
   <div class="container p-3">
 
     <div class="search">
-      <form class="d-flex mb-3">
-        <input class="form-control me-2" type="text" placeholder="Search Your Destination" />
-        <button class="btn btn-primary" type="button">Search</button>
+      <form class="d-flex mb-3" action="passenger_flight_booking.php" method="post">
+        <select name="destination" id="destination" class="form-control me-2">
+          <option value="all">Select Your Destination</option>
+          <option value="all">All</option>
+        <?php
+            foreach ($destinations as $destination) {
+              $option=$destination['airport_code'].'-'.$destination['name'].'-'.$destination['country'];
+              echo '<option value="'.$destination['airport_code'].'">'.$option.'</option>';
+            }
+          ?>
+        </select>
       </form>
     </div>
 
@@ -60,97 +77,23 @@
             <th>Economy Price</th>
             <th>Buisiness Price</th>
             <th>Platinum Price</th>
-            <th>Date</th>
-            <th>Time</th>
+            <th>Departure Date</th>
+            <th>Departure Time</th>
+            <th>Flight Time</th>
             <th>Book</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>A310</td>
-            <td>U.S.A.</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
-          </tr>
-          <tr>
-            <td>B310</td>
-            <td>Japan</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
-          </tr>
-          <tr>
-            <td>C310</td>
-            <td>China</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
-          </tr>
-          <tr>
-            <td>D310</td>
-            <td>Japan</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
-          </tr>
-          <tr>
-            <td>D320</td>
-            <td>Japan</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>14-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
-          </tr>
-          <tr>
-            <td>D330</td>
-            <td>India</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
-          </tr>
-          <tr>
-            <td>D310</td>
-            <td>New Zealand</td>
-            <td>U.K.</td>
-            <td>$100</td>
-            <td>$200</td>
-            <td>$400</td>
-            <td>13-02-2022</td>
-            <td>08:00 a.m.</td>
-            <td><button class="btn btn-primary"><a href="passenger_seat_reservation.php" class="button">Book This Flight</a></button></td>
-          </tr>
-
-
-        </tbody>
+        <tbody id="flightTable"></tbody>
       </table>
+
+      <form id="flight_id_form" action="passenger_seat_reservation.php" method="post" hidden>
+        <input type="text" name='flight_id' id='flight_id'>
+      </form>
 
     </div>
 
   </div>
+  <script src="js/passenger_flight_booking.js"></script>
 </body>
 
 </html>
