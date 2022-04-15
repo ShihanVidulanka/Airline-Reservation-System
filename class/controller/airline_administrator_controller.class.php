@@ -45,11 +45,11 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
         if (strpos($tail_no, '-')==false) {
             $error = "Invalid Tail No: Should Contain '-' character";
         }elseif (is_numeric($no_platinum_seats) == false || $no_platinum_seats < 0 || $no_platinum_seats>900) {
-            $error = 'Invalid Economy Seat Price';
+            $error = 'Invalid No. of Platinum Seats';
         } elseif (is_numeric($no_economy_seats) == false || $no_economy_seats < 0 || $no_economy_seats>900) {
-            $error = 'Invalid Economy Seat Price';
+            $error = 'Invalid No. of Economy Seats';
         } elseif (is_numeric($no_business_seats) == false || $no_business_seats < 0 || $no_business_seats>900) {
-            $error = 'Invalid Economy Seat Price';
+            $error = 'Invalid No. of Business Seats';
         } else {
             $tail_splitted = explode("-",$tail_no);
             if(!ctype_upper($tail_splitted[0]) || !ctype_digit($tail_splitted[1])){
