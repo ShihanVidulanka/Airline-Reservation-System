@@ -11,7 +11,9 @@ class Operation_Agent_Controller extends Operation_Agent_Model{
         $passenger_details=$this->getPassengers_details($flight_id);
         return $passenger_details;
     }
-
+    function getGuestDetails($flight_id){
+        return $this->getGuestsDetalis($flight_id);
+    }
     public function getCurrentDate()
     {
         date_default_timezone_set('Asia/Colombo');

@@ -45,6 +45,10 @@
             $passenger_details=$this->operation_agent_controller->getPassenger_details($flight_id);
             return $passenger_details;
         }
+        public function showGuest($flight_id){
+            $guest_details=$this->getGuestDetails($flight_id);
+            return $guest_details;
+        }
 
         
     }
