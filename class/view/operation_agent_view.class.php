@@ -19,7 +19,7 @@
             $details = array(
                 "ID" => $this->getOperationAgentNo($this->operation_agent->getUser_id()),
                 "first_name" => $this->operation_agent->getFirst_name(),
-                "second_name"=>$this->operation_agent->getSecond_name(),
+                "second_name"=>$this->operation_agent->getLast_name(),
                 "username" => $this->operation_agent->getUser_name(),
                 "airport_name" => $this->getAirportName($this->operation_agent->getAirport_Code()),
                 "telephone_numbers" =>  $this->formatTelephoneNos($this->operation_agent->getTelephone_nos()),
