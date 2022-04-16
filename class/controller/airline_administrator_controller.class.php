@@ -19,14 +19,14 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
 
     public function createOperationsAgentFromModel(Operations_Agent $operations_Agent){
         $details = array(
-            'username'=>remove_unnessaries($operations_Agent->getUsername()),
+            'username'=>remove_unnessaries($operations_Agent->getUser_name()),
             'hashed_password'=>"abcd",  // Question
             'account_type'=>1,
-            'first_name'=>remove_unnessaries($operations_Agent->getFirstName()),
-            'last_name'=>remove_unnessaries($operations_Agent->getLastName()),
+            'first_name'=>remove_unnessaries($operations_Agent->getFirst_name()),
+            'last_name'=>remove_unnessaries($operations_Agent->getLast_name()),
             'state'=>remove_unnessaries($operations_Agent->getState()),
-            'airport_code'=>remove_unnessaries($operations_Agent->getAirportCode()),
-            'telephone_numbers'=>$operations_Agent->getTelephoneNo()
+            'airport_code'=>remove_unnessaries($operations_Agent->getAirport_code()),
+            'telephone_numbers'=>$operations_Agent->getTelephone_nos()
         );
 
         $this->createAccount($details, $details['account_type']);

@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-// include_once('./class/model/login_model.class.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/additional.inc.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
 session_start();
 
@@ -9,8 +9,12 @@ if (!isset($_SESSION['ID'])) {
     return;
 }
 
-
-
+$errors = array();
+if (isset($_SESSION['errors'])) {
+    $errors = $_SESSION['errors'];
+    unset($_SESSION['errors']);
+}
+// print_array($errors)
 ?>
 
 <!DOCTYPE html>
@@ -71,162 +75,135 @@ if (!isset($_SESSION['ID'])) {
     <!-- create a form  -->
     <div class="container p-3">
         <form STYLE="padding-left:5px">
-            <!-- <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />Add New Airline Administrator<BR> -->
             <input TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 2)" />Add New Flight Dispatcher<br>
             <input TYPE="radio" NAME="RadioGroupName" ID="GroupName2" ONCLICK="ShowRadioButtonDiv('GroupName', 2)" />Add New Operations Agent<br>
         </FORM>
 
-        <!-- <DIV ID="GroupName1Div" STYLE="display:none;">
-            <div class="container pt-5">
-                <div class="wrapper p-3">
-                    <h1 id="heading" class="mb-4">New Airline Administrator</h1>
-                    <form action="" class="was-validated">
-                        <div class="row mb-3">
-                            <div class="col-sm-4">
-                                <label for="plane" class="form-label">Name</label>
-                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter User Name:">
-                                <div class="valid-feedback">Valid Name</div>
-                                <div class="invalid-feedback">Invalid Name</div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-4" id="aa_p">
-                                <label for="plane" class="form-label">Phone Number</label>
-                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Phone Number:" value="" />
-                                <div class="valid-feedback">Valid Number</div>
-                                <div class="invalid-feedback">Invalid Number</div>
-                                <a href="javascript:void(0);" class="add_button_aa" title="Add field"><img src="img/add_icon.png" /></a>
-                            </div>
-                        </div>
-                        <div class="btn-group">
-                            <button class="btn btn-primary buttons">Create</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </DIV> -->
         <div ID="GroupName1Div" STYLE="display:none;">
             <div class="container pt-5">
                 <div class="wrapper p-3">
                     <h1 id="heading" class="mb-4">New Flight Dispatcher</h1>
-                    <form action="" class="was-validated">
+                    <form action="" class="was-validated" id="fd_signup_form" action="include/create_flight_dispatcher.inc.php" method="POST">
+                        <?php
+                        if (!empty($errors)) {
+                            echo '<div class="alert alert-danger errors" role="alert">';
+                            foreach ($errors as $error) {
+                                echo " <p>" . $error . "</P>";
+                            }
+                            echo "</div>";
+                        }
+                        ?>
                         <div class="row mb-3">
-                            <div class="col-sm-4">
-                                <label for="plane" class="form-label">First Name</label>
-                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter User First Name:">
-                                <div class="valid-feedback">Valid Name</div>
-                                <div class="invalid-feedback">Invalid Name</div>
+                            <div class="col-sm-6">
+                                <label for="fd_first_name" class="form-label">First Name</label>
+                                <input required class="form-control" type="text" name="fd_first_name" id="fd_first_name" placeholder="Enter User First Name:">
+                                <div id="fd_first_name_val" class="m-3"></div>
                             </div>
-                            <div class="col-sm-4">
-                                <label for="plane" class="form-label">Last Name</label>
-                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter User Last Name:">
-                                <div class="valid-feedback">Valid Name</div>
-                                <div class="invalid-feedback">Invalid Name</div>
+                            <div class="col-sm-6">
+                                <label for="fd_last_name" class="form-label">Last Name</label>
+                                <input required class="form-control" type="text" name="fd_last_name" id="fd_last_name" placeholder="Enter User Last Name:">
+                                <div id="fd_last_name_val" class="m-3"></div>
                             </div>
-                            <div class="col-sm-4">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <label for="fd_username" class="form-label">Username</label>
+                                <input required class="form-control" type="text" name="fd_username" id="fd_username" placeholder="Enter Username:">
+                                <div Id="fd_username_val" class="m-3"></div>
+                            </div>
+                            <div class="col-sm-6">
                                 <label for="plane" class="form-label">Airport Code</label>
                                 <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Airport Code:">
-                                <div class="valid-feedback">Valid Airport Code</div>
-                                <div class="invalid-feedback">Invalid Airport Code</div>
+                                <div id="fd_airport_code_val" class="m-3"></div>
                             </div>
-
                         </div>
-                        <!-- <div class="row mb-3">
-                            <div class="col-sm-4" id="fd_p">
-                                <label for="plane" class="form-label">Phone Number</label>
-                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Phone Number:">
-                                <div class="valid-feedback">Valid Number</div>
-                                <div class="invalid-feedback">Invalid Number</div>
-                                <a href="javascript:void(0);" class="add_button_fd" title="Add field"><img src="img/add_icon.png" /></a>
-                            </div>
-                        </div> -->
                         <div class="row mb-3">
                             <div class="col-sm-6">
-                                <label for="telephone" class="form-label">Telephone Number:</label>
+                                <label for="fd_telephone" class="form-label">Telephone Number:</label>
                                 <div class="input-group mb-3">
-                                    <input required class="form-control" type="tel" name="telephone" id="telephone" placeholder="Enter Your Telephone No:">
-                                    <button type="button" class="btn btn-primary btn-outline-secondry" onclick="addtelephone();">Add</button>
+                                    <input required class="form-control" type="tel" name="fd_telephone" id="fd_telephone" placeholder="Enter Your Telephone No:">
+                                    <button type="button" id="fd_add" class="btn btn-primary btn-outline-secondry" onclick="add_fd_telephone();">Add</button>
                                 </div>
-                                <div class="valid-feedback">Valid Telephone number</div>
-                                <div class="invalid-feedback">Invalid Telephone number</div>
+                                <div Id="fd_telephone_val" class="m-3"></div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="telephone_numbers" class="form-label">Telephone Numbers List:</label>
-                                <select name="" id="telephone_numbers_list" class="form-control" multiple disabled></select>
+                                <label for="fd_telephone_numbers" class="form-label">Telephone Numbers List:</label>
+                                <select name="" id="fd_telephone_numbers_list" class="form-control" multiple disabled></select>
                             </div>
                         </div>
-                        <input type="text" id="telephone_numbers" class="form-control" hidden name="telephone_numbers">
+                        <input type="text" id="fd_telephone_numbers" class="form-control" hidden name="fd_telephone_numbers">
                         <div class="btn-group">
-                            <button class="btn btn-primary buttons">Create</button>
-                            <!-- <button class="btn btn-primary buttons">Exit</button> -->
+                            <button onclick="fd_checkAll();" type="button" class="btn btn-primary buttons" value="fd_create">Create</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
         <div ID="GroupName2Div" STYLE="display:none;">
             <div class="container pt-5">
                 <div class="wrapper p-3">
                     <h1 id="heading" class="mb-4">New Operations Agent</h1>
-                    <form action="" class="was-validated">
+                    <form id="oa_signup_form" action="include/crerate_operations_agent.inc.php" class="was-validated" method="POST">
+                        <?php
+                        if (!empty($errors)) {
+                            echo '<div class="alert alert-danger errors" role="alert">';
+                            foreach ($errors as $error) {
+                                echo " <p>" . $error . "</P>";
+                            }
+                            echo "</div>";
+                        }
+                        ?>
                         <div class="row mb-3">
-                            <div class="col-sm-6">
-                                <label for="plane" class="form-label">Name</label>
-                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter User Name:">
-                                <div class="valid-feedback">Valid Name</div>
-                                <div class="invalid-feedback">Invalid Name</div>
+                            <div class="col-sm-4">
+                                <label for="oa_first_name" class="form-label">First Name</label>
+                                <input required class="form-control" type="text" name="oa_first_name" id="oa_first_name" placeholder="Enter User Name:">
+                                <div id="oa_first_name_val" class="m-3"></div>
                             </div>
 
-                            <div class="col-sm-6">
-                                <label for="plane" class="form-label">Last Name</label>
-                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter User Last Name:">
-                                <div class="valid-feedback">Valid Name</div>
-                                <div class="invalid-feedback">Invalid Name</div>
+                            <div class="col-sm-4">
+                                <label for="oa_last_name" class="form-label">Last Name</label>
+                                <input required class="form-control" type="text" name="oa_last_name" id="oa_last_name" placeholder="Enter User Last Name:">
+                                <div id="oa_last_name_val" class="m-3"></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="oa_username" class="form-label">Username</label>
+                                <input required class="form-control" type="text" name="oa_username" id="oa_username" placeholder="Enter Username:">
+                                <div id="oa_username_val" class="m-3"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-6">
-                                <label for="plane" class="form-label">Airport Code</label>
-                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Airport Code:">
-                                <div class="valid-feedback">Valid Airport Code</div>
-                                <div class="invalid-feedback">Invalid Airport Code</div>
+                                <label for="airport_code" class="form-label">Airport Code</label>
+                                <input required class="form-control" type="text" name="airport_code" id="oa_airport_code" placeholder="Enter Airport Code:">
+                                <div id="oa_airport_code_val" class="m-3"></div>
                             </div>
 
                             <div class="col-sm-6">
-                                <label for="plane" class="form-label">State</label>
-                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter State:">
-                                <div class="valid-feedback">Valid State</div>
-                                <div class="invalid-feedback">Invalid State</div>
+                                <label for="state" class="form-label">State</label>
+                                <input required class="form-control" type="text" name="state" id="state" placeholder="Enter State:">
+                                <div id="state_val" class="m-3"></div>
                             </div>
                         </div>
-                        <!-- <div class="row mb-3">
-                            <div class="col-sm-4" id="oa_p">
-                                <label for="plane" class="form-label">Phone Number</label>
-                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Phone Number:">
-                                <div class="valid-feedback">Valid Number</div>
-                                <div class="invalid-feedback">Invalid Number</div>
-                                <a href="javascript:void(0);" class="add_button_oa" title="Add field"><img src="img/add_icon.png" /></a>
-                            </div>
-                        </div> -->
                         <div class="row mb-3">
                             <div class="col-sm-6">
-                                <label for="telephone" class="form-label">Telephone Number:</label>
+                                <label for="oa_telephone" class="form-label">Telephone Number:</label>
                                 <div class="input-group mb-3">
-                                    <input required class="form-control" type="tel" name="telephone" id="telephone" placeholder="Enter Your Telephone No:">
-                                    <button type="button" class="btn btn-primary btn-outline-secondry" onclick="addtelephone();">Add</button>
+                                    <input required class="form-control" type="tel" name="oa_telephone" id="oa_telephone" placeholder="Enter Your Telephone No:">
+                                    <button type="button" id="oa_add" class="btn btn-primary btn-outline-secondry" onclick="add_oa_telephone();">Add</button>
                                 </div>
-                                <div class="valid-feedback">Valid Telephone number</div>
-                                <div class="invalid-feedback">Invalid Telephone number</div>
+                                <div Id="oa_telephone_val" class="m-3"></div>
+                                <!-- <div class="valid-feedback">Valid Telephone number</div>
+                                <div class="invalid-feedback">Invalid Telephone number</div> -->
                             </div>
                             <div class="col-sm-6">
-                                <label for="telephone_numbers" class="form-label">Telephone Numbers List:</label>
-                                <select name="" id="telephone_numbers_list" class="form-control" multiple disabled></select>
+                                <label for="oa_telephone_numbers" class="form-label">Telephone Numbers List:</label>
+                                <select name="" id="oa_telephone_numbers_list" class="form-control" multiple disabled></select>
                             </div>
                         </div>
-                        <input type="text" id="telephone_numbers" class="form-control" hidden name="telephone_numbers">
+                        <input type="text" id="oa_telephone_numbers" class="form-control" hidden name="oa_telephone_numbers">
                         <div class="btn-group">
-                            <button class="btn btn-primary buttons">Create</button>
-                            <!-- <button class="btn btn-primary buttons">Exit</button> -->
+                            <button onclick="oa_checkAll();" type="button" class="btn btn-primary buttons" value="oa_create">Create</button>
                         </div>
                     </form>
                 </div>
@@ -235,6 +212,9 @@ if (!isset($_SESSION['ID'])) {
     </div>
 
     <script src="js/admin_create_user.js"></script>
+    <script src="js/create_fd_user.js"></script>
+    <script src="js/create_oa_user.js"></script>
+
 
 </body>
 

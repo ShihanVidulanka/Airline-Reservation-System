@@ -22,11 +22,12 @@ class Airline_Administrator_Model extends Dbh{
             $db = $this->connect();
             $db->beginTransaction();
 
-            $query1 = "INSERT INTO user(username, password, account_type) VALUES(:username, :password, :account_type)";
+            $query1 = "INSERT INTO user(username, password, email, account_type) VALUES(:username, :password, :email, :account_type)";
             $statement1 = $db->prepare($query1);
             $statement1->execute(array(
                 ':username'=>$details['username'],
                 ':password'=>$details['hashed_password'],
+                ':email'=>$details['email'],
                 ':account_type'=>$details['account_type']
             ));
             $user_id = $db->lastInsertId();
@@ -34,27 +35,27 @@ class Airline_Administrator_Model extends Dbh{
             $statement1->closeCursor();
 
             if ($type == 1) {
-                $query2 = "INSERT INTO flight_dispatcher(user_id, first_name, last_name, airport_code) VALUES(:user_id, :first_name, :last_name, :airport_code)";
+                $query2 = "INSERT INTO operations_agent(user_id, first_name, last_name, airport_code) VALUES(:user_id, :first_name, :last_name, :airport_code)";
             
-            $statement2 = $db->prepare($query2);
-            $statement2->execute(array(
-                ':user_id'=>$user_id,
-                ':first_name'=>$details['first_name'],
-                ':last_name'=>$details['last_name'],
-                ':airport_code'=>$details['airport_code']
-            ));
-            $statement2->closeCursor();
+                $statement2 = $db->prepare($query2);
+                $statement2->execute(array(
+                    ':user_id'=>$user_id,
+                    ':first_name'=>$details['first_name'],
+                    ':last_name'=>$details['last_name'],
+                    ':airport_code'=>$details['airport_code']
+                ));
+                $statement2->closeCursor();
             } else {
                 $query2 = "INSERT INTO flight_dispatcher(user_id, first_name, last_name, airport_code) VALUES(:user_id, :first_name, :last_name, :airport_code)";
             
-            $statement2 = $db->prepare($query2);
-            $statement2->execute(array(
-                ':user_id'=>$user_id,
-                ':first_name'=>$details['first_name'],
-                ':last_name'=>$details['last_name'],
-                ':airport_code'=>$details['airport_code']
-            ));
-            $statement2->closeCursor();
+                $statement2 = $db->prepare($query2);
+                $statement2->execute(array(
+                    ':user_id'=>$user_id,
+                    ':first_name'=>$details['first_name'],
+                    ':last_name'=>$details['last_name'],
+                    ':airport_code'=>$details['airport_code']
+                ));
+                $statement2->closeCursor();
             }
             
             $query3 = "INSERT INTO telephone_no(user_id, phone_no) VALUES(:user_id, :telephone_no)";
