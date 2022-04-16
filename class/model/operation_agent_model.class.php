@@ -16,6 +16,18 @@ class Operation_Agent_Model extends Dbh{
         // echo $passenger_details;
         return $passenger_details;
     }
+    function getGuestsDetails($flight_id){
+        $query = "SELECT flight_id,booking.passenger_id,booking.booking_time,guest.first_name,guest.last_name,
+        guest.passport_number,guest.dob
+        FROM booking JOIN guest where booking.passenger_id=guest.passenger_id  AND flight_id='{$flight_id}'";
+        
+        $stmt=$this->connect()->prepare($query);
+        
+        $stmt->execute();
+        $passenger_details=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        // echo $passenger_details;
+        return $passenger_details;
+    }
     function remove_passenger($id){
         $query="UPDATE booking set state=1 where passenger_id=$id";
         $stmt=$this->connect()->prepare($query);
