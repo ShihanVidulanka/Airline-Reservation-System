@@ -19,7 +19,7 @@
             $details = array(
                 "ID" => $this->getOperationAgentNo($this->operation_agent->getUser_id()),
                 "first_name" => $this->operation_agent->getFirst_name(),
-                "second_name"=>$this->operation_agent->getSecond_name(),
+                "second_name"=>$this->operation_agent->getLast_name(),
                 "username" => $this->operation_agent->getUser_name(),
                 "airport_name" => $this->getAirportName($this->operation_agent->getAirport_Code()),
                 "telephone_numbers" =>  $this->formatTelephoneNos($this->operation_agent->getTelephone_nos()),
@@ -46,7 +46,7 @@
             return $passenger_details;
         }
         public function showGuest($flight_id){
-            $guest_details=$this->getGuestDetails($flight_id);
+            $guest_details=$this->operation_agent_controller->getGuestDetails($flight_id);
             return $guest_details;
         }
 

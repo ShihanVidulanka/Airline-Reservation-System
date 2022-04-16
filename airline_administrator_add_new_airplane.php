@@ -76,7 +76,7 @@ $view = new Airline_Administrator_View();
             ?>
 
             <h1 id="heading" class="mb-4">Add New Airport</h1>
-            <form action="include/airline_administrator_add_new_airplane.inc.php" method="POST">
+            <form action="include/airline_administrator_add_new_airplane.inc.php" method="POST" enctype='multipart/form-data' >
 
                 <div class="row mb-3">
 
@@ -85,7 +85,7 @@ $view = new Airline_Administrator_View();
                         <input required class="form-control" type="text" name="tail_no" placeholder="Enter Airplane Tail No.">
                     </div>
 
-                    //-------------Error----------------------------------------------------------------------
+                    <!-------------Error---------------------------------------------------------------------->
                     <div class="col-sm-6">
                         <label for="model" class="form-label">Model:</label>
                         <select required name="model" class="form-control" id="model">
@@ -114,6 +114,13 @@ $view = new Airline_Administrator_View();
                         <input required class="form-control" type="text" name="no_business_seats" placeholder="Enter No. of Business Seats">
                     </div>
 
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <label for="formFileLg" class="form-label">Input Picture of Airplane Seating</label>
+                        <input required class="form-control form-control-sm" id="formFileLg" type="file"  name="file_up" accept="image/*" />
+                    </div>
                 </div>
 
                 <div class="btn-group">
