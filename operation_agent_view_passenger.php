@@ -9,11 +9,7 @@ if (!isset($_SESSION['ID'])) {
     return;
 }
 if(isset($_SESSION['flight_id'])){
-    // echo $_SESSION['flight_id'];
-    // echo '<br>';
-    // echo $_SESSION['origin'];
-    // echo '<br>';
-    // echo $_SESSION['destination'];
+
     $operation_agent_view=new Operation_Agent_View();
     $passengers_details_of_flight= $operation_agent_view->showPassengers($_SESSION['flight_id']);
     $guest_passengers_details_of_flight=$operation_agent_view->showGuest($_SESSION['flight_id']);
@@ -216,7 +212,7 @@ if(isset($_SESSION['flight_id'])){
 <!--pop up delete confirm-->
     <div id="id01" class="modal">
     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-    <form class="modal-content" action="/action_page.php">
+    <form class="modal-content" action="include/operation_agent_remove_passenger.inc.php">
         <div class="container">
         <h1>Delete Account</h1>
         <p>Are you sure you want to delete your account?</p>

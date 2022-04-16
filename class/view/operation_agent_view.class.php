@@ -46,7 +46,7 @@
             return $passenger_details;
         }
         public function showGuest($flight_id){
-            $guest_details=$this->getGuestDetails($flight_id);
+            $guest_details=$this->operation_agent_controller->getGuestDetails($flight_id);
             return $guest_details;
         }
 
