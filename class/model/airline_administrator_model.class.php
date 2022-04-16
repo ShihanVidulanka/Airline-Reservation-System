@@ -75,14 +75,37 @@ class Airline_Administrator_Model extends Dbh{
         
     }
 
-    
-    //add new row to airplane table
-    public function addNewAirplaneFromModel($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats)
-    {
-        $query = "INSERT INTO airplane(tail_no, model, no_platinum_seats, no_economy_seats, no_business_seats, in_service)
-             VALUES ( '{$tail_no}', '{$model}', '{$no_platinum_seats}', '{$no_economy_seats}', '{$no_business_seats}', 0)";
+    //get airplane details using tail_no or return null if empty
+    public function getAirplaneDetailsFromModel($tail_no){
+        $query = "SELECT * FROM airplane WHERE tail_no='{$tail_no}'";
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
+        $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $details;
+    }
+    
+    //add new row to airplane table
+    public function addNewAirplaneFromModel($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image)
+    {
+        $query = "INSERT INTO airplane(tail_no, model, no_platinum_seats, no_economy_seats, no_business_seats, in_service, image)
+             VALUES ( :tail_no, :model, :no_platinum_seats, :no_economy_seats, :no_business_seats, :in_service, :image)";
+        $stmt = $this->connect()->prepare($query);
+        $in_service = 0;
+        $stmt->bindParam(':tail_no', $tail_no, PDO::PARAM_STR, 20);
+        $stmt->bindParam(':model', $model, PDO::PARAM_STR, 20);
+        $stmt->bindParam(':no_platinum_seats', $no_platinum_seats, PDO::PARAM_INT, 3);
+        $stmt->bindParam(':no_economy_seats', $no_economy_seats, PDO::PARAM_INT, 3);
+        $stmt->bindParam(':no_business_seats', $no_business_seats, PDO::PARAM_INT, 3);
+        $stmt->bindParam(':in_service', $in_service, PDO::PARAM_INT, 1);
+        $stmt->bindParam(':image', $image, PDO::PARAM_LOB);
+
+        if ($stmt->execute()) {
+
+            echo " Data with Photo is added ";
+        } else {
+            echo " Not able to add data please contact Admin ";
+            print_r($stmt->errorInfo());
+        }
     }
 
     // protected function createFlightDispatcher($details){
