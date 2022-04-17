@@ -27,7 +27,7 @@ if (!isset($_SESSION['ID'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/operation_agent_home.css">
+    <link rel="stylesheet" href="css/airline_Administrator_generate_reports.css">
     <title>Home</title>
 </head>
 
@@ -67,34 +67,51 @@ if (!isset($_SESSION['ID'])) {
     </nav>
 
 
-    <FORM STYLE="padding-left:5px">
-        <INPUT TYPE="checkbox" ID="BoxName1" ONCLICK="ShowCheckboxDiv('BoxName', 3)" />Report of Number of Passengers in Given Flight<BR>
-        <DIV ID="BoxName1Div" STYLE="display:none;">
-            <div class="container my-3 border">
+
+
+    
+
+<div class="flex-shrink-0 p-3 bg-transparent" style="width: 90%;">
+    <a href="airline_administrator_generate_report.php" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+      <svg class="bi me-2" width="30" height="24"></svg>
+      <span class="fs-5 fw-semibold">Generate Reports</span>
+    </a>
+    <ul class="list-unstyled ps-0">
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+        Given a flight no, all passengers travelling in it (next immediate flight) below age 18,above age 18
+        </button>
+        <div class="collapse" id="home-collapse">
+            <div class="container ">
                 <form>
 
-                    <legend>Get Number of passengers in Flight</legend>
+                    <legend>Given a flight no, all passengers travelling in it (next immediate flight) below age 18,above age 18</legend>
                     <div class="mb-3">
-                        <label for="FlightNumber" class="form-label">Flight Number</label>
-                        <input type="text" id="FlightNumber" class="form-control" placeholder="Flight Number">
+                        <label for="Flight no" class="form-label">Flight no</label>
+                        <input type="text" id="FlightNumber" class="form-control" placeholder="Flight no">
                     </div>
-
+                    
                     <br>
                     <button type="submit" class="btn btn-primary">Create Report</button>
-                    <BUTTON ONCLICK="ShowAndHide()">Click me</BUTTON>
-                    <DIV ID="SectionName" STYLE="display:none">Text to be shown and hidden</DIV>
+                    
                 </form>
+                <br>
             </div>
-        </DIV>
-        <INPUT TYPE="checkbox" ID="BoxName2" ONCLICK="ShowCheckboxDiv('BoxName', 3)" />Report Number of passengers to given destination<BR>
-        <DIV ID="BoxName2Div" STYLE="display:none;">
-            <div class="container my-3 border">
+        </div>
+      </li>
+      <li class="border-top my-3"></li>
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+        Given a date range, number of passengers travelling to a given destination 
+        </button>
+        <div class="collapse" id="dashboard-collapse">
+            <div class="container ">
                 <form>
 
-                    <legend>Get Number of passengers to given destination</legend>
+                    <legend>Given a date range, number of passengers travelling to a given destination</legend>
                     <div class="mb-3">
                         <label for="destination" class="form-label">Destination</label>
-                        <input type="text" id="FlightNumber" class="form-control" placeholder="destination">
+                        <input type="text" id="Destination" class="form-control" placeholder="destination">
                     </div>
                     <div class="mb-6">
                         <label for="StartingDate" class="form-label">Starting Date</label><br>
@@ -108,14 +125,21 @@ if (!isset($_SESSION['ID'])) {
                     <button type="submit" class="btn btn-primary">Create Report</button>
 
                 </form>
+                <br>
             </div>
-        </DIV>
-        <INPUT TYPE="checkbox" ID="BoxName3" ONCLICK="ShowCheckboxDiv('BoxName', 3)" />Report Number of passengers in Given Date Range<BR>
-        <DIV ID="BoxName3Div" STYLE="display:none;">
-            <div class="container my-3 border">
+        </div>
+      </li>
+      <li class="border-top my-3"></li>
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+        Given a date range, number of bookings by each passenger type
+        </button>
+        <div class="collapse" id="orders-collapse">
+            <div class="container ">
                 <form>
 
-                    <legend>Get Number of passengers in Given Date Range</legend>
+                    <legend>Given a date range, number of bookings by each passenger type</legend>
+                    
                     <div class="mb-6">
                         <label for="StartingDate" class="form-label">Starting Date</label><br>
                         <input type="date" placeholder="starting date">
@@ -129,38 +153,67 @@ if (!isset($_SESSION['ID'])) {
 
                 </form>
             </div>
-        </DIV>
-    </FORM>
+        </div>
+      </li>
+      <li class="border-top my-3"></li>
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+        Given origin and destination, all past flights, states, passenger counts data
+        </button>
+        <div class="collapse" id="account-collapse">
+            <div class="container ">
+                <form>
 
+                    <legend>Given origin and destination, all past flights, states, passenger counts data</legend>
+                    <div class="mb-3">
+                        <label for="origin" class="form-label">Origin</label>
+                        <input type="text" id="Origin" class="form-control" placeholder="origin">
+                    </div>
+                    <div class="mb-3">
+                        <label for="destination" class="form-label">Destination</label>
+                        <input type="text" id="Destination" class="form-control" placeholder="destination">
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Create Report</button>
 
+                </form>
+            </div>
+        </div>
+      </li>
+      <li class="border-top my-3"></li>
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#accounts-collapse" aria-expanded="false">
+        Total revenue generated by each Aircraft type
+        </button>
+        <div class="collapse" id="accounts-collapse">
+            <div class="container ">
+                <form>
 
+                    <legend>Total revenue generated by each Aircraft type</legend>
+                    <div class="mb-3">
+                        <label for="aircraft" class="form-label">Aircraft</label>
+                        <input type="text" id="aircraft" class="form-control" placeholder="aircraft">
+                    </div>
+                    <div class="mb-6">
+                        <label for="StartingDate" class="form-label">Starting Date</label><br>
+                        <input type="date" placeholder="starting date">
+                    </div>
+                    <div class="mb-6">
+                        <label for="EndiningDate" class="form-label">Ending Date</label><br>
+                        <input type="date" placeholder="Ending date">
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Create Report</button>
 
+                </form>
+            </div>
+          
+        </div>
+      </li>
+    </ul>
+  </div>
 
 
 </body>
 
 </html>
-<SCRIPT>
-    function ShowCheckboxDiv(IdBaseName, NumberOfBoxes) {
-        for (x = 1; x <= NumberOfBoxes; x++) {
-            CheckThisBox = IdBaseName + x;
-            BoxDiv = IdBaseName + x + 'Div';
-            if (document.getElementById(CheckThisBox).checked) {
-                document.getElementById(BoxDiv).style.display = "block";
-            } else {
-
-                document.getElementById(BoxDiv).style.display = "none";
-            }
-        }
-        return false;
-    }
-
-    function ShowAndHide() {
-        var x = document.getElementById('SectionName');
-        if (x.style.display == 'none') {
-            x.style.display = 'block';
-        } else {
-            x.style.display = 'block';
-        }
-    }
-</SCRIPT>

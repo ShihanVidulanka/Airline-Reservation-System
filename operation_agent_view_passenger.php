@@ -212,7 +212,7 @@ if(isset($_SESSION['flight_id'])){
 <!--pop up delete confirm-->
     <div id="id01" class="modal">
     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-    <form class="modal-content" action="include/operation_agent_remove_passenger.inc.php">
+    <form class="modal-content" action="include/operation_agent_remove_passenger.inc.php" method="get">
         <div class="container">
         <h1>Delete Account</h1>
         <p>Are you sure you want to delete your account?</p>
