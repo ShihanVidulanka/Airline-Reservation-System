@@ -12,88 +12,49 @@ function ShowRadioButtonDiv (IdBaseName, NumberOfButtons) {
     return false;
 }
 
-var telephone_number_str='';
-function addtelephone(){
-    var telephone = document.getElementById('telephone');
-    var telephone_number_list = document.getElementById('telephone_numbers_list');
-    var telephone_numbers = document.getElementById('telephone_numbers');
-
-    var option = document.createElement("option");
-    option.text = telephone.value;
-    console.log(option.text);
-    telephone_number_list.appendChild(option);
-
-    telephone_numbers.value+=telephone.value+',';
+//telephone number validation
+function validateTelphoneNumber(tpno){
+    // let pattern = /^((\+94)|(0))([0-9]{9})$/;
+    let pattern = /^[\+a-zA-Z0-9\-().\s]{10,15}$/;
+    return (pattern.test(tpno));
 }
 
-// $(document).ready(function() {
-//     var maxField = 5; //Input fields increment limitation
-//     var addButton = $('.add_button_aa'); //Add button selector
-//     var wrapper = $('#aa_p'); //Input field wrapper
-//     var fieldHTML = '<div><input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Phone Number:" value="" /><div class="valid-feedback">Valid Number</div><div class="invalid-feedback">Invalid Number</div><a href="javascript:void(0);" class="remove_button"><img src="img/remove_icon.png"/></a></div>'; //New input field html 
-//     var x = 1; //Initial field counter is 1
+var fd_telephone_numbers = document.getElementById('fd_telephone_numbers');
+var oa_telephone_numbers = document.getElementById('oa_telephone_numbers');
+function add_fd_telephone(){
+    let fd_telephone = document.getElementById('fd_telephone');
+    let fd_errormsg = document.getElementById('fd_telephone_val');
 
-//     //Once add button is clicked
-//     $(addButton).click(function() {
-//         //Check maximum number of input fields
-//         if (x < maxField) {
-//             x++; //Increment field counter
-//             $(wrapper).append(fieldHTML); //Add field html
-//         }
-//     });
+    if(validateTelphoneNumber(fd_telephone.value)){
+        let fd_telephone_number_list = document.getElementById('fd_telephone_numbers_list');
+        let option = document.createElement("option");
+        option.text = fd_telephone.value;
+        console.log(option.text);
+        fd_telephone_number_list.appendChild(option);
+        fd_telephone_numbers.value+=fd_telephone.value+',';
+        fd_telephone.value='';
+    }else{
+        fd_errormsg.innerHTML = 'Invalid telephone!';
+        fd_errormsg.style.color = 'red';
+        document.getElementById('fd_add').disabled = true;
+    }
+}
 
-//     //Once remove button is clicked
-//     $(wrapper).on('click', '.remove_button', function(e) {
-//         e.preventDefault();
-//         $(this).parent('div').remove(); //Remove field html
-//         x--; //Decrement field counter
-//     });
-// });
+function add_oa_telephone(){
+    let oa_telephone = document.getElementById('oa_telephone');
+    let oa_errormsg = document.getElementById('oa_telephone_val');
 
-// $(document).ready(function() {
-//     var maxField = 5; //Input fields increment limitation
-//     var addButton = $('.add_button_fd'); //Add button selector
-//     var wrapper = $('#fd_p'); //Input field wrapper
-//     var fieldHTML = '<div><input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Phone Number:" value="" /><div class="valid-feedback">Valid Number</div><div class="invalid-feedback">Invalid Number</div><a href="javascript:void(0);" class="remove_button"><img src="img/remove_icon.png"/></a></div>'; //New input field html 
-//     var x = 1; //Initial field counter is 1
-
-//     //Once add button is clicked
-//     $(addButton).click(function() {
-//         //Check maximum number of input fields
-//         if (x < maxField) {
-//             x++; //Increment field counter
-//             $(wrapper).append(fieldHTML); //Add field html
-//         }
-//     });
-
-//     //Once remove button is clicked
-//     $(wrapper).on('click', '.remove_button', function(e) {
-//         e.preventDefault();
-//         $(this).parent('div').remove(); //Remove field html
-//         x--; //Decrement field counter
-//     });
-// });
-
-// $(document).ready(function() {
-//     var maxField = 5; //Input fields increment limitation
-//     var addButton = $('.add_button_oa'); //Add button selector
-//     var wrapper = $('#oa_p'); //Input field wrapper
-//     var fieldHTML = '<div><input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Phone Number:" value="" /><div class="valid-feedback">Valid Number</div><div class="invalid-feedback">Invalid Number</div><a href="javascript:void(0);" class="remove_button"><img src="img/remove_icon.png"/></a></div>'; //New input field html 
-//     var x = 1; //Initial field counter is 1
-
-//     //Once add button is clicked
-//     $(addButton).click(function() {
-//         //Check maximum number of input fields
-//         if (x < maxField) {
-//             x++; //Increment field counter
-//             $(wrapper).append(fieldHTML); //Add field html
-//         }
-//     });
-
-//     //Once remove button is clicked
-//     $(wrapper).on('click', '.remove_button', function(e) {
-//         e.preventDefault();
-//         $(this).parent('div').remove(); //Remove field html
-//         x--; //Decrement field counter
-//     });
-// });
+    if(validateTelphoneNumber(oa_telephone.value)){
+        let oa_telephone_number_list = document.getElementById('oa_telephone_numbers_list');
+        let option = document.createElement("option");
+        option.text = oa_telephone.value;
+        console.log(option.text);
+        oa_telephone_number_list.appendChild(option);
+        oa_telephone_numbers.value+=oa_telephone.value+',';
+        oa_telephone.value='';
+    }else{
+        oa_errormsg.innerHTML = 'Invalid telephone!';
+        oa_errormsg.style.color = 'red';
+        document.getElementById('oa_add').disabled = true;
+    }
+}

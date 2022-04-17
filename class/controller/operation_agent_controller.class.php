@@ -12,7 +12,7 @@ class Operation_Agent_Controller extends Operation_Agent_Model{
         return $passenger_details;
     }
     function getGuestDetails($flight_id){
-        return $this->getGuestsDetalis($flight_id);
+        return $this->getGuestsDetails($flight_id);
     }
     public function getCurrentDate()
     {

@@ -9,7 +9,7 @@ if (isset($_GET['passenger_id'])){
     $passenger_id = htmlentities($_GET['passenger_id']);
     echo $passenger_id;
    
-     header("Location: ../operation_agent_view_passenger.php");
+    //  header("Location: ../operation_agent_view_passenger.php");
     // return;
 }
 
