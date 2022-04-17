@@ -13,9 +13,8 @@ if(isset($_POST['submit'])){
     $_POST['telephone_numbers']=explode(",",$_POST['telephone_numbers']);
 
     $create_flight_dispatcher_controller = new Airline_Administrator_Controller();
-    // $flight_dispatcher = new Flight_Dispatcher();
-    // Then set everthing with ($_POST['everything'])
+    $flight_dispatcher = new Flight_Dispatcher($_POST['user_id'], $_POST['username'], $_POST['first_name'], $_POST['last_name'], $_POST['airport_code'], $_POST['telephonez_nos']);
 
-    // $create_flight_dispatcher_controller->createFlightDispatcherFromModel($flight_dispatcher);
+    $create_flight_dispatcher_controller->createFlightDispatcherFromModel($flight_dispatcher);
 }
 ?>

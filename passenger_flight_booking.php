@@ -54,8 +54,9 @@
 
     <div class="search">
       <form class="d-flex mb-3" action="passenger_flight_booking.php" method="post">
+        <label for="destination" id="destination_label">Select your destination:</label>
         <select name="destination" id="destination" class="form-control me-2">
-          <option value="all">Select Your Destination</option>
+          <!-- <option value="all">Select Your Destination</option> -->
           <option value="all">All</option>
         <?php
             foreach ($destinations as $destination) {
