@@ -83,7 +83,7 @@ if (isset($_SESSION['errors'])) {
             <div class="container pt-5">
                 <div class="wrapper p-3">
                     <h1 id="heading" class="mb-4">New Flight Dispatcher</h1>
-                    <form action="" class="was-validated" id="fd_signup_form" action="include/create_flight_dispatcher.inc.php" method="POST">
+                    <form class="was-validated" id="fd_signup_form" action="include/create_flight_dispatcher.inc.php" method="POST">
                         <?php
                         if (!empty($errors)) {
                             echo '<div class="alert alert-danger errors" role="alert">';
@@ -113,7 +113,7 @@ if (isset($_SESSION['errors'])) {
                             </div>
                             <div class="col-sm-6">
                                 <label for="plane" class="form-label">Airport Code</label>
-                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Airport Code:">
+                                <input required class="form-control" type="text" name="fd_airport_code" id="fd_airport_code" placeholder="Enter Airport Code:">
                                 <div id="fd_airport_code_val" class="m-3"></div>
                             </div>
                         </div>
@@ -133,7 +133,7 @@ if (isset($_SESSION['errors'])) {
                         </div>
                         <input type="text" id="fd_telephone_numbers" class="form-control" hidden name="fd_telephone_numbers">
                         <div class="btn-group">
-                            <button onclick="fd_checkAll();" type="button" class="btn btn-primary buttons" value="fd_create">Create</button>
+                            <button onclick="fd_checkAll();" type="submit" class="btn btn-primary buttons" value="fd_create">Create</button>
                         </div>
                     </form>
                 </div>
