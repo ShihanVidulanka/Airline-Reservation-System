@@ -126,7 +126,7 @@ if (isset($_SESSION['errors'])) {
                             <div class="col-sm-6">
                                 <label for="fd_telephone" class="form-label">Telephone Number:</label>
                                 <div class="input-group mb-3">
-                                    <input required class="form-control" type="tel" name="" id="fd_telephone" placeholder="Enter Your Telephone No:">
+                                    <input required class="form-control" type="tel" name="fd_user_id" id="fd_telephone" placeholder="Enter Your Telephone No:">
                                     <button type="button" id="fd_add" class="btn btn-primary btn-outline-secondry" onclick="add_fd_telephone();">Add</button>
                                 </div>
                                 <div Id="fd_telephone_val" class="m-3"></div>
@@ -199,7 +199,7 @@ if (isset($_SESSION['errors'])) {
                             <div class="col-sm-6">
                                 <label for="oa_telephone" class="form-label">Telephone Number:</label>
                                 <div class="input-group mb-3">
-                                    <input required class="form-control" type="tel" name="oa_telephone" id="oa_telephone" placeholder="Enter Your Telephone No:">
+                                    <input required class="form-control" type="tel" name="oa_user_id" id="oa_telephone" placeholder="Enter Your Telephone No:">
                                     <button type="button" id="oa_add" class="btn btn-primary btn-outline-secondry" onclick="add_oa_telephone();">Add</button>
                                 </div>
                                 <div Id="oa_telephone_val" class="m-3"></div>
@@ -211,7 +211,7 @@ if (isset($_SESSION['errors'])) {
                         </div>
                         <input type="text" id="oa_telephone_numbers" class="form-control" hidden name="oa_telephone_numbers">
                         <div class="btn-group">
-                            <button onclick="oa_checkAll();" type="button" class="btn btn-primary buttons" value="oa_create">Create</button>
+                            <button onclick="oa_checkAll();" type="submit" class="btn btn-primary buttons" value="oa_create">Create</button>
                         </div>
                     </form>
                 </div>

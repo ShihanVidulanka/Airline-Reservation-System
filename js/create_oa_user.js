@@ -66,6 +66,18 @@ function oa_checkAll(){
         error_count++;
         oa_usernameListener();
     }
+
+    if (!validateEmail(oa_email.value)) {
+        error_count++;
+        oa_emailListener();
+    }
+
+    console.log(error_count);
+    if(error_count==0){
+        document.getElementById('oa_signup_form').submit();
+    }else{
+        alert('Enter the correct details');
+    }
 }
 
 function validateName(name){

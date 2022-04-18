@@ -59,6 +59,7 @@ class Airline_Administrator_Model extends Dbh{
             }
             
             $query3 = "INSERT INTO telephone_no(user_id, phone_no) VALUES(:user_id, :phone_no)";
+            // print_array($details['telephone_numbers']);
             foreach ($details['telephone_numbers'] as $telephone_number){
                 $statement3 = $db->prepare($query3);
                 $statement3->execute(array(
@@ -115,13 +116,13 @@ class Airline_Administrator_Model extends Dbh{
 //     'username'=>'osuracaldera',
 //     'email'=>'osuracaldera2009@gmail.com',
 //     'hashed_password'=>encryptPassword('abcd'),  // Question
-//     'account_type'=>2,
+//     'account_type'=>1,
 //     'first_name'=>'Osura',
 //     'last_name'=>'Thenuka',
 //     'airport_code'=>'BIA',
 //     'telephone_numbers'=>array('0718949089','0714629179')
 // );
-// $airline_administrator_model->createAccount($details, 2);
+// $airline_administrator_model->createAccount($details, $details['account_type']);
 ?>
 
 
