@@ -29,7 +29,7 @@ function airportNameListner() {
         errormsg.innerHTML = 'Valid Airport Name!';
         errormsg.style.color = 'green';
     } else {
-        errormsg.innerHTML = 'Invalid Airport Name Length!';
+        errormsg.innerHTML = 'Invalid Airport Name!';
         errormsg.style.color = 'red';
     }
 }
@@ -39,7 +39,7 @@ function provinceListner() {
     let errormsg = document.getElementById("province_val");
 
     if (validateAirportName(province.value)) {
-        errormsg.innerHTML = 'Valid Province Name!';
+        errormsg.innerHTML = 'Valid Province!';
         errormsg.style.color = 'green';
     } else {
         errormsg.innerHTML = 'Invalid Province!';
@@ -112,7 +112,7 @@ function checkAll() {
     let error_count = 0;
     if (!validateAirportCode(airport_code.value)) {
         error_count++;
-        airportCodeListner()
+        // airportCodeListner();
     }
     if (!validateAirportName(airport_name.value)) {
         error_count++;
