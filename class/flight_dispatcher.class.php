@@ -10,6 +10,7 @@ class Flight_Dispatcher{
     private $username;
     private $first_name;
     private $last_name;
+    private $email;
     private $airport_code;
     private $telephone_nos; //needs to be array
 
@@ -29,6 +30,7 @@ class Flight_Dispatcher{
     public function getUsername(){return $this->username;}
     public function getFirstName(){return $this->first_name;}
     public function getLastName(){return $this->last_name;}
+    public function getEmail(){return $this->email;}
     public function getAirportCode(){return $this->airport_code;}
     public function getTelephoneNo(){return $this->telephone_nos;}
 
@@ -38,6 +40,7 @@ class Flight_Dispatcher{
     public function setUserId($user_id){$this->user_id=$user_id;}
     public function setFirstName($first_name){return $this->first_name=$first_name;}
     public function setLastName($last_name){return $this->last_name=$last_name;}
+    public function setEmail($email){$this->email = $email;return $this;}
     public function setAirportCode($airport_code){return $this->airport_code=$airport_code;}
     public function setTelephoneNo($telephone_nos){return $this->telephone_nos=$telephone_nos;}
 
