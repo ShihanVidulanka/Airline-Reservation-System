@@ -86,10 +86,10 @@ class Airline_Administrator_Model extends Dbh{
     }
     
     //add new row to airplane table
-    public function addNewAirplaneFromModel($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image)
+    public function addNewAirplaneFromModel($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_type)
     {
-        $query = "INSERT INTO airplane(tail_no, model, no_platinum_seats, no_economy_seats, no_business_seats, in_service, image)
-             VALUES ( :tail_no, :model, :no_platinum_seats, :no_economy_seats, :no_business_seats, :in_service, :image)";
+        $query = "INSERT INTO airplane(tail_no, model, no_platinum_seats, no_economy_seats, no_business_seats, in_service, image, file_type)
+             VALUES ( :tail_no, :model, :no_platinum_seats, :no_economy_seats, :no_business_seats, :in_service, :image, :file_type)";
         $stmt = $this->connect()->prepare($query);
         $in_service = 0;
         $stmt->bindParam(':tail_no', $tail_no, PDO::PARAM_STR, 20);
@@ -99,6 +99,7 @@ class Airline_Administrator_Model extends Dbh{
         $stmt->bindParam(':no_business_seats', $no_business_seats, PDO::PARAM_INT, 3);
         $stmt->bindParam(':in_service', $in_service, PDO::PARAM_INT, 1);
         $stmt->bindParam(':image', $image, PDO::PARAM_LOB);
+        $stmt->bindParam(':file_type', $file_type, PDO::PARAM_STR, 255);
 
         if ($stmt->execute()) {
 

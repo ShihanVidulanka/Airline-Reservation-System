@@ -15,10 +15,11 @@ if (isset($_POST['submit'])) {
 
     //Image
     $file_size = $_FILES['file_up']['size'];
+    $file_type = $_FILES['file_up']['type'];
     $image = file_get_contents($_FILES['file_up']['tmp_name']);
 
 
-    $error = $controller->validateAddNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_size);
+    $error = $controller->validateAddNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_size, $file_type);
     header("Location: ../airline_administrator_add_new_airplane.php?error={$error}");
     return;
 }

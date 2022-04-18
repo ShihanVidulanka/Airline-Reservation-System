@@ -41,11 +41,11 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
         return $this->getAirplaneDetailsFromModel($tail_no);
     }
     
-    public function addNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image){
-        $this->addNewAirplaneFromModel($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image);
+    public function addNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_type){
+        $this->addNewAirplaneFromModel($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_type);
     }
     
-    public function validateAddNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_size){
+    public function validateAddNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_size, $file_type){
         define('MB', 1048576);
         if (!empty($this->getAirplaneDetails($tail_no))) {
             $error = "Duplicate Tail No.";
@@ -58,7 +58,6 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
         } elseif (is_numeric($no_business_seats) == false || $no_business_seats < 0 || $no_business_seats>900) {
             $error = 'Invalid No. of Business Seats';
         } elseif($file_size > 5*MB){
-
             $error = 'File Size Exceeded';
         } else {
             $tail_splitted = explode("-",$tail_no);
@@ -69,7 +68,7 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
             }
             else{
                 $error = 'SUCCESS';
-                $this->addNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image);
+                $this->addNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_type);
             }
         }
         echo $error;
