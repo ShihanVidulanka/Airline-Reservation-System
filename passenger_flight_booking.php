@@ -61,7 +61,7 @@
         <?php
             foreach ($destinations as $destination) {
               $option=$destination['airport_code'].'-'.$destination['name'].'-'.$destination['country'];
-              echo '<option value="'.$destination['airport_code'].'">'.$option.'</option>';
+              echo '<option value="'.$destination['airplane_code'].'">'.$option.'</option>';
             }
           ?>
         </select>
