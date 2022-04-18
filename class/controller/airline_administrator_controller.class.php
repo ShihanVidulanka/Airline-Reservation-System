@@ -46,35 +46,6 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
         $this->addNewAirplaneFromModel($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_type);
     }
     
-    public function validateAddNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_size, $file_type){
-        define('MB', 1048576);
-        if (!empty($this->getAirplaneDetails($tail_no))) {
-            $error = "Duplicate Tail No.";
-        }elseif (strpos($tail_no, '-')==false) {
-            $error = "Invalid Tail No: Should Contain '-' character";
-        }elseif (is_numeric($no_platinum_seats) == false || $no_platinum_seats < 0 || $no_platinum_seats>900) {
-            $error = 'Invalid No. of Platinum Seats';
-        } elseif (is_numeric($no_economy_seats) == false || $no_economy_seats < 0 || $no_economy_seats>900) {
-            $error = 'Invalid No. of Economy Seats';
-        } elseif (is_numeric($no_business_seats) == false || $no_business_seats < 0 || $no_business_seats>900) {
-            $error = 'Invalid No. of Business Seats';
-        } elseif($file_size > 5*MB){
-            $error = 'File Size Exceeded';
-        } else {
-            $tail_splitted = explode("-",$tail_no);
-            if(!ctype_upper($tail_splitted[0]) || !ctype_digit($tail_splitted[1])){
-                $error = 'Incorrect Format: Tail No. should be like AZ-3245'; 
-            }elseif (count($tail_splitted)!=2 || strlen($tail_splitted[0])>2 || strlen($tail_splitted[0])<0 || strlen($tail_splitted[1])!=4) {
-                $error = 'Invalid Tail No. Length';
-            }
-            else{
-                $error = 'SUCCESS';
-                $this->addNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_type);
-            }
-        }
-        echo $error;
-        return $error;
-    }
 
 }
 
@@ -98,4 +69,3 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
 //         $this->check_username(remove_unnessaries($username, 1));
 //     }
 // }
-?>
