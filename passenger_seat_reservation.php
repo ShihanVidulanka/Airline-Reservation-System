@@ -3,7 +3,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/ad
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
 $seat_reservation_view = new Seat_Reservation_View();
 $airplane = $seat_reservation_view->getPlaneDetailsFromModel($_POST['flight_id']);
+$flightView = new Flight_View();
+$flight= $flightView->getFlightDetailsByFlightIdFromModel($_POST['flight_id']);
 $reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
+// print_array($flight);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,23 +37,41 @@ $reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
                 <img id="seatmap" src="data:<?php echo $airplane->getFile_type; ?>;charset=utf8;base64,<?php echo base64_encode($airplane->getImage()); ?>" > 
             </div>
             <div class="col-sm-7 wrapper">
-                <form class="form-horizontal p-4" action="includes/passenger_seat_reservation.inc.php" method="post">
+                <form id="seatbooking" class="form-horizontal p-4" action="include/passenger_seat_reservation.inc.php" method="post">
                   
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="seat">Select your seat:</label>
-                        <div class="col-sm-10">
-                            <select name="seat" class="form-control mb-4" id="seat">
-                            <option value=""></option>
+                        <label class="control-label col-sm-4" for="seat">Select your seat:</label>
+                        <div class="col-sm-8">
+                            <select name="seat" class="form-control mb-4" id="seat"
+                                onchange="addTicketPrice(
+                                                    this.value,
+                                                    <?php echo $airplane->getNo_platinum_seats();?>, 
+                                                    <?php echo $airplane->getNo_business_seats();?>, 
+                                                    <?php echo $airplane->getNo_economy_seats();?>, 
+                                                    <?php echo $flight->getPlatinum_price();?>, 
+                                                    <?php echo $flight->getBusiness_price();?>, 
+                                                    <?php echo $flight->getEconomy_price();?> 
+                                            )"
+                            >
+                            <option value="">Select</option>
                             <?php
 
                                 $seat_count = $airplane->getNo_business_seats() + $airplane->getNo_economy_seats() + $airplane->getNo_platinum_seats();
                                 
-                                for ($i=1; $i <= $seat_count; $i++) { 
+                                for ($i=1; $i <= $seat_count; $i++) {
+                                    $seat=$i."-";
+                                    if($i<=$airplane->getNo_platinum_seats()){
+                                        $seat.="Platinum Class Seat";
+                                    }else if($i<=$airplane->getNo_business_seats()+$airplane->getNo_platinum_seats()){
+                                        $seat.="Business Class Seat";
+                                    }else if($i<=$airplane->getNo_business_seats()+$airplane->getNo_platinum_seats()+$airplane->getNo_economy_seats()){
+                                        $seat.="Economy Class Seat";
+                                    } 
                                     if(in_array($i,$reserved_seats)){
-                                        echo "<option class=\"unavailable\" value={$i} disabled>{$i} - Unavailable</option>";
+                                        echo "<option class=\"unavailable\" value={$i} disabled>{$seat} - Unavailable</option>";
                                     }
                                     else{
-                                        echo "<option class=\"available\" value={$i}>{$i} - Available</option>";
+                                        echo "<option class=\"available\" value={$i}>{$seat} - Available</option>";
 
                                     }
                                 }
@@ -60,8 +81,32 @@ $reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
                         </div>
                         
                     </div>
-                    
-                    <button class="btn btn-primary">Book Now</button>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="seattype">Seat Type:</label>
+                        <div class="col-sm-8">
+                            <input disabled class="form-control"  type="text" name="" id="seattype">
+                            <input hidden class="form-control"  type="text" name="seattype" id="seattype">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="seatno">Seat No:</label>
+                        <div class="col-sm-8">
+                            <input disabled class="form-control"  type="text" name="" id="seatno">
+                            <input hidden class="form-control"  type="text" name="seat_no" id="seat_no">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="ticket_price">Ticket Price:</label>
+                        <div class="col-sm-8">
+                            <input disabled class="form-control"  type="text" name="" id="ticketprice">
+                            <input hidden class="form-control"  type="text" name="ticket_price" id="ticket_price">
+                        </div>
+                    </div>
+                    <input hidden type="text" id="flightid" name="flight_id" value="<?php echo $_POST['flight_id']; ?>">
+                    <input hidden type="text" name="seat_type" id="seat_type">
+                    <div class="button" >
+                        <button type="button" onclick="checkSeatAvailability();" class="btn btn-primary">Book Now</button>
+                    </div>
                 </form>
             </div>
                 
@@ -69,5 +114,7 @@ $reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
         </div>
         
     </div>
+    <script src="js/passenger_seat_reservation.js"></script>
+
 </body>
 </html>

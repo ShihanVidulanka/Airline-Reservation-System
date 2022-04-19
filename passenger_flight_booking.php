@@ -1,10 +1,15 @@
 <?php
   require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
   require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
+
   $flight_view = new Flight_View();
   $destinations = $flight_view->getDestinations();
   if(isset($_POST['submit'])){
     $flights= $flight_view->getFlightDetailsFromModel($_POST['destination']);
+  }
+  $bookingError = "";
+  if(isset($_GET['error'])){
+    $bookingError=$_GET['error'];
   }
 ?>
 <!DOCTYPE html>
@@ -49,7 +54,20 @@
       </div>
     </div>
   </nav>
-
+  <?php
+    if(strcmp($bookingError,"success")==0){
+      echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
+        Booking Successfull!!!
+        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
+      </div>";
+    }
+    else if(strcmp($bookingError,"alreadyBooked")==0){
+      echo "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">
+        Seat is already booked. Try another seat!!!
+        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
+      </div>";
+    }
+  ?>
   <div class="container p-3">
 
     <div class="search">
@@ -61,7 +79,7 @@
         <?php
             foreach ($destinations as $destination) {
               $option=$destination['airport_code'].'-'.$destination['name'].'-'.$destination['country'];
-              echo '<option value="'.$destination['airplane_code'].'">'.$option.'</option>';
+              echo '<option value="'.$destination['airport_code'].'">'.$option.'</option>';
             }
           ?>
         </select>
