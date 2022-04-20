@@ -7,10 +7,14 @@ session_start();
 if (isset($_GET['passenger_id'])){
     $controller =  new Operation_Agent_Controller();
     $passenger_id = htmlentities($_GET['passenger_id']);
+    echo $_GET['onclick'];
     echo $passenger_id;
    
     //  header("Location: ../operation_agent_view_passenger.php");
     // return;
+}
+if (isset($_GET['cancel'])){
+    echo "ddddddddddddddddddddddddd";
 }
 
 ?>
