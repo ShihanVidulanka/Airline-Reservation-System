@@ -7,3 +7,5 @@ class Airport_View extends Airport_Model{
         return $this->getAllAirports();
     }
 }
+// $av = new Airport_View();
+// print_array($av->getAirportsFromModel());

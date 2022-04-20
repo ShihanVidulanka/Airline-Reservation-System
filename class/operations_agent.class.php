@@ -7,6 +7,7 @@ class Operations_Agent{
     private $user_id;
     private $first_name;
     private $last_name;
+    private $email;
     private $state;
     private $airport_code;
     private $telephone_nos;
@@ -26,6 +27,7 @@ class Operations_Agent{
     public function getUser_id(){return $this->user_id;}
     public function getUser_name(){return $this->user_name;}
     public function getState(){return $this->state;}
+    public function getEmail(){return $this->email;}
     public function getAirport_code(){return $this->airport_code;}
     public function getFirst_name(){return $this->first_name;}
     public function getLast_name(){return $this->last_name;}
@@ -35,6 +37,7 @@ class Operations_Agent{
 
     public function setUser_id($user_id){$this->user_id = $user_id;return $this;}
     public function setState($state){$this->state = $state;return $this;}
+    public function setEmail($email){$this->email = $email;return $this;}
     public function setAirport_code($airport_code){$this->airport_code = $airport_code;return $this;}
     public function setUser_name($user_name){$this->user_name = $user_name;return $this;}
     public function setLast_name($last_name){$this->last_name = $last_name;return $this;}    

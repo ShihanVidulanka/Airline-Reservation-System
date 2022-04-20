@@ -83,7 +83,7 @@ if (isset($_SESSION['errors'])) {
             <div class="container pt-5">
                 <div class="wrapper p-3">
                     <h1 id="heading" class="mb-4">New Flight Dispatcher</h1>
-                    <form action="" class="was-validated" id="fd_signup_form" action="include/create_flight_dispatcher.inc.php" method="POST">
+                    <form class="was-validated" id="fd_signup_form" action="include/create_flight_dispatcher.inc.php" method="POST">
                         <?php
                         if (!empty($errors)) {
                             echo '<div class="alert alert-danger errors" role="alert">';
@@ -94,26 +94,31 @@ if (isset($_SESSION['errors'])) {
                         }
                         ?>
                         <div class="row mb-3">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label for="fd_first_name" class="form-label">First Name</label>
                                 <input required class="form-control" type="text" name="fd_first_name" id="fd_first_name" placeholder="Enter User First Name:">
                                 <div id="fd_first_name_val" class="m-3"></div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label for="fd_last_name" class="form-label">Last Name</label>
                                 <input required class="form-control" type="text" name="fd_last_name" id="fd_last_name" placeholder="Enter User Last Name:">
                                 <div id="fd_last_name_val" class="m-3"></div>
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label for="fd_username" class="form-label">Username</label>
                                 <input required class="form-control" type="text" name="fd_username" id="fd_username" placeholder="Enter Username:">
                                 <div Id="fd_username_val" class="m-3"></div>
                             </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <label for="fd_email" class="form-label">Email</label>
+                                <input required class="form-control" type="text" name="fd_email" id="fd_email" placeholder="Enter Email:">
+                                <div Id="fd_email_val" class="m-3"></div>
+                            </div>
                             <div class="col-sm-6">
                                 <label for="plane" class="form-label">Airport Code</label>
-                                <input required class="form-control" type="text" name="plane" id="plane" placeholder="Enter Airport Code:">
+                                <input required class="form-control" type="text" name="fd_airport_code" id="fd_airport_code" placeholder="Enter Airport Code:">
                                 <div id="fd_airport_code_val" class="m-3"></div>
                             </div>
                         </div>
@@ -121,7 +126,7 @@ if (isset($_SESSION['errors'])) {
                             <div class="col-sm-6">
                                 <label for="fd_telephone" class="form-label">Telephone Number:</label>
                                 <div class="input-group mb-3">
-                                    <input required class="form-control" type="tel" name="fd_telephone" id="fd_telephone" placeholder="Enter Your Telephone No:">
+                                    <input required class="form-control" type="tel" name="fd_user_id" id="fd_telephone" placeholder="Enter Your Telephone No:">
                                     <button type="button" id="fd_add" class="btn btn-primary btn-outline-secondry" onclick="add_fd_telephone();">Add</button>
                                 </div>
                                 <div Id="fd_telephone_val" class="m-3"></div>
@@ -144,7 +149,7 @@ if (isset($_SESSION['errors'])) {
             <div class="container pt-5">
                 <div class="wrapper p-3">
                     <h1 id="heading" class="mb-4">New Operations Agent</h1>
-                    <form id="oa_signup_form" action="include/crerate_operations_agent.inc.php" class="was-validated" method="POST">
+                    <form class="was-validated" id="oa_signup_form" action="include/crerate_operations_agent.inc.php" method="POST">
                         <?php
                         if (!empty($errors)) {
                             echo '<div class="alert alert-danger errors" role="alert">';
@@ -173,13 +178,18 @@ if (isset($_SESSION['errors'])) {
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
+                                <label for="oa_email" class="form-label">Email</label>
+                                <input required class="form-control" type="text" name="oa_email" id="oa_email" placeholder="Enter Email:">
+                                <div Id="oa_email_val" class="m-3"></div>
+                            </div>
+                            <div class="col-sm-4">
                                 <label for="airport_code" class="form-label">Airport Code</label>
-                                <input required class="form-control" type="text" name="airport_code" id="oa_airport_code" placeholder="Enter Airport Code:">
+                                <input required class="form-control" type="text" name="oa_airport_code" id="oa_airport_code" placeholder="Enter Airport Code:">
                                 <div id="oa_airport_code_val" class="m-3"></div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label for="state" class="form-label">State</label>
                                 <input required class="form-control" type="text" name="state" id="state" placeholder="Enter State:">
                                 <div id="state_val" class="m-3"></div>
@@ -189,12 +199,10 @@ if (isset($_SESSION['errors'])) {
                             <div class="col-sm-6">
                                 <label for="oa_telephone" class="form-label">Telephone Number:</label>
                                 <div class="input-group mb-3">
-                                    <input required class="form-control" type="tel" name="oa_telephone" id="oa_telephone" placeholder="Enter Your Telephone No:">
+                                    <input required class="form-control" type="tel" name="oa_user_id" id="oa_telephone" placeholder="Enter Your Telephone No:">
                                     <button type="button" id="oa_add" class="btn btn-primary btn-outline-secondry" onclick="add_oa_telephone();">Add</button>
                                 </div>
                                 <div Id="oa_telephone_val" class="m-3"></div>
-                                <!-- <div class="valid-feedback">Valid Telephone number</div>
-                                <div class="invalid-feedback">Invalid Telephone number</div> -->
                             </div>
                             <div class="col-sm-6">
                                 <label for="oa_telephone_numbers" class="form-label">Telephone Numbers List:</label>
@@ -203,7 +211,7 @@ if (isset($_SESSION['errors'])) {
                         </div>
                         <input type="text" id="oa_telephone_numbers" class="form-control" hidden name="oa_telephone_numbers">
                         <div class="btn-group">
-                            <button onclick="oa_checkAll();" type="button" class="btn btn-primary buttons" value="oa_create">Create</button>
+                            <button onclick="oa_checkAll();" type="submit" class="btn btn-primary buttons" value="oa_create">Create</button>
                         </div>
                     </form>
                 </div>

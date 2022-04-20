@@ -10,6 +10,10 @@ if (!isset($_SESSION['ID'])) {
 }
 
 $view = new Airline_Administrator_View();
+
+// $controller = new Airline_Administrator_Controller();
+// $duplicates = $controller->getAirplaneDetails('AZ-1234');
+// print_r($duplicates);
 ?>
 
 <!DOCTYPE html>
@@ -76,16 +80,17 @@ $view = new Airline_Administrator_View();
             ?>
 
             <h1 id="heading" class="mb-4">Add New Airport</h1>
-            <form action="include/airline_administrator_add_new_airplane.inc.php" method="POST" enctype='multipart/form-data' >
+            <form action="include/airline_administrator_add_new_airplane.inc.php" method="POST" enctype='multipart/form-data' id="add_new_airplane_form">
 
                 <div class="row mb-3">
 
                     <div class="col-sm-6">
                         <label for="plane" class="form-label">Airplane Tail No.</label>
-                        <input required class="form-control" type="text" name="tail_no" placeholder="Enter Airplane Tail No.">
+                        <input required oninput="checkDuplicatesTailNo('tail_no_val','include/airline_administrator_add_new_airplane.inc.php','tail_no_', this.value)"
+                        class="form-control" type="text" name="tail_no" id="tail_no" placeholder="Enter Airplane Tail No.">
+                        <div id="tail_no_val" class="m-3"></div>
                     </div>
 
-                    <!-------------Error---------------------------------------------------------------------->
                     <div class="col-sm-6">
                         <label for="model" class="form-label">Model:</label>
                         <select required name="model" class="form-control" id="model">
@@ -94,6 +99,7 @@ $view = new Airline_Administrator_View();
                             <option value="Boeing 757">Boeing 757</option>
                             <option value="Airbus A380">Airbus A380</option>
                         </select>
+                        <div id="model_val" class="m-3"></div>
                     </div>
                 </div>
 
@@ -101,17 +107,20 @@ $view = new Airline_Administrator_View();
 
                     <div class="col-sm-4">
                         <label for="destination" class="form-label">No. of Platinum Seats</label>
-                        <input required class="form-control" type="text" name="no_platinum_seats" placeholder="Enter No. of Platinum Seats">
+                        <input required class="form-control" type="text" name="no_platinum_seats" id="no_platinum_seats" placeholder="Enter No. of Platinum Seats">
+                        <div id="no_platinum_seats_val" class="m-3"></div>
                     </div>
 
                     <div class="col-sm-4">
                         <label for="destination" class="form-label">No. of Economy Seats</label>
-                        <input required class="form-control" type="text" name="no_economy_seats" placeholder="Enter No. of Economy Seats">
+                        <input required class="form-control" type="text" name="no_economy_seats" id="no_economy_seats" placeholder="Enter No. of Economy Seats">
+                        <div id="no_economy_seats_val" class="m-3"></div>
                     </div>
 
                     <div class="col-sm-4">
                         <label for="destination" class="form-label">No. of Business Seats</label>
-                        <input required class="form-control" type="text" name="no_business_seats" placeholder="Enter No. of Business Seats">
+                        <input required class="form-control" type="text" name="no_business_seats" id="no_business_seats" placeholder="Enter No. of Business Seats">
+                        <div id="no_business_seats_val" class="m-3"></div>
                     </div>
 
                 </div>
@@ -119,17 +128,20 @@ $view = new Airline_Administrator_View();
                 <div class="row mb-3">
                     <div class="col-sm-12">
                         <label for="formFileLg" class="form-label">Input Picture of Airplane Seating</label>
-                        <input required class="form-control form-control-sm" id="formFileLg" type="file"  name="file_up" accept="image/*" />
+                        <input required class="form-control form-control-sm" id="file_up" type="file"  name="file_up" accept="image/*" />
+                        <div id="file_up_val" class="m-3"></div>
                     </div>
                 </div>
 
                 <div class="btn-group">
-                    <button class="btn btn-primary buttons" type="submit" name='submit'>Add</button>
+                    <button onclick="checkAll();" class="btn btn-primary buttons" type="button" name='add'>Add</button>
                 </div>
             </form>
         </div>
 
     </div>
+
+    <script src="js/admin_add_new_airplane.js"></script>
 
 </body>
 

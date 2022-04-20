@@ -69,25 +69,28 @@ $view = new Flight_Dispatcher_View();
   <div class="container pt-5">
     <div class="wrapper p-3">
 
-      <?php 
-        if (isset($_GET['error'])) {
-          $view->showError($_GET['error']);
-        }
+      <?php
+      if (isset($_GET['error'])) {
+        $view->showError($_GET['error']);
+      }
       ?>
 
       <h1 id="heading" class="mb-4">Add New Airport</h1>
-      <form action="include/flight_dispatcher_add_new_airport.inc.php" method="POST">
+      <form action="include/flight_dispatcher_add_new_airport.inc.php" method="POST" class="was-validated" id="add_new_airport_form">
 
         <div class="row mb-3">
 
           <div class="col-sm-4">
-            <label for="plane" class="form-label">Airport Code</label>
-            <input required class="form-control" type="text" name="airport_code" placeholder="Enter Airport Code">
+            <label for="airport_code" class="form-label">Airport Code:</label>
+            <input oninput="checkDuplicatesAirportCode('airport_code_val','include/flight_dispatcher_add_new_airport.inc.php','airport_code_',this.value)" 
+                required class="form-control" type="text" name="airport_code" id="airport_code" placeholder="Enter Airport Code">
+            <div id="airport_code_val" class="m-3"></div>
           </div>
 
           <div class="col-sm-8">
-            <label for="plane" class="form-label">Airport Name</label>
-            <input required class="form-control" type="text" name="airport_name" placeholder="Enter Airport Name">
+            <label for="airport_name" class="form-label">Airport Name:</label>
+            <input required class="form-control" type="text" id="airport_name" name="airport_name" placeholder="Enter Airport Name">
+            <div id="airport_name_val" class="m-3"></div>
           </div>
         </div>
 
@@ -347,24 +350,28 @@ $view = new Flight_Dispatcher_View();
           </div>
 
           <div class="col-sm-4">
-            <label for="destination" class="form-label">Province/State:</label>
-            <input required class="form-control" type="text" name="province" placeholder=" Enter Province or State">
+            <label for="province" class="form-label">Province/State:</label>
+            <input required class="form-control" type="text" name="province"  id="province" placeholder=" Enter Province or State">
+            <div id="province_val" class="m-3"></div>
           </div>
 
           <div class="col-sm-4">
-            <label for="destination" class="form-label">City:</label>
-            <input required class="form-control" type="text" name="city" placeholder="Enter City">
+            <label for="city" class="form-label">City:</label>
+            <input required class="form-control" type="text" id="city" name="city" placeholder="Enter City">
+            <div id="city_val" class="m-3"></div>
           </div>
 
         </div>
 
         <div class="btn-group">
-          <button class="btn btn-primary buttons" type="submit" name='create'>Add</button>
+          <button onclick="checkAll();" class="btn btn-primary buttons" type="button" name='create'>Add</button>
         </div>
       </form>
     </div>
 
   </div>
+
+  <script src="js/flight_dispatcher_add_new_airport.js"></script>
 
 </body>
 

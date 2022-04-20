@@ -23,3 +23,6 @@ a.button {
 #destination_label{
     color: aliceblue;
 }
+.button{
+    width: 150px;
+}

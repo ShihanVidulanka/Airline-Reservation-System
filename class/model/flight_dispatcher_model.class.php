@@ -118,7 +118,7 @@ class Flight_Dispatcher_Model extends Dbh
     //return aiport details usning airport code
     protected function getAirportDetailsFromModel($airport_code)
     {
-        $query = "SELECT * FROM airport where airport_code='{$airport_code}' ";
+        $query = "SELECT * FROM airport where airport_code='{$airport_code}'";
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
         $details = $stmt->fetchAll(PDO::FETCH_ASSOC);
