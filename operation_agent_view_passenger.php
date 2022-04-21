@@ -163,7 +163,9 @@ if(isset($_SESSION['flight_id'])){
                 echo '<td>' . $value['passport_number'] . "</td>";
                 echo '<td>' . $value['booking_time'] . "</td>";
                 echo '<td>' . $value['dob'] . "</td>";
-                echo "<td><a class=\"btn btn-sm btn-info\" href=\"include/operation_agent_remove_passenger.inc.php?passenger_id={$value['passenger_id']}\">DELETE</a></td>";
+                $y=$value['passenger_id'];
+                echo "<td><a class=\"btn btn-sm btn-info\" onclick=\"ConfirmDelete()\" href=\"include/operation_agent_remove_passenger.inc.php?passenger_id={$value['passenger_id']}&onclick={ConfirmDelete()}\">DELETE</a></td>";
+            
                 echo '</tr>';
                 
             }?>
@@ -191,6 +193,7 @@ if(isset($_SESSION['flight_id'])){
                     
                 </tr>
             </tbody>
+            
         </table>
         </div>
         </div>
@@ -218,8 +221,10 @@ if(isset($_SESSION['flight_id'])){
         <p>Are you sure you want to delete your account?</p>
 
         <div class="clearfix">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <button type="button" class="deletebtn">Delete</button>
+            <?php echo "<td><a class=\"btn btn-sm btn-info\" href=\"include/operation_agent_remove_passenger.inc.php?passenger_id={$value['passenger_id']}\">DELETE</a></td>";
+                ?>
+            <button type="button" class="cancelbtn"name='cancel'>Cancel</button>
+            <button type="button" class="deletebtn"name='delete'>Delete</button>
         </div>
         </div>
     </form>
@@ -241,5 +246,16 @@ window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
+}
+
+
+function ConfirmDelete()
+{
+  var x = confirm("Are you sure you want to delete?");
+  if (x)
+    
+    return true;
+  else
+    return false;
 }
 </script>
