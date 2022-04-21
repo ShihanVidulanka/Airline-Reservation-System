@@ -83,7 +83,7 @@ if (!isset($_SESSION['ID'])) {
         </button>
         <div class="collapse" id="home-collapse">
             <div class="container ">
-                <form>
+                <form method="post" action="include/airline_Administrator_generate_report.inc.php">
 
                     <legend>Given a flight no, all passengers travelling in it (next immediate flight) below age 18,above age 18</legend>
                     <div class="mb-3">

@@ -7,7 +7,7 @@ class Operation_Agent_Model extends Dbh{
     function getPassengers_details($flight_id){
         $query = "SELECT flight_id,booking.passenger_id,booking.booking_time,registered_passenger.first_name,registered_passenger.last_name,
         registered_passenger.passport_number,registered_passenger.dob
-        FROM booking JOIN registered_passenger where booking.passenger_id=registered_passenger.passenger_id  AND flight_id='{$flight_id}'";
+        FROM booking JOIN registered_passenger where booking.passenger_id=registered_passenger.passenger_id  AND flight_id='{$flight_id}' and state=0";
         
         $stmt=$this->connect()->prepare($query);
         
@@ -19,7 +19,7 @@ class Operation_Agent_Model extends Dbh{
     function getGuestsDetails($flight_id){
         $query = "SELECT flight_id,booking.passenger_id,booking.booking_time,guest.first_name,guest.last_name,
         guest.passport_number,guest.dob
-        FROM booking JOIN guest where booking.passenger_id=guest.passenger_id  AND flight_id='{$flight_id}'";
+        FROM booking JOIN guest where booking.passenger_id=guest.passenger_id  AND flight_id='{$flight_id}'and state=0";
         
         $stmt=$this->connect()->prepare($query);
         

@@ -73,7 +73,10 @@ if(isset($_SESSION['flight_id'])){
             </div>
         </div>
     </nav>
-   
+   <div>
+       <br>
+       <a href="operation_agent_view_passengers_flight.php" class="btn btn-sm btn-danger">BACK</a>
+   </div>  
     <div class="container xxl">
         <div class="col-sm-12" style="align-self: center;align-items:center">
             <h1>Passengers of Flight No <?php echo $_SESSION['flight_id'];?></h1>
@@ -164,34 +167,29 @@ if(isset($_SESSION['flight_id'])){
                 echo '<td>' . $value['booking_time'] . "</td>";
                 echo '<td>' . $value['dob'] . "</td>";
                 $y=$value['passenger_id'];
-                echo "<td><a class=\"btn btn-sm btn-info\" onclick=\"ConfirmDelete()\" href=\"include/operation_agent_remove_passenger.inc.php?passenger_id={$value['passenger_id']}&onclick={ConfirmDelete()}\">DELETE</a></td>";
-            
+                //echo "<td><a class=\"btn btn-sm btn-info\" onclick=\"ConfirmDelete()\" href=\"include/operation_agent_remove_passenger.inc.php?passenger_id={$value['passenger_id']}&onclick={ConfirmDelete()}\">DELETE</a></td>";
+                echo "<td><a class=\"btn btn-sm btn-danger\" onClick=\"javascript: return confirm('Please confirm deletion');\" href=\"include/operation_agent_remove_passenger.inc.php?id={$value['passenger_id']}\">remove</a></td><tr>"; //use double quotes for js inside php!
                 echo '</tr>';
                 
             }?>
                 <tr><th scope="row">Guests</th></tr>
-                <tr>
-                <th scope="row">1</th>
-                <td>Sahan</td>
-                <td>Caldera</td>
-                <td>@mdo</td>
-                <td>colombo</td>
-                <td><button type="button" class="btn btn-info">View</button></td>
-                <td><button type="button" class="btn btn-danger"onclick="document.getElementById('id01').style.display='block'">Delete</button></td>
+                <?php
+            foreach ($guest_passengers_details_of_flight  as $value) {
+                echo '<tr>';
+                // echo '<td>' . $value['flight_id'] . "</td>";
+                echo '<td>' . $value['passenger_id'] . "</td>";
                 
-                </tr>
+                echo '<td>' . $value['first_name'] . "</td>";
+                echo '<td>' . $value['last_name'] . "</td>";
+                echo '<td>' . $value['passport_number'] . "</td>";
+                echo '<td>' . $value['booking_time'] . "</td>";
+                echo '<td>' . $value['dob'] . "</td>";
+                $y=$value['passenger_id'];
+                //echo "<td><a class=\"btn btn-sm btn-info\" onclick=\"ConfirmDelete()\" href=\"include/operation_agent_remove_passenger.inc.php?passenger_id={$value['passenger_id']}&onclick={ConfirmDelete()}\">DELETE</a></td>";
+                echo "<td><a class=\"btn btn-sm btn-danger\" onClick=\"javascript: return confirm('Please confirm deletion');\" href=\"include/operation_agent_remove_passenger.inc.php?id={$value['passenger_id']}\">remove</a></td><tr>"; //use double quotes for js inside php!
+                echo '</tr>';
                 
-                <tr>
-                <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>theek</td>
-                    <td>@twitter</td>
-                    <td>india</td>
-                    <td><button type="button" class="btn btn-info">View</button></td>
-
-                    <td><button type="button" class="btn btn-danger"onclick="document.getElementById('id01').style.display='block'">Delete</button></td>
-                    
-                </tr>
+            }?>
             </tbody>
             
         </table>

@@ -43,7 +43,9 @@ class Operation_Agent_Controller extends Operation_Agent_Model{
         return $details;
     }
     
-    
-
+    public function removePassenger($passenger_id){
+        $this->remove_passenger($passenger_id);
+        return;
+    }
 }
 ?>

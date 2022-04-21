@@ -114,11 +114,7 @@ $departure_flight_details=$operation_agent_view->departureFlightDetails();
                             <th scope="col">View </th>
                             </tr>
                         </thead>
-                        <?php foreach ($departure_flight_details as $value){?>
-
-
-
-
+                        <!-- <?php foreach ($departure_flight_details as $value){?>
                         <tbody>
                             <tr>
                                 
@@ -134,12 +130,13 @@ $departure_flight_details=$operation_agent_view->departureFlightDetails();
                             </form>
                             </tr>
                         </tbody>
-
-
-                        <?php }?>
-                        <tbody>
+                        <?php }?> -->
+                        
+                        
                         <?php
                         foreach ($departure_flight_details  as $value) {
+                            '<tbody>';
+                            
                             echo '<tr>';
                             echo '<td>' . $value['id'] . "</td>";
                             echo '<td>' . $value['origin'] . "</td>";
@@ -148,9 +145,11 @@ $departure_flight_details=$operation_agent_view->departureFlightDetails();
                             echo '<td>' . $value['departure_date'] . "</td>";
                             echo "<td><a class=\"btn btn-sm btn-info\" href=\"include/operation_agent_view_passengers_flight.inc.php?id_o={$value['id']}&origin={$value['origin']}&destination={$value['destination']}&departure_time={$value['departure_time']}&departure_date={$value['departure_date']}\">view</a></td>";
                             echo '</tr>';
+                            '</tbody>';
                         }
                         ?>
-                        </tbody>
+                    
+                        
 
 
                     </table>

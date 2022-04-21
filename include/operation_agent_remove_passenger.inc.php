@@ -13,7 +13,13 @@ if (isset($_GET['passenger_id'])){
     //  header("Location: ../operation_agent_view_passenger.php");
     // return;
 }
-if (isset($_GET['cancel'])){
+if (isset($_GET['id'])){
+    $controller =  new Operation_Agent_Controller();
+    $passenger_id = htmlentities($_GET['id']);
+    echo $passenger_id;
+    $controller->removePassenger($passenger_id);
+    header("Location: ../operation_agent_view_passenger.php");
+    return;
     echo "ddddddddddddddddddddddddd";
 }
 
