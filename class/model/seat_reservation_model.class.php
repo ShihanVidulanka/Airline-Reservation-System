@@ -83,6 +83,40 @@ class Seat_Reservation_Model extends Dbh{
         }
         return $reserved;
     }
+    public function getBookedFlightDestinations($passenger_id){
+        $pdo = $this->connect();
+        $query = "SELECT af.id, af.airport_code,af.name,af.country, b.passenger_id,b.state
+                    FROM booking AS b INNER JOIN 
+                    (SELECT f.id, a.airport_code,a.name,a.country FROM airport AS a INNER JOIN flight AS f ON a.airport_code = f.destination) 
+                    AS af ON af.id = b.flight_id 
+                    WHERE passenger_id=:passenger_id AND b.state=0";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute(
+            array(
+                ':passenger_id'=>$passenger_id
+            )
+            );
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getBookedFlightDetails($passenger_id){
+        $pdo = $this->connect();
+        $query="SELECT CONCAT(a.tail_no,'-',a.model) AS airplane,bf.* 
+                    FROM airplane AS a 
+                    INNER JOIN 
+                    (SELECT b.passenger_id, f.origin, f.destination, b.seat_type, b.state, b.ticket_price, f.airplane_id, f.departure_time, f.departure_date 
+                    FROM booking as b INNER JOIN flight as f ON b.flight_id = f.id WHERE b.state=0 AND b.passenger_id=:passenger_id) 
+                    as bf ON a.id = bf.airplane_id";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute(
+            array(
+                ':passenger_id'=>$passenger_id
+            )
+            );
+        $results=$stmt->fetchAll();
+        return $results;
+    }
 }
 
 // $a = new Seat_Reservation_Model();

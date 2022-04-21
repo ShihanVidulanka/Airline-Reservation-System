@@ -4,6 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 
 class Flight_View extends Flight_Model{
 
+
     public function getDestinations(){
         $airport_view = new Airport_View();
         return $airport_view->getAirportsFromModel();

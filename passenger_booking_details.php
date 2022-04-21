@@ -1,4 +1,23 @@
+<?php
+session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/additional.inc.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
 
+$seat_reservation_view = new Seat_Reservation_View();
+// print_array($_SESSION);
+$destinations = $seat_reservation_view->getBookedFlightDestinationsFromModel($_SESSION['passenger_id']);
+// print_array($destinations);
+$tcontent = $seat_reservation_view->getBookedFlightDetailsFromModel($_SESSION['passenger_id']);
+// print_array($tcontent);
+
+if (isset($_POST['submit'])) {
+    $flights = $flight_view->getFlightDetailsFromModel($_POST['destination']);
+}
+$bookingError = "";
+if (isset($_GET['error'])) {
+    $bookingError = $_GET['error'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +28,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="css/flight_details.css">
+    <!-- <link rel="stylesheet" href="css/flight_details.css"> -->
     <title>Booking Details</title>
 </head>
 
@@ -45,8 +64,16 @@
 
         <div class="search">
             <form class="d-flex mb-3">
-                <input class="form-control me-2" type="text" placeholder="Search Your Flight" />
-                <button class="btn btn-primary" type="button">Search</button>
+            <label for="destination" id="destination_label">Select your destination:</label>
+        <select name="destination" id="destination" class="form-control me-2">
+          <option value="all">All</option>
+        <?php
+foreach ($destinations as $destination) {
+  $option=$destination['airport_code'].'-'.$destination['name'].'-'.$destination['country'];
+  echo '<option value="'.$destination['airport_code'].'">'.$option.'</option>';
+}
+?>
+        </select>
             </form>
         </div>
 
@@ -57,84 +84,39 @@
                         <th>Air Plane NO</th>
                         <th>Origine</th>
                         <th>Destination</th>
+                        <th>Class</th>
                         <th>Price</th>
                         <th>Date</th>
                         <th>Time</th>
                         <th>Book</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>A310</td>
-                        <td>U.S.A.</td>
-                        <td>U.K.</td>
-                        <td>$100</td>
-                        <td>13-02-2022</td>
-                        <td>08:00 a.m.</td>
-                        <td><button class="btn btn-danger">Cancel this Flight</button></td>
-                    </tr>
-                    <tr>
-                        <td>B310</td>
-                        <td>Japan</td>
-                        <td>U.K.</td>
-                        <td>$100</td>
-                        <td>13-02-2022</td>
-                        <td>08:00 a.m.</td>
-                        <td><button class="btn btn-danger">Cancel this Flight</button></td>
-                    </tr>
-                    <tr>
-                        <td>C310</td>
-                        <td>China</td>
-                        <td>U.K.</td>
-                        <td>$100</td>
-                        <td>13-02-2022</td>
-                        <td>08:00 a.m.</td>
-                        <td><button class="btn btn-danger">Cancel this Flight</button></td>
-                    </tr>
-                    <tr>
-                        <td>D310</td>
-                        <td>Japan</td>
-                        <td>U.K.</td>
-                        <td>$100</td>
-                        <td>13-02-2022</td>
-                        <td>08:00 a.m.</td>
-                        <td><button class="btn btn-danger">Cancel this Flight</button></td>
-                    </tr>
-                    <tr>
-                        <td>D320</td>
-                        <td>Japan</td>
-                        <td>U.K.</td>
-                        <td>$400</td>
-                        <td>14-02-2022</td>
-                        <td>08:00 a.m.</td>
-                        <td><button class="btn btn-danger">Cancel this Flight</button></td>
-                    </tr>
-                    <tr>
-                        <td>D330</td>
-                        <td>India</td>
-                        <td>U.K.</td>
-                        <td>$200</td>
-                        <td>13-02-2022</td>
-                        <td>08:00 a.m.</td>
-                        <td><button class="btn btn-danger">Cancel this Flight</button></td>
-                    </tr>
-                    <tr>
-                        <td>D310</td>
-                        <td>New Zealand</td>
-                        <td>U.K.</td>
-                        <td>$400</td>
-                        <td>13-02-2022</td>
-                        <td>08:00 a.m.</td>
-                        <td><button class="btn btn-danger">Cancel this Flight</button></td>
-                    </tr>
-
-
+                <tbody id="tablebody">
+                    <?php 
+                        foreach ($tcontent as $flight) {
+                            echo "
+                                <tr>
+                                    <td>{$flight['airplane']}</td>
+                                   
+                                    <td>{$flight['origin']}</td>
+                                    <td>{$flight['destination']}</td>
+                                    <td>{$flight['seat_type']}</td>
+                                    <td>{$flight['ticket_price']}</td>
+                                    <td>{$flight['departure_date']}</td>
+                                    <td>{$flight['departure_time']}</td>
+                                    <td><button class='btn btn-danger'>Cancel Booking</button></td>
+                                </tr>
+                            
+                            ";
+                        }
+                    ?>
                 </tbody>
             </table>
 
         </div>
 
     </div>
+    <script src="js/additional.js"></script>
 </body>
 
 </html>
