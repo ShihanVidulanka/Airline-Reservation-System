@@ -22,6 +22,13 @@ class Seat_Reservation_View extends Seat_Reservation_Model{
         $reserved = $this->getReservedSeats(remove_unnessaries($flight_id));
         return $reserved;
     }
+    public function getBookedFlightDestinationsFromModel($passenger_id){
+        return $this->getBookedFlightDestinations(remove_unnessaries($passenger_id));
+    }
+
+    public function getBookedFlightDetailsFromModel($passenger_id){
+        return $this->getBookedFlightDetails(remove_unnessaries($passenger_id));
+    }
 }
 // $seat_reservation_view = new Seat_Reservation_View();
-// print_array($seat_reservation_view->getReservedSeats(1));
+// print_array($seat_reservation_view->getBookedFlightDetailsFromModel(1));

@@ -11,3 +11,6 @@ table{
 .opt{
     float: right;
 }
+#destination_label{
+    color: aliceblue;
+}
