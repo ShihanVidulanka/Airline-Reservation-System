@@ -45,7 +45,18 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
     public function addNewAirplane($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_type){
         $this->addNewAirplaneFromModel($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_type);
     }
-    
+
+    public function get_no_passenger_by_flightno($flight_no){
+
+        return $this->getNofPassengerByFlightNo($flight_no);
+    }
+    public function get_no_passenger_by_daterange_destination($destination,$starting_date,$ending_date){
+        return $this->getNoPassengerByDaterangeDestination($destination,$starting_date,$ending_date);
+    }
+    public function get_no_passenger_by_daterange($starting_date,$ending_date){
+        $no_of_passenger_by_type=$this->getNoPassengerByDaterange($starting_date,$ending_date);
+        return $no_of_passenger_by_type;
+    }
 
 }
 

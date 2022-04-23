@@ -88,11 +88,11 @@ if (!isset($_SESSION['ID'])) {
                     <legend>Given a flight no, all passengers travelling in it (next immediate flight) below age 18,above age 18</legend>
                     <div class="mb-3">
                         <label for="Flight no" class="form-label">Flight no</label>
-                        <input type="text" id="FlightNumber" class="form-control" placeholder="Flight no">
+                        <input required type="number" id="FlightNumber" name='FlightNumber1'class="form-control" placeholder="Flight no"value=''min=1 max=10000>
                     </div>
                     
                     <br>
-                    <button type="submit" class="btn btn-primary">Create Report</button>
+                    <button type="submit"name='get_no_passenger_by_flightno' class="btn btn-primary">Create Report</button>
                     
                 </form>
                 <br>
@@ -106,23 +106,23 @@ if (!isset($_SESSION['ID'])) {
         </button>
         <div class="collapse" id="dashboard-collapse">
             <div class="container ">
-                <form>
+                <form method="post" action="include/airline_administrator_generate_report.inc.php">
 
                     <legend>Given a date range, number of passengers travelling to a given destination</legend>
                     <div class="mb-3">
                         <label for="destination" class="form-label">Destination</label>
-                        <input type="text" id="Destination" class="form-control" placeholder="destination">
+                        <input required type="text" id="Destination"name="destination2" class="form-control" placeholder="destination">
                     </div>
                     <div class="mb-6">
                         <label for="StartingDate" class="form-label">Starting Date</label><br>
-                        <input type="date" placeholder="starting date">
+                        <input required type="date" id="startingdate2"name="startingdate2"placeholder="starting date">
                     </div>
                     <div class="mb-6">
                         <label for="EndiningDate" class="form-label">Ending Date</label><br>
-                        <input type="date" placeholder="Ending date">
+                        <input required type="date"id='endingdate2' name="endingdate2" placeholder="Ending date" >
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Create Report</button>
+                    <button type="submit"name='get_no_passenger_by_daterange_destination' class="btn btn-primary">Create Report</button>
 
                 </form>
                 <br>
@@ -136,20 +136,20 @@ if (!isset($_SESSION['ID'])) {
         </button>
         <div class="collapse" id="orders-collapse">
             <div class="container ">
-                <form>
+                <form method="post" action="include/airline_administrator_generate_report.inc.php">
 
                     <legend>Given a date range, number of bookings by each passenger type</legend>
                     
                     <div class="mb-6">
                         <label for="StartingDate" class="form-label">Starting Date</label><br>
-                        <input type="date" placeholder="starting date">
+                        <input required type="date" id='startingdate3'name='startingdate3'placeholder="starting date">
                     </div>
                     <div class="mb-6">
                         <label for="EndiningDate" class="form-label">Ending Date</label><br>
-                        <input type="date" placeholder="Ending date">
+                        <input required type="date" id='endingdate3' name='endingdate3'placeholder="Ending date">
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Create Report</button>
+                    <button type="submit" name='get_no_passenger_by_daterange' class="btn btn-primary">Create Report</button>
 
                 </form>
             </div>
@@ -167,11 +167,11 @@ if (!isset($_SESSION['ID'])) {
                     <legend>Given origin and destination, all past flights, states, passenger counts data</legend>
                     <div class="mb-3">
                         <label for="origin" class="form-label">Origin</label>
-                        <input type="text" id="Origin" class="form-control" placeholder="origin">
+                        <input required type="text" id="Origin" class="form-control" placeholder="origin">
                     </div>
                     <div class="mb-3">
                         <label for="destination" class="form-label">Destination</label>
-                        <input type="text" id="Destination" class="form-control" placeholder="destination">
+                        <input required type="text" id="Destination" class="form-control" placeholder="destination">
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Create Report</button>
@@ -192,15 +192,15 @@ if (!isset($_SESSION['ID'])) {
                     <legend>Total revenue generated by each Aircraft type</legend>
                     <div class="mb-3">
                         <label for="aircraft" class="form-label">Aircraft</label>
-                        <input type="text" id="aircraft" class="form-control" placeholder="aircraft">
+                        <input required type="text" id="aircraft" class="form-control" placeholder="aircraft">
                     </div>
                     <div class="mb-6">
                         <label for="StartingDate" class="form-label">Starting Date</label><br>
-                        <input type="date" placeholder="starting date">
+                        <input required type="date" placeholder="starting date">
                     </div>
                     <div class="mb-6">
                         <label for="EndiningDate" class="form-label">Ending Date</label><br>
-                        <input type="date" placeholder="Ending date">
+                        <input required type="date" placeholder="Ending date">
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Create Report</button>
@@ -217,3 +217,16 @@ if (!isset($_SESSION['ID'])) {
 </body>
 
 </html>
+
+
+
+
+<script type="text/javascript">
+    document.getElementById('startingdate2').onchange = function () {
+        document.getElementById('endingdate2').setAttribute('min',  this.value);
+   };
+
+   document.getElementById('startingdate3').onchange = function () {
+        document.getElementById('endingdate3').setAttribute('min',  this.value);
+   };
+</script>

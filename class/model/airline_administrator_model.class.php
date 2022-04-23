@@ -110,6 +110,106 @@ class Airline_Administrator_Model extends Dbh{
             print_r($stmt->errorInfo());
         }
     }
+    //get no of passengers by given flight no----->generate reports
+    public function getNofPassengerByFlightNo($flight_no){
+        $query="SELECT *
+        FROM booking join registered_passenger on booking.passenger_id=registered_passenger.passenger_id 
+        where flight_id=$flight_no AND
+        TIMESTAMPDIFF(year, dob, DATE(booking_time))>=18 AND
+        state=0
+        ";
+        $stmt=$this->connect()->prepare($query);
+        $stmt->execute();
+        $array0=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        $registered_above_18=count($array0);
+        // echo"\n";
+        // print(count($array0));
+
+
+        $query1="SELECT *
+        FROM booking join registered_passenger on booking.passenger_id=registered_passenger.passenger_id 
+        where flight_id=$flight_no AND
+        TIMESTAMPDIFF(year, dob, DATE(booking_time))<18 AND
+        state=0
+
+        ";
+        $stmt1=$this->connect()->prepare($query1);
+        $stmt1->execute();
+        $array1=$stmt1->fetchAll(PDO::FETCH_ASSOC);
+        
+        $registered_below_18=count($array1);
+        #print_array(count($array1));
+        
+
+
+
+        $query2="SELECT *
+        FROM booking join guest on booking.passenger_id=guest.passenger_id 
+        where flight_id=$flight_no AND
+        TIMESTAMPDIFF(year, dob, DATE(booking_time))>=18 and
+        state=0
+        ";
+        $stmt2=$this->connect()->prepare($query2);
+        $stmt2->execute();
+        $array2=$stmt2->fetchAll(PDO::FETCH_ASSOC);
+        
+        $guest_above_18=count($array2);
+        #print_array(count($array2));
+        
+
+        $query3="SELECT *
+        FROM booking join guest on booking.passenger_id=guest.passenger_id 
+        where flight_id=$flight_no AND
+        TIMESTAMPDIFF(year, dob, DATE(booking_time))<18 and
+        state=0
+        ";
+        $stmt3=$this->connect()->prepare($query3);
+        $stmt3->execute();
+        $array3=$stmt3->fetchAll(PDO::FETCH_ASSOC);
+        echo"\n";
+        $guest_below_18=count($array3);
+        #print_array(count($array3));
+
+        $noofpassengers = array("registered_above_18"=>$registered_above_18,
+                                "registered_below_18"=>$registered_below_18,
+                                "guest_above_18"=>$guest_above_18,
+                                "guest_below_18"=>$guest_below_18);
+         return $noofpassengers;
+
+    }
+    //get no of passenger by destination and time range----->generate reports
+    public function getNoPassengerByDaterangeDestination($destination,$starting_date,$ending_date){
+       
+       $query="SELECT * from booking join flight where booking.flight_id=flight.id 
+       and  booking.state=0 and flight.state=0 and departure_date>='$starting_date' and departure_date<='$ending_date'and destination='$destination'";
+       $stmt=$this->connect()->prepare($query);
+       $stmt->execute();
+       $passenger_list=$stmt->fetchAll(PDO::FETCH_ASSOC);
+       print_array($passenger_list);
+       return $passenger_list;
+
+    }
+     //get no of passenger by  time range----->generate reports
+     public function getNoPassengerByDaterange($starting_date,$ending_date){
+         $query1="SELECT category,count(user_id) FROM booking join registered_passenger where booking.passenger_id=registered_passenger.passenger_id 
+         and state=0 and date(booking_time)>='$starting_date' and date(booking_time)<='$ending_date'group by category order by category ";
+         $stmt1=$this->connect()->prepare($query1);
+         $stmt1->execute();
+         $passenger_list=$stmt1->fetchAll(PDO::FETCH_ASSOC);
+         
+
+
+         $query2="SELECT count(booking.passenger_id) as no_of_guest FROM booking join guest where booking.passenger_id=guest.passenger_id 
+         and state=0 and date(booking_time)>='$starting_date' and date(booking_time)<='$ending_date'";
+         $stmt2=$this->connect()->prepare($query2);
+         $stmt2->execute();
+         $guest_list=$stmt2->fetchAll(PDO::FETCH_ASSOC);
+         
+         $x=array_merge($passenger_list,$guest_list);
+         return $x;
+         
+     }
+
 }
 // $airline_administrator_model = new Airline_Administrator_Model();
 // $details = array(
