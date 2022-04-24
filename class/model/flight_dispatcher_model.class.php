@@ -173,4 +173,9 @@ class Flight_Dispatcher_Model extends Dbh
         $code = $stmt->fetch(PDO::FETCH_ASSOC)['airport_code'];
         return $code;
     }
+
+    protected function addflight($arr){
+        
+    } 
+
 }
