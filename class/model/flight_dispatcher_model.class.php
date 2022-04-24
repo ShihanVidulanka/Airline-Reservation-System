@@ -174,6 +174,7 @@ class Flight_Dispatcher_Model extends Dbh
         return $code;
     }
 
+    //get free planes on given time period from given airport which are already assigned to flights 
     protected function getFreeplanes($arr){
         $query = "SELECT flight.id,flight.origin,flight.destination,flight.airplane_id,flight.departure_date,flight.departure_time,flight.flight_time,flight.state,airplane.*,DATE_ADD(CONCAT_WS(' ', flight.departure_date,flight.departure_time),INTERVAL flight.flight_time MINUTE) AS arrival_time FROM flight LEFT OUTER JOIN airplane ON flight.airplane_id= airplane.id WHERE DATE_ADD(CONCAT_WS(' ', flight.departure_date,flight.departure_time),INTERVAL flight.flight_time MINUTE)<{$arr['departure_datetime']} AND destination={$arr['airport']} AND airplane_id NOT IN (SELECT airplane_id FROM flight where departure_time>={$arr['departure_time']} AND departure_date >= {$arr['departure_date']} AND origin = {$arr['airport']});";
         $stmt = $this->connect()->prepare($query);
@@ -182,12 +183,21 @@ class Flight_Dispatcher_Model extends Dbh
         return $available_plane_details;
     } 
 
+    // get planes which are not assign to flights
     protected function getNewPlanes(){
         $query = "SELECT * FROM airplane WHERE airplane.id NOT IN (SELECT DISTINCT airplane_id FROM flight);";
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
         $new_planes = $stmt->fetchALL(PDO::FETCH_ASSOC);
         return $new_planes;
+    }
+    
+    //insert the new flight into database
+    protected function addNewPlanes($id, $origin, $destination, $airplane_id, $business_price, $economy_price, $platinum_price, $departure_time, $departure_date, $flight_time, $state){
+        $query = "INSERT INTO `flight` (`id`, `origin`, `destination`, `airplane_id`, `business_price`, `economy_price`, `platinum_price`, `departure_time`, `departure_date`, `flight_time`, `state`) VALUES ('{$id}', '{$origin}', '{$destination}', '{$airplane_id}', '{$business_price}', '{$economy_price}', '{$platinum_price}', '{$departure_time}', '{$departure_date}', '{$flight_time}', '{$state}')";
+        echo $query;
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
     }
 
 }
