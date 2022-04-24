@@ -72,24 +72,13 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
     <div class="wrapper p-3">
       <h1 id="heading" class="mb-4">Add New Flight</h1>
       <form action="include/flight_dispatcher_add_new_flight.inc.php" method="POST">
+
+
         <div class="row mb-3">
-
-          <div class="col-sm-4">
-            <label class="form-label">Airplane Tail No.</label>
-            <select required class="form-control" name="tail_no" id="">
-              <option value="" selected hidden disabled>-Select the Airplane Tail No-</option>
-              <?php
-              foreach ($tail_nos as $tail_no) {
-                echo "<option value='{$tail_no['tail_no']}'>" . $tail_no['tail_no'] . "</option>";
-              }
-              ?>
-            </select>
-          </div>
-
-          <div class="col-sm-8">
+          <div class="col-sm-12">
             <label class="form-label">Destination</label>
-            <select required class="form-control" name="destination">
-              <option value="" selected hidden disabled>-Select the Destination-</option>
+            <select required class="form-control" name="destination" id="destination">
+              <option value="" selected hidden disabled>----------Select the Destination-----------</option>
               <?php
               foreach ($destinations as $destination) {
                 echo "<option value='{$destination['name']}'>" . $destination['name'] . "</option>";
@@ -98,6 +87,40 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
             </select>
           </div>
 
+        </div>
+
+        <div class="row mb-3">
+
+          <div class="col-sm-6">
+            <label for="date" class="form-label">Departure Date/Time</label>
+            <input required class="form-control" type="datetime-local" name="departure_date_time" id="departure_date_time" placeholder="Enter the Date/Time">
+          </div>
+
+          <div class="col-sm-6">
+            <label for="telephone" class="form-label">Apprx. Arrival Date/Time</label>
+            <input required class="form-control" type="datetime-local" name="arrival_date_time" id="arrival_date_time" placeholder="Enter the Time/Date">
+          </div>
+
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-sm-6">
+            <label class="form-label">Airplane Tail No.</label>
+            
+            <select oninput="validateTailNo('tail_no_val', 'include/flight_dispatcher_add_new_flight.inc.php', 'tail_no_', this.value)" 
+            required class="form-control" name="tail_no" id="tail_no">
+
+              <option value="" selected hidden disabled>--Select the Airplane Tail No--</option>
+              <?php
+              foreach ($tail_nos as $tail_no) {
+                echo "<option value='{$tail_no['tail_no']}'>" . $tail_no['tail_no'] . "</option>";
+              }
+              ?>
+            </select>
+            <div id="tail_no_val" class="m-3"></div>
+          </div>
+
+          <div class="col-sm-8"></div>
         </div>
 
         <div class="row mb-3">
@@ -119,22 +142,6 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
 
         </div>
 
-        <div class="row mb-3">
-
-          <div class="col-sm-6">
-            <label for="date" class="form-label">Departure Date/Time</label>
-            <input required class="form-control" type="datetime-local" name="departure_date_time" placeholder="Enter the Date/Time">
-          </div>
-
-          <div class="col-sm-6">
-            <label for="telephone" class="form-label">Apprx. Arrival Date/Time</label>
-            <input required class="form-control" type="datetime-local" name="arrival_date_time" placeholder="Enter the Time/Date">
-          </div>
-
-        </div>
-
-
-
         <div class="btn-group">
           <button class="btn btn-primary buttons" name='submit' type="submit">Add</button>
         </div>
@@ -142,7 +149,7 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
     </div>
 
   </div>
-
+  <script src="js/flight_dispatcher_add_new_flight.js"></script>
 </body>
 
 </html>
