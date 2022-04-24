@@ -58,6 +58,29 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
         return $no_of_passenger_by_type;
     }
 
+    public function getCurrentDate()
+    {
+        date_default_timezone_set('Asia/Colombo');
+        $date = date('y-m-d');
+        return $date;
+    }
+    public function getCurrentTime()
+    {
+        date_default_timezone_set('Asia/Colombo');
+        $time = date('H:i:s');
+        return $time;
+    }
+    public function get_flight_details_by_origin_destination($origin,$destination)
+    {
+        $current_date=$this->getCurrentDate();
+        $current_time=$this->getCurrentTime();
+        return $this->getFlightDeailsByOriginDestination($origin,$destination,$current_date,$current_time);
+    }
+    public function get_revenue_by_aircraft($starting_date,$ending_date){
+        
+        return $this->getRevenueByAircraft($starting_date,$ending_date);
+    }
+
 }
 
 // class CreateOperationsAgent_Ccontroller extends CreateOperartionsAgent_Model{

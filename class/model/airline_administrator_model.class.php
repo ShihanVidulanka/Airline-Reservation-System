@@ -209,6 +209,26 @@ class Airline_Administrator_Model extends Dbh{
          return $x;
          
      }
+     public function getFlightDeailsByOriginDestination($origin,$destination,$current_date,$current_time){
+         $query="SELECT flight.id,destination,origin, count(booking.passenger_id) as no_of_passengerof_flight,flight.state ,flight.id as flight_state 
+         from flight join booking where flight.id=booking.flight_id and booking.state=0 and origin='$origin' and destination='$destination'and(departure_date<'$current_date' or(departure_date='$current_date' and departure_time<'$current_time'))
+          group by flight.id";
+           $stmt=$this->connect()->prepare($query);
+          $stmt->execute();
+          $details_of_flights=$stmt->fetchAll(PDO::FETCH_ASSOC);
+          print_array($details_of_flights);
+
+     }
+     public function getRevenueByAircraft($starting_date,$ending_date)
+     {
+        $query="SELECT sum(ticket_price),model FROM booking join flight on booking.flight_id=flight.id join airplane on airplane.id=flight.airplane_id
+        where
+        flight.state=0 and booking.state=0 and '$starting_date'<=date(booking_time) and '$ending_date'>=date(booking_time) group by model";
+        $stmt=$this->connect()->prepare($query);
+        $stmt->execute();
+        $renue_list=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        print_array($renue_list);
+     }
 
 }
 // $airline_administrator_model = new Airline_Administrator_Model();
