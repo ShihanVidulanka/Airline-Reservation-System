@@ -19,7 +19,7 @@ class Login_Controller extends Login_Model
         // check for all the errors using the helper functions
         if ($this->checkEmptyField() == false) {
             // error msg here
-            header("location: login.php?error=emptyfield");
+            header("location: ../login.php?error=emptyfield");
             exit();
         }
 
