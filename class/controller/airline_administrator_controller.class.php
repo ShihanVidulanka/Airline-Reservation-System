@@ -80,6 +80,15 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
         
         return $this->getRevenueByAircraft($starting_date,$ending_date);
     }
+    public function get_name_of_origins(){
+        return $this->getNameOfOrigins();
+    }
+    public function get_name_of_destinations(){
+        return $this->getNameOfDestination();
+    }
+    public function get_flight_id(){
+        return $this->getFlightId();
+    }
 
 }
 

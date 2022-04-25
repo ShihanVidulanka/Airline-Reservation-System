@@ -8,9 +8,10 @@ if (!isset($_SESSION['ID'])) {
     header("Location: login.php");
     return;
 }
-
-
-
+$controller=new Airline_Administrator_Controller();
+$origin=$controller->get_name_of_origins();
+$destination=$controller->get_name_of_destinations();
+$flight_id=$controller->get_flight_id();
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +89,15 @@ if (!isset($_SESSION['ID'])) {
                     <legend>Given a flight no, all passengers travelling in it (next immediate flight) below age 18,above age 18</legend>
                     <div class="mb-3">
                         <label for="Flight no" class="form-label">Flight no</label>
-                        <input required type="number" id="FlightNumber" name='FlightNumber1'class="form-control" placeholder="Flight no"value=''min=1 max=10000>
+                        <!-- <input required type="number" id="FlightNumber" name='FlightNumber1'class="form-control" placeholder="Flight no"value=''min=1 max=10000> -->
+                        <select  required id="FlightNumber"name="FlightNumber1" class="form-control" placeholder="Flight no">
+                            <option value=""selected hidden disabled style="text-align : center;align-items:center">=========select flight no=========</option>
+                        <?php
+                            foreach ($flight_id as $value) {
+                                echo "<option value='{$value['flight_id']}'>" . $value['flight_id'] . "</option>";
+                            }
+                        ?>
+                        </select>
                     </div>
                     
                     <br>
@@ -111,7 +120,14 @@ if (!isset($_SESSION['ID'])) {
                     <legend>Given a date range, number of passengers travelling to a given destination</legend>
                     <div class="mb-3">
                         <label for="destination" class="form-label">Destination</label>
-                        <input required type="text" id="Destination"name="destination2" class="form-control" placeholder="destination">
+                        <select  required id="Destination"name="destination2" class="form-control" placeholder="destination">
+                            <option value=""selected hidden disabled style="text-align : center;align-items:center">=========select destination=========</option>
+                        <?php
+                            foreach ($destination as $value) {
+                                echo "<option value='{$value['destination']}'>" . $value['destination'] . "</option>";
+                            }
+                        ?>
+                        </select>
                     </div>
                     <div class="mb-6">
                         <label for="StartingDate" class="form-label">Starting Date</label><br>
@@ -167,11 +183,27 @@ if (!isset($_SESSION['ID'])) {
                     <legend>Given origin and destination, all past flights, states, passenger counts data</legend>
                     <div class="mb-3">
                         <label for="origin" class="form-label">Origin</label>
-                        <input required type="text" id="origin4" name="origin4"class="form-control" placeholder="origin">
+                        
+                        <select  required id="origin4"name="origin4" class="form-control" placeholder="origin">
+                            <option value=""selected hidden disabled >=========select origin=========</option>
+                        <?php
+                            foreach ($origin as $value) {
+                                echo "<option value='{$value['origin']}'>" . $value['origin'] . "</option>";
+                            }
+                        ?>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="destination" class="form-label">Destination</label>
-                        <input required type="text" id="destination4"name="destination4" class="form-control" placeholder="destination">
+                        <!-- <input required type="text" id="destination4"name="destination4" class="form-control" placeholder="destination"> -->
+                        <select  required id="Destination4"name="destination4" class="form-control" placeholder="destination">
+                            <option value=""selected hidden disabled >=========select destination=========</option>
+                        <?php
+                            foreach ($destination as $value) {
+                                echo "<option value='{$value['destination']}'>" . $value['destination'] . "</option>";
+                            }
+                        ?>
+                        </select>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary"name="flight_details_by_origin_destination">Create Report</button>

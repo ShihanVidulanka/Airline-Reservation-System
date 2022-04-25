@@ -39,6 +39,8 @@ if(isset($_POST['get_no_passenger_by_daterange'])){
 if(isset($_POST['flight_details_by_origin_destination'])){
     $origin=$_POST['origin4'];
     $destination=$_POST['destination4'];
+    //header("Location: ../airline_administrator_view_generated_report.php");
+
     $flight_details=$controller->get_flight_details_by_origin_destination($origin,$destination);
 }
 if(isset($_POST['get_revenue_by_aircraft'])){
