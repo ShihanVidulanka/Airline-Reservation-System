@@ -69,27 +69,12 @@ if (!isset($_SESSION['ID'])) {
 
     <div class="container p-3">
         <FORM STYLE="padding-left:5px">
-            <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Airline Administrator<BR>
-            <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName2" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Flight Dispatcher<BR>
-            <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName3" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Operations Agent<BR>
+            <!-- <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Airline Administrator<BR> -->
+            <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Flight Dispatcher<BR>
+            <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName2" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Operations Agent<BR>
         </FORM>
 
         <DIV ID="GroupName1Div" STYLE="display:none;">
-            <div class="wrapper p-3">
-                <h1 id="heading" class="mb-4">Airline Administrators</h1>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Username</th>
-                            <th>Account No</th>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </DIV>
-        <DIV ID="GroupName2Div" STYLE="display:none;">
             <div class="wrapper p-3">
                 <h1 id="heading" class="mb-4">Flight Dispatchers</h1>
                 <table class="table table-striped">
@@ -98,14 +83,14 @@ if (!isset($_SESSION['ID'])) {
                             <th>ID</th>
                             <th>Username</th>
                             <th>Account No</th>
-                            <th>Name</th>
                             <th>Airport Code</th>
+                            <th>Telephone No(s)</th>
                         </tr>
                     </thead>
                 </table>
             </div>
         </DIV>
-        <DIV ID="GroupName3Div" STYLE="display:none;">
+        <DIV ID="GroupName2Div" STYLE="display:none;">
             <div class="wrapper p-3">
                 <h1 id="heading" class="mb-4">Operations Agents</h1>
                 <table class="table table-striped">
@@ -114,9 +99,8 @@ if (!isset($_SESSION['ID'])) {
                             <th>ID</th>
                             <th>Username</th>
                             <th>Account No</th>
-                            <th>Name</th>
                             <th>Airport Code</th>
-                            <th>State</th>
+                            <th>Telephone No(s)</th>
                         </tr>
                     </thead>
                 </table>

@@ -178,22 +178,22 @@ if (isset($_SESSION['errors'])) {
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="oa_email" class="form-label">Email</label>
                                 <input required class="form-control" type="text" name="oa_email" id="oa_email" placeholder="Enter Email:">
                                 <div Id="oa_email_val" class="m-3"></div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="airport_code" class="form-label">Airport Code</label>
                                 <input required class="form-control" type="text" name="oa_airport_code" id="oa_airport_code" placeholder="Enter Airport Code:">
                                 <div id="oa_airport_code_val" class="m-3"></div>
                             </div>
 
-                            <div class="col-sm-4">
+                            <!-- <div class="col-sm-4">
                                 <label for="state" class="form-label">State</label>
                                 <input required class="form-control" type="text" name="state" id="state" placeholder="Enter State:">
                                 <div id="state_val" class="m-3"></div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-6">
