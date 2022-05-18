@@ -2,6 +2,7 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/additional.inc.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
+
 session_start();
 
 if (!isset($_SESSION['ID'])) {
@@ -15,8 +16,8 @@ if (isset($_SESSION['errors'])) {
     unset($_SESSION['errors']);
 }
 // print_array($errors)
-$flight_view = new Flight_View();
-$destinations = $flight_view->getDestinations();
+$controller=new Airline_Administrator_Controller();
+$destinations = $controller->get_all_airports();
 ?>
 
 <!DOCTYPE html>
@@ -120,7 +121,18 @@ $destinations = $flight_view->getDestinations();
                             </div>
                             <div class="col-sm-6">
                                 <label for="plane" class="form-label">Airport Code</label>
-                                <input required class="form-control" type="text" name="fd_airport_code" id="fd_airport_code" placeholder="Enter Airport Code:">
+                                <!-- <input required class="form-control" type="text" name="fd_airport_code" id="fd_airport_code" placeholder="Enter Airport Code:"> -->
+                                <select required class="form-control me-2" name="fd_airport_code" id="fd_airport_code">
+
+                                    <option value="all">Select an Airport</option>
+                                    <?php
+                                    foreach ($destinations as $destination) {
+                                        $option = $destination['airport_code'] . '-' . $destination['name'] . '-' . $destination['country'];
+                                        // $option = $destination['airport_code'];
+                                        echo '<option value="' . $destination['airport_code'] . '">' . $option . '</option>';
+                                    }
+                                    ?>
+                                </select>
                                 <div id="fd_airport_code_val" class="m-3"></div>
                             </div>
                         </div>
@@ -151,7 +163,7 @@ $destinations = $flight_view->getDestinations();
             <div class="container pt-5">
                 <div class="wrapper p-3">
                     <h1 id="heading" class="mb-4">New Operations Agent</h1>
-                    <form class="was-validated" id="oa_signup_form" action="include/crerate_operations_agent.inc.php" method="POST">
+                    <form class="was-validated" id="oa_signup_form" action="include/create_operations_agent.inc.php" method="POST">
                         <?php
                         if (!empty($errors)) {
                             echo '<div class="alert alert-danger errors" role="alert">';
@@ -187,7 +199,18 @@ $destinations = $flight_view->getDestinations();
                             </div>
                             <div class="col-sm-6">
                                 <label for="airport_code" class="form-label">Airport Code</label>
-                                <input required class="form-control" type="text" name="oa_airport_code" id="oa_airport_code" placeholder="Enter Airport Code:">
+                                <!-- <input required class="form-control" type="text" name="oa_airport_code" id="oa_airport_code" placeholder="Enter Airport Code:"> -->
+                                <select required class="form-control me-2" name="oa_airport_code" id="oa_airport_code">
+
+                                    <option value="all">Select an Airport</option>
+                                    <?php
+                                    foreach ($destinations as $destination) {
+                                        $option = $destination['airport_code'] . '-' . $destination['name'] . '-' . $destination['country'];
+                                        // $option = $destination['airport_code'];
+                                        echo '<option value="' . $destination['airport_code'] . '">' . $option . '</option>';
+                                    }
+                                    ?>
+                                </select>
                                 <div id="oa_airport_code_val" class="m-3"></div>
                             </div>
 

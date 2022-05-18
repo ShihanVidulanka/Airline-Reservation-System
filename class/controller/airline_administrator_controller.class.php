@@ -100,6 +100,11 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
         return $this->getOperationsAgentDetails();
     }
 
+    public function get_all_airports()
+    {
+        return $this->getAllAirports();
+    }
+
 }
 
 // class CreateOperationsAgent_Ccontroller extends CreateOperartionsAgent_Model{

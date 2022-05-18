@@ -281,6 +281,15 @@ class Airline_Administrator_Model extends Dbh
         $all_oa_details = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $all_oa_details;
     }
+
+    public function getAllAirports(){
+        $pdo = $this->connect();
+        $query = "SELECT airport_code,name,country FROM airport";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        $details = $stmt->fetchAll();
+        return $details;
+    }
 }
 // $airline_administrator_model = new Airline_Administrator_Model();
 // $details = array(
