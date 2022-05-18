@@ -102,7 +102,7 @@ $flight_id=$controller->get_flight_id();
                     
                     <br>
                     <button type="submit"name='get_no_passenger_by_flightno' class="btn btn-primary">Create Report</button>
-                    
+                    <br>
                 </form>
                 <br>
             </div>
@@ -139,7 +139,7 @@ $flight_id=$controller->get_flight_id();
                     </div>
                     <br>
                     <button type="submit"name='get_no_passenger_by_daterange_destination' class="btn btn-primary">Create Report</button>
-
+                    <br>
                 </form>
                 <br>
             </div>
@@ -207,7 +207,7 @@ $flight_id=$controller->get_flight_id();
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary"name="flight_details_by_origin_destination">Create Report</button>
-
+                    <br>
                 </form>
             </div>
         </div>
@@ -236,7 +236,7 @@ $flight_id=$controller->get_flight_id();
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary"name='get_revenue_by_aircraft'>Create Report</button>
-
+                    <br>
                 </form>
             </div>
           

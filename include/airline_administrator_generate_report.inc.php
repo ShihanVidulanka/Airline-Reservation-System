@@ -12,8 +12,23 @@ if (isset($_POST['get_no_passenger_by_flightno'])){
     $flight_no=$_POST['FlightNumber1'] ;
     echo "number of passengers in flight no". $flight_no.":\n" ;
     echo '<br>';
-    $y=$controller->get_no_passenger_by_flightno($flight_no);                           
-    print_array($y);
+    $y=$controller->get_no_passenger_by_flightno($flight_no);  
+    $Array=array(1,2,3);
+    //header("Location: ../airline_administrator_view_generated_report.php?case=1&output=".$y); 
+    echo 
+        '<form action="../airline_administrator_view_generated_report.php" method="post"> 
+            <input type="hidden" name="case" value=1>
+            <input type="hidden" name="CourseID" value="'.$Array[0].'">
+            <input type="hidden" name="CourseID2" value="'.$Array[1].'">
+            <input type="hidden" name="CourseID3" value="'.$Array[2].'">
+        </form>';  ?>
+        <script>
+            document.getElementsByTagName('form')[0].submit()
+        </script>
+
+        <?php
+            print_array($y);
+    
 
 
 

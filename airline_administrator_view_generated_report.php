@@ -27,7 +27,7 @@ $view = new Airline_Administrator_View();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/flight_dispatcher_add_new_flight.css">
-
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <title>AView Generated Report</title>
 </head>
 
@@ -69,17 +69,55 @@ $view = new Airline_Administrator_View();
 
     <div class="container pt-5">
         <div class="wrapper p-3">
-
-            
-
             <h1 id="heading" class="mb-4">Report</h1>
+            <?php 
+                 echo $_POST['case'];
+                // print_array( $_GET['output']);
+             ?>
+             <?php
+                    $age = $_POST['CourseID'];
+                    echo $age;
+                    echo$_POST['CourseID2'];
+                    echo$_POST['CourseID3'];
+                    // foreach($age as $x => $x_value) {
+                    // echo "Key=" . $x . ", Value=" . $x_value;
+                    // echo "<br>";
+// }
+?>
+
+
+            <div id="myChart" style="width:100%; max-width:600px; height:500px;"></div>
+
+                
             
         </div>
 
     </div>
 
-    <script src=""></script>
+    
 
 </body>
 
 </html>
+<script>
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                ['Contry', 'Mhl'],
+                ['Italy',54.8],
+                ['France',48.6],
+                ['Spain',44.4],
+                ['USA',23.9],
+                ['Argentina',14.5]
+                ]);
+
+                var options = {
+                title:'World Wide Wine Production'
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('myChart'));
+                chart.draw(data, options);
+                }
+</script>
