@@ -264,18 +264,28 @@ class Airline_Administrator_Model extends Dbh
         return $flightIdList;
     }
 
-    public function getFlightDispatcherDetails()
+    public function getFlightDispatcherDetails($search)
     {
-        $query = "SELECT fd.user_id, u.username, fd.account_no, fd.airport_code, t.phone_no FROM flight_dispatcher as fd JOIN user as u JOIN telephone_no as t WHERE u.ID = fd.user_id and t.user_id = fd.user_id";
+        if ($search != ''){
+            $query = "SELECT fd.user_id, u.username, fd.account_no, fd.airport_code, t.phone_no FROM flight_dispatcher as fd JOIN user as u JOIN telephone_no as t WHERE (u.ID = fd.user_id and t.user_id = fd.user_id) AND (fd.user_id LIKE '%{$search}%' OR u.username LIKE '%{$search}%')";
+        }
+        else{
+            $query = "SELECT fd.user_id, u.username, fd.account_no, fd.airport_code, t.phone_no FROM flight_dispatcher as fd JOIN user as u JOIN telephone_no as t WHERE u.ID = fd.user_id and t.user_id = fd.user_id";
+        }
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
         $all_fd_details = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $all_fd_details;
     }
 
-    public function getOperationsAgentDetails()
+    public function getOperationsAgentDetails($search)
     {
-        $query = "SELECT oa.user_id, u.username, oa.account_no, oa.airport_code, t.phone_no FROM operations_agent as oa JOIN user as u JOIN telephone_no as t WHERE u.ID = oa.user_id and t.user_id = oa.user_id";
+        if ($search != ''){
+            $query = "SELECT oa.user_id, u.username, oa.account_no, oa.airport_code, t.phone_no FROM flight_dispatcher as oa JOIN user as u JOIN telephone_no as t WHERE (u.ID = oa.user_id and t.user_id = oa.user_id) AND (oa.user_id LIKE '%{$search}%' OR u.username LIKE '%{$search}%')";
+        }
+        else{
+            $query = "SELECT oa.user_id, u.username, oa.account_no, oa.airport_code, t.phone_no FROM flight_dispatcher as oa JOIN user as u JOIN telephone_no as t WHERE u.ID = oa.user_id and t.user_id = oa.user_id";
+        }
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
         $all_oa_details = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -3,6 +3,8 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/addi
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
 class Airline_Administrator_Controller extends Airline_Administrator_Model{
+    private $search = '';
+    
     public function createFlightDispatcherFromModel(Flight_Dispatcher $flight_Dispatcher){
         $details = array(
             'username'=>remove_unnessaries($flight_Dispatcher->getUsername()),
@@ -90,14 +92,21 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
         return $this->getFlightId();
     }
 
-    public function get_flight_dispatcher_details()
-    {
-        return $this->getFlightDispatcherDetails();
+    private static function check_search(){
+        if (isset($_GET['search'])) {
+            $search = $_GET['search'];
+        }
+        return $search;
     }
 
-    public function get_operations_agent_details()
+    public function get_flight_dispatcher_details($search)
     {
-        return $this->getOperationsAgentDetails();
+        return $this->getFlightDispatcherDetails($search);
+    }
+
+    public function get_operations_agent_details($search)
+    {
+        return $this->getOperationsAgentDetails($search);
     }
 
     public function get_all_airports()

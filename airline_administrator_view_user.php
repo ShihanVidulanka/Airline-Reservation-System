@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // include_once('./class/model/login_model.class.php');
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
@@ -9,9 +9,32 @@ if (!isset($_SESSION['ID'])) {
     return;
 }
 
-$controller=new Airline_Administrator_Controller();
-$fd_details = $controller->get_flight_dispatcher_details();
-$oa_details = $controller->get_operations_agent_details();
+// search for flight dispatcher
+if (isset($_GET['fd_search'])) {
+    $fd_search = $_GET['fd_search'];
+}
+else{
+    $fd_search = '';
+}
+
+// search for operations agent
+if (isset($_GET['oa_search'])) {
+    $oa_search = $_GET['oa_search'];
+}
+else{
+    $oa_search = '';
+}
+
+// $oa_search = '';
+// if (isset($_GET['oa_search'])) {
+//     $search = $_GET['oa_search'];
+// }
+// print_r($oa_search);
+
+$controller = new Airline_Administrator_Controller();
+$fd_details = $controller->get_flight_dispatcher_details($fd_search);
+$oa_details = $controller->get_operations_agent_details($oa_search);
+
 
 ?>
 
@@ -79,6 +102,15 @@ $oa_details = $controller->get_operations_agent_details();
         <DIV ID="GroupName1Div" STYLE="display:none;">
             <div class="wrapper p-3">
                 <h1 id="heading" class="mb-4">Flight Dispatchers</h1>
+                <form class="form-inline" action="airline_administrator_view_user.php" method="get">
+                    <div class="type">
+                        <input class="form-control mr-sm-2" name="fd_search" type="search" placeholder="Search by Id, Name, etc." aria-label="Search" value="<?php echo $fd_search; ?>" autofocus>
+                    </div>
+
+                    <div class="search">
+                        <button class="btn btn-light my-sm-0" type="submit"><a href="airline_administrator_view_user.php">Refresh</a></button>
+                    </div>
+                </form>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -91,13 +123,13 @@ $oa_details = $controller->get_operations_agent_details();
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($fd_details as $fd){?>
+                        foreach ($fd_details as $fd) { ?>
                             <tr>
-                                <td><?php echo $fd['user_id']?></td>
-                                <td><?php echo $fd['username']?></td>
-                                <td><?php echo $fd['account_no']?></td>
-                                <td><?php echo $fd['airport_code']?></td>
-                                <td><?php echo $fd['phone_no']?></td>
+                                <td><?php echo $fd['user_id'] ?></td>
+                                <td><?php echo $fd['username'] ?></td>
+                                <td><?php echo $fd['account_no'] ?></td>
+                                <td><?php echo $fd['airport_code'] ?></td>
+                                <td><?php echo $fd['phone_no'] ?></td>
                             </tr>
                         <?php
                         }
@@ -109,6 +141,15 @@ $oa_details = $controller->get_operations_agent_details();
         <DIV ID="GroupName2Div" STYLE="display:none;">
             <div class="wrapper p-3">
                 <h1 id="heading" class="mb-4">Operations Agents</h1>
+                <form class="form-inline" action="airline_administrator_view_user.php" method="get">
+                    <div class="type">
+                        <input class="form-control mr-sm-2" name="oa_search" type="search" placeholder="Search by Id, Name, etc." aria-label="Search" value="<?php echo $oa_search; ?>" autofocus>
+                    </div>
+
+                    <div class="search mt-1">
+                        <button class="btn btn-light my-sm-0" type="submit"><a href="airline_administrator_view_user.php">Refresh</a></button>
+                    </div>
+                </form>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -121,13 +162,13 @@ $oa_details = $controller->get_operations_agent_details();
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($oa_details as $oa){?>
+                        foreach ($oa_details as $oa) { ?>
                             <tr>
-                                <td><?php echo $oa['user_id']?></td>
-                                <td><?php echo $oa['username']?></td>
-                                <td><?php echo $oa['account_no']?></td>
-                                <td><?php echo $oa['airport_code']?></td>
-                                <td><?php echo $oa['phone_no']?></td>
+                                <td><?php echo $oa['user_id'] ?></td>
+                                <td><?php echo $oa['username'] ?></td>
+                                <td><?php echo $oa['account_no'] ?></td>
+                                <td><?php echo $oa['airport_code'] ?></td>
+                                <td><?php echo $oa['phone_no'] ?></td>
                             </tr>
                         <?php
                         }
