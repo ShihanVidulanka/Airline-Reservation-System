@@ -15,6 +15,8 @@ if (isset($_SESSION['errors'])) {
     unset($_SESSION['errors']);
 }
 // print_array($errors)
+$flight_view = new Flight_View();
+$destinations = $flight_view->getDestinations();
 ?>
 
 <!DOCTYPE html>

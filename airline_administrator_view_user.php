@@ -9,7 +9,9 @@ if (!isset($_SESSION['ID'])) {
     return;
 }
 
-
+$controller=new Airline_Administrator_Controller();
+$fd_details = $controller->get_flight_dispatcher_details();
+$oa_details = $controller->get_operations_agent_details();
 
 ?>
 
@@ -87,6 +89,20 @@ if (!isset($_SESSION['ID'])) {
                             <th>Telephone No(s)</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?php
+                        foreach ($fd_details as $fd){?>
+                            <tr>
+                                <td><?php echo $fd['user_id']?></td>
+                                <td><?php echo $fd['username']?></td>
+                                <td><?php echo $fd['account_no']?></td>
+                                <td><?php echo $fd['airport_code']?></td>
+                                <td><?php echo $fd['phone_no']?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
                 </table>
             </div>
         </DIV>
@@ -103,6 +119,20 @@ if (!isset($_SESSION['ID'])) {
                             <th>Telephone No(s)</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?php
+                        foreach ($oa_details as $oa){?>
+                            <tr>
+                                <td><?php echo $oa['user_id']?></td>
+                                <td><?php echo $oa['username']?></td>
+                                <td><?php echo $oa['account_no']?></td>
+                                <td><?php echo $oa['airport_code']?></td>
+                                <td><?php echo $oa['phone_no']?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
                 </table>
             </div>
         </DIV>

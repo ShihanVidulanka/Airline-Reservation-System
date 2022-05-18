@@ -90,6 +90,16 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
         return $this->getFlightId();
     }
 
+    public function get_flight_dispatcher_details()
+    {
+        return $this->getFlightDispatcherDetails();
+    }
+
+    public function get_operations_agent_details()
+    {
+        return $this->getOperationsAgentDetails();
+    }
+
 }
 
 // class CreateOperationsAgent_Ccontroller extends CreateOperartionsAgent_Model{
