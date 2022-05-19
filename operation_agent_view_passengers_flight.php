@@ -89,7 +89,7 @@ $departure_flight_details=$operation_agent_view->departureFlightDetails();
                             echo '<td>' . $value['destination'] . "</td>";
                             echo '<td>' . $value['departure_time'] . "</td>";
                             echo '<td>' . $value['departure_date'] . "</td>";
-                            echo "<td><a class=\"btn btn-sm btn-info\" href=\"include/operation_agent_view_passengers_flight.inc.php?id_o={$value['id']}\">view</a></td>";
+                            echo "<td><a class=\"btn btn-sm btn-info\" href=\"include/operation_agent_view_passengers_flight.inc.php?id_o={$value['id']}&origin={$value['origin']}&destination={$value['destination']}&departure_time={$value['departure_time']}&departure_date={$value['departure_date']}\">view</a></td>";
                             echo '</tr>';
                         }
                         ?>
@@ -114,23 +114,7 @@ $departure_flight_details=$operation_agent_view->departureFlightDetails();
                             <th scope="col">View </th>
                             </tr>
                         </thead>
-                        <!-- <?php foreach ($departure_flight_details as $value){?>
-                        <tbody>
-                            <tr>
-                                
-                            <form class="d-flex mb-3" action="include/operation_agent_view_passengers_flight.inc.php" method="GET">
-                            <th scope="row"name='id'><?php echo $value['id']?></th>
-                                
-                                <td><?php echo $value['origin']?></td>
-                                <td><?php echo $value['destination']?></td>
-                                <td><?php echo $value['departure_time']?></td>
-                                <td><?php echo $value['departure_date']?></td>
-                                <td><button type="button" class="btn btn-info"name="view">View </button></td>
-                                <td><input type = "submit" value='view' name='view'/></td>
-                            </form>
-                            </tr>
-                        </tbody>
-                        <?php }?> -->
+                        
                         
                         
                         <?php

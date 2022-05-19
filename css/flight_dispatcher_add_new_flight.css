@@ -21,6 +21,10 @@ body{
     margin:100px auto;
     border-radius: 10px;
     overflow: auto;
+    align-items: center;
+}
+.wrapper.h4{
+    font-style: italic;
 }
 label.form-label{
     color: black;

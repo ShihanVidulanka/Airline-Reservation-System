@@ -191,7 +191,7 @@ class Airline_Administrator_Model extends Dbh{
     }
      //get no of passenger by  time range----->generate reports
      public function getNoPassengerByDaterange($starting_date,$ending_date){
-         $query1="SELECT category,count(user_id) FROM booking join registered_passenger where booking.passenger_id=registered_passenger.passenger_id 
+         $query1="SELECT category,count(user_id) as count FROM booking join registered_passenger where booking.passenger_id=registered_passenger.passenger_id 
          and state=3 and date(booking_time)>='$starting_date' and date(booking_time)<='$ending_date'group by category order by category ";
          $stmt1=$this->connect()->prepare($query1);
          $stmt1->execute();
@@ -199,7 +199,7 @@ class Airline_Administrator_Model extends Dbh{
          
 
 
-         $query2="SELECT count(booking.passenger_id) as no_of_guest FROM booking join guest where booking.passenger_id=guest.passenger_id 
+         $query2="SELECT 5 as category,count(booking.passenger_id) as count  FROM booking join guest where booking.passenger_id=guest.passenger_id 
          and state=3 and date(booking_time)>='$starting_date' and date(booking_time)<='$ending_date'";
          $stmt2=$this->connect()->prepare($query2);
          $stmt2->execute();
@@ -212,13 +212,14 @@ class Airline_Administrator_Model extends Dbh{
      //get no of passenger by  origin and destination----->generate reports
      public function getFlightDeailsByOriginDestination($origin,$destination,$current_date,$current_time){
          
-         $query="SELECT flight.id,destination,origin, count(booking.passenger_id) as no_of_passengerof_flight,flight.state  
+         $query="SELECT  flight.id,destination,origin,count(booking.passenger_id) as no_of_passengerof_flight,flight.state  
          from flight left outer join booking on flight.id=booking.flight_id where (booking.state=3 or booking.state is null) and origin='$origin' and destination='$destination'and(departure_date<'$current_date' or(departure_date='$current_date' and departure_time<'$current_time'))
           group by flight.id";
         $stmt=$this->connect()->prepare($query);
           $stmt->execute();
           $details_of_flights=$stmt->fetchAll(PDO::FETCH_ASSOC);
-          print_array($details_of_flights);
+          return $details_of_flights;
+          //print_array($details_of_flights);
 
      }
      //get total revenue----->generate reports
@@ -230,6 +231,7 @@ class Airline_Administrator_Model extends Dbh{
         $stmt=$this->connect()->prepare($query);
         $stmt->execute();
         $renue_list=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $renue_list;
         print_array($renue_list);
      }
      //get origin
