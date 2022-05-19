@@ -9,7 +9,9 @@ if (!isset($_SESSION['ID'])) {
     return;
 }
 
-
+$controller=new Airline_Administrator_Controller();
+$fd_details = $controller->get_flight_dispatcher_details();
+$oa_details = $controller->get_operations_agent_details();
 
 ?>
 
@@ -69,27 +71,12 @@ if (!isset($_SESSION['ID'])) {
 
     <div class="container p-3">
         <FORM STYLE="padding-left:5px">
-            <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Airline Administrator<BR>
-            <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName2" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Flight Dispatcher<BR>
-            <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName3" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Operations Agent<BR>
+            <!-- <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Airline Administrator<BR> -->
+            <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Flight Dispatcher<BR>
+            <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName2" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Operations Agent<BR>
         </FORM>
 
         <DIV ID="GroupName1Div" STYLE="display:none;">
-            <div class="wrapper p-3">
-                <h1 id="heading" class="mb-4">Airline Administrators</h1>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Username</th>
-                            <th>Account No</th>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </DIV>
-        <DIV ID="GroupName2Div" STYLE="display:none;">
             <div class="wrapper p-3">
                 <h1 id="heading" class="mb-4">Flight Dispatchers</h1>
                 <table class="table table-striped">
@@ -98,14 +85,28 @@ if (!isset($_SESSION['ID'])) {
                             <th>ID</th>
                             <th>Username</th>
                             <th>Account No</th>
-                            <th>Name</th>
                             <th>Airport Code</th>
+                            <th>Telephone No(s)</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?php
+                        foreach ($fd_details as $fd){?>
+                            <tr>
+                                <td><?php echo $fd['user_id']?></td>
+                                <td><?php echo $fd['username']?></td>
+                                <td><?php echo $fd['account_no']?></td>
+                                <td><?php echo $fd['airport_code']?></td>
+                                <td><?php echo $fd['phone_no']?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
                 </table>
             </div>
         </DIV>
-        <DIV ID="GroupName3Div" STYLE="display:none;">
+        <DIV ID="GroupName2Div" STYLE="display:none;">
             <div class="wrapper p-3">
                 <h1 id="heading" class="mb-4">Operations Agents</h1>
                 <table class="table table-striped">
@@ -114,11 +115,24 @@ if (!isset($_SESSION['ID'])) {
                             <th>ID</th>
                             <th>Username</th>
                             <th>Account No</th>
-                            <th>Name</th>
                             <th>Airport Code</th>
-                            <th>State</th>
+                            <th>Telephone No(s)</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?php
+                        foreach ($oa_details as $oa){?>
+                            <tr>
+                                <td><?php echo $oa['user_id']?></td>
+                                <td><?php echo $oa['username']?></td>
+                                <td><?php echo $oa['account_no']?></td>
+                                <td><?php echo $oa['airport_code']?></td>
+                                <td><?php echo $oa['phone_no']?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
                 </table>
             </div>
         </DIV>

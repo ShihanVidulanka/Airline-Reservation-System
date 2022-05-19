@@ -71,24 +71,260 @@ $view = new Airline_Administrator_View();
         <div class="wrapper p-3">
             <h1 id="heading" class="mb-4">Report</h1>
             <?php 
-                 echo $_POST['case'];
-                // print_array( $_GET['output']);
-             ?>
-             <?php
-                    $age = $_POST['CourseID'];
-                    echo $age;
-                    echo$_POST['CourseID2'];
-                    echo$_POST['CourseID3'];
-                    // foreach($age as $x => $x_value) {
-                    // echo "Key=" . $x . ", Value=" . $x_value;
-                    // echo "<br>";
-// }
-?>
+                $report_num= $_POST['case'];
+                $description=$_POST['description'];
+                echo '<h4>'. $description.'</h4>';
+//================report 1=========================================================
+                if($report_num==1){
+                    // echo "no of registered passengers above 18 ->". $_POST['registered_above_18']."<br>";
+                    // echo "no of registered passengers below 18 ->".$_POST['registered_below_18']."<br>";
+                    // echo "no of guest passengers above 18 ->".$_POST['guest_above_18']."<br>";
+                    // echo "no of guest passengers above 18 ->".$_POST['guest_below_18']."<br>";
+                    
+                    $registered_above_18= intval($_POST['registered_above_18']);
+                    $registered_below_18= intval($_POST['registered_below_18']);
+                    $guest_above_18= intval($_POST['guest_above_18']);
+                    $guest_below_18= intval($_POST['guest_below_18']);
+                    $tot_passenger=$registered_above_18+$registered_below_18+$guest_above_18+$guest_below_18;
+                    $chart_array=[
+                        ['passenger type','number of passenger'],
+                        ['registered_above_18', $registered_above_18],
+                        ['registered_below_18',$registered_below_18],
+                        ['guest_above_18',$guest_above_18],
+                        ['guest_below_18',$guest_below_18]
+                        
+                    
+                    ];
+                    echo '<table class="table table-striped">';
+                    echo '<tbody>';
+                    foreach($chart_array as $passenger_type){
+                        echo '<tr>';
+                        echo '<td>' . $passenger_type[0]. "</td>";
+                        echo '<td>' . $passenger_type[1]. "</td>";
+                        echo '</tr>';
+                    }
+                    echo '<tr>';
+                    echo '<td>' . 'totoal passengers'. "</td>";
+                    echo '<td>' . $tot_passenger. "</td>";
+                    echo '</tr>';
+                    echo '</tbody></table>'
+                    ?>
+                    
+                    <div id="myChart" style="width:100%; "></div>
+                    <script>
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(<?php echo(json_encode($chart_array)); ?>);
+
+                    var options = {
+                    title:<?php echo(json_encode($description)); ?>
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('myChart'));
+                    chart.draw(data, options);
+                    }
+                    </script>
+                    <?php
+                    
+                }
+//=========================report 2============================================
+                elseif ($report_num==2){
+                    echo '<h4>'.$_POST['numOfPassenger'].'</h4>';
+
+                }
+//======================report 3===========================================
+                elseif ($report_num==3){
+                    $passengerList=json_decode(htmlspecialchars_decode($_POST['passengerList']));
+                    //print_array($passengerList);
+                    $chart_array=[['type of passenger','number of passenger']];
+                    $tot_passenger=0;
+                    foreach($passengerList  as $obj){
+                        $status = $obj->category;
+                        $count=intval($obj->count);
+                        $tot_passenger+=$count;
+                        
+                        if($status=='0')
+                            array_push($chart_array,['normal passenger',$count]);
+                        elseif($status=='1')
+                            array_push($chart_array,['frequent passenger',$count]);
+                        elseif($status=='2')
+                            array_push($chart_array,['gold passenger',$count]);
+                        else
+                            array_push($chart_array,['guest passenger',$count]);
+                        
+                    }
+                    echo '<table class="table table-striped">';
+                    echo '<tbody>';
+                    foreach($chart_array as $passenger_type){
+                        echo '<tr>';
+                        echo '<td>' . $passenger_type[0]. "</td>";
+                        echo '<td>' . $passenger_type[1]. "</td>";
+                        echo '</tr>';
+                    }
+                    echo '<tr>';
+                    echo '<td>' . 'totoal passengers'. "</td>";
+                    echo '<td>' . $tot_passenger. "</td>";
+                    echo '</tr>';
+                    echo '</tbody></table>'
+                    ?>
+                    <div id="myChart" style="width:100%; "></div>
+                    <script>
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(<?php echo(json_encode($chart_array)); ?>);
+
+                    var options = {
+                    title:<?php echo(json_encode($description)); ?>
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('myChart'));
+                    chart.draw(data, options);
+                    }
+                    </script>
+                    <?php
+                    
+                }
+//======================report 4======================================
+                elseif ($report_num==4){
+                    $flight_list=json_decode(htmlspecialchars_decode($_POST['flight_details']));
+                   // print_array($flight_list);
+                    $chart_array=[['Flight No','Number of Passengers']];
+                    $arrived_flight=0;$not_arrived_flight=0;$cansel_flgiht=0;
+                    echo '<table class="table table-striped">';
+                    echo '<tbody>';
+                    echo '<tr>';
+                    echo '<td>' . 'Flight ID'. "</td>";
+                    echo '<td>' . 'Destination'. "</td>";
+                    echo '<td>' . 'Origin'. "</td>";
+                    echo '<td>' . 'num of Passenger'. "</td>";
+                    echo '<td>' . 'Flight State'. "</td>";
+                    echo '</tr>';
+                    foreach($flight_list as $fligh){
+                        $flight=get_object_vars($fligh);
+                        echo '<tr>';
+                        echo '<td>' . $flight['id']. "</td>";
+                        echo '<td>' . $flight['destination']. "</td>";
+                        echo '<td>' . $flight['origin']. "</td>";
+                        echo '<td>' . $flight['no_of_passengerof_flight']. "</td>";
+                        if($flight['state']=='0') {
+                            echo '<td>' . 'Not Arrived'. "</td>";
+                            $not_arrived_flight+=1;
+                        }
+                        elseif($flight['state']==1){
+                            echo '<td>' . 'Cancelled'. "</td>";
+                            $cansel_flgiht+=1; 
+                        }
+                        elseif($flight['state']==2){
+                            echo '<td>' . 'Arrived'. "</td>";
+                            $arrived_flight+=1;
+                        }
+                        array_push($chart_array,['filght no '.$flight['id'],intval($flight['no_of_passengerof_flight'])]);
+                        echo '</tr>';
+                    }
+                    
+                    echo '</tbody></table>';
+                    echo '<hr><hr>';
+                    $chart_array2=[
+                        ['Flight State','Number of Flight'],
+                        ['Arrived Flight',$arrived_flight],
+                        ['Not Arrived Flight',$not_arrived_flight],
+                        ['Canceled Flight',$cansel_flgiht]
+                    ];
+                    echo ' <table class="table table-striped">
+                            <tbody>';
+                            foreach($chart_array2 as $row){
+                                echo '<tr>';echo '<td>'.$row[0].'</td>';echo '<td>'.$row[1].'</td>';echo'</tr>';
+                                }
+                    echo '</tbody></table>';
+                   // print_array($chart_array2);
+                    ?>
+                    <div id="myChart1" style="width:100%; "></div>
+                    <div id="myChart2" style="width:100%; "></div>
+                    <div id="Sarah_chart_div" style="width: 500px; ;"></div>
+                    <div id="Anthony_chart_div" style="width:100%;"></div>
+                    <script>
+                        google.charts.load('current', {'packages':['corechart']});
+                        google.charts.setOnLoadCallback(drawSarahChart);
+                        google.charts.setOnLoadCallback(drawAnthonyChart);
+
+                        function drawSarahChart() {
+                            var data = new google.visualization.arrayToDataTable(<?php echo(json_encode($chart_array)); ?>);
+                            var options = {title:'Number of Passengers By Flight ID '}; 
+                            var chart = new google.visualization.BarChart(document.getElementById("myChart1"));
+                            chart.draw(data, options);
+                        }
+
+                        
+                        function drawAnthonyChart() {
+                            var data = new google.visualization.arrayToDataTable(<?php echo(json_encode($chart_array2)); ?>);
+                            var options = {title:'States of the Flights '};
+                            var chart = new google.visualization.PieChart(document.getElementById("myChart2"));
+                            chart.draw(data, options);
+                        }
+                    </script>
+                    <?php
+                   
+                    
+                }
 
 
-            <div id="myChart" style="width:100%; max-width:600px; height:500px;"></div>
+//===============================================report 5=======================================================================================
+                elseif ($report_num==5){
+                    $revenue_by_aircrafts=json_decode(htmlspecialchars_decode($_POST['revenue_by_aircrafts']));
+                    //print_array($revenue_by_aircrafts);
+                    $chart_array=[['Aircraft name','Total Revenue']];
+                    $tot_revenue=0;
+                    echo '<table class="table table-striped">';
+                    echo '<tbody>';
+                    echo '<tr>';
+                    echo '<td>' . 'Aircraft type'. "</td>";
+                    echo '<td>' . 'Total revenue'. "</td>";
+                    
+                    echo '</tr>';
+                    foreach($revenue_by_aircrafts as $aircrafts){
+                        $aircraft=get_object_vars($aircrafts);
+                        echo '<tr>';
+                        echo '<td>' . $aircraft['model']. "</td>";
+                        echo '<td>' . $aircraft['sum(ticket_price)']. "</td>";
+                        echo '<tr>';
+                        $tot_revenue+=$aircraft['sum(ticket_price)'];
+                        array_push($chart_array,[$aircraft['model'],intval($aircraft['sum(ticket_price)'])]);
+                    }
+                    echo '<tr>';
+                    echo '<td>' . 'Total Revenue'. "</td>";
+                    echo '<td>' . $tot_revenue. "</td>";
+                    echo '<tr>';
+                    echo '</tbody></table>';
 
-                
+                    ?>
+                    <div id="myChart" style="width:100%;"></div>
+                    <script>
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                    var data = google.visualization.arrayToDataTable(<?php echo(json_encode($chart_array)); ?>);
+
+                    var options = {
+                    title:<?php echo(json_encode($description)); ?>
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('myChart'));
+                    chart.draw(data, options);
+                    
+                }
+                    </script>
+                    <?php
+                   
+                    
+                }
+                    
+
+?>         
             
         </div>
 
@@ -99,25 +335,3 @@ $view = new Airline_Administrator_View();
 </body>
 
 </html>
-<script>
-                google.charts.load('current', {'packages':['corechart']});
-                google.charts.setOnLoadCallback(drawChart);
-
-                function drawChart() {
-                var data = google.visualization.arrayToDataTable([
-                ['Contry', 'Mhl'],
-                ['Italy',54.8],
-                ['France',48.6],
-                ['Spain',44.4],
-                ['USA',23.9],
-                ['Argentina',14.5]
-                ]);
-
-                var options = {
-                title:'World Wide Wine Production'
-                };
-
-                var chart = new google.visualization.PieChart(document.getElementById('myChart'));
-                chart.draw(data, options);
-                }
-</script>

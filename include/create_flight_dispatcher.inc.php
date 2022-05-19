@@ -2,8 +2,8 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
-print_array($_POST);
-// Copied from Yasith
+// print_array($_POST);
+
 if(isset($_POST['username_'])){
     $create_flight_dispatcher_controller = new Airline_Administrator_Controller;
     $create_flight_dispatcher_controller->checkUsernameFromModel($_POST['username_']);

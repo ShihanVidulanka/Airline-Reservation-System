@@ -14,7 +14,7 @@ if(isset($_POST['oa_first_name'])){
     $_POST['oa_telephone_numbers']=explode(",",$_POST['oa_telephone_numbers']);
 
     $create_operations_agent_controller = new Airline_Administrator_Controller();
-    $operations_agent = new Operations_Agent($_POST['oa_username'],$_POST['oa_user_id'],$_POST['oa_first_name'], $_POST['oa_last_name'], $_POST['state'], $_POST['oa_airport_code'], $_POST['oa_telephone_numbers']);
+    $operations_agent = new Operations_Agent($_POST['oa_username'],$_POST['oa_user_id'],$_POST['oa_first_name'], $_POST['oa_last_name'], '', $_POST['oa_airport_code'], $_POST['oa_telephone_numbers']);
     $operations_agent->setEmail($_POST['oa_email']);
 
     $create_operations_agent_controller->createOperationsAgentFromModel($operations_agent);
