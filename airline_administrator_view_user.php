@@ -36,6 +36,25 @@ $fd_previous_user_id = "";
 $oa_previous_user_id = "";
 
 // print_array($fd_details);
+// echo count($fd_details);
+// for ($i = 0; $i < count($fd_details); $i++) {
+//     echo "<pre>";
+//     echo $fd_details[$i]['user_id'];
+//     echo $fd_details[$i]['username'];
+//     echo $fd_details[$i]['account_no'];
+//     echo $fd_details[$i]['airport_code'];
+//     echo $fd_details[$i]['phone_no'];
+//     for ($j = $i; $j < count($fd_details) - 1; $j++) {
+//         if ($fd_details[$j]['user_id'] == $fd_details[$j + 1]['user_id']) {
+//             echo $fd_details[$j + 1]['phone_no'];
+//         } else {
+//             $i = $j;
+//             break;
+//         }
+//     }
+
+//     echo "</pre>";
+// }
 // print_array($oa_details);
 
 
@@ -125,23 +144,39 @@ $oa_previous_user_id = "";
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($fd_details as $fd) {
-                            if (($fd_search == '' && $fd['user_id'] != $fd_previous_user_id) || ($fd_search != '')) { ?>
+                        for ($i = 0; $i < count($fd_details); $i++) {
+                            if ($fd_previous_user_id != $fd_details[$i]['user_id']) { ?>
                                 <tr>
-                                    <td><?php echo $fd['user_id'] ?></td>
-                                    <td><?php echo $fd['username'] ?></td>
-                                    <td><?php echo $fd['account_no'] ?></td>
-                                    <td><?php echo $fd['airport_code'] ?></td>
-                                    <td><?php echo $fd['phone_no'] ?></td>
+                                    <td><?php echo $fd_details[$i]['user_id'] ?></td>
+                                    <td><?php echo $fd_details[$i]['username'] ?></td>
+                                    <td><?php echo $fd_details[$i]['account_no'] ?></td>
+                                    <td><?php echo $fd_details[$i]['airport_code'] ?></td>
+                                    <td>
+                                        <a href="tel: <?php $fd_details[$i]['phone_no'] ?>">
+                                            <?php
+                                            echo $fd_details[$i]['phone_no']; ?>
+                                        </a>
+                                        <?php
+                                        for ($j = $i; $j < count($fd_details) - 1; $j++) {
+                                            if ($fd_details[$j]['user_id'] == $fd_details[$j + 1]['user_id']) {
+                                                echo "<br>"; ?>
+                                                <a href="tel: <?php $fd_details[$i]['phone_no'] ?>">
+                                                    <?php
+                                                    echo $fd_details[$j + 1]['phone_no']; ?>
+                                                </a>
+                                        <?php
+                                            } else {
+                                                $i = $j;
+                                                break;
+                                            }
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                         <?php
-                            } elseif ($fd_search == '' && $fd['user_id'] == $fd_previous_user_id) {
-                                continue;
+                                $fd_previous_user_id = $fd_details[$i]['user_id'];
                             }
-                            $fd_previous_user_id = $fd['user_id'];
-                            
                         }
-
                         ?>
                     </tbody>
                 </table>
@@ -171,23 +206,39 @@ $oa_previous_user_id = "";
                     </thead>
                     <tbody>
                     <?php
-                        foreach ($oa_details as $oa) {
-                            if (($oa_search == '' && $oa['user_id'] != $oa_previous_user_id) || ($oa_search != '')) { ?>
+                        for ($i = 0; $i < count($oa_details); $i++) {
+                            if ($oa_previous_user_id != $oa_details[$i]['user_id']) { ?>
                                 <tr>
-                                    <td><?php echo $oa['user_id'] ?></td>
-                                    <td><?php echo $oa['username'] ?></td>
-                                    <td><?php echo $oa['account_no'] ?></td>
-                                    <td><?php echo $oa['airport_code'] ?></td>
-                                    <td><?php echo $oa['phone_no'] ?></td>
+                                    <td><?php echo $oa_details[$i]['user_id'] ?></td>
+                                    <td><?php echo $oa_details[$i]['username'] ?></td>
+                                    <td><?php echo $oa_details[$i]['account_no'] ?></td>
+                                    <td><?php echo $oa_details[$i]['airport_code'] ?></td>
+                                    <td>
+                                        <a href="tel: <?php $oa_details[$i]['phone_no'] ?>">
+                                            <?php
+                                            echo $oa_details[$i]['phone_no']; ?>
+                                        </a>
+                                        <?php
+                                        for ($j = $i; $j < count($oa_details) - 1; $j++) {
+                                            if ($oa_details[$j]['user_id'] == $oa_details[$j + 1]['user_id']) {
+                                                echo "<br>"; ?>
+                                                <a href="tel: <?php $oa_details[$i]['phone_no'] ?>">
+                                                    <?php
+                                                    echo $oa_details[$j + 1]['phone_no']; ?>
+                                                </a>
+                                        <?php
+                                            } else {
+                                                $i = $j;
+                                                break;
+                                            }
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                         <?php
-                            } elseif ($oa_search == '' && $oa['user_id'] == $oa_previous_user_id) {
-                                continue;
+                                $oa_previous_user_id = $oa_details[$i]['user_id'];
                             }
-                            $oa_previous_user_id = $oa['user_id'];
-                            
                         }
-
                         ?>
                     </tbody>
                 </table>
