@@ -160,7 +160,7 @@ $oa_previous_user_id = "";
                                         for ($j = $i; $j < count($fd_details) - 1; $j++) {
                                             if ($fd_details[$j]['user_id'] == $fd_details[$j + 1]['user_id']) {
                                                 echo "<br>"; ?>
-                                                <a href="tel: <?php $fd_details[$i]['phone_no'] ?>">
+                                                <a href="tel: <?php $fd_details[$j + 1]['phone_no'] ?>">
                                                     <?php
                                                     echo $fd_details[$j + 1]['phone_no']; ?>
                                                 </a>
@@ -222,7 +222,7 @@ $oa_previous_user_id = "";
                                         for ($j = $i; $j < count($oa_details) - 1; $j++) {
                                             if ($oa_details[$j]['user_id'] == $oa_details[$j + 1]['user_id']) {
                                                 echo "<br>"; ?>
-                                                <a href="tel: <?php $oa_details[$i]['phone_no'] ?>">
+                                                <a href="tel: <?php $oa_details[$j + 1]['phone_no'] ?>">
                                                     <?php
                                                     echo $oa_details[$j + 1]['phone_no']; ?>
                                                 </a>
