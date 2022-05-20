@@ -1,12 +1,12 @@
 *{
     box-sizing: border-box;
 }
-/* body{
+body{
     
     background: url("../img/background.jpg") center fixed;
     background-size: cover;
 
-} */
+}
 
 #heading{
     text-align: center;
@@ -27,4 +27,9 @@
 
 #form{
     background-color: rgba(255, 255, 255, 0.459)
+}
+
+#topics{
+    color:antiquewhite;
+    font-size: large;
 }

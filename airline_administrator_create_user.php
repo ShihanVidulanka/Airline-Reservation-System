@@ -77,7 +77,7 @@ $destinations = $controller->get_all_airports();
 
     <!-- create a form  -->
     <div class="container p-3">
-        <form STYLE="padding-left:5px">
+        <form STYLE="padding-left:5px" id = "topics">
             <input TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 2)" />Add New Flight Dispatcher<br>
             <input TYPE="radio" NAME="RadioGroupName" ID="GroupName2" ONCLICK="ShowRadioButtonDiv('GroupName', 2)" />Add New Operations Agent<br>
         </FORM>

@@ -282,10 +282,10 @@ class Airline_Administrator_Model extends Dbh
     public function getOperationsAgentDetails($search)
     {
         if ($search != ''){
-            $query = "SELECT oa.user_id, u.username, oa.account_no, oa.airport_code, t.phone_no FROM flight_dispatcher as oa JOIN user as u JOIN telephone_no as t WHERE (u.ID = oa.user_id and t.user_id = oa.user_id) AND (oa.user_id LIKE '%{$search}%' OR u.username LIKE '%{$search}%')";
+            $query = "SELECT oa.user_id, u.username, oa.account_no, oa.airport_code, t.phone_no FROM operations_agent as oa JOIN user as u JOIN telephone_no as t WHERE (u.ID = oa.user_id and t.user_id = oa.user_id) AND (oa.user_id LIKE '%{$search}%' OR u.username LIKE '%{$search}%')";
         }
         else{
-            $query = "SELECT oa.user_id, u.username, oa.account_no, oa.airport_code, t.phone_no FROM flight_dispatcher as oa JOIN user as u JOIN telephone_no as t WHERE u.ID = oa.user_id and t.user_id = oa.user_id";
+            $query = "SELECT oa.user_id, u.username, oa.account_no, oa.airport_code, t.phone_no FROM operations_agent as oa JOIN user as u JOIN telephone_no as t WHERE u.ID = oa.user_id and t.user_id = oa.user_id";
         }
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();

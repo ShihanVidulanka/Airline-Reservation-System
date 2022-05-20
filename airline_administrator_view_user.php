@@ -12,16 +12,14 @@ if (!isset($_SESSION['ID'])) {
 // search for flight dispatcher
 if (isset($_GET['fd_search'])) {
     $fd_search = $_GET['fd_search'];
-}
-else{
+} else {
     $fd_search = '';
 }
 
 // search for operations agent
 if (isset($_GET['oa_search'])) {
     $oa_search = $_GET['oa_search'];
-}
-else{
+} else {
     $oa_search = '';
 }
 
@@ -34,6 +32,11 @@ else{
 $controller = new Airline_Administrator_Controller();
 $fd_details = $controller->get_flight_dispatcher_details($fd_search);
 $oa_details = $controller->get_operations_agent_details($oa_search);
+$fd_previous_user_id = "";
+$oa_previous_user_id = "";
+
+// print_array($fd_details);
+// print_array($oa_details);
 
 
 ?>
@@ -52,7 +55,7 @@ $oa_details = $controller->get_operations_agent_details($oa_search);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="css/airline_administrator_view_user.css"> -->
+    <link rel="stylesheet" href="css/airline_administrator_view_user.css">
     <title>View User</title>
 </head>
 
@@ -93,22 +96,21 @@ $oa_details = $controller->get_operations_agent_details($oa_search);
     </nav>
 
     <div class="container p-3">
-        <FORM STYLE="padding-left:5px">
-            <!-- <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Airline Administrator<BR> -->
+        <FORM STYLE="padding-left:5px" id="topics">
             <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Flight Dispatcher<BR>
             <INPUT TYPE="radio" NAME="RadioGroupName" ID="GroupName2" ONCLICK="ShowRadioButtonDiv('GroupName', 3)" />View Operations Agent<BR>
         </FORM>
 
-        <DIV ID="GroupName1Div" STYLE="display:none;">
+        <DIV ID="GroupName1Div">
             <div class="wrapper p-3">
                 <h1 id="heading" class="mb-4">Flight Dispatchers</h1>
-                <form class="form-inline" action="airline_administrator_view_user.php" method="get">
-                    <div class="type">
-                        <input class="form-control mr-sm-2" name="fd_search" type="search" placeholder="Search by Id, Name, etc." aria-label="Search" value="<?php echo $fd_search; ?>" autofocus>
+                <form class="form-inline flex-container" action="airline_administrator_view_user.php" method="get">
+                    <div class="type col-sm-9">
+                        <input class="form-control flex-child" name="fd_search" type="search" placeholder="Search by Id, Name, etc." aria-label="Search" value="<?php echo $fd_search; ?>" autofocus>
                     </div>
 
-                    <div class="search">
-                        <button class="btn btn-light my-sm-0" type="submit"><a href="airline_administrator_view_user.php">Refresh</a></button>
+                    <div class="search col-sm-2">
+                        <button class="btn btn-light flex child" type="submit"><a href="airline_administrator_view_user.php">Refresh</a></button>
                     </div>
                 </form>
                 <table class="table table-striped">
@@ -123,16 +125,23 @@ $oa_details = $controller->get_operations_agent_details($oa_search);
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($fd_details as $fd) { ?>
-                            <tr>
-                                <td><?php echo $fd['user_id'] ?></td>
-                                <td><?php echo $fd['username'] ?></td>
-                                <td><?php echo $fd['account_no'] ?></td>
-                                <td><?php echo $fd['airport_code'] ?></td>
-                                <td><?php echo $fd['phone_no'] ?></td>
-                            </tr>
+                        foreach ($fd_details as $fd) {
+                            if (($fd_search == '' && $fd['user_id'] != $fd_previous_user_id) || ($fd_search != '')) { ?>
+                                <tr>
+                                    <td><?php echo $fd['user_id'] ?></td>
+                                    <td><?php echo $fd['username'] ?></td>
+                                    <td><?php echo $fd['account_no'] ?></td>
+                                    <td><?php echo $fd['airport_code'] ?></td>
+                                    <td><?php echo $fd['phone_no'] ?></td>
+                                </tr>
                         <?php
+                            } elseif ($fd_search == '' && $fd['user_id'] == $fd_previous_user_id) {
+                                continue;
+                            }
+                            $fd_previous_user_id = $fd['user_id'];
+                            
                         }
+
                         ?>
                     </tbody>
                 </table>
@@ -142,11 +151,11 @@ $oa_details = $controller->get_operations_agent_details($oa_search);
             <div class="wrapper p-3">
                 <h1 id="heading" class="mb-4">Operations Agents</h1>
                 <form class="form-inline" action="airline_administrator_view_user.php" method="get">
-                    <div class="type">
+                    <div class="type col-sm-9">
                         <input class="form-control mr-sm-2" name="oa_search" type="search" placeholder="Search by Id, Name, etc." aria-label="Search" value="<?php echo $oa_search; ?>" autofocus>
                     </div>
 
-                    <div class="search mt-1">
+                    <div class="search ml-1 col-sm-2">
                         <button class="btn btn-light my-sm-0" type="submit"><a href="airline_administrator_view_user.php">Refresh</a></button>
                     </div>
                 </form>
@@ -161,17 +170,24 @@ $oa_details = $controller->get_operations_agent_details($oa_search);
                         </tr>
                     </thead>
                     <tbody>
+                    <?php
+                        foreach ($oa_details as $oa) {
+                            if (($oa_search == '' && $oa['user_id'] != $oa_previous_user_id) || ($oa_search != '')) { ?>
+                                <tr>
+                                    <td><?php echo $oa['user_id'] ?></td>
+                                    <td><?php echo $oa['username'] ?></td>
+                                    <td><?php echo $oa['account_no'] ?></td>
+                                    <td><?php echo $oa['airport_code'] ?></td>
+                                    <td><?php echo $oa['phone_no'] ?></td>
+                                </tr>
                         <?php
-                        foreach ($oa_details as $oa) { ?>
-                            <tr>
-                                <td><?php echo $oa['user_id'] ?></td>
-                                <td><?php echo $oa['username'] ?></td>
-                                <td><?php echo $oa['account_no'] ?></td>
-                                <td><?php echo $oa['airport_code'] ?></td>
-                                <td><?php echo $oa['phone_no'] ?></td>
-                            </tr>
-                        <?php
+                            } elseif ($oa_search == '' && $oa['user_id'] == $oa_previous_user_id) {
+                                continue;
+                            }
+                            $oa_previous_user_id = $oa['user_id'];
+                            
                         }
+
                         ?>
                     </tbody>
                 </table>
