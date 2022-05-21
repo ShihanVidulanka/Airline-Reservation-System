@@ -54,9 +54,6 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
           <li class="nav-item">
             <a class="nav-link" href="flight_dispatcher_add_new_airport.php">Add New Airport</a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="flight_dispatcher_confirm_arrival.php">Confirm Arrival</a>
-          </li> -->
         </ul>
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -73,7 +70,7 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
       <h1 id="heading" class="mb-4">Add New Flight</h1>
       <form action="include/flight_dispatcher_add_new_flight.inc.php" method="POST">
 
-
+        <!-- Destination in Words -->
         <div class="row mb-3">
           <div class="col-sm-12">
             <label class="form-label">Destination</label>
@@ -86,62 +83,114 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
               ?>
             </select>
           </div>
-
         </div>
 
+        <!-- Departure Date/Time -->
         <div class="row mb-3">
-
           <div class="col-sm-6">
-            <label for="date" class="form-label">Departure Date/Time</label>
+            <label for="departure_date" class="form-label">Departure Date/Time</label>
             <input required class="form-control" type="datetime-local" name="departure_date_time" id="departure_date_time" placeholder="Enter the Date/Time">
           </div>
 
+          <!-- Apprx. Arrival Date/Time -->
           <div class="col-sm-6">
-            <label for="telephone" class="form-label">Apprx. Arrival Date/Time</label>
+            <label for="arrival_date" class="form-label">Apprx. Arrival Date/Time</label>
             <input required class="form-control" type="datetime-local" name="arrival_date_time" id="arrival_date_time" placeholder="Enter the Time/Date">
           </div>
-
         </div>
 
-        <div class="row mb-3">
-          <div class="col-sm-6">
-            <label class="form-label">Airplane Tail No.</label>
-            
-            <select oninput="validateTailNo('tail_no_val', 'include/flight_dispatcher_add_new_flight.inc.php', 'tail_no_', this.value)" 
-            required class="form-control" name="tail_no" id="tail_no">
 
-              <option value="" selected hidden disabled>--Select the Airplane Tail No--</option>
-              <?php
-              foreach ($tail_nos as $tail_no) {
-                echo "<option value='{$tail_no['tail_no']}'>" . $tail_no['tail_no'] . "</option>";
-              }
-              ?>
-            </select>
-            <div id="tail_no_val" class="m-3"></div>
+        <div class="row mb-3">
+
+          <div class="col-sm-6">
+            <!-- Select Prefered Method -->
+            <label for="method" class="form-label">Select Prefered Method of Airplane</label>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" onchange="changeContent1('tail_no_val', 'include/flight_dispatcher_add_new_flight.inc.php', 'departure_datetime_');">Select Existing Airplane
+              <label class="form-check-label" for="radio1"></label>
+            </div>
+
+            <div class="form-check">
+              <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2" onchange="changeContent2('tail_no_val', 'include/flight_dispatcher_add_new_flight.inc.php', 'free_departure_datetime_');">Select Brand New Airplane
+              <label class="form-check-label" for="radio2"></label>
+            </div>
           </div>
 
-          <div class="col-sm-8"></div>
+          <!-- Airplane Tail No. -->
+          <div class="col-sm-6 hide" id="show1">
+            <label class="form-label">Airplane Tail No.</label>
+            <select required class="form-control" name="tail_no" id="tail_no">
+              <option value="" selected hidden disabled>--Select the Airplane Tail No--</option>
+
+            </select>
+          </div>
+
+          <!-- NEW Airplane Tail No. -->
+          <div class="col-sm-6 hide" id="show2">
+            <label class="form-label">Free Airplane Tail No.</label>
+            <select required class="form-control" name="free_tail_no" id="free_tail_no">
+              <option value="" selected hidden disabled>--Select the Airplane Tail No--</option>
+
+            </select>
+            <div id="free_tail_no_val" class="m-3"></div>
+          </div>
         </div>
+
+        <!-- Table of free airplanes -->
+        <div id="tail_no_val" class="row mb-3 hide">
+          <table class="table" id="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">ORG</th>
+                <th scope="col">DSTN</th>
+                <th scope="col">DDate</th>
+                <th scope="col">DTime</th>
+                <th scope="col">FTime</th>
+                <th scope="col">ADate</th>
+                <th scope="col">ATime</th>
+              </tr>
+            </thead>
+            <tbody id="tBody">
+              <!-- new rows will be added by javascript -->
+            </tbody>
+          </table>
+        </div>
+
 
         <div class="row mb-3">
 
+          <!-- Economy Class Price -->
           <div class="col-sm-4">
             <label class="form-label">Economy Class Price</label>
-            <input required class="form-control" type="text" name="economy_price" placeholder="Enter the Price">
+            <input required onchange="valdiatePrice('economy_validation', this.value)" class="form-control" type="text" name="economy_price" placeholder="Enter the Price">
           </div>
 
+          <!-- Business Class Price -->
           <div class="col-sm-4">
             <label class="form-label">Business Class Price</label>
-            <input required class="form-control" type="text" name="business_price" placeholder="Enter the Price">
+            <input onchange="valdiatePrice('business_validation', this.value)" required class="form-control" type="text" name="business_price" placeholder="Enter the Price">
           </div>
 
+          <!-- Platinum Class Price -->
           <div class="col-sm-4">
             <label class="form-label">Platinum Class Price</label>
-            <input required class="form-control" type="text" name="platinum_price" placeholder="Enter the Price">
+            <input onchange="valdiatePrice('platinum_validation', this.value)" required class="form-control" type="text" name="platinum_price" placeholder="Enter the Price">
           </div>
 
         </div>
 
+        <!-- validations for prices -->
+        <div class="row mb-3">
+          <div class="col-sm-4" id="economy_validation">
+          </div>
+          <div class="col-sm-4" id="business_validation">
+          </div>
+          <div class="col-sm-4" id="platinum_validation">
+          </div>
+        </div>
+
+        <!-- Submit button -->
         <div class="btn-group">
           <button class="btn btn-primary buttons" name='submit' type="submit">Add</button>
         </div>
@@ -151,5 +200,7 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
   </div>
   <script src="js/flight_dispatcher_add_new_flight.js"></script>
 </body>
+
+
 
 </html>

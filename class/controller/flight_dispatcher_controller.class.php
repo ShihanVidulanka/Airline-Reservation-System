@@ -150,6 +150,14 @@ class Flight_Dispatcher_Controller extends Flight_Dispatcher_Model
         }
     }
 
+    public function getFreeAriplanes($airport, $departure_date_time, $departure_date, $departure_time)
+    {
+        $arr= array("departure_datetime"=>$departure_date_time, "airport"=>$airport ,"departure_date"=>$departure_date, "departure_time"=>$departure_time);
+        return $this->getFreeplanesFromModel($arr);
+    }
 
+    public function getNewAirplanes(){
+        return $this->getNewPlanesFromModel();
+    }
 
 }

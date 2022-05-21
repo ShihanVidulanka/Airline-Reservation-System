@@ -18,7 +18,7 @@ body{
     max-width: 60%;
     background-color: rgba(183, 199, 213,0.8);
     font-weight: bold;
-    margin:100px auto;
+    margin: 1% auto;
     border-radius: 10px;
     overflow: auto;
     align-items: center;
@@ -34,4 +34,15 @@ label.form-label{
 }
 .buttons{
     width: 125px;;
+}
+
+.hide{
+    display: none;
+}
+
+#tail_no_val{
+    border-style: solid;
+    border-radius: 2%;
+    border-color: black;
+    border-width: 2px;
 }
