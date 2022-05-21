@@ -199,9 +199,9 @@ class Flight_Dispatcher_Model extends Dbh
     }
     
     //insert the new flight into database
-    protected function addNewPlanes($id, $origin, $destination, $airplane_id, $business_price, $economy_price, $platinum_price, $departure_time, $departure_date, $flight_time, $state){
-        $query = "INSERT INTO `flight` (`id`, `origin`, `destination`, `airplane_id`, `business_price`, `economy_price`, `platinum_price`, `departure_time`, `departure_date`, `flight_time`, `state`) VALUES ('{$id}', '{$origin}', '{$destination}', '{$airplane_id}', '{$business_price}', '{$economy_price}', '{$platinum_price}', '{$departure_time}', '{$departure_date}', '{$flight_time}', '{$state}')";
-        echo $query;
+    protected function addNewFlightFromModel($origin, $destination, $airplane_id, $business_price, $economy_price, $platinum_price, $departure_time, $departure_date, $flight_time, $state){
+        $query = "INSERT INTO flight(origin, destination, airplane_id, business_price, economy_price, platinum_price, departure_time, departure_date, flight_time, state) VALUES
+        ('{$origin}', '{$destination}', '{$airplane_id}', '{$business_price}', '{$economy_price}', '{$platinum_price}', '{$departure_time}', '{$departure_date}', '{$flight_time}', '{$state}')";
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
     }

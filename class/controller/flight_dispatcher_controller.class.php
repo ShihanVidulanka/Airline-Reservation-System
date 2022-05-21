@@ -120,7 +120,7 @@ class Flight_Dispatcher_Controller extends Flight_Dispatcher_Model
         return $minutes;
     }
 
-    public function validateAddNewFlight($tail_no, $destination, $economy_price, $platinum_price, $business_price, $departure_date_time_string, $arrival_date_time_string)
+    public function addNewFlight($tail_no, $destination, $economy_price, $platinum_price, $business_price, $departure_date_time_string, $arrival_date_time_string)
     {
         $origin_code = $_SESSION['airport_code'];
         $destination_code = $this->getAirportCode($destination);
@@ -129,25 +129,13 @@ class Flight_Dispatcher_Controller extends Flight_Dispatcher_Model
         $departure_time = (new DateTime($departure_date_time_string))->format('H:i:s');
 
         $flight_time = $this->getFlightTime($departure_date_time_string, $arrival_date_time_string);
-        echo $flight_time;
         
-        if (is_numeric($economy_price) == false || $economy_price < 0) {
-            echo 'inside';
-            $error = 'Invalid Economy Seat Price';
-        } elseif (is_numeric($platinum_price) == false || $platinum_price < 0) {
-            echo 'inside';
-            $error = 'Invalid Economy Seat Price';
-        } elseif (is_numeric($business_price) == false || $business_price < 0) {
-            echo 'inside';
-            $error = 'Invalid Economy Seat Price';
-        } elseif ($departure_date_time_string > $arrival_date_time_string) {
-            echo 'tak';
-            $error = 'Invalid Departure Date/Time and Arrival Date/Time';
-        }
-        elseif($flight_time<=0 || $flight_time>1440){
-            echo 'time';
-            $error = 'Invalid Flight T. :Flight T. should be less than 24hrs';
-        }
+        // echo "<br>".$departure_date;
+        // echo "<br>".$departure_time;
+        // echo "<br>".$flight_time;
+        //$id, $origin, $destination, $airplane_id, $business_price, $economy_price, $platinum_price, $departure_time, $departure_date, $flight_time, $state
+        $this->addNewFlightFromModel($origin_code, $destination_code, $airplane_id, $business_price, $economy_price, $platinum_price, $departure_time, $departure_date, $flight_time, 0);
+        
     }
 
     public function getFreeAriplanes($airport, $departure_date_time, $departure_date, $departure_time)

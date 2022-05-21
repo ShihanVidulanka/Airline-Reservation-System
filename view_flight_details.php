@@ -16,6 +16,8 @@
         <div id="he"></div>
     </form>
 
+    <input type="datetime-local" id="txtDate" min="2022-05-21T16:30"; ?>">
+    
     <script>
         var radios = document.forms["formA"].elements["myradio"];
         for (var i = 0, max = radios.length; i < max; i++) {

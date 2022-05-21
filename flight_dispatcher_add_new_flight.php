@@ -8,11 +8,13 @@ if (!isset($_SESSION['ID'])) {
   header("Location: login.php");
   return;
 }
+if (isset($_GET['success'])) {
+  $error = 'Flight Succesfully Added';
+}
 
 $view = new Flight_Dispatcher_View();
-$tail_nos = $view->getTailNos();
 $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
-// print_r($destinations);
+
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +70,20 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
   <div class="container pt-5">
     <div class="wrapper p-3">
       <h1 id="heading" class="mb-4">Add New Flight</h1>
-      <form action="include/flight_dispatcher_add_new_flight.inc.php" method="POST">
+      <form id="add_new_flight_form" action="include/flight_dispatcher_add_new_flight2.inc.php" method="POST">
+
+        <div class="row mb-3" id="error">
+          <?php
+          if (isset($_GET['error'])) {
+            if ($_GET['error'] == 'SUCCESS') {
+              $error = 'Flight Succesfully Added';
+              echo "<p>" . "{$error}" . "</p>";
+            }
+          }
+
+          ?>
+
+        </div>
 
         <!-- Destination in Words -->
         <div class="row mb-3">
@@ -89,16 +104,22 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
         <div class="row mb-3">
           <div class="col-sm-6">
             <label for="departure_date" class="form-label">Departure Date/Time</label>
-            <input required class="form-control" type="datetime-local" name="departure_date_time" id="departure_date_time" placeholder="Enter the Date/Time">
+            <input required class="form-control" type="datetime-local" name="departure_date_time" id="departure_date_time" placeholder="Enter the Date/Time" min="<?php echo date("Y-m-d") . "T01:30"; ?>">
           </div>
 
           <!-- Apprx. Arrival Date/Time -->
           <div class="col-sm-6">
             <label for="arrival_date" class="form-label">Apprx. Arrival Date/Time</label>
-            <input required class="form-control" type="datetime-local" name="arrival_date_time" id="arrival_date_time" placeholder="Enter the Time/Date">
+            <input required class="form-control" type="datetime-local" name="arrival_date_time" id="arrival_date_time" placeholder="Enter the Time/Date" min="<?php echo date("Y-m-d") . "T01:30"; ?>">
           </div>
         </div>
 
+        <div class="row mb-3">
+          <div class="col-sm-6" id="departure_date_validation"></div>
+          <div class="col-sm-6" id="arrival_date_validation">
+
+          </div>
+        </div>
 
         <div class="row mb-3">
 
@@ -119,7 +140,7 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
           <!-- Airplane Tail No. -->
           <div class="col-sm-6 hide" id="show1">
             <label class="form-label">Airplane Tail No.</label>
-            <select required class="form-control" name="tail_no" id="tail_no">
+            <select required="" class="form-control" name="tail_no" id="tail_no">
               <option value="" selected hidden disabled>--Select the Airplane Tail No--</option>
 
             </select>
@@ -128,7 +149,7 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
           <!-- NEW Airplane Tail No. -->
           <div class="col-sm-6 hide" id="show2">
             <label class="form-label">Free Airplane Tail No.</label>
-            <select required class="form-control" name="free_tail_no" id="free_tail_no">
+            <select required="" class="form-control" name="free_tail_no" id="free_tail_no">
               <option value="" selected hidden disabled>--Select the Airplane Tail No--</option>
 
             </select>
@@ -163,19 +184,19 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
           <!-- Economy Class Price -->
           <div class="col-sm-4">
             <label class="form-label">Economy Class Price</label>
-            <input required onchange="valdiatePrice('economy_validation', this.value)" class="form-control" type="text" name="economy_price" placeholder="Enter the Price">
+            <input required class="form-control" type="text" name="economy_price" id="economy_price" placeholder="Enter the Price">
           </div>
 
           <!-- Business Class Price -->
           <div class="col-sm-4">
             <label class="form-label">Business Class Price</label>
-            <input onchange="valdiatePrice('business_validation', this.value)" required class="form-control" type="text" name="business_price" placeholder="Enter the Price">
+            <input required class="form-control" type="text" name="business_price" id="business_price" placeholder="Enter the Price">
           </div>
 
           <!-- Platinum Class Price -->
           <div class="col-sm-4">
             <label class="form-label">Platinum Class Price</label>
-            <input onchange="valdiatePrice('platinum_validation', this.value)" required class="form-control" type="text" name="platinum_price" placeholder="Enter the Price">
+            <input required class="form-control" type="text" name="platinum_price" id="platinum_price" placeholder="Enter the Price">
           </div>
 
         </div>
@@ -192,7 +213,8 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
 
         <!-- Submit button -->
         <div class="btn-group">
-          <button class="btn btn-primary buttons" name='submit' type="submit">Add</button>
+          <input onclick="checkAll();" class="btn btn-primary buttons" type="button" name='create' value="ADD">
+
         </div>
       </form>
     </div>
