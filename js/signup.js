@@ -139,6 +139,11 @@ function emailListner() {
   }
 }
 
+function remove_tp(){
+  var x = document.getElementById("telephone_numbers_list");
+  x.remove(x.selectedIndex);
+}
+
 function addtelephone() {
   let telephone = document.getElementById('telephone');
   let errormsg = document.getElementById('telephone_val');
@@ -149,7 +154,7 @@ function addtelephone() {
     option.text = telephone.value;
     // console.log(option.text);
     telephone_number_list.appendChild(option);
-    telephone_numbers.value += telephone.value + ',';
+    // telephone_numbers.value += telephone.value + ',';
     telephone.value = '';
   } else {
     errormsg.innerHTML = 'Invalid telephone!';
@@ -231,6 +236,11 @@ function checkPassportNo() {
 
 //validations
 function checkAll() {
+
+  for (var option of document.getElementById("telephone_numbers_list").options) {
+    document.getElementById("telephone_numbers").value+=option.value + ',';
+  }
+
   let error_count = 0;
   if (!validateName(first_name.value)) {
     error_count++;

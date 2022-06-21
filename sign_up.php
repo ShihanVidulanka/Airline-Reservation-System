@@ -100,11 +100,18 @@ if(isset($_SESSION['errors'])){
                         <div Id="telephone_val" class="m-3"></div>
                     </div>
                     <div class="col-sm-6">
-                    <label for="telephone_numbers" class="form-label">Telephone Numbers List:</label>
-                    <select name="" id="telephone_numbers_list" class="form-control" multiple disabled></select>
+                        <label for="telephone_numbers" class="form-label">Telephone Numbers List:</label>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <select name="" id="telephone_numbers_list" class="form-control" multiple></select>
+                            </div>
+                            <div class="col-sm-4">
+                                <button class="btn btn-primary" onclick="remove_tp()">Remove</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <input type="text" id="telephone_numbers" class="form-control" hidden name="telephone_numbers">
+                <input type="text" id="telephone_numbers" class="form-control"  name="telephone_numbers" hidden>
 
 
                 <div class="row mb-3">
