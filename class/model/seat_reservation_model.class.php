@@ -5,7 +5,7 @@ class Seat_Reservation_Model extends Dbh{
 
     public function checkForBookedSeat($flight_id,$passenger_id){
         $pdo = $this->connect();
-        $query="SELECT * FROM booking WHERE flight_id=:flight_id AND passenger_id=:passenger_id";
+        $query="SELECT * FROM booking WHERE flight_id=:flight_id AND passenger_id=:passenger_id AND state=0";
         $stmt=$pdo->prepare($query);
         $stmt->execute(
                 array(
@@ -69,7 +69,7 @@ class Seat_Reservation_Model extends Dbh{
 
     public function getReservedSeats($flight_id){
         $pdo = $this->connect();
-        $query = "SELECT * FROM booking WHERE flight_id=:flight_id";
+        $query = "SELECT * FROM booking WHERE flight_id=:flight_id AND state=0";
         $stmt = $pdo->prepare($query);
         $stmt->execute(
             array(

@@ -30,7 +30,7 @@ class Flight_View extends Flight_Model{
                     echo '<td>'.$flight['business_price'].'</td>';
                     echo '<td>'.$flight['platinum_price'].'</td>';  
                     echo '<td>'.$flight['departure_date'].'</td>';  
-                    echo '<td>'.$flight['flight_time'].'</td>';  
+                    echo '<td>'.$flight['departure_time'].'</td>';
                     echo '<td>'.$flight['flight_time'].'</td>';  
                     echo '<td><button class="button btn btn-primary" onclick="sendFlightId('.$flight['id'].');">Book this Flight</button></td>'; 
                 echo "</tr>";    
@@ -43,7 +43,7 @@ class Flight_View extends Flight_Model{
                     echo '<td>'.$flight['business_price'].'</td>';
                     echo '<td>'.$flight['platinum_price'].'</td>';  
                     echo '<td>'.$flight['departure_date'].'</td>';  
-                    echo '<td>'.$flight['flight_time'].'</td>';  
+                    echo '<td>'.$flight['departure_time'].'</td>';
                     echo '<td>'.$flight['flight_time'].'</td>';  
                     echo '<td><button class="button btn btn-danger" disabled >BOOKED</button></td>'; 
                 echo "</tr>";

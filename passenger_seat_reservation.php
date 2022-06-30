@@ -106,6 +106,7 @@ $reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
                     <input hidden type="text" name="seat_type" id="seat_type">
                     <div class="button" >
                         <button type="button" onclick="checkSeatAvailability();" class="btn btn-primary">Book Now</button>
+                        <a class="btn btn-primary" href="passenger_flight_booking.php">Back</a>
                     </div>
                 </form>
             </div>
