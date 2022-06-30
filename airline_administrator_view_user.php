@@ -124,13 +124,16 @@ $oa_previous_user_id = "";
             <div class="wrapper p-3">
                 <h1 id="heading" class="mb-4">Flight Dispatchers</h1>
                 <form class="form-inline flex-container" action="airline_administrator_view_user.php" method="get">
-                    <div class="type col-sm-9">
-                        <input class="form-control flex-child" name="fd_search" type="search" placeholder="Search by Id, Name, etc." aria-label="Search" value="<?php echo $fd_search; ?>" autofocus>
-                    </div>
+                    <div class="row">
+                        <div class="type col-sm-9">
+                            <input class="form-control flex-child" name="fd_search" type="search" placeholder="Search by Id, Name, etc." aria-label="Search" value="<?php echo $fd_search; ?>" autofocus>
+                        </div>
 
-                    <div class="search col-sm-2">
-                        <button class="btn btn-light flex child" type="submit"><a href="airline_administrator_view_user.php">Refresh</a></button>
+                        <div class="search col-sm-3">
+                            <button class="btn btn-light flex-child" type="submit">Refresh</button>
+                        </div>
                     </div>
+                    
                 </form>
                 <table class="table table-striped">
                     <thead>
