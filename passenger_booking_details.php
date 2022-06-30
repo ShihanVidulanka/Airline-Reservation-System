@@ -60,6 +60,17 @@ if (isset($_GET['error'])) {
             </div>
         </div>
     </nav>
+
+    <?php
+    if(strcmp($bookingError,"SUCCESS")==0){
+        echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
+        Booking Removed Successfully!!!
+        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
+      </div>";
+    }
+    ?>
+
+
     <div class="container p-3">
 
         <div class="search">
@@ -104,7 +115,7 @@ foreach ($destinations as $destination) {
                                     <td>{$flight['ticket_price']}</td>
                                     <td>{$flight['departure_date']}</td>
                                     <td>{$flight['departure_time']}</td>
-                                    <td><button class='btn btn-danger'>Cancel Booking</button></td>
+                                    <td><button onclick=\"cancel_booking('{$flight['id']}');\" class='btn btn-danger'>Cancel Booking</button></td>
                                 </tr>
                             
                             ";
@@ -113,10 +124,15 @@ foreach ($destinations as $destination) {
                 </tbody>
             </table>
 
+            <form action="include/passenger_flight_booking_details.inc.php" method="post" id="bookingform" hidden>
+                <input type="text" id="booking" name="booking_id">
+            </form>
+
         </div>
 
     </div>
     <script src="js/additional.js"></script>
+    <script src="js/passenger_booking_details.js"></script>
 </body>
 
 </html>
