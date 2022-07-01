@@ -7,12 +7,12 @@ $seat_reservation_view = new Seat_Reservation_View();
 // print_array($_SESSION);
 $destinations = $seat_reservation_view->getBookedFlightDestinationsFromModel($_SESSION['passenger_id']);
 // print_array($destinations);
-$tcontent = $seat_reservation_view->getBookedFlightDetailsFromModel($_SESSION['passenger_id']);
+//$tcontent = $seat_reservation_view->getBookedFlightDetailsFromModel($_SESSION['passenger_id']);
 // print_array($tcontent);
 
-if (isset($_POST['submit'])) {
-    $flights = $flight_view->getFlightDetailsFromModel($_POST['destination']);
-}
+//if (isset($_POST['submit'])) {
+//    $flights = $flight_view->getFlightDetailsFromModel($_POST['destination']);
+//}
 $bookingError = "";
 if (isset($_GET['error'])) {
     $bookingError = $_GET['error'];
@@ -32,7 +32,7 @@ if (isset($_GET['error'])) {
     <title>Booking Details</title>
 </head>
 
-<body>
+<body onload="filter()">
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">B Airline</a>
@@ -76,7 +76,7 @@ if (isset($_GET['error'])) {
         <div class="search">
             <form class="d-flex mb-3">
             <label for="destination" id="destination_label">Select your destination:</label>
-        <select name="destination" id="destination" class="form-control me-2">
+        <select name="destination" id="destination" class="form-control me-2" onchange="filter()">
           <option value="all">All</option>
         <?php
 foreach ($destinations as $destination) {
@@ -85,6 +85,10 @@ foreach ($destinations as $destination) {
 }
 ?>
         </select>
+            </form>
+
+            <form action="include/passenger_flight_booking_details.inc.php" method="post" id="destform" hidden>
+                <input type="text" id="dest" name="dest">
             </form>
         </div>
 
@@ -102,24 +106,9 @@ foreach ($destinations as $destination) {
                         <th>Book</th>
                     </tr>
                 </thead>
-                <tbody id="tablebody">
+                <tbody id="bookingtable">
                     <?php 
-                        foreach ($tcontent as $flight) {
-                            echo "
-                                <tr>
-                                    <td>{$flight['airplane']}</td>
-                                   
-                                    <td>{$flight['origin']}</td>
-                                    <td>{$flight['destination']}</td>
-                                    <td>{$flight['seat_type']}</td>
-                                    <td>{$flight['ticket_price']}</td>
-                                    <td>{$flight['departure_date']}</td>
-                                    <td>{$flight['departure_time']}</td>
-                                    <td><button onclick=\"cancel_booking('{$flight['id']}');\" class='btn btn-danger'>Cancel Booking</button></td>
-                                </tr>
-                            
-                            ";
-                        }
+
                     ?>
                 </tbody>
             </table>

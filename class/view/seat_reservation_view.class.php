@@ -26,8 +26,25 @@ class Seat_Reservation_View extends Seat_Reservation_Model{
         return $this->getBookedFlightDestinations(remove_unnessaries($passenger_id));
     }
 
-    public function getBookedFlightDetailsFromModel($passenger_id){
-        return $this->getBookedFlightDetails(remove_unnessaries($passenger_id));
+    public function getBookedFlightDetailsFromModel($passenger_id,$dest){
+        $tcontent =  $this->getBookedFlightDetails(remove_unnessaries($passenger_id),remove_unnessaries($dest));
+
+        foreach ($tcontent as $flight) {
+            echo "
+                                <tr>
+                                    <td>{$flight['airplane']}</td>
+
+                                    <td>{$flight['origin']}</td>
+                                    <td>{$flight['destination']}</td>
+                                    <td>{$flight['seat_type']}</td>
+                                    <td>{$flight['ticket_price']}</td>
+                                    <td>{$flight['departure_date']}</td>
+                                    <td>{$flight['departure_time']}</td>
+                                    <td><button onclick=\"cancel_booking('{$flight['id']}');\" class='btn btn-danger'>Cancel Booking</button></td>
+                                </tr>
+
+                            ";
+        }
     }
 }
 // $seat_reservation_view = new Seat_Reservation_View();
