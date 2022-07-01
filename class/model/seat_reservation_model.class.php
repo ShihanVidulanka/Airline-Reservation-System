@@ -85,9 +85,11 @@ class Seat_Reservation_Model extends Dbh{
     }
     public function getBookedFlightDestinations($passenger_id){
         $pdo = $this->connect();
+        date_default_timezone_set("Asia/Colombo");
+        $date = Date("Y-m-d");
         $query = "SELECT af.id, af.airport_code,af.name,af.country, b.passenger_id,b.state
                     FROM booking AS b INNER JOIN 
-                    (SELECT f.id, a.airport_code,a.name,a.country FROM airport AS a INNER JOIN flight AS f ON a.airport_code = f.destination) 
+                    (SELECT f.id, a.airport_code,a.name,a.country FROM airport AS a INNER JOIN flight AS f ON a.airport_code = f.destination AND f.departure_date>'".$date."'".") 
                     AS af ON af.id = b.flight_id 
                     WHERE passenger_id=:passenger_id AND b.state=0";
         $stmt = $pdo->prepare($query);
@@ -102,6 +104,8 @@ class Seat_Reservation_Model extends Dbh{
 
     public function getBookedFlightDetails($passenger_id,$dest='all'){
         $pdo = $this->connect();
+        date_default_timezone_set("Asia/Colombo");
+        $date = Date("Y-m-d");
         $destination = '';
         if(strcmp($dest,'all')!=0){
             $destination = "AND f.destination="."'".$dest."'";
@@ -110,7 +114,7 @@ class Seat_Reservation_Model extends Dbh{
                     FROM airplane AS a 
                     INNER JOIN 
                     (SELECT b.id, b.flight_id,b.passenger_id, f.origin, f.destination, b.seat_type, b.state, b.ticket_price, f.airplane_id, f.departure_time, f.departure_date 
-                    FROM booking as b INNER JOIN flight as f ON b.flight_id = f.id WHERE b.state=0 AND b.passenger_id=:passenger_id {$destination} ) 
+                    FROM booking as b INNER JOIN flight as f ON b.flight_id = f.id WHERE b.state=0 AND b.passenger_id=:passenger_id {$destination} AND departure_date>'".$date."'"." ) 
                     as bf ON a.id = bf.airplane_id";
         $stmt = $pdo->prepare($query);
         $stmt->execute(

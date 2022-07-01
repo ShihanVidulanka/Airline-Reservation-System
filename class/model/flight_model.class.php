@@ -7,8 +7,12 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 class Flight_Model extends Dbh{
     public function getFlightDetails($destination=null){
         $pdo = $this->connect();
+
+        date_default_timezone_set("Asia/Colombo");
+        $date = Date("Y-m-d");
+//        echo $date;
         if(is_null($destination)||strcmp($destination,'all')==0){
-            $query="SELECT * FROM flight WHERE state=0 ORDER BY departure_date,departure_time";
+            $query="SELECT * FROM flight WHERE state=0 AND departure_date>'".$date."'"."ORDER BY departure_date,departure_time";
             
         // $query = "SELECT * FROM flight 
         //             WHERE state=0
@@ -22,9 +26,8 @@ class Flight_Model extends Dbh{
                 // )
         );
         }else{
-            $query="SELECT * FROM flight WHERE state=0 AND destination=:destination ORDER BY departure_date,departure_time ";
-
-            // $query = "SELECT * FROM flight 
+            $query="SELECT * FROM flight WHERE state=0 AND departure_date>'".$date."'"." AND destination=:destination ORDER BY departure_date,departure_time ";
+            // $query = "SELECT * FROM flight
             //             WHERE state=0 AND destination=:destination
             //             AND id NOT IN (SELECT flight_id FROM booking WHERE passenger_id=:passenger_id)
             //             ORDER BY departure_date,departure_time";
