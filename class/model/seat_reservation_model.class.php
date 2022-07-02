@@ -114,7 +114,7 @@ class Seat_Reservation_Model extends Dbh{
                     FROM airplane AS a 
                     INNER JOIN 
                     (SELECT b.id, b.flight_id,b.passenger_id, f.origin, f.destination, b.seat_type, b.state, b.ticket_price, f.airplane_id, f.departure_time, f.departure_date 
-                    FROM booking as b INNER JOIN flight as f ON b.flight_id = f.id WHERE b.state=0 AND b.passenger_id=:passenger_id {$destination} AND departure_date>'".$date."'"." ) 
+                    FROM booking as b INNER JOIN flight as f ON b.flight_id = f.id WHERE b.state=0 AND b.passenger_id=:passenger_id {$destination} AND f.departure_date>'".$date."'"." ) 
                     as bf ON a.id = bf.airplane_id";
         $stmt = $pdo->prepare($query);
         $stmt->execute(
