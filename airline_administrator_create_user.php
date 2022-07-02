@@ -16,7 +16,7 @@ if (isset($_SESSION['errors'])) {
     unset($_SESSION['errors']);
 }
 // print_array($errors)
-$controller=new Airline_Administrator_Controller();
+$controller = new Airline_Administrator_Controller();
 $destinations = $controller->get_all_airports();
 ?>
 
@@ -77,7 +77,7 @@ $destinations = $controller->get_all_airports();
 
     <!-- create a form  -->
     <div class="container p-3">
-        <form STYLE="padding-left:5px" id = "topics">
+        <form STYLE="padding-left:5px" id="topics">
             <input TYPE="radio" NAME="RadioGroupName" ID="GroupName1" ONCLICK="ShowRadioButtonDiv('GroupName', 2)" />Add New Flight Dispatcher<br>
             <input TYPE="radio" NAME="RadioGroupName" ID="GroupName2" ONCLICK="ShowRadioButtonDiv('GroupName', 2)" />Add New Operations Agent<br>
         </FORM>
@@ -141,16 +141,23 @@ $destinations = $controller->get_all_airports();
                                 <label for="fd_telephone" class="form-label">Telephone Number:</label>
                                 <div class="input-group mb-3">
                                     <input required class="form-control" type="tel" name="fd_user_id" id="fd_telephone" placeholder="Enter Your Telephone No:">
-                                    <button type="button" id="fd_add" class="btn btn-primary btn-outline-secondry" onclick="add_fd_telephone();">Add</button>
+                                    <button type="button" id="fd_add" class="btn btn-primary btn-outline-secondry" onclick="fd_addTelephone();">Add</button>
                                 </div>
                                 <div Id="fd_telephone_val" class="m-3"></div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="fd_telephone_numbers" class="form-label">Telephone Numbers List:</label>
-                                <select name="" id="fd_telephone_numbers_list" class="form-control" multiple disabled></select>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <select name="" id="fd_telephone_numbers_list" class="form-control" multiple></select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-primary" onclick="fd_remove_telephone()">Remove</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <input type="text" id="fd_telephone_numbers" class="form-control" hidden name="fd_telephone_numbers">
+                        <input type="text" id="fd_telephone_numbers" class="form-control" name="fd_telephone_numbers" hidden>
                         <div class="btn-group">
                             <button onclick="fd_checkAll();" type="button" class="btn btn-primary buttons" value="fd_create">Create</button>
                         </div>
@@ -225,13 +232,20 @@ $destinations = $controller->get_all_airports();
                                 <label for="oa_telephone" class="form-label">Telephone Number:</label>
                                 <div class="input-group mb-3">
                                     <input required class="form-control" type="tel" name="oa_user_id" id="oa_telephone" placeholder="Enter Your Telephone No:">
-                                    <button type="button" id="oa_add" class="btn btn-primary btn-outline-secondry" onclick="add_oa_telephone();">Add</button>
+                                    <button type="button" id="oa_add" class="btn btn-primary btn-outline-secondry" onclick="oa_addTelephone();">Add</button>
                                 </div>
                                 <div Id="oa_telephone_val" class="m-3"></div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="oa_telephone_numbers" class="form-label">Telephone Numbers List:</label>
-                                <select name="" id="oa_telephone_numbers_list" class="form-control" multiple disabled></select>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <select name="" id="oa_telephone_numbers_list" class="form-control" multiple></select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-primary" onclick="oa_remove_telephone()">Remove</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <input type="text" id="oa_telephone_numbers" class="form-control" hidden name="oa_telephone_numbers">
