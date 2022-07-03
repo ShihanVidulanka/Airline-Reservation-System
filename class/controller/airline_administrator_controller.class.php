@@ -17,6 +17,8 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
             'telephone_numbers'=>$flight_Dispatcher->getTelephoneNo()
         );
         $this->createAccount($details, $details['account_type']);
+        header("location: ../airline_administrator_create_user.php");
+
     }
 
     public function createOperationsAgentFromModel(Operations_Agent $operations_Agent){
@@ -33,6 +35,7 @@ class Airline_Administrator_Controller extends Airline_Administrator_Model{
         );
 
         $this->createAccount($details, $details['account_type']);
+        header("location: ../airline_administrator_create_user.php");
     }
 
     public function checkUsernameFromModel($username) {
