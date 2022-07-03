@@ -47,7 +47,7 @@ $departure_flight_details=$operation_agent_view->departureFlightDetails();
                         <a class="nav-link" href="operation_agent_home.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="operation_agent_view_passengers_flight.php">Flight Details of Passengers</Details></a>
+                        <a class="nav-link active" href="operation_agent_view_passengers_flight.php">Flight Details</Details></a>
                     
                     </li>
                     
