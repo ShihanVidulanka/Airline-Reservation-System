@@ -139,7 +139,19 @@
                     <p>:</p>
                 </div>
                 <div class="col-sm-6">
-                    <p><?php echo $category; ?></p>
+                    <?php
+                        if($category==1){
+                          echo "
+                            <p>Regular Passenger</p>
+                          ";
+                        }else{
+                            echo "
+                            <p>General Passenger</p>
+                          ";
+                        }
+                    ?>
+
+
                 </div>
             </div>
 
