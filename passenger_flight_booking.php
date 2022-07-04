@@ -72,6 +72,12 @@
         <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
       </div>";
     }
+    else if(strcmp($bookingError,"regular")==0){
+      echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
+        Payment is success and You are Regular Passenger now!!!
+        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
+      </div>";
+    }
   ?>
   <div class="container p-3">
 

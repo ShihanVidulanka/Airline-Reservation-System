@@ -13,7 +13,9 @@ class Flight_Model extends Dbh{
         $time = date("H:i:s");
 //        echo $date;
         if(is_null($destination)||strcmp($destination,'all')==0){
-            $query="SELECT * FROM flight WHERE state=0 AND departure_date>='".$date."'"." AND departure_time>"."'".$time."'"." ORDER BY departure_date,departure_time";
+            $query="SELECT * FROM flight WHERE state=0 AND 
+                           (departure_date>'".$date."' OR (departure_date='".$date."'"." AND departure_time>"."'".$time."'))"." 
+                           ORDER BY departure_date,departure_time";
 
         // $query = "SELECT * FROM flight 
         //             WHERE state=0
@@ -27,7 +29,9 @@ class Flight_Model extends Dbh{
                 // )
         );
         }else{
-            $query="SELECT * FROM flight WHERE state=0 AND departure_date>='".$date."'"." AND departure_time>"."'".$time."'"." AND destination=:destination ORDER BY departure_date,departure_time ";
+            $query="SELECT * FROM flight WHERE state=0 AND 
+                           (departure_date>'".$date."' OR (departure_date='".$date."'"." AND departure_time>"."'".$time."'))"." 
+                           AND destination=:destination ORDER BY departure_date,departure_time ";
             // $query = "SELECT * FROM flight
             //             WHERE state=0 AND destination=:destination
             //             AND id NOT IN (SELECT flight_id FROM booking WHERE passenger_id=:passenger_id)

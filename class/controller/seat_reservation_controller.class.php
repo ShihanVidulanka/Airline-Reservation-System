@@ -23,7 +23,8 @@ class Seat_Reservation_Controller extends Seat_Reservation_Model{
       }
       
    }
-   public function checkForBookedSeatFromModel($flight_id,$passenger_id){
-      $this->checkForBookedSeat(remove_unnessaries($flight_id),remove_unnessaries($passenger_id));
+   public function checkForBookedSeat($flight_id,$passenger_id){
+      return $this->checkForBookedSeatFromModel(remove_unnessaries($flight_id),remove_unnessaries($passenger_id));
    }
+
 }

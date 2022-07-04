@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/ad
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
 class Seat_Reservation_Model extends Dbh{
 
-    public function checkForBookedSeat($flight_id,$passenger_id){
+    protected function checkForBookedSeatFromModel($flight_id,$passenger_id){
         $pdo = $this->connect();
         $query="SELECT * FROM booking WHERE flight_id=:flight_id AND passenger_id=:passenger_id AND state=3";
         $stmt=$pdo->prepare($query);
@@ -94,8 +94,8 @@ class Seat_Reservation_Model extends Dbh{
         $time = date("H:i:s");
         $query = "SELECT af.id, af.airport_code,af.name,af.country, b.passenger_id,b.state
                     FROM booking AS b INNER JOIN 
-                    (SELECT f.id, a.airport_code,a.name,a.country FROM airport AS a INNER JOIN flight AS f ON a.airport_code = f.destination AND f.departure_date>='".$date."'".
-                    " AND departure_time>"."'".$time."'".") 
+                    (SELECT f.id, a.airport_code,a.name,a.country FROM airport AS a INNER JOIN flight AS f ON a.airport_code = f.destination AND
+                    (f.departure_date>'".$date."' OR (f.departure_date='".$date."'"." AND f.departure_time>"."'".$time."'))".")
                     AS af ON af.id = b.flight_id 
                     WHERE passenger_id=:passenger_id AND b.state=3";
         $stmt = $pdo->prepare($query);
@@ -121,8 +121,8 @@ class Seat_Reservation_Model extends Dbh{
                     FROM airplane AS a 
                     INNER JOIN 
                     (SELECT b.id, b.flight_id,b.passenger_id, f.origin, f.destination, b.seat_type, b.state, b.ticket_price, f.airplane_id, f.departure_time, f.departure_date 
-                    FROM booking as b INNER JOIN flight as f ON b.flight_id = f.id WHERE (b.state=2 OR b.state=3) AND b.passenger_id=:passenger_id {$destination} AND f.departure_date>='".$date."'".
-                    " AND departure_time>"."'".$time."'"." ) 
+                    FROM booking as b INNER JOIN flight as f ON b.flight_id = f.id WHERE (b.state=2 OR b.state=3) AND b.passenger_id=:passenger_id {$destination} AND 
+                    (f.departure_date>'".$date."' OR (f.departure_date='".$date."'"." AND f.departure_time>"."'".$time."'))".")
                     as bf ON a.id = bf.airplane_id";
         $stmt = $pdo->prepare($query);
         $stmt->execute(
@@ -134,6 +134,7 @@ class Seat_Reservation_Model extends Dbh{
         return $results;
     }
     public function pay($booking_id){
+
         $pdo = $this->connect();
         $query = "UPDATE booking SET state=:state WHERE id=:booking_id";
         $stmt = $pdo->prepare($query);
@@ -143,7 +144,14 @@ class Seat_Reservation_Model extends Dbh{
                 ":booking_id"=>$booking_id
             )
         );
-        header('Location:../passenger_flight_booking.php?error=success');
+
+
+        $regular = $this->createRegularCustomer();
+        if(strcmp($regular,"regular")==0){
+            header('Location:../passenger_flight_booking.php?error=regular');
+        }else{
+            header('Location:../passenger_flight_booking.php?error=success');
+        }
 
 
     }
@@ -159,8 +167,42 @@ class Seat_Reservation_Model extends Dbh{
         );
         header('Location:../passenger_flight_booking.php?error=cancelled');
     }
-    public function getNumberofBookingsFromModel($passenger_id){
-        
+    private function getNumberofBookingsFromModel(){
+        $pdo = $this->connect();
+        $username = $_SESSION['username'];
+        $query = "SELECT * FROM booking as b INNER JOIN 
+                    (SELECT * FROM registered_passenger INNER JOIN user ON registered_passenger.user_id = user.ID) as p 
+                        ON b.passenger_id = p.passenger_id 
+                    WHERE b.state=3 AND p.username=:username";
+        $stmt= $pdo->prepare($query);
+        $stmt->execute(
+          array(
+              ":username"=>$username
+          )
+        );
+        $rows=$stmt->rowCount();
+        if($rows>=2){
+            return true;
+        }else{
+            return false;
+        }
+//        $records = $stmt->fetchAll();
+    }
+    protected function createRegularCustomer(){
+        $passenger_id = $_SESSION['passenger_id'];
+        $username = $_SESSION['username'];
+        if($this->getNumberofBookingsFromModel($username)){
+            $pdo = $this->connect();
+            $query = "UPDATE registered_passenger SET category=:category where passenger_id=:passenger_id";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute(
+                array(
+                    ":category"=>1,
+                    ":passenger_id"=>$passenger_id
+                )
+            );
+            return "regular";
+        }
     }
 }
 

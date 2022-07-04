@@ -9,3 +9,4 @@ $time = date("H:i:s");
 echo $time;
 
 
+print_array($_SESSION);

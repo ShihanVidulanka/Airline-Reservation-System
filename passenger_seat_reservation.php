@@ -53,7 +53,7 @@ $reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
                                                     <?php echo $flight->getEconomy_price();?> 
                                             )"
                             >
-                            <option value="">Select</option>
+                            <option value="0">Select</option>
                             <?php
 
                                 $seat_count = $airplane->getNo_business_seats() + $airplane->getNo_economy_seats() + $airplane->getNo_platinum_seats();
