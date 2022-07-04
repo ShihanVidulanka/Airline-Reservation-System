@@ -42,7 +42,7 @@
                     <input type="password" id="password" class="fadeIn third" name="password" placeholder="Enter the Password" />
 
 
-                    <i class="bi bi-eye-fill" id="togglePassword"></i>
+                    <i class="bi bi-eye-fill fadeIn third" id="togglePassword"></i>
 
 
                     <!-- <div>

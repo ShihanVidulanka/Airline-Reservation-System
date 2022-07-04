@@ -1,0 +1,48 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    
+    background: url("../img/background.jpg") center fixed;
+    background-size: cover;
+
+}
+#heading{
+    text-align: center;
+    /* background-color:blue; */
+    color: rgb(15, 27, 189);
+    font-family: 'Playfair Display', serif;
+}
+.wrapper{
+
+    max-width: 60%;
+    background-color: rgba(183, 199, 213,0.8);
+    font-weight: bold;
+    margin: 1% auto;
+    border-radius: 10px;
+    overflow: auto;
+    align-items: center;
+}
+.wrapper.h4{
+    font-style: italic;
+}
+label.form-label{
+    color: black;
+}
+.btn-group{
+    float: right;
+}
+.buttons{
+    width: 125px;;
+}
+
+.hide{
+    display: none;
+}
+
+#tail_no_val{
+    border-style: solid;
+    border-radius: 2%;
+    border-color: black;
+    border-width: 2px;
+}

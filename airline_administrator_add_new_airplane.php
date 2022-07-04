@@ -59,6 +59,9 @@ $view = new Airline_Administrator_View();
                     <li class="nav-item">
                         <a class="nav-link active" href="airline_administrator_add_new_airplane.php">Add New Airplane</a>
                     </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="airline_administrator_add_new_airport.php">Add New Flight</a>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

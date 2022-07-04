@@ -23,6 +23,20 @@ class Airline_Administrator_View extends Airline_Administrator_Model{
         }
     }
 
+    public function showErrorAddNewAirport($error)
+    {
+        if ($error == 'SUCCESS'){
+            echo '<div class="alert alert-success" role="alert">';
+            echo "<p>Successfully Added</p>";
+            echo '</div>';
+        } 
+        else{
+            echo '<div class="alert alert-danger" role="alert">';
+            echo "<p>{$error}</p>";
+            echo '</div>';
+        } 
+    }
+
 
 }
 ?>
