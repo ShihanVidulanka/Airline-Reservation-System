@@ -107,6 +107,7 @@
             <th>Economy Price</th>
             <th>Buisiness Price</th>
             <th>Platinum Price</th>
+            <th>Discount</th>
             <th>Departure Date</th>
             <th>Departure Time</th>
             <th>Flight Time</th>
