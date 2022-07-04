@@ -35,7 +35,7 @@ $discount = $details['discount'];
 
 
 
-    <title>Home</title>
+    <title>Regular Customer Settings</title>
 </head>
 
 <body>

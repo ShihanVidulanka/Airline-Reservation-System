@@ -204,6 +204,20 @@ class Seat_Reservation_Model extends Dbh{
             return "regular";
         }
     }
+    protected function checkForRegularCustomerFromMOdel(){
+        $pdo = $this->connect();
+        $passenger_id = $_SESSION['passenger_id'];
+        $query="SELECT category FROM registered_passenger where passenger_id=:passenger_id";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute(
+            array(
+                ":passenger_id"=>$passenger_id
+            )
+        );
+        $result = $stmt->fetch();
+        return $result['category'];
+
+    }
 }
 
 // $a = new Seat_Reservation_Model();
