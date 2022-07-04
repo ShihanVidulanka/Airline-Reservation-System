@@ -119,7 +119,7 @@ class Airline_Administrator_Model extends Dbh
         FROM booking join registered_passenger on booking.passenger_id=registered_passenger.passenger_id 
         where flight_id=$flight_no AND
         TIMESTAMPDIFF(year, dob, DATE(booking_time))>=18 AND
-        state=3
+        state=0
         ";
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
@@ -133,7 +133,7 @@ class Airline_Administrator_Model extends Dbh
         FROM booking join registered_passenger on booking.passenger_id=registered_passenger.passenger_id 
         where flight_id=$flight_no AND
         TIMESTAMPDIFF(year, dob, DATE(booking_time))<18 AND
-        state=3
+        state=0
 
         ";
         $stmt1 = $this->connect()->prepare($query1);
@@ -150,7 +150,7 @@ class Airline_Administrator_Model extends Dbh
         FROM booking join guest on booking.passenger_id=guest.passenger_id 
         where flight_id=$flight_no AND
         TIMESTAMPDIFF(year, dob, DATE(booking_time))>=18 and
-        state=3
+        state=0
         ";
         $stmt2 = $this->connect()->prepare($query2);
         $stmt2->execute();
@@ -164,7 +164,7 @@ class Airline_Administrator_Model extends Dbh
         FROM booking join guest on booking.passenger_id=guest.passenger_id 
         where flight_id=$flight_no AND
         TIMESTAMPDIFF(year, dob, DATE(booking_time))<18 and
-        state=3
+        state=0
         ";
         $stmt3 = $this->connect()->prepare($query3);
         $stmt3->execute();

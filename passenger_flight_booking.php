@@ -66,6 +66,11 @@
         Seat is already booked. Try another seat!!!
         <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
       </div>";
+    }else if(strcmp($bookingError,"cancelled")==0){
+      echo "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">
+        Payment cancelled!!!
+        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
+      </div>";
     }
   ?>
   <div class="container p-3">

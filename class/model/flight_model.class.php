@@ -10,10 +10,11 @@ class Flight_Model extends Dbh{
 
         date_default_timezone_set("Asia/Colombo");
         $date = Date("Y-m-d");
+        $time = date("H:i:s");
 //        echo $date;
         if(is_null($destination)||strcmp($destination,'all')==0){
-            $query="SELECT * FROM flight WHERE state=0 AND departure_date>'".$date."'"."ORDER BY departure_date,departure_time";
-            
+            $query="SELECT * FROM flight WHERE state=0 AND departure_date>='".$date."'"." AND departure_time>"."'".$time."'"." ORDER BY departure_date,departure_time";
+
         // $query = "SELECT * FROM flight 
         //             WHERE state=0
         //             AND id NOT IN (SELECT flight_id FROM booking WHERE passenger_id=:passenger_id)
@@ -26,7 +27,7 @@ class Flight_Model extends Dbh{
                 // )
         );
         }else{
-            $query="SELECT * FROM flight WHERE state=0 AND departure_date>'".$date."'"." AND destination=:destination ORDER BY departure_date,departure_time ";
+            $query="SELECT * FROM flight WHERE state=0 AND departure_date>='".$date."'"." AND departure_time>"."'".$time."'"." AND destination=:destination ORDER BY departure_date,departure_time ";
             // $query = "SELECT * FROM flight
             //             WHERE state=0 AND destination=:destination
             //             AND id NOT IN (SELECT flight_id FROM booking WHERE passenger_id=:passenger_id)

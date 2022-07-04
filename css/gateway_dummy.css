@@ -1,0 +1,35 @@
+*{
+    box-sizing: border-box;
+}
+body{
+
+    background: url("../img/background.jpg") center fixed;
+    background-size: cover;
+
+}
+.buttons{
+    text-align: center;
+}
+
+.button{
+    height: 100px;
+    width: 100px;
+    margin-right: 20px;
+}
+
+#heading{
+    /*text-align: center;*/
+    /* background-color:blue; */
+    color: rgb(255, 255, 255);
+    font-family: 'Playfair Display', serif;
+}
+
+.wrapper{
+
+    max-width: 45%;
+    background-color: rgba(183, 199, 213,0.8);
+    font-weight: bold;
+    margin:100px auto;
+    border-radius: 10px;
+    overflow: auto;
+}

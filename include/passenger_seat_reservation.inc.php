@@ -22,7 +22,7 @@ if(isset($_POST['flight_id'])){
         'ticket_price'=>$_POST['ticket_price'],
         'seat_no'=>$_POST['seat_no'],
         'seat_type'=>$_POST['seat_type'],
-        'state'=>0
+        'state'=>2
     );
     $seat_reservation_controller = new Seat_Reservation_Controller();
     $seat_reservation_controller->reserveSeatFromModel($details);

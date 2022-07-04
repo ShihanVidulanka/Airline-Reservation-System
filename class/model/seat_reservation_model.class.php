@@ -5,7 +5,7 @@ class Seat_Reservation_Model extends Dbh{
 
     public function checkForBookedSeat($flight_id,$passenger_id){
         $pdo = $this->connect();
-        $query="SELECT * FROM booking WHERE flight_id=:flight_id AND passenger_id=:passenger_id AND state=0";
+        $query="SELECT * FROM booking WHERE flight_id=:flight_id AND passenger_id=:passenger_id AND state=3";
         $stmt=$pdo->prepare($query);
         $stmt->execute(
                 array(
@@ -48,7 +48,11 @@ class Seat_Reservation_Model extends Dbh{
                 ':state'=>$booking->getState(),
             )
             );
-            header('Location:../passenger_flight_booking.php?error=success');
+        $query = "SELECT LAST_INSERT_ID() as booking_id";
+        $record = $pdo->query($query);
+        $result=$record->fetch();
+        $_SESSION['booking_id'] = $result;
+        header('Location:../payment_gateway_dummy.php?error=success');
         
         
     }
@@ -69,7 +73,7 @@ class Seat_Reservation_Model extends Dbh{
 
     public function getReservedSeats($flight_id){
         $pdo = $this->connect();
-        $query = "SELECT * FROM booking WHERE flight_id=:flight_id AND state=0";
+        $query = "SELECT * FROM booking WHERE flight_id=:flight_id AND (state=2 OR state=3)";
         $stmt = $pdo->prepare($query);
         $stmt->execute(
             array(
@@ -87,11 +91,13 @@ class Seat_Reservation_Model extends Dbh{
         $pdo = $this->connect();
         date_default_timezone_set("Asia/Colombo");
         $date = Date("Y-m-d");
+        $time = date("H:i:s");
         $query = "SELECT af.id, af.airport_code,af.name,af.country, b.passenger_id,b.state
                     FROM booking AS b INNER JOIN 
-                    (SELECT f.id, a.airport_code,a.name,a.country FROM airport AS a INNER JOIN flight AS f ON a.airport_code = f.destination AND f.departure_date>'".$date."'".") 
+                    (SELECT f.id, a.airport_code,a.name,a.country FROM airport AS a INNER JOIN flight AS f ON a.airport_code = f.destination AND f.departure_date>='".$date."'".
+                    " AND departure_time>"."'".$time."'".") 
                     AS af ON af.id = b.flight_id 
-                    WHERE passenger_id=:passenger_id AND b.state=0";
+                    WHERE passenger_id=:passenger_id AND b.state=3";
         $stmt = $pdo->prepare($query);
         $stmt->execute(
             array(
@@ -106,6 +112,7 @@ class Seat_Reservation_Model extends Dbh{
         $pdo = $this->connect();
         date_default_timezone_set("Asia/Colombo");
         $date = Date("Y-m-d");
+        $time = date("H:i:s");
         $destination = '';
         if(strcmp($dest,'all')!=0){
             $destination = "AND f.destination="."'".$dest."'";
@@ -114,7 +121,8 @@ class Seat_Reservation_Model extends Dbh{
                     FROM airplane AS a 
                     INNER JOIN 
                     (SELECT b.id, b.flight_id,b.passenger_id, f.origin, f.destination, b.seat_type, b.state, b.ticket_price, f.airplane_id, f.departure_time, f.departure_date 
-                    FROM booking as b INNER JOIN flight as f ON b.flight_id = f.id WHERE b.state=0 AND b.passenger_id=:passenger_id {$destination} AND f.departure_date>'".$date."'"." ) 
+                    FROM booking as b INNER JOIN flight as f ON b.flight_id = f.id WHERE (b.state=2 OR b.state=3) AND b.passenger_id=:passenger_id {$destination} AND f.departure_date>='".$date."'".
+                    " AND departure_time>"."'".$time."'"." ) 
                     as bf ON a.id = bf.airplane_id";
         $stmt = $pdo->prepare($query);
         $stmt->execute(
@@ -124,6 +132,35 @@ class Seat_Reservation_Model extends Dbh{
             );
         $results=$stmt->fetchAll();
         return $results;
+    }
+    public function pay($booking_id){
+        $pdo = $this->connect();
+        $query = "UPDATE booking SET state=:state WHERE id=:booking_id";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute(
+            array(
+                ":state"=>3,
+                ":booking_id"=>$booking_id
+            )
+        );
+        header('Location:../passenger_flight_booking.php?error=success');
+
+
+    }
+    public function cancel($booking_id){
+        $pdo = $this->connect();
+        $query = "UPDATE booking SET state=:state WHERE id=:booking_id";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute(
+            array(
+                ":state"=>1,
+                ":booking_id"=>$booking_id
+            )
+        );
+        header('Location:../passenger_flight_booking.php?error=cancelled');
+    }
+    public function getNumberofBookingsFromModel($passenger_id){
+        
     }
 }
 
