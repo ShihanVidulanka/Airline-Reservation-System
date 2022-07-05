@@ -168,7 +168,7 @@ if(isset($_SESSION['flight_id'])){
                 echo '<td>' . $value['dob'] . "</td>";
                 $y=$value['passenger_id'];
                 //echo "<td><a class=\"btn btn-sm btn-info\" onclick=\"ConfirmDelete()\" href=\"include/operation_agent_remove_passenger.inc.php?passenger_id={$value['passenger_id']}&onclick={ConfirmDelete()}\">DELETE</a></td>";
-                echo "<td><a class=\"btn btn-sm btn-danger\" onClick=\"javascript: return confirm('Please confirm deletion');\" href=\"include/operation_agent_remove_passenger.inc.php?id={$value['passenger_id']}\">remove</a></td><tr>"; //use double quotes for js inside php!
+                echo "<td><a class=\"btn btn-sm btn-danger\" onClick=\"javascript: return confirm('Please confirm deletion');\" href=\"include/operation_agent_remove_passenger.inc.php?id={$value['passenger_id']}&flight_id={$_SESSION['flight_id']}\">remove</a></td><tr>"; //use double quotes for js inside php!
                 echo '</tr>';
                 
             }?>
@@ -186,7 +186,7 @@ if(isset($_SESSION['flight_id'])){
                 echo '<td>' . $value['dob'] . "</td>";
                 $y=$value['passenger_id'];
                 //echo "<td><a class=\"btn btn-sm btn-info\" onclick=\"ConfirmDelete()\" href=\"include/operation_agent_remove_passenger.inc.php?passenger_id={$value['passenger_id']}&onclick={ConfirmDelete()}\">DELETE</a></td>";
-                echo "<td><a class=\"btn btn-sm btn-danger\" onClick=\"javascript: return confirm('Please confirm deletion');\" href=\"include/operation_agent_remove_passenger.inc.php?id={$value['passenger_id']}\">remove</a></td><tr>"; //use double quotes for js inside php!
+                echo "<td><a class=\"btn btn-sm btn-danger\" onClick=\"javascript: return confirm('Please confirm deletion');\" href=\"include/operation_agent_remove_passenger.inc.php?id={$value['passenger_id']}&flight_id={$_SESSION['flight_id']}\">remove</a></td><tr>"; //use double quotes for js inside php!
                 echo '</tr>';
                 
             }?>
