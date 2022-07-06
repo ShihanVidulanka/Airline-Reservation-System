@@ -269,7 +269,7 @@ function checkAll() {
   }
   if (telephone_numbers.value == '') {
     error_count++;
-    console.log('telephone');
+    // console.log('telephone');
     document.getElementById('telephone_val').innerHTML = 'Empty telephone number!';
     document.getElementById('telephone_val').style.color = 'red';
   }
@@ -281,6 +281,9 @@ function checkAll() {
     passport_numberListner();
   }
   if (!validateDate(dob.value)) {
+    // console.log(dob.value);
+    // console.log(validateDate(dob.value));
+    // console.log( new Date());
     error_count++;
     dobListner();
   }
@@ -303,14 +306,17 @@ function checkAll() {
     let errormsg = document.getElementById('passport_number_val');
     errormsg.innerHTML = 'passport_number is already used!';
     errormsg.style.color = 'red';
-    console.log('password used');
+    // console.log('password used');
 
   }
-  console.log(error_count);
+  // console.log(error_count);
   if (error_count == 0) {
     document.getElementById('signup_form').submit();
+    // console.log(error_count);
   } else {
-    alert('Enter the correct details')
+    document.getElementById("telephone_numbers").value="";
+    alert('Enter the correct details');
+
   }
 
 

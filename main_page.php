@@ -44,7 +44,7 @@
                                 <!-- <li class='active'><a href="#">Popular</a></li> -->
                                 <li><a href="#">Bookings</a>
                                     <ul class="sub-menu">
-                                        <li><a href="passenger_flight_booking.php">Place Booking</a></li>
+                                        <li><a href="guest_flight_booking.php">Place Booking</a></li>
                                         <li><a href="#">View Booking Details</a></li>
                                     </ul>
                                 </li>
