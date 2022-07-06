@@ -36,7 +36,7 @@ if (isset($_GET['error'])) {
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="main_page.php">Main Page</a>
+                        <a class="nav-link" href="index.php">Main Page</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="guest_flight_booking.php">Flight Details</a>

@@ -156,7 +156,7 @@ class Seat_Reservation_Model extends Dbh{
 
         if (!isset($_SESSION['username'])) {
             unset($_SESSION['passenger_id']);
-            header('Location:../main_page.php?error=success');
+            header('Location:../index.php?error=success');
         }
 
         else if(strcmp($regular,"regular")==0){

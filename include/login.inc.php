@@ -2,7 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
 if (isset($_SESSION['login'])) {
-    header("Location: main_page.php");
+    header("Location: index.php");
 }
 
 if (isset($_POST['login'])) {

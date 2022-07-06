@@ -76,7 +76,7 @@ if(isset($_SESSION['errors'])){
                 </div>                
                 <div class="btn-group">
                     <button onclick="checkAll();" type="Submit" class="btn btn-primary buttons" name="Submit" value="Submit">Submit</button>
-                    <a class="btn btn-primary buttons" href="main_page.php">Cancel</a>
+                    <a class="btn btn-primary buttons" href="index.php">Cancel</a>
                 </div>
             </form>
         </div>
