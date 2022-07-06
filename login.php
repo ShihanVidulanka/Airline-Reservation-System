@@ -35,19 +35,16 @@
 
                 <!-- Login Form -->
                 <form method="post" action="include/login.inc.php">
+                    <div class="row">
+                        <input type="text" id="username" class="fadeIn second" name="username" placeholder="Enter Your Username">
+                    </div>
+                    <div class="row">
+                        <input type="password" id="password" class="fadeIn third" name="password" placeholder="Enter the Password" />
+                        <i class="bi bi-eye-fill fadeIn third" id="togglePassword"></i>
+                    </div>
+                    
 
-                    <input type="text" id="username" class="fadeIn second" name="username" placeholder="Enter Your Username">
-
-
-                    <input type="password" id="password" class="fadeIn third" name="password" placeholder="Enter the Password" />
-
-
-                    <i class="bi bi-eye-fill fadeIn third" id="togglePassword"></i>
-
-
-                    <!-- <div>
-                        <input type="checkbox" onchange="SHPassword(this)" class="fadeIn third mt-2 mb-3"><span id="showhidepwd" class="fadeIn third">Show Password</span>
-                    </div> -->
+                    
 
                     <input type="submit" name="login" id="submit" class="fadeIn fourth" value="Log In">
                 </form>
@@ -61,15 +58,6 @@
         </div>
 
         <script>
-            // function SHPassword() {
-            //     if (document.getElementById("password").type = 'text') {
-            //         document.getElementById("togglePassword").removeClass("bi-eye")
-            //         document.getElementById("togglePassword").addClass("bi-eye-slash")
-            //     } else {
-            //         document.getElementById("togglePassword").removeClass("bi-eye-slash")
-            //         document.getElementById("togglePassword").addClass("bi-eye")
-            //     }
-            // }
             const togglePassword = document.querySelector('#togglePassword');
 
             const password = document.querySelector('#password');

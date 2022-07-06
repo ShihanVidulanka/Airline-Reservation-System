@@ -1,7 +1,7 @@
 body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
-    /* background: url("../img/background.jpg") center fixed; */
+    background: url("../img/background.jpg") center fixed;
     background-size: cover;
     align-items: center;
   }
@@ -89,7 +89,10 @@ body {
     overflow-y: auto;
   }
   
-  .fw-semibold { font-weight: 600; }
+  .fw-semibold { 
+    font-weight: 600; 
+    color: antiquewhite;
+  }
   .lh-tight { line-height: 1.25; }
 
 
