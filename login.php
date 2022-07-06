@@ -51,7 +51,8 @@
 
                 <!-- Remind Passowrd -->
                 <div id="formFooter">
-                    <a class="underlineHover" href="sign_up.php">Create New Account</a>
+                    <a class="underlineHover" href="sign_up.php">Create New Account</a><br>
+                    <a class="underlineHover" href="main_page.php">Back to Main Page</a>
                 </div>
 
             </div>

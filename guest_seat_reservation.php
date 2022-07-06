@@ -107,14 +107,14 @@ $reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
                         <label class="control-label col-sm-4" for="first_name">First Name:</label>
                         <div class="col-sm-8">
                             <input required class="form-control" type="text" name="first_name" id="first_name" placeholder="Enter User First Name">
-                            <div id="first_name_val" class="m-3"></div>
+                            <div id="first_name_val" class="m-3 error"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="last_name">Last Name:</label>
                         <div class="col-sm-8">
                             <input required class="form-control" type="text" name="last_name" id="last_name" placeholder="Enter User Last Name">
-                            <div id="last_name_val" class="m-3"></div>
+                            <div id="last_name_val" class="m-3 error"></div>
                         </div>
                     </div>
 
@@ -122,7 +122,7 @@ $reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
                         <label class="control-label col-sm-4" for="passport_number">Passport Number:</label>
                         <div class="col-sm-8">
                             <input onchange="checkPassportNo()" required class="form-control" type="text" name="passport_number" id="passport_number" placeholder="Enter User passport Number">
-                            <div id="passport_number_val" class="m-3"></div>
+                            <div id="passport_number_val" class="m-3 error"></div>
                         </div>
                     </div>
 
@@ -130,7 +130,7 @@ $reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
                         <label class="control-label col-sm-4" for="dob">Date Of Birth:</label>
                         <div class="col-sm-8">
                             <input required class="form-control" type="date" name="dob" id="dob" placeholder="Enter Your Date Of Birth:">
-                            <div id="dob_val" class="m-3"></div>
+                            <div id="dob_val" class="m-3 error"></div>
                         </div>
                     </div>
 
@@ -138,7 +138,7 @@ $reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
                         <label class="control-label col-sm-4" for="telephone">Telephone Number:</label>
                         <div class="col-sm-8">
                             <input required class="form-control" type="tel" name="telephone" id="telephone" placeholder="Enter Your Telephone No:">
-                            <div id="telephone_val" class="m-3"></div>
+                            <div id="telephone_val" class="m-3 error"></div>
                         </div>
                     </div>
 

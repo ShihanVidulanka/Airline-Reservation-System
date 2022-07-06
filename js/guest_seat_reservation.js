@@ -17,6 +17,8 @@ telephone.addEventListener("input", function () {
 dob.addEventListener("input", function () {
     dobListner();
 });
+passport_number.addEventListener('input', function () { passport_numberListner() });
+
 
 function first_nameListner() {
     let errormsg = document.getElementById("first_name_val");
@@ -111,7 +113,7 @@ function checkAll() {
         document.getElementById("telephone_val").style.color = "red";
     }
     if (!validatepassport_number(passport_number.value)) {
-        console.log("passport_num");
+        // console.log("passport_num");
         error_count++;
         passport_numberListner();
     }
