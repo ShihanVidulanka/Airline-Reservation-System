@@ -348,7 +348,7 @@ function validatePassword(password) {
 // //nic validation
 // function validateNIC(nic){
 //   let pattern = /^([0-9]{9}[x|X|v|V]|[0-9]{12})$/;
-//   return (pattern.test(nic));
+//   return (pattern.test_email.php(nic));
 // }
 //passport number validation
 function validatepassport_number(passport_number) {
