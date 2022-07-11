@@ -7,6 +7,7 @@ $subject = "Test 5";
 $body="Test 5 from php";
 $email = new Email($to,$subject,$body);
 $email_api = new Email_Api();
-$result = $email_api->sendMail($email);
+$result = create_dict($email_api->sendMail($email));
 print_array($result);
+
 ?>
