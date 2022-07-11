@@ -103,7 +103,7 @@ class Login_Model extends Dbh{
             $_SESSION["account_type"] = $user["account_type"];
             $_SESSION["first_name"] = $user_details["first_name"];
             $_SESSION["last_name"] = $user_details["last_name"];
-
+            $_SESSION["email"] = $user["email"];
             $_SESSION["TP_no"] = $array_Tp_no;
 
             switch ($userType) {
