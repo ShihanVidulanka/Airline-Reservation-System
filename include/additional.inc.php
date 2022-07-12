@@ -32,6 +32,10 @@ function create_dict($str){
     $associative_array = array();
     foreach ($array as $item) {
         $temp = explode(":",$item);
+        $temp[0] = ltrim($temp[0],"\"");
+        $temp[0] = rtrim($temp[0],"\"");
+        $temp[1] = ltrim($temp[1],"\"");
+        $temp[1] = rtrim($temp[1],"\"");
         $associative_array[$temp[0]]=$temp[1];
     }
     return $associative_array;

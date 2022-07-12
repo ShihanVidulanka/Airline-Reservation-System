@@ -8,6 +8,8 @@ $body="Test 5 from php";
 $email = new Email($to,$subject,$body);
 $email_api = new Email_Api();
 $result = create_dict($email_api->sendMail($email));
+//$result = $email_api->sendMail($email);
+//echo $result;
 print_array($result);
 
 ?>

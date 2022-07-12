@@ -160,6 +160,7 @@ class Seat_Reservation_Model extends Dbh{
         );
 
         $regular = "";
+        $email_sending = "";
         if (isset($_SESSION['username'])){
             $regular = $this->createRegularCustomer();
             $booking_details = $this->getBookingDetails($booking_id);
@@ -184,7 +185,7 @@ class Seat_Reservation_Model extends Dbh{
             $recipient = $_SESSION['email'];
             $email = new Email($recipient,$subject,$body);
             $email_api = new Email_Api();
-            $email_api->sendMail($email);
+            $email_sending = create_dict($email_api->sendMail($email));
         }
 //        print_array($_SESSION);
 
@@ -194,9 +195,9 @@ class Seat_Reservation_Model extends Dbh{
         }
 
         else if(strcmp($regular,"regular")==0){
-            header('Location:../passenger_flight_booking.php?error=regular');
+            header('Location:../passenger_flight_booking.php?error=regular&email='.$email_sending['status']);
         }else{
-            header('Location:../passenger_flight_booking.php?error=success');
+            header('Location:../passenger_flight_booking.php?error=success&email='.$email_sending['status']);
         }
 
 
