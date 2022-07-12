@@ -9,9 +9,10 @@ session_start();
 //    return;
 //}
 $airline_administrator_settings_controller = new Airline_Administrator_Settings_Controller();
-$details = $airline_administrator_settings_controller->getRegularPassengerDetails();
+$details = $airline_administrator_settings_controller->getSettingsDetails();
 $booking_count = $details['booking_count'];
 $discount = $details['discount'];
+$url = $details['url']
 
 
 
@@ -35,7 +36,7 @@ $discount = $details['discount'];
 
 
 
-    <title>Regular Customer Settings</title>
+    <title>Settings</title>
 </head>
 
 <body>
@@ -109,7 +110,10 @@ $discount = $details['discount'];
             <div class="form-group mb-3">
                 <label class="control-label" for="discount">Discount:</label>
                 <input name="discount" value="<?php echo $discount?>" type="text" class="form-control" id="discount" placeholder="Enter Discount of regular customer">
-
+            </div>
+            <div class="form-group mb-3">
+                <label class="control-label" for="url">URL of email:</label>
+                <input name="url" value="<?php echo $url?>" type="text" class="form-control" id="url" placeholder="Enter URL of email">
             </div>
 
             <div class="form-group">

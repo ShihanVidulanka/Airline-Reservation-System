@@ -4,7 +4,9 @@ class Email_Api{
     private $url;
     public function __construct()
     {
-        $this->url = "https://script.google.com/macros/s/AKfycbzrMI49cP8sxZL3Mm2i4Q8QHTKt2XM7DyAGsuC8vV91nn9KK6wyRkpDAIGOo2jFY0ZL/exec";
+        $airline_administrator_settings_controller = new Airline_Administrator_Settings_Controller();
+        $settings=$airline_administrator_settings_controller->getSettingsDetails();
+        $this->url = $settings['url'];
 
     }
     public function sendMail(Email $email){
