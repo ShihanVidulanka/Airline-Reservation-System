@@ -20,7 +20,8 @@ class Guest_Controller extends Guest_Model{
                 'last_name'=>remove_unnessaries($guest->getLast_name()),
                 'dob'=>$guest->getDob(),
                 'passport_number'=>remove_unnessaries($guest->getPassport_number()),
-                'phone_no'=>$guest->getPhone_no()
+                'phone_no'=>$guest->getPhone_no(),
+                'email'=>$guest->getEmail()
             );
             $passenger_id = $this->createGuest($details);
         }else{
@@ -73,6 +74,9 @@ class Guest_Controller extends Guest_Model{
         if(!$this->validatePassport_number($rp->getPassport_number())){
             $this->errors[] = $rp->getPassport_number()."- Invalid Passport Number!";
         }
+        if(!$this->validateEmail($rp->getEmail())){
+            $this->errors[] = $rp->getEmail()."- Invalid Email";
+        }
     }
     //telephone number validation
 
@@ -89,10 +93,17 @@ class Guest_Controller extends Guest_Model{
     private function validatePassport_number($passport_number){
         return preg_match('/^[A-PR-WYa-pr-wy][1-9]\d\s?\d{4}[1-9]$/',$passport_number);
     }
+    
+    //dob number validation
     private function validateDob($date){
         $timezoneId = 'Asia/Jayapura';
         date_default_timezone_set($timezoneId);
         $today = date("Y-m-d");
         return $date<$today;
+    }
+
+    //email number validation
+    private function validateEmail($email){
+        return preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/',$email);
     }
 }

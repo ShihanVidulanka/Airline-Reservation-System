@@ -10,6 +10,7 @@ class Guest{
     private $is_deleted;
     private $created_date_time;
     private $passenger_id;
+    private $email;
 
 
     public function getGuest_no(){return $this->guest_no;}
@@ -21,7 +22,7 @@ class Guest{
     public function getIs_deleted(){return $this->is_deleted;}
     public function getCreated_date_time(){return $this->created_date_time;}
     public function getPassenger_id(){return $this->passenger_id;}
-
+    public function getEmail(){return $this->email;}
 
     
     public function setGuest_no($guest_no){$this->guest_no = $guest_no;return $this;}
@@ -33,4 +34,7 @@ class Guest{
     public function setIs_deleted($is_deleted){$this->is_deleted = $is_deleted;return $this;}
     public function setCreated_date_time($created_date_time) {$this->created_date_time = $created_date_time;return $this;}
     public function setPassenger_id($passenger_id){$this->passenger_id = $passenger_id;return $this;}
+    public function setEmail($email){$this->email = $email;return $this;}
+
+    
 }
