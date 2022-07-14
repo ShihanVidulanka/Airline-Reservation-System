@@ -149,7 +149,7 @@ $reserved_seats = $seat_reservation_view->getReservedSeatsFromModel($_POST['flig
                         <label class="control-label col-sm-4" for="email">Email:</label>
                         <div class="col-sm-8">
                             <input class="form-control" type="email" name="email" id="email" placeholder="Enter Your Email Addressemail:">
-                            <div id="email_val" class="m-3"></div>
+                            <div id="email_val" class="m-3 error"></div>
                         </div>
                     </div>
 

@@ -178,7 +178,8 @@ function validateEmail(email) {
 function validateDate(date) {
     let dob = new Date(date);
     let today = new Date();
-    return dob < today;
+    let minimum = new Date('1900-01-01')
+    return (dob < today) && (dob>minimum);
 }
 
 //check seat reservation
