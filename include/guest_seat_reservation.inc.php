@@ -20,7 +20,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 if(isset($_POST['seatno-flightid'])){
     $post = explode('-',$_POST['seatno-flightid']);
     $seat_reservation_view = new Seat_Reservation_View();
-    $reserved_seats = $seat_reservation_view->getReservedSeats($post[1]);
+    $reserved_seats = $seat_reservation_view->getReservedSeatsFromModel($post[1]);
     if(in_array($post[0],$reserved_seats)){
         echo 'alreadybooked';
     }else{

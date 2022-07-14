@@ -11,7 +11,9 @@
   $email="";
   if(isset($_GET['error'])){
     $bookingError=$_GET['error'];
-    $email = $_GET['email'];
+      if(isset($_GET['email'])){
+          $email = $_GET['email'];
+      }
   }
 ?>
 <!DOCTYPE html>
@@ -62,7 +64,6 @@
         if(strcmp($email,"success")==0){
             $email_sent = "and Seat booking Confirmation email has been sent successfully.";
         }
-        echo $email_sent;
 
         echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
         Booking Successfull!!! {$email_sent}

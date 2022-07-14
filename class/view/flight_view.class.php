@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
@@ -27,6 +30,7 @@ class Flight_View extends Flight_Model{
             if($seat_reservation_controller->checkForRegularCustomer()){
                 $discount = $discount_details['discount']."%";
                 $coefficient = 1-$discount_details['discount']/100;
+                $_SESSION['coefficient'] = $coefficient;
             }
             //check flight['id'] and passenger_id are there in a booking
             if(!$seat_reservation_controller->checkForBookedSeat($flight['id'],$_SESSION['passenger_id'])){

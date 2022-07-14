@@ -1,7 +1,6 @@
 function sendFlightId(id){
     let flightId = document.getElementById('flight_id');
     flightId.value = id;
-    // console.log(flightId.value);
     document.getElementById('flight_id_form').submit();
 }
 
