@@ -62,19 +62,32 @@ if (isset($_GET['error'])) {
     </nav>
 
     <?php
-    if(strcmp($bookingError,"SUCCESS")==0){
+    if(strcmp($bookingError,"not-genaral")==0){
+        echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
+        Booking Removed Successfully!!!
+        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
+      </div>";
+    }else if(strcmp($bookingError,"email")==0){
         echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
         Booking Removed Successfully and Payment refunding email has been sent Successfully!!!
         <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
       </div>";
-    }else if(strcmp($bookingError,"general")==0){
+    }
+
+    else if(strcmp($bookingError,"general-email")==0){
         echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
-        Booking Removed Successfully and Payment refunding email has been sent Successfully and You are now General Passenger!!!
+        Booking Removed Successfully and Payment refunding email has been sent Successfully!!!
         <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
       </div>";
 
         echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
         You are now General Passenger!!!
+        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
+      </div>";
+    }
+    else if(strcmp($bookingError,"general")==0) {
+        echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
+        Booking Removed Successfully and Payment refunding email has been sent Successfully!!!
         <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
       </div>";
     }
