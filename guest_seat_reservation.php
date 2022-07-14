@@ -142,6 +142,14 @@ $reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="email">Email:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="email" name="email" id="email" placeholder="Enter Your Email Addressemail:">
+                            <div id="email_val" class="m-3"></div>
+                        </div>
+                    </div>
+
                     <input hidden type="text" id="flightid" name="flight_id" value="<?php echo $_POST['flight_id']; ?>">
                     <input hidden type="text" name="seat_type" id="seat_type">
                     <div class="button">

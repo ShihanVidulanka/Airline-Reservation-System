@@ -8,8 +8,10 @@
     $flights= $flight_view->getFlightDetailsFromModel($_POST['destination']);
   }
   $bookingError = "";
+  $email="";
   if(isset($_GET['error'])){
     $bookingError=$_GET['error'];
+    $email = $_GET['email'];
   }
 ?>
 <!DOCTYPE html>
@@ -56,8 +58,14 @@
   </nav>
   <?php
     if(strcmp($bookingError,"success")==0){
-      echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
-        Booking Successfull!!!
+        $email_sent="";
+        if(strcmp($email,"success")==0){
+            $email_sent = "and Seat booking Confirmation email has been sent successfully.";
+        }
+        echo $email_sent;
+
+        echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
+        Booking Successfull!!! {$email_sent}
         <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
       </div>";
     }
@@ -73,8 +81,14 @@
       </div>";
     }
     else if(strcmp($bookingError,"regular")==0){
+        $email_sent="123";
+
+        if(strcmp($email,"success")==0){
+            $email_sent = "and Seat booking Confirmation email has been sent successfully.";
+        }
+
       echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
-        Payment is success and You are Regular Passenger now!!!
+        Payment is success and You are Regular Passenger now!!! {$email_sent}
         <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
       </div>";
     }

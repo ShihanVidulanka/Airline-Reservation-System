@@ -35,6 +35,7 @@ if(isset($_POST['flight_id'])){
     $passport_number=$_POST['passport_number'];
     $dob=$_POST['dob'];
     $telephone=$_POST['telephone'];
+    $email=$_POST['email'];
 
     if (!isset($_SESSION['passenger_id'])) {
         $guest = new Guest();
@@ -43,6 +44,7 @@ if(isset($_POST['flight_id'])){
         $guest->setPassport_number($passport_number);
         $guest->setDob($dob);
         $guest->setPhone_no($telephone);
+        $guest->setEmail($email);
 
         $guest_controller = new Guest_Controller();
         $guest_controller->createGuestFromModel($guest);

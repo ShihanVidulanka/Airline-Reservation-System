@@ -24,3 +24,19 @@ function remove_unnessaries($data,$password=0)
     }
     return $data;
 }
+function create_dict($str){
+    $str_without_brackets = rtrim($str,"}");
+    $str_without_brackets = ltrim($str_without_brackets,"{");
+    $array = explode(",",$str_without_brackets);
+
+    $associative_array = array();
+    foreach ($array as $item) {
+        $temp = explode(":",$item);
+        $temp[0] = ltrim($temp[0],"\"");
+        $temp[0] = rtrim($temp[0],"\"");
+        $temp[1] = ltrim($temp[1],"\"");
+        $temp[1] = rtrim($temp[1],"\"");
+        $associative_array[$temp[0]]=$temp[1];
+    }
+    return $associative_array;
+}

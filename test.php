@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 date_default_timezone_set("Asia/Colombo");
 $date = Date("Y-m-d");
 $time = date("H:i:s");
-echo $time;
-
+//echo $time;
 
 print_array($_SESSION);
+

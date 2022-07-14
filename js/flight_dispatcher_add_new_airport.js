@@ -62,7 +62,7 @@ function cityListner() {
 
 function validateAirportCode(airport_code) {
     let UpperPattern = /^[A-Z]*$/;
-    // console.log(UpperPattern.test(airport_code));
+    // console.log(UpperPattern.test_email.php(airport_code));
     return (UpperPattern.test(airport_code) && airport_code.length == 3);
 
 }

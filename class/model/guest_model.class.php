@@ -41,14 +41,16 @@ class Guest_Model extends Dbh
                                                     dob,
                                                     passport_number,
                                                     phone_no,
-                                                    passenger_id)
+                                                    passenger_id,
+                                                    email)
                                 VALUES(
                                     :first_name,
                                     :last_name,
                                     :dob,
                                     :passport_number,
                                     :phone_no,
-                                    :passenger_id)";
+                                    :passenger_id,
+                                    :email)";
             //echo $passenger_id."<br>";
             $stmt2 = $db->prepare($query2);
             $stmt2->execute(array(
@@ -57,12 +59,16 @@ class Guest_Model extends Dbh
                 ':dob' => $details['dob'],
                 ':passport_number' => $details['passport_number'],
                 ':phone_no' => $details['phone_no'],
-                ':passenger_id' => $passenger_id
+                ':passenger_id' => $passenger_id,
+                ':email' => $details['email']
             ));
             $stmt2->closeCursor();
             $db->commit();
+            $_SESSION['first_name'] = $details['first_name'];
+            $_SESSION['last_name'] = $details['last_name'];
             $_SESSION["passenger_id"] = $passenger_id;
             $_SESSION["passenger_type"] = 1;
+            $_SESSION['email'] = $details['email'];
         } catch (PDOException $e) {
             $db->rollBack();
             die($e->getMessage());

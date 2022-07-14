@@ -4,6 +4,7 @@ var last_name = document.getElementById("last_name");
 var passport_number = document.getElementById("passport_number");
 var telephone = document.getElementById("telephone");
 var dob = document.getElementById("dob");
+var email = document.getElementById("email");
 
 first_name.addEventListener("input", function () {
     first_nameListner();
@@ -17,8 +18,12 @@ telephone.addEventListener("input", function () {
 dob.addEventListener("input", function () {
     dobListner();
 });
-passport_number.addEventListener('input', function () { passport_numberListner() });
-
+passport_number.addEventListener("input", function () {
+    passport_numberListner();
+});
+email.addEventListener("input", function () {
+    emailListner();
+});
 
 function first_nameListner() {
     let errormsg = document.getElementById("first_name_val");
@@ -85,10 +90,19 @@ function checkPassportNo() {
         return;
     }
 }
+function emailListner() {
+    let errormsg = document.getElementById("email_val");
+    if (validateEmail(email.value)) {
+        errormsg.innerHTML = "Valid Email Address!";
+        errormsg.style.color = "green";
+    } else {
+        errormsg.innerHTML = "Invalid Email Address!";
+        errormsg.style.color = "red";
+    }
+}
 
 //validations
 function checkAll() {
-
     let error_count = 0;
     if (!validateName(first_name.value)) {
         error_count++;
@@ -105,7 +119,7 @@ function checkAll() {
             "Empty telephone number!";
         document.getElementById("telephone_val").style.color = "red";
     }
-    if (!validateTelphoneNumber(telephone.value)){
+    if (!validateTelphoneNumber(telephone.value)) {
         error_count++;
         console.log("telephone");
         document.getElementById("telephone_val").innerHTML =
@@ -121,11 +135,15 @@ function checkAll() {
         error_count++;
         dobListner();
     }
+    if (!validateEmail(email.value)) {
+        error_count++;
+        emailListner();
+    }
     checkPassportNo();
 
     console.log(error_count);
     if (error_count == 0) {
-        document.getElementById('seatbooking').submit();
+        document.getElementById("seatbooking").submit();
     } else {
         alert("Enter the correct details");
     }
@@ -150,6 +168,12 @@ function validatepassport_number(passport_number) {
     return pattern.test(passport_number);
 }
 
+//email validation
+function validateEmail(email) {
+    let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return (pattern.test(email));
+}
+
 //date of birth validation
 function validateDate(date) {
     let dob = new Date(date);
@@ -158,24 +182,32 @@ function validateDate(date) {
 }
 
 //check seat reservation
-function addTicketPrice(seatno, platinum_Seats,buisness_seats, economy_Seats, platinumPrice, businessPrice, economyPrice){
-    let ticketprice = document.getElementById('ticketprice');
-    let ticket_price = document.getElementById('ticket_price');
-    let seat_no = document.getElementById('seat_no');
-    let seatno_ = document.getElementById('seatno');
-    let seattype=document.getElementById('seattype');
-    let seat_type=document.getElementById('seat_type');
+function addTicketPrice(
+    seatno,
+    platinum_Seats,
+    buisness_seats,
+    economy_Seats,
+    platinumPrice,
+    businessPrice,
+    economyPrice
+) {
+    let ticketprice = document.getElementById("ticketprice");
+    let ticket_price = document.getElementById("ticket_price");
+    let seat_no = document.getElementById("seat_no");
+    let seatno_ = document.getElementById("seatno");
+    let seattype = document.getElementById("seattype");
+    let seat_type = document.getElementById("seat_type");
 
-    if (seatno!=0) {
+    if (seatno != 0) {
         seat_no.value = seatno;
 
         if (seatno <= platinum_Seats) {
             ticket_price.value = platinumPrice;
-            seattype.value = 'Platinum Class';
+            seattype.value = "Platinum Class";
             seat_type.value = 2;
         } else if (seatno <= platinum_Seats + buisness_seats) {
             ticket_price.value = businessPrice;
-            seattype.value = 'Business Class';
+            seattype.value = "Business Class";
             seat_type.value = 1;
         } else if (seatno <= platinum_Seats + buisness_seats + economy_Seats) {
             ticket_price.value = economyPrice;
@@ -184,40 +216,40 @@ function addTicketPrice(seatno, platinum_Seats,buisness_seats, economy_Seats, pl
         }
         seatno_.value = seat_no.value;
         ticketprice.value = ticket_price.value;
-
-    }else {
-        seattype.value = '';
-        seat_type.value = '';
-        seatno_.value="";
-        ticketprice.value="";
+    } else {
+        seattype.value = "";
+        seat_type.value = "";
+        seatno_.value = "";
+        ticketprice.value = "";
     }
 }
-function checkSeatAvailability(){
-    let seat = document.getElementById('seat').value;
-    let seatno = document.getElementById('seat').value;
-    let flightid = document.getElementById('flightid').value;
-    if (seat!=0) {
+function checkSeatAvailability() {
+    let seat = document.getElementById("seat").value;
+    let seatno = document.getElementById("seat").value;
+    let flightid = document.getElementById("flightid").value;
+    if (seat != 0) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 // responseElement.innerHTML = this.responseText;
                 console.log(this.responseText);
-                if (this.responseText == 'alreadybooked') {
-                    alert('Seat is already booked!!!');
+                if (this.responseText == "alreadybooked") {
+                    alert("Seat is already booked!!!");
                     location.reload();
                 } else {
                     checkAll();
                     // document.getElementById('seatbooking').submit();
                     // console.log(this.responseText);
-
                 }
-
             }
         };
-        xhttp.open("POST", 'include/guest_seat_reservation.inc.php', true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send('seatno-flightid' + "=" + seatno + '-' + flightid);
-    }else {
+        xhttp.open("POST", "include/guest_seat_reservation.inc.php", true);
+        xhttp.setRequestHeader(
+            "Content-type",
+            "application/x-www-form-urlencoded"
+        );
+        xhttp.send("seatno-flightid" + "=" + seatno + "-" + flightid);
+    } else {
         alert("Please Select seat!!!");
     }
 }

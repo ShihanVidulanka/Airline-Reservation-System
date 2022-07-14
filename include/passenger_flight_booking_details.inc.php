@@ -10,8 +10,13 @@ if(isset($_POST['booking_id'])){
     $customer = $cancel_booking_details_controller->cancel_booking($_POST['booking_id']);
     if(strcmp($customer,"general")==0){
         header("Location: ../passenger_booking_details.php?error=general");
-    }else{
-        header("Location: ../passenger_booking_details.php?error=SUCCESS");
+    }else if(strcmp($customer,"general-email")==0){
+        header("Location: ../passenger_booking_details.php?error=general-email");
+    }else if(strcmp($customer,"email")==0){
+        header("Location: ../passenger_booking_details.php?error=email");
+    }
+    else{
+        header("Location: ../passenger_booking_details.php?error=not-genaral");
     }
 }
 if(isset($_POST['dest'])){

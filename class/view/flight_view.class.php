@@ -21,7 +21,7 @@ class Flight_View extends Flight_Model{
 
             $airline_administrator_settings_controller = new Airline_Administrator_Settings_Controller();
 
-            $discount_details =  $airline_administrator_settings_controller->getRegularPassengerDetails();
+            $discount_details =  $airline_administrator_settings_controller->getSettingsDetails();
             $coefficient=1;
             $discount = "0%";
             if($seat_reservation_controller->checkForRegularCustomer()){
