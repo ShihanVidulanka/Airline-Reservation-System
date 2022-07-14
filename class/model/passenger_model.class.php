@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/addi
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
 class Passenger_Model extends Dbh{
-    public function getPassegerDetails($username){
+    protected function getPassegerDetails($username){
         $pdo=$this->connect();
         $query1="SELECT * FROM  registered_passenger AS rp INNER JOIN user as u 
                 ON rp.user_id=u.ID

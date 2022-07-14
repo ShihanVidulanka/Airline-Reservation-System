@@ -7,7 +7,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 
 
 class Flight_Model extends Dbh{
-    public function getFlightDetails($destination=null){
+    protected function getFlightDetails($destination=null){
         $pdo = $this->connect();
 
         date_default_timezone_set("Asia/Colombo");
@@ -73,7 +73,7 @@ class Flight_Model extends Dbh{
         $details=$stmt->fetchAll();
         return $details;
     }
-    public function getFlightDetailsByFlightId($flight_id){
+    protected function getFlightDetailsByFlightId($flight_id){
         $pdo = $this->connect();
         $query = "SELECT * FROM flight where id=:flight_id";
         $stmt = $pdo->prepare($query);

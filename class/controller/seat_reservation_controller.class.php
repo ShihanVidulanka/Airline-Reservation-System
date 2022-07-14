@@ -32,5 +32,10 @@ class Seat_Reservation_Controller extends Seat_Reservation_Model{
        }
        return false;
    }
-
+   public function pay($booking_id){
+       $this->payFromModel($booking_id);
+   }
+    public function cancel($booking_id){
+       $this->cancelFromModel($booking_id);
+    }
 }

@@ -5,7 +5,7 @@ $seat_reservation_view = new Seat_Reservation_View();
 $airplane = $seat_reservation_view->getPlaneDetailsFromModel($_POST['flight_id']);
 $flightView = new Flight_View();
 $flight= $flightView->getFlightDetailsByFlightIdFromModel($_POST['flight_id']);
-$reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
+$reserved_seats = $seat_reservation_view->getReservedSeatsFromModel($_POST['flight_id']);
 // print_array($flight);
 ?>
 <!DOCTYPE html>

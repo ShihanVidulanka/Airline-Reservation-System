@@ -16,7 +16,7 @@ class Cancel_Booking_Model extends Dbh{
         return $result;
     }
 
-    public function cancel_booking_from_model($booking_id){
+    protected function cancel_booking_from_model($booking_id){
         $seat_reservation_controller = new Seat_Reservation_Controller();
         $pdo = $this->connect();
         $query = "UPDATE booking SET state=1 WHERE id=:id";
@@ -67,7 +67,7 @@ class Cancel_Booking_Model extends Dbh{
         }
 
     }
-    public function getNumberofBookingsFromModel(){
+    private function getNumberofBookingsFromModel(){
         $pdo = $this->connect();
         $username = $_SESSION['username'];
         $query = "SELECT * FROM booking as b INNER JOIN 

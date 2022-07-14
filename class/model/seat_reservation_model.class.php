@@ -23,7 +23,7 @@ class Seat_Reservation_Model extends Dbh{
             return false;
         }
     }
-    public function reserveSeat(Booking $booking){
+    protected function reserveSeat(Booking $booking){
         $pdo = $this->connect();
        $query = "INSERT INTO booking(
                     flight_id,
@@ -59,7 +59,7 @@ class Seat_Reservation_Model extends Dbh{
         
         
     }
-    public function getPlaneDetails($id){
+    protected function getPlaneDetails($id){
         $pdo = $this->connect();
         $query = "SELECT * FROM airplane INNER JOIN flight 
                     ON flight.airplane_id=airplane.id
@@ -74,7 +74,7 @@ class Seat_Reservation_Model extends Dbh{
         return $result;
     }
 
-    public function getReservedSeats($flight_id){
+    protected function getReservedSeats($flight_id){
         $pdo = $this->connect();
         $query = "SELECT * FROM booking WHERE flight_id=:flight_id AND (state=2 OR state=3)";
         $stmt = $pdo->prepare($query);
@@ -90,7 +90,7 @@ class Seat_Reservation_Model extends Dbh{
         }
         return $reserved;
     }
-    public function getBookedFlightDestinations($passenger_id){
+    protected function getBookedFlightDestinations($passenger_id){
         $pdo = $this->connect();
         date_default_timezone_set("Asia/Colombo");
         $date = Date("Y-m-d");
@@ -111,7 +111,7 @@ class Seat_Reservation_Model extends Dbh{
         return $result;
     }
 
-    public function getBookedFlightDetails($passenger_id,$dest='all'){
+    protected function getBookedFlightDetails($passenger_id,$dest='all'){
         $pdo = $this->connect();
         date_default_timezone_set("Asia/Colombo");
         $date = Date("Y-m-d");
@@ -147,7 +147,7 @@ class Seat_Reservation_Model extends Dbh{
         $result = $stmt->fetch();
         return $result;
     }
-    public function pay($booking_id){
+    protected function payFromModel($booking_id){
 
         $pdo = $this->connect();
         $query = "UPDATE booking SET state=:state WHERE id=:booking_id";
@@ -203,7 +203,7 @@ class Seat_Reservation_Model extends Dbh{
 
 
     }
-    public function cancel($booking_id){
+    protected function cancelFromModel($booking_id){
         $pdo = $this->connect();
         $query = "UPDATE booking SET state=:state WHERE id=:booking_id";
         $stmt = $pdo->prepare($query);
