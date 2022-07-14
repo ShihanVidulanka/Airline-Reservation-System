@@ -30,17 +30,17 @@ class Flight_View extends Flight_Model{
             if($seat_reservation_controller->checkForRegularCustomer()){
                 $discount = $discount_details['discount']."%";
                 $coefficient = 1-$discount_details['discount']/100;
-                $_SESSION['coefficient'] = $coefficient;
             }
+            $_SESSION['coefficient'] = $coefficient;
             //check flight['id'] and passenger_id are there in a booking
             if(!$seat_reservation_controller->checkForBookedSeat($flight['id'],$_SESSION['passenger_id'])){
                 echo "<tr>";    
                     echo '<td>'.$flight['id'].'</td>';  
                     echo '<td>'.$flight['origin'].'</td>';  
                     echo '<td>'.$flight['destination'].'.</td>';
-                    echo '<td>'.$flight['economy_price']*$coefficient.'</td>';
-                    echo '<td>'.$flight['business_price']*$coefficient.'</td>';
-                    echo '<td>'.$flight['platinum_price']*$coefficient.'</td>';
+                    echo '<td>'.$flight['economy_price'].'</td>';
+                    echo '<td>'.$flight['business_price'].'</td>';
+                    echo '<td>'.$flight['platinum_price'].'</td>';
                     echo '<td>'.$discount.'</td>';
                     echo '<td>'.$flight['departure_date'].'</td>';  
                     echo '<td>'.$flight['departure_time'].'</td>';
@@ -52,9 +52,9 @@ class Flight_View extends Flight_Model{
                     echo '<td>'.$flight['id'].'</td>';  
                     echo '<td>'.$flight['origin'].'</td>';  
                     echo '<td>'.$flight['destination'].'.</td>';  
-                    echo '<td>'.$flight['economy_price']*$coefficient.'</td>';
-                    echo '<td>'.$flight['business_price']*$coefficient.'</td>';
-                    echo '<td>'.$flight['platinum_price']*$coefficient.'</td>';
+                    echo '<td>'.$flight['economy_price'].'</td>';
+                    echo '<td>'.$flight['business_price'].'</td>';
+                    echo '<td>'.$flight['platinum_price'].'</td>';
                     echo '<td>'.$discount.'</td>';
                     echo '<td>'.$flight['departure_date'].'</td>';
                     echo '<td>'.$flight['departure_time'].'</td>';

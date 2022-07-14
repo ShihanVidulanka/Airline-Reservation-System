@@ -229,7 +229,10 @@ class Seat_Reservation_Model extends Dbh{
           )
         );
         $rows=$stmt->rowCount();
-        if($rows>=2){
+        $airline_administrator_settings_controller = new Airline_Administrator_Settings_Controller();
+        $settings = $airline_administrator_settings_controller->getSettingsDetails();
+        $booking_count = $settings['booking_count'];
+        if($rows>=$booking_count){
             return true;
         }else{
             return false;
@@ -250,6 +253,17 @@ class Seat_Reservation_Model extends Dbh{
                 )
             );
             return "regular";
+        }else{
+            $pdo = $this->connect();
+            $query = "UPDATE registered_passenger SET category=:category where passenger_id=:passenger_id";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute(
+                array(
+                    ":category"=>0,
+                    ":passenger_id"=>$passenger_id
+                )
+            );
+            return "general";
         }
     }
     protected function checkForRegularCustomerFromMOdel(){

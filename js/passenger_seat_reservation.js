@@ -1,4 +1,4 @@
-function addTicketPrice(seatno, platinum_Seats,buisness_seats, economy_Seats, platinumPrice, businessPrice, economyPrice){
+function addTicketPrice(seatno,coefficient, platinum_Seats,buisness_seats, economy_Seats, platinumPrice, businessPrice, economyPrice){
     let ticketprice = document.getElementById('ticketprice');
     let ticket_price = document.getElementById('ticket_price');
     let seat_no = document.getElementById('seat_no');
@@ -23,7 +23,7 @@ function addTicketPrice(seatno, platinum_Seats,buisness_seats, economy_Seats, pl
             seat_type.value = 0;
         }
         seatno_.value = seat_no.value;
-        ticketprice.value = ticket_price.value;
+        ticketprice.value = ticket_price.value*coefficient;
 
     }else {
         seattype.value = '';

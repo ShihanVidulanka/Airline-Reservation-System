@@ -1,6 +1,12 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/additional.inc.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
+
+
 $seat_reservation_view = new Seat_Reservation_View();
 $airplane = $seat_reservation_view->getPlaneDetailsFromModel($_POST['flight_id']);
 $flightView = new Flight_View();
@@ -45,6 +51,7 @@ $reserved_seats = $seat_reservation_view->getReservedSeatsFromModel($_POST['flig
                             <select name="seat" class="form-control mb-4" id="seat"
                                 onchange="addTicketPrice(
                                                     this.value,
+                                                    <?php echo $_SESSION['coefficient']; ?>,
                                                     <?php echo $airplane->getNo_platinum_seats();?>, 
                                                     <?php echo $airplane->getNo_business_seats();?>, 
                                                     <?php echo $airplane->getNo_economy_seats();?>, 

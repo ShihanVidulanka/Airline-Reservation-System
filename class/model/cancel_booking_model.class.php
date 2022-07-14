@@ -81,7 +81,10 @@ class Cancel_Booking_Model extends Dbh{
             )
         );
         $rows=$stmt->rowCount();
-        if($rows+1==2){
+        $airline_administrator_settings_controller = new Airline_Administrator_Settings_Controller();
+        $settings = $airline_administrator_settings_controller->getSettingsDetails();
+        $booking_count = $settings['booking_count'];
+        if($rows+1==$booking_count){
             return true;
         }else{
             return false;

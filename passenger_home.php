@@ -3,6 +3,8 @@
     require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
     require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
     // print_array($_SESSION);
+    $seat_reservation_controller = new Seat_Reservation_Controller();
+    $seat_reservation_controller->createRegularCustomerFromModel();
     $passenger_view = new Passenger_View();
     $registered_passenger = $passenger_view->getRegisteredPassenger(remove_unnessaries($_SESSION['username'],1));
     // print_array($registered_passenger);
@@ -16,6 +18,8 @@
     $passport_number=$registered_passenger->getPassport_number();
     $category=$registered_passenger->getCategory();
     $email = $registered_passenger->getEmail();
+
+
 
 ?>
 <!DOCTYPE html>

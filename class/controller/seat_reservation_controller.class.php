@@ -38,4 +38,7 @@ class Seat_Reservation_Controller extends Seat_Reservation_Model{
     public function cancel($booking_id){
        $this->cancelFromModel($booking_id);
     }
+    public function createRegularCustomerFromModel(){
+       $this->createRegularCustomer();
+    }
 }
