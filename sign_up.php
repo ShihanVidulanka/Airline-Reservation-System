@@ -22,6 +22,9 @@ if(isset($_SESSION['errors'])){
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/user_sign_up.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>User Sign Up</title>
 </head>
 <body>
@@ -73,12 +76,22 @@ if(isset($_SESSION['errors'])){
                 <div class="row mb-3">
                     <div class="col-sm-6">
                         <label for="password" class="form-label">Password:</label>
-                        <input required class="form-control" type="password" name="password" id="password" placeholder="Enter User Password">
+                        <div class="input-group mb-3">
+                            <input required class="form-control" type="password" name="password" id="password" placeholder="Enter User Password">
+                            <button class="btn btn-primary" onclick="togglepassword('password')">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        </div>
                         <div Id="password_val" class="m-3"></div>
                     </div>
                     <div class="col-sm-6">
                         <label for="password" class="form-label">Retype Password:</label>
-                        <input required class="form-control" type="password" name="retypepwd" id="retypepwd" placeholder="Enter User Password Again">
+                        <div class="input-group mb-3">
+                            <input required class="form-control" type="password" name="retypepwd" id="retypepwd" placeholder="Enter User Password Again">
+                            <button class="btn btn-primary" onclick="togglepassword('retypepwd')">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        </div>
                         <div Id="retypepassword_val" class="m-3"></div>
                     </div>
                 </div>
@@ -121,12 +134,9 @@ if(isset($_SESSION['errors'])){
                         <div Id="dob_val" class="m-3"></div>
                     </div>
                     <div class="col-sm-6">
-
                         <label for="email" class="form-label">Email:</label>
                         <input class="form-control" type="email" name="email" id="email" placeholder="Enter Your Email Addressemail:">
                         <div Id="email_val" class="m-3"></div>
-
-
                     </div>
                 </div>
                 <!-- <input type="text" name="submit_" value="submit" hidden> -->
@@ -135,6 +145,7 @@ if(isset($_SESSION['errors'])){
                     <button onclick="checkAll();" type="button" class="btn btn-primary buttons" value="Sign Up">Sign Up</button>
                     <a class="btn btn-primary buttons" href="login.php">Exit</a>
                 </div>
+
             </form>
         </div>
         

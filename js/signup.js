@@ -11,6 +11,17 @@ var telephone_numbers = document.getElementById('telephone_numbers');
 var dob = document.getElementById('dob');
 var email = document.getElementById('email');
 
+
+function togglepassword(textID){
+  console.log(textID);
+  var x = document.getElementById(textID);
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+
 var usedUsername = false;
 var usedPassportNo = false;
 // var errors_count = 0;
@@ -372,3 +383,5 @@ function validateEmail(email) {
   let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   return (pattern.test(email));
 }
+
+
