@@ -117,11 +117,12 @@ class Airline_Administrator_Model extends Dbh
     {
         $query = "SELECT *
         FROM booking join registered_passenger on booking.passenger_id=registered_passenger.passenger_id 
-        where flight_id=$flight_no AND
+        where flight_id=:flight_no AND
         TIMESTAMPDIFF(year, dob, DATE(booking_time))>=18 AND
         state=0
         ";
         $stmt = $this->connect()->prepare($query);
+        $stmt->bindParam(':flight_no',$flight_no);
         $stmt->execute();
         $array0 = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $registered_above_18 = count($array0);
@@ -131,12 +132,13 @@ class Airline_Administrator_Model extends Dbh
 
         $query1 = "SELECT *
         FROM booking join registered_passenger on booking.passenger_id=registered_passenger.passenger_id 
-        where flight_id=$flight_no AND
+        where flight_id=:flight_no AND
         TIMESTAMPDIFF(year, dob, DATE(booking_time))<18 AND
         state=3
 
         ";
         $stmt1 = $this->connect()->prepare($query1);
+        $stmt1->bindParam(':flight_no',$flight_no);
         $stmt1->execute();
         $array1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
@@ -148,11 +150,12 @@ class Airline_Administrator_Model extends Dbh
 
         $query2 = "SELECT *
         FROM booking join guest on booking.passenger_id=guest.passenger_id 
-        where flight_id=$flight_no AND
+        where flight_id=:flight_no AND
         TIMESTAMPDIFF(year, dob, DATE(booking_time))>=18 and
         state=3
         ";
         $stmt2 = $this->connect()->prepare($query2);
+        $stmt2->bindParam(':flight_no',$flight_no);
         $stmt2->execute();
         $array2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
@@ -162,11 +165,12 @@ class Airline_Administrator_Model extends Dbh
 
         $query3 = "SELECT *
         FROM booking join guest on booking.passenger_id=guest.passenger_id 
-        where flight_id=$flight_no AND
+        where flight_id=:flight_no AND
         TIMESTAMPDIFF(year, dob, DATE(booking_time))<18 and
         state=3
         ";
         $stmt3 = $this->connect()->prepare($query3);
+        $stmt3->bindParam(':flight_no',$flight_no);
         $stmt3->execute();
         $array3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
         echo "\n";
@@ -186,25 +190,33 @@ class Airline_Administrator_Model extends Dbh
     {
 
         $query = "SELECT * from booking join flight where booking.flight_id=flight.id 
-       and  booking.state=3 and flight.state=0 and departure_date>='$starting_date' and departure_date<='$ending_date'and destination='$destination'";
+       and  booking.state=3 and flight.state=0 and departure_date>=:starting_date and departure_date<=:ending_date and destination=:destination";
         $stmt = $this->connect()->prepare($query);
+        $stmt->bindParam(':starting_date',$starting_date);
+        $stmt->bindParam(':ending_date',$ending_date);
+        $stmt->bindParam(':destination',$destination);
         $stmt->execute();
+
         $passenger_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
         print_array($passenger_list);
         return $passenger_list;
     }
      //get no of passenger by  time range----->generate reports
      public function getNoPassengerByDaterange($starting_date,$ending_date){
-         $query1="SELECT category,count(user_id) as count FROM booking join registered_passenger where booking.passenger_id=registered_passenger.passenger_id 
-         and state=3 and date(booking_time)>='$starting_date' and date(booking_time)<='$ending_date'group by category order by category ";
+        $query1="SELECT category,count(user_id) as count FROM booking join registered_passenger where booking.passenger_id=registered_passenger.passenger_id 
+         and state=3 and date(booking_time)>=:starting_date and date(booking_time)<=:ending_date group by category order by category ";
         $stmt1 = $this->connect()->prepare($query1);
+        $stmt1->bindParam(':starting_date',$starting_date);
+        $stmt1->bindParam(':ending_date',$ending_date);
         $stmt1->execute();
         $passenger_list = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
 
-         $query2="SELECT 5 as category,count(booking.passenger_id) as count  FROM booking join guest where booking.passenger_id=guest.passenger_id 
-         and state=3 and date(booking_time)>='$starting_date' and date(booking_time)<='$ending_date'";
+         $query2="SELECT 5 as category, count(booking.passenger_id) as count  FROM booking join guest where booking.passenger_id=guest.passenger_id 
+         and state=3 and date(booking_time)>=:starting_date and date(booking_time)<=:ending_date";
          $stmt2=$this->connect()->prepare($query2);
+         $stmt2->bindParam(':starting_date',$starting_date);
+         $stmt2->bindParam(':ending_date',$ending_date);
          $stmt2->execute();
          $guest_list=$stmt2->fetchAll(PDO::FETCH_ASSOC);
          
@@ -213,25 +225,37 @@ class Airline_Administrator_Model extends Dbh
          
      }
      //get no of passenger by  origin and destination----->generate reports
-     public function getFlightDeailsByOriginDestination($origin,$destination,$current_date,$current_time){
+     public function getFlightDeailsByOriginDestination($origin,$destination,$current_date,$current_time1){
          
          $query="SELECT  flight.id,destination,origin,count(booking.passenger_id) as no_of_passengerof_flight,flight.state  
-         from flight left outer join booking on flight.id=booking.flight_id where (booking.state=3 or booking.state is null) and origin='$origin' and destination='$destination'and(departure_date<'$current_date' or(departure_date='$current_date' and departure_time<'$current_time'))
+         from flight left outer join booking on flight.id=booking.flight_id 
+         where (booking.state=3 or booking.state is null) 
+         and origin=:origin and destination=:destination 
+         and(departure_date<:current_date or(departure_date=:current_date and departure_time<:current_time1))
           group by flight.id";
         $stmt=$this->connect()->prepare($query);
-          $stmt->execute();
-          $details_of_flights=$stmt->fetchAll(PDO::FETCH_ASSOC);
-          return $details_of_flights;
-          //print_array($details_of_flights);
+        $stmt->bindParam(':destination',$destination);
+        $stmt->bindParam(':origin',$origin);
+        $stmt->bindParam(':current_date',$current_date);
+        $stmt->bindParam(':current_time1',$current_time1);
+        $stmt->execute();
+        $details_of_flights=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $details_of_flights;
+        //print_array($details_of_flights);
 
      }
      //get total revenue----->generate reports
      public function getRevenueByAircraft($starting_date,$ending_date)
      {
-        $query="SELECT sum(ticket_price),model FROM booking join flight on booking.flight_id=flight.id join airplane on airplane.id=flight.airplane_id
+        $query="SELECT sum(ticket_price),model FROM 
+        booking join flight on booking.flight_id=flight.id 
+        join airplane on airplane.id=flight.airplane_id
         where
-        flight.state<>1 and booking.state=3 and '$starting_date'<=date(booking_time) and '$ending_date'>=date(booking_time) group by model";
+        flight.state<>1 and booking.state=3 and :starting_date<=date(booking_time) and :ending_date>=date(booking_time) 
+        group by model";
         $stmt = $this->connect()->prepare($query);
+        $stmt->bindParam(':starting_date',$starting_date);
+        $stmt->bindParam(':ending_date',$ending_date);
         $stmt->execute();
         $renue_list=$stmt->fetchAll(PDO::FETCH_ASSOC);
         return $renue_list;
