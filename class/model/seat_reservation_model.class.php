@@ -161,9 +161,8 @@ class Seat_Reservation_Model extends Dbh{
 
         $regular = "";
         $email_sending = "";
-        if (isset($_SESSION['username'])){
-            $regular = $this->createRegularCustomer();
-            $booking_details = $this->getBookingDetails($booking_id);
+
+        $booking_details = $this->getBookingDetails($booking_id);
 //            print_array($booking_details);
             $body=
                 "\tB Airways Seat Reservation system: You have booked seat successfully.\nDetails of seat reservation :-\n".
@@ -186,11 +185,13 @@ class Seat_Reservation_Model extends Dbh{
             $email = new Email($recipient,$subject,$body);
             $email_api = new Email_Api();
             $email_sending = create_dict($email_api->sendMail($email));
+
+        if (isset($_SESSION['username'])){
+            $regular = $this->createRegularCustomer();
         }
 //        print_array($_SESSION);
-
         if (!isset($_SESSION['username'])) {
-            unset($_SESSION['passenger_id']);
+            session_destroy();
             header('Location:../index.php?error=success');
         }
 
