@@ -45,17 +45,26 @@ class Cancel_Booking_Model extends Dbh{
             "\tSeat No: ".$booking_details['seat_no']."\n".
             "\tSeat Type: ".$booking_details['seat_type']."\n"
         ;
-        $subject = "Seat Reservation Successfull!";
+        $subject = "Payment Refunding Email!";
         $recipient = $_SESSION['email'];
         $email = new Email($recipient,$subject,$body);
         $email_api = new Email_Api();
-        $result = $email_api->sendMail($email);
+        $email_result = create_dict($email_api->sendMail($email));
 
         if($this->getNumberofBookingsFromModel()){
             $this->removeRegularCustomer();
-            return "general";
+            if(strcmp($email_result['status'],"success")==0){
+                return "general-email";
+            }else{
+                return "general";
+            }
+        }else{
+            if(strcmp($email_result['status'],"success")==0){
+                return "email";
+            }else{
+                return "";
+            }
         }
-        return "";
 
     }
     public function getNumberofBookingsFromModel(){
