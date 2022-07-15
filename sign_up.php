@@ -78,7 +78,7 @@ if(isset($_SESSION['errors'])){
                         <label for="password" class="form-label">Password:</label>
                         <div class="input-group mb-3">
                             <input required class="form-control" type="password" name="password" id="password" placeholder="Enter User Password">
-                            <button class="btn btn-primary" onclick="togglepassword('password')">
+                            <button type="button" class="btn btn-primary" onclick="togglepassword('password')">
                                 <i class="fa fa-eye"></i>
                             </button>
                         </div>
@@ -88,7 +88,7 @@ if(isset($_SESSION['errors'])){
                         <label for="password" class="form-label">Retype Password:</label>
                         <div class="input-group mb-3">
                             <input required class="form-control" type="password" name="retypepwd" id="retypepwd" placeholder="Enter User Password Again">
-                            <button class="btn btn-primary" onclick="togglepassword('retypepwd')">
+                            <button type="button"  class="btn btn-primary" onclick="togglepassword('retypepwd')">
                                 <i class="fa fa-eye"></i>
                             </button>
                         </div>

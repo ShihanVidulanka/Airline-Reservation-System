@@ -151,7 +151,7 @@ $email = $registered_passenger->getEmail();
              <input type="text" name="submit_" value="submit" hidden>
 
             <div class="btn-group">
-                <a href="" class="btn btn-primary buttons">Change Password</a>
+                <a href="change_password.php" class="btn btn-primary buttons">Change Password</a>
                 <button onclick="checkAll();" type="button" class="btn btn-primary buttons" value="Edit">Edit</button>
                 <a class="btn btn-primary buttons" href="passenger_home.php">Back</a>
             </div>
