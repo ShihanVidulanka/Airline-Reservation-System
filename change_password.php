@@ -102,7 +102,7 @@ if(isset($_SESSION['resetCondition'])){
                 $userTypeVal=$_SESSION['account_type'];
                 switch ($userTypeVal) { // Complete this wthen users are done
                     case '0':
-                        $location="airline_administrator_home.php";
+                        $location="airline_administrator_settings.php";
                         break;
                     case '1':
                         $location="operation_agent_home.php";

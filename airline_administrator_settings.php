@@ -118,7 +118,11 @@ $url = $details['url']
 
             <div class="form-group">
                 <div class="buttons">
-                    <button type="submit"  name="submit" class="btn btn-primary button">Set</button>
+                    <div class="btn-group">
+                        <a href="change_password.php" class="btn btn-primary button">Change Password</a>
+                        <button type="submit"  name="submit" class="btn btn-primary button">Set</button>
+                        <a href="airline_administrator_home.php" class="btn btn-primary button">Back</a>
+                    </div>
                 </div>
             </div>
         </form>
