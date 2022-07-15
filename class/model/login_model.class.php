@@ -38,7 +38,7 @@ class Login_Model extends Dbh{
         elseif ($checkPassword == true) {
 
             // When Password is verified get the user telephone numbers using  user id.
-            $query2 =  "SELECT phone_no FROM telephone_no WHERE user_id =:ID";
+            $query2 =  "SELECT phone_no FROM telephone_no WHERE user_id =:ID AND is_deleted=0";
             $result_set2 = $this->connect()->prepare($query2);
             $result_set2->bindParam(':ID',$user['ID']);
             $result_set2->execute();

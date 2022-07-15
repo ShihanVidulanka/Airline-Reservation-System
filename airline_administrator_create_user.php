@@ -120,7 +120,7 @@ $destinations = $controller->get_all_airports();
                             </div>
                             <div class="col-sm-4">
                                 <label for="fd_username" class="form-label">Username</label>
-                                <input required class="form-control" type="text" name="fd_username" id="fd_username" placeholder="Enter Username:">
+                                <input onchange="fd_check_username()" required class="form-control" type="text" name="fd_username" id="fd_username" placeholder="Enter Username:">
                                 <div Id="fd_username_val" class="m-3"></div>
                             </div>
                         </div>
@@ -132,7 +132,6 @@ $destinations = $controller->get_all_airports();
                             </div>
                             <div class="col-sm-6">
                                 <label for="plane" class="form-label">Airport Code</label>
-                                <!-- <input required class="form-control" type="text" name="fd_airport_code" id="fd_airport_code" placeholder="Enter Airport Code:"> -->
                                 <select required class="form-control me-2" name="fd_airport_code" id="fd_airport_code">
 
                                     <option value="all">Select an Airport</option>
@@ -205,7 +204,7 @@ $destinations = $controller->get_all_airports();
                             </div>
                             <div class="col-sm-4">
                                 <label for="oa_username" class="form-label">Username</label>
-                                <input required class="form-control" type="text" name="oa_username" id="oa_username" placeholder="Enter Username:">
+                                <input onchange="oa_check_username()" required class="form-control" type="text" name="oa_username" id="oa_username" placeholder="Enter Username:">
                                 <div id="oa_username_val" class="m-3"></div>
                             </div>
                         </div>

@@ -108,6 +108,7 @@ class SignUp_Model extends Dbh{
         } catch (PDOException $e) {
             $db->rollBack();
             die($e->getMessage());
+            header("location: ../login.php?error=signup_failed");
         }
         
 

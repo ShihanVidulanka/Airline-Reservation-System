@@ -11,6 +11,17 @@ var telephone_numbers = document.getElementById('telephone_numbers');
 var dob = document.getElementById('dob');
 var email = document.getElementById('email');
 
+
+function togglepassword(textID){
+  console.log(textID);
+  var x = document.getElementById(textID);
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+
 var usedUsername = false;
 var usedPassportNo = false;
 // var errors_count = 0;
@@ -166,7 +177,7 @@ function addtelephone() {
 function checkUserName() {
 
   let username = document.getElementById('username').value;
-  let errormsg = document.getElementById('username_val')
+  let errormsg = document.getElementById('username_val');
   console.log(username);
   if (username.length == 0) {
     errormsg.innerHTML = "Invalid Username";
@@ -200,7 +211,7 @@ function checkUserName() {
 }
 function checkPassportNo() {
   let passport_number = document.getElementById('passport_number').value;
-  let errormsg = document.getElementById('passport_number_val')
+  let errormsg = document.getElementById('passport_number_val');
 
   // console.log(passport_number);
   if (passport_number.length == 0) {
@@ -363,7 +374,8 @@ function validatepassport_number(passport_number) {
 function validateDate(date) {
   let dob = new Date(date);
   let today = new Date();
-  return (dob < today);
+  let minimum = new Date('1900-01-01')
+  return (dob < today) && (dob>minimum);
 
 }
 
@@ -372,3 +384,5 @@ function validateEmail(email) {
   let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   return (pattern.test(email));
 }
+
+

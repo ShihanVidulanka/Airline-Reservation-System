@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/additional.inc.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
 //print_array($_POST);
@@ -6,7 +9,7 @@ $seat_reservation_view = new Seat_Reservation_View();
 $airplane = $seat_reservation_view->getPlaneDetailsFromModel($_POST['flight_id']);
 $flightView = new Flight_View();
 $flight = $flightView->getFlightDetailsByFlightIdFromModel($_POST['flight_id']);
-$reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
+$reserved_seats = $seat_reservation_view->getReservedSeatsFromModel($_POST['flight_id']);
 // print_array($flight);
 ?>
 <!DOCTYPE html>
@@ -146,7 +149,7 @@ $reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
                         <label class="control-label col-sm-4" for="email">Email:</label>
                         <div class="col-sm-8">
                             <input class="form-control" type="email" name="email" id="email" placeholder="Enter Your Email Addressemail:">
-                            <div id="email_val" class="m-3"></div>
+                            <div id="email_val" class="m-3 error"></div>
                         </div>
                     </div>
 

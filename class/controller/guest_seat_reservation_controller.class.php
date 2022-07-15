@@ -15,7 +15,7 @@ class Guest_Seat_Reservation_Controller extends Guest_Seat_Reservation_Model
         $booking->setState($details['state']);
 
         $seat_reservation_view = new Seat_Reservation_View();
-        $reserved_seats = $seat_reservation_view->getReservedSeats($_POST['flight_id']);
+        $reserved_seats = $seat_reservation_view->getReservedSeatsFromModel($_POST['flight_id']);
 
         if (in_array($details['seat_no'], $reserved_seats)) {
             // header('Location:../guest_flight_booking.php?error=alreadyBooked');
