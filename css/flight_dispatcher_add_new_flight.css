@@ -39,10 +39,3 @@ label.form-label{
 .hide{
     display: none;
 }
-
-#tail_no_val{
-    border-style: solid;
-    border-radius: 2%;
-    border-color: black;
-    border-width: 2px;
-}
