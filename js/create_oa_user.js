@@ -115,9 +115,9 @@ function oa_check_username(){
     } else {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
-            console.log(this.readyState);
-            console.log(this.status);
-            console.log(this.responseText);
+            // console.log(this.readyState);
+            // console.log(this.status);
+            // console.log(this.responseText);
             if (this.readyState == 4 && this.status == 200) {
                 if (this.responseText == 'error') {
                     errormsg.innerHTML = 'Already used!'
