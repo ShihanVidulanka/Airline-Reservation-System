@@ -177,7 +177,7 @@ function addtelephone() {
 function checkUserName() {
 
   let username = document.getElementById('username').value;
-  let errormsg = document.getElementById('username_val')
+  let errormsg = document.getElementById('username_val');
   console.log(username);
   if (username.length == 0) {
     errormsg.innerHTML = "Invalid Username";
@@ -211,7 +211,7 @@ function checkUserName() {
 }
 function checkPassportNo() {
   let passport_number = document.getElementById('passport_number').value;
-  let errormsg = document.getElementById('passport_number_val')
+  let errormsg = document.getElementById('passport_number_val');
 
   // console.log(passport_number);
   if (passport_number.length == 0) {

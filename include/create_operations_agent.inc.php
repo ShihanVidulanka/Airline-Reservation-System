@@ -4,9 +4,9 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 
 // print_array($_POST);
 
-if(isset($_POST['username_'])){
+if(isset($_POST['oa_username_'])){
     $create_operations_agent_controller = new Airline_Administrator_Controller;
-    $create_operations_agent_controller->checkUsernameFromModel($_POST['username_']);
+    $create_operations_agent_controller->checkUsernameFromModel($_POST['oa_username_']);
 }
 
 if(isset($_POST['oa_first_name'])){
@@ -18,8 +18,5 @@ if(isset($_POST['oa_first_name'])){
     $operations_agent->setEmail($_POST['oa_email']);
 
     $create_operations_agent_controller->createOperationsAgentFromModel($operations_agent);
-}
-else{
-    print_r("NOT WORKING");
 }
 ?>
