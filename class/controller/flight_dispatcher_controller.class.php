@@ -2,6 +2,7 @@
 
 // include_once('./class/model/login_model.class.php');
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/additional.inc.php";
 
 class Flight_Dispatcher_Controller extends Flight_Dispatcher_Model
 {
@@ -141,6 +142,7 @@ class Flight_Dispatcher_Controller extends Flight_Dispatcher_Model
     public function getFreeAriplanes($airport, $departure_date_time, $departure_date, $departure_time)
     {
         $arr= array("departure_datetime"=>$departure_date_time, "airport"=>$airport ,"departure_date"=>$departure_date, "departure_time"=>$departure_time);
+        // print_array($this->getFreeplanesFromModel($arr));
         return $this->getFreeplanesFromModel($arr);
     }
 

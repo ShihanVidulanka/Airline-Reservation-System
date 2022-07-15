@@ -2,6 +2,7 @@
 
 // include_once('./class/model/login_model.class.php');
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/additional.inc.php";
 
 class Flight_Dispatcher_Model extends Dbh
 {
@@ -176,22 +177,20 @@ class Flight_Dispatcher_Model extends Dbh
 
     //get free planes on given time period from given airport which are already assigned to flights 
     protected function getFreeplanesFromModel($arr){
-        $query = "SELECT flight.id, flight.origin, flight.destination, flight.airplane_id, flight.departure_date, 
-        flight.departure_time, flight.flight_time, flight.state, airplane.*, 
-        DATE_ADD(CONCAT_WS(' ', flight.departure_date,flight.departure_time),INTERVAL flight.flight_time MINUTE) 
-        AS arrival_time FROM flight LEFT OUTER JOIN airplane ON flight.airplane_id= airplane.id WHERE 
-        DATE_ADD(CONCAT_WS(' ', flight.departure_date,flight.departure_time),INTERVAL flight.flight_time MINUTE)<'{$arr['departure_datetime']}' 
-        AND destination='{$arr['airport']}' AND airplane_id NOT IN (SELECT airplane_id FROM flight where departure_time>='{$arr['departure_time']}'
+        $query = "SELECT flight.id, flight.origin, flight.destination, flight.airplane_id, flight.departure_date, flight.departure_time, flight.flight_time, flight.state, airplane.id, airplane.tail_no, airplane.model, airplane.no_platinum_seats, airplane.no_economy_seats, airplane.no_business_seats, airplane.in_service, 
+        DATE_ADD(CONCAT_WS(' ', flight.departure_date,flight.departure_time),INTERVAL flight.flight_time MINUTE)AS arrival_time FROM flight LEFT OUTER JOIN airplane ON flight.airplane_id= airplane.id WHERE 
+        DATE_ADD(CONCAT_WS(' ', flight.departure_date,flight.departure_time), INTERVAL flight.flight_time MINUTE)<'{$arr['departure_datetime']}' AND destination='{$arr['airport']}' AND state = 2 AND airplane_id NOT IN (SELECT airplane_id FROM flight where departure_time>='{$arr['departure_time']}'
         AND departure_date >= '{$arr['departure_date']}' AND origin = '{$arr['airport']}')";
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
         $available_plane_details = $stmt->fetchALL(PDO::FETCH_ASSOC);
+        // print_array($available_plane_details);
         return $available_plane_details;
     } 
 
     // get planes which are not assign to flights(Indonesian Airport)
     protected function getNewPlanesFromModel(){
-        $query = "SELECT airplane.tail_no, airplane.no_platinum_seats, airplane.no_economy_seats, airplane.no_business_seats FROM airplane WHERE airplane.id NOT IN (SELECT DISTINCT airplane_id FROM flight)";
+        $query = "SELECT airplane.tail_no, airplane.no_platinum_seats, airplane.no_economy_seats, airplane.no_business_seats FROM airplane WHERE airplane.id NOT IN (SELECT DISTINCT airplane_id FROM flight  WHERE state = 0 OR state = 2)";
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
         $new_planes = $stmt->fetchALL(PDO::FETCH_ASSOC);

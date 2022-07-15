@@ -120,6 +120,7 @@ function changeContent1(responseElementID, postingPage, dateTime) {
     const xhttp = new XMLHttpRequest();
 
     xhttp.onload = function () {
+        console.log(this.responseText);
         let array = JSON.parse(this.responseText);
 
         var tBody = document.getElementById("tBody");
@@ -147,6 +148,7 @@ function changeContent1(responseElementID, postingPage, dateTime) {
             var arrival_time = dateTime.toLocaleTimeString();
 
             var tail_no = arrayElement['tail_no'];
+            console.log(tail_no);
             addOptionToFreePlanesDropDown(tail_no);
 
             cell1.innerHTML = tail_no;
@@ -174,7 +176,7 @@ function changeContent2(freeResponseElementID, postingPage, freeDateTime) {
     let freeVariableValue = document.getElementById("departure_date_time").value;
 
     if (freeVariableValue.length == 0 || freeVariableValue == null) {
-        console.log('sss');
+        // console.log('sss');
         document.getElementById('tail_no_val').style.display = 'block';
         document.getElementById(freeResponseElementID).innerHTML = "Please Select the Departure Date and Time";
         document.getElementById(freeResponseElementID).style.color = 'Red';
@@ -188,6 +190,7 @@ function changeContent2(freeResponseElementID, postingPage, freeDateTime) {
     const xhttp = new XMLHttpRequest();
 
     xhttp.onload = function () {
+        console.log(this.responseText);
         let freeArray = JSON.parse(this.responseText);
 
         let freeIndex = 0;
@@ -277,7 +280,7 @@ function checkAll() {
     if (incorrectBusinessPrice) {
         error_count++;
     }
-    //console.log(error_count);
+    console.log(error_count);
     if (error_count != 0) {
         alert('Enter the correct details')
     }else{
