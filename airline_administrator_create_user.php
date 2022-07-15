@@ -132,7 +132,6 @@ $destinations = $controller->get_all_airports();
                             </div>
                             <div class="col-sm-6">
                                 <label for="plane" class="form-label">Airport Code</label>
-                                <!-- <input required class="form-control" type="text" name="fd_airport_code" id="fd_airport_code" placeholder="Enter Airport Code:"> -->
                                 <select required class="form-control me-2" name="fd_airport_code" id="fd_airport_code">
 
                                     <option value="all">Select an Airport</option>
