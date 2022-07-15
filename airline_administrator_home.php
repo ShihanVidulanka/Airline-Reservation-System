@@ -57,7 +57,7 @@ if (!isset($_SESSION['ID'])) {
                         <a class="nav-link" href="airline_administrator_add_new_airplane.php">Add New Airplane</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="airline_administrator_add_new_airport.php">Add New Flight</a>
+                      <a class="nav-link" href="airline_administrator_add_new_airport.php">Add New Airport</a>
                     </li>
 
                 </ul>
