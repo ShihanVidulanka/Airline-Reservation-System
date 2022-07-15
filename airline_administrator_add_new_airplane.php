@@ -90,7 +90,7 @@ $view = new Airline_Administrator_View();
             }
             ?>
 
-            <h1 id="heading" class="mb-4">Add New Airport</h1>
+            <h1 id="heading" class="mb-4">Add New Airplane</h1>
             <form action="include/airline_administrator_add_new_airplane.inc.php" method="POST" enctype='multipart/form-data' id="add_new_airplane_form">
 
                 <div class="row mb-3">

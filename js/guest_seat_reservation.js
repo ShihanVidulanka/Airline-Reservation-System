@@ -6,6 +6,8 @@ var telephone = document.getElementById("telephone");
 var dob = document.getElementById("dob");
 var email = document.getElementById("email");
 
+var usedpassportNo = false;
+
 first_name.addEventListener("input", function () {
     first_nameListner();
 });
@@ -80,16 +82,6 @@ function dobListner() {
     }
 }
 
-function checkPassportNo() {
-    let passport_number = document.getElementById("passport_number").value;
-    let errormsg = document.getElementById("passport_number_val");
-
-    // console.log(passport_number);
-    if (passport_number.length == 0) {
-        errormsg.innerHTML = "Invalid Passport_number";
-        return;
-    }
-}
 function emailListner() {
     let errormsg = document.getElementById("email_val");
     if (validateEmail(email.value)) {
@@ -139,7 +131,14 @@ function checkAll() {
         error_count++;
         emailListner();
     }
-    checkPassportNo();
+    if (usedpassportNo) {
+        error_count++;
+        let errormsg = document.getElementById('passport_number_val');
+        errormsg.innerHTML = 'A seat is already reserved using this passport no!';
+        errormsg.style.color = 'red';
+        // console.log('password used');
+    
+    }
 
     console.log(error_count);
     if (error_count == 0) {
@@ -171,7 +170,7 @@ function validatepassport_number(passport_number) {
 //email validation
 function validateEmail(email) {
     let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return (pattern.test(email));
+    return pattern.test(email);
 }
 
 //date of birth validation
@@ -252,5 +251,49 @@ function checkSeatAvailability() {
         xhttp.send("seatno-flightid" + "=" + seatno + "-" + flightid);
     } else {
         alert("Please Select seat!!!");
+    }
+}
+
+function checkPassportNo() {
+    let passport_number = document.getElementById("passport_number").value;
+    let flightid = document.getElementById("flightid").value;
+    let errormsg = document.getElementById("passport_number_val");
+    console.log(passport_number);
+    console.log(flightid);
+
+    if (passport_number.length == 0) {
+        errormsg.innerHTML = "Invalid passportNo";
+        return;
+    } else {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+                if (this.responseText == "error") {
+                    errormsg.innerHTML = "A seat is already reserved using this passport no!";
+                    errormsg.style.color = "red";
+                    usedpassportNo = true;
+                } else {
+                    usedpassportNo = false;
+                    if (passport_number.length == 0) {
+                            errormsg.innerHTML = "Invalid PassportNo";
+                            errormsg.style.color = "red";
+                            }
+                    else if (validatepassport_number(passport_number)) {
+                        errormsg.innerHTML = "Valid PassportNo";
+                        errormsg.style.color = "green";
+                    } else {
+                        errormsg.innerHTML = "Invalid PassportNo";
+                        errormsg.style.color = "red";
+                    }
+                }
+            }
+        };
+        xhttp.open("POST", "include/guest_seat_reservation.inc.php", true);
+        xhttp.setRequestHeader(
+            "Content-type",
+            "application/x-www-form-urlencoded"
+        );
+        xhttp.send("passportNo_flightid=" + passport_number+"_"+flightid);
     }
 }

@@ -225,7 +225,36 @@ class Guest_Seat_Reservation_Model extends Dbh
         $result = $stmt->fetch();
         return $result['category'];
     }
-}
+    protected function checkPassportNo($passportNo,$flight_id){
+        $db=$this->connect();
+        $query1 = "SELECT COUNT(id) FROM booking LEFT OUTER JOIN registered_passenger USING(passenger_id) 
+                    WHERE booking.flight_id = :flight_id AND passport_number = :passportNo AND booking.state = :state_;";
+        $query2 = "SELECT COUNT(id) FROM booking LEFT OUTER JOIN guest USING(passenger_id) 
+                    WHERE booking.flight_id = :flight_id AND passport_number = :passportNo AND booking.state = :state_;";
 
-// $a = new Seat_Reservation_Model();
-// print_array($a->getPlaneDetails(1));
+        $stmt1=$db->prepare($query1);
+        $stmt1->execute(
+            array(
+                ':passportNo'=>$passportNo,
+                ':flight_id'=>$flight_id,
+                ':state_' => 3
+            )
+        );
+        $count1=$stmt1->fetch()['COUNT(id)'];
+
+        $stmt2=$db->prepare($query2);
+        $stmt2->execute(
+            array(
+                ':passportNo'=>$passportNo,
+                ':flight_id'=>$flight_id,
+                ':state_' => 3
+            )
+        );
+        $count2=$stmt2->fetch()['COUNT(id)'];
+        $result = array($count1,$count2,$count1!=0 or $count2!=0);
+        // print_array($result);
+        if($count1!=0 or $count2!=0){
+            echo "error";
+        }
+    }
+}
