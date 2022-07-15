@@ -84,7 +84,7 @@ if (isset($_SESSION['flight_id'])) {
     </nav>
     <div>
         <br>
-        <a href="operation_agent_view_passengers_flight.php" class="btn btn-sm btn-danger">BACK</a>
+        <a href="operation_agent_view_passengers_flight.php" class="m-3 btn btn-sm btn-danger">BACK</a>
     </div>
     <div class="container xxl">
         <div class="col-sm-12" style="align-self: center;align-items:center">
