@@ -19,12 +19,11 @@ class Guest_Seat_Reservation_Controller extends Guest_Seat_Reservation_Model
 
         if (in_array($details['seat_no'], $reserved_seats)) {
             // header('Location:../guest_flight_booking.php?error=alreadyBooked');
-            echo($details['seat_no']);
-//            print_array($reserved_seats);
+            echo ($details['seat_no']);
+            //            print_array($reserved_seats);
+        } else {
+            $this->reserveSeat($booking);
         }
-         else {
-             $this->reserveSeat($booking);
-         }
     }
     public function checkForBookedSeat($flight_id, $passenger_id)
     {
@@ -36,5 +35,8 @@ class Guest_Seat_Reservation_Controller extends Guest_Seat_Reservation_Model
             return true;
         }
         return false;
+    }
+    public function checkPassportNoFromModel($passportNo,$flight_id){
+        $this->checkPassportNo(remove_unnessaries($passportNo,1),$flight_id);
     }
 }

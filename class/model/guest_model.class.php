@@ -66,6 +66,7 @@ class Guest_Model extends Dbh
             $db->commit();
             $_SESSION['first_name'] = $details['first_name'];
             $_SESSION['last_name'] = $details['last_name'];
+            $_SESSION['last_name'] = $details['passport_number'];
             $_SESSION["passenger_id"] = $passenger_id;
             $_SESSION["passenger_type"] = 1;
             $_SESSION['email'] = $details['email'];

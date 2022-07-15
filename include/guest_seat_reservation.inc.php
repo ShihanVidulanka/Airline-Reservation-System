@@ -5,18 +5,13 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
-// if(isset($_POST['Submit'])){
-//     $Guest_Controller = new Guest_Controller();
-//     $guest = new Guest();
+if (isset($_POST['passportNo_flightid'])){
+    $result = explode("_",$_POST['passportNo_flightid']);
+    // print_array($result);
+    $guest_seat_reservation_controller=new Guest_Seat_Reservation_Controller;
+    $guest_seat_reservation_controller->checkPassportNoFromModel($result[0],$result[1]);
+}
 
-//     $guest->setFirst_name($_POST['first_name']);
-//     $guest->setLast_name($_POST['last_name']);
-//     $guest->setDob($_POST['dob']);
-//     $guest->setPassport_number($_POST['passport_number']);
-//     $guest->setPhone_no($_POST['telephone']);
-
-//     $Guest_Controller->updateGuestFromModel($guest);
-// }
 if(isset($_POST['seatno-flightid'])){
     $post = explode('-',$_POST['seatno-flightid']);
     $seat_reservation_view = new Seat_Reservation_View();
