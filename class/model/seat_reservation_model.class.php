@@ -213,7 +213,13 @@ class Seat_Reservation_Model extends Dbh{
                 ":booking_id"=>$booking_id
             )
         );
-        header('Location:../passenger_flight_booking.php?error=cancelled');
+        if (!isset($_SESSION['username'])) {
+            session_destroy();
+            header('Location:../index.php?error=success');
+        }
+        else{
+            header('Location:../passenger_flight_booking.php?error=cancelled');
+        }
     }
     private function getNumberofBookingsFromModel(){
         $pdo = $this->connect();

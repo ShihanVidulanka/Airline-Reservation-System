@@ -228,15 +228,16 @@ class Guest_Seat_Reservation_Model extends Dbh
     protected function checkPassportNo($passportNo,$flight_id){
         $db=$this->connect();
         $query1 = "SELECT COUNT(id) FROM booking LEFT OUTER JOIN registered_passenger USING(passenger_id) 
-                    WHERE booking.flight_id = :flight_id AND passport_number = :passportNo;";
+                    WHERE booking.flight_id = :flight_id AND passport_number = :passportNo AND booking.state = :state_;";
         $query2 = "SELECT COUNT(id) FROM booking LEFT OUTER JOIN guest USING(passenger_id) 
-                    WHERE booking.flight_id = :flight_id AND passport_number = :passportNo;";
+                    WHERE booking.flight_id = :flight_id AND passport_number = :passportNo AND booking.state = :state_;";
 
         $stmt1=$db->prepare($query1);
         $stmt1->execute(
             array(
                 ':passportNo'=>$passportNo,
-                ':flight_id'=>$flight_id
+                ':flight_id'=>$flight_id,
+                ':state_' => 3
             )
         );
         $count1=$stmt1->fetch()['COUNT(id)'];
@@ -245,7 +246,8 @@ class Guest_Seat_Reservation_Model extends Dbh
         $stmt2->execute(
             array(
                 ':passportNo'=>$passportNo,
-                ':flight_id'=>$flight_id
+                ':flight_id'=>$flight_id,
+                ':state_' => 3
             )
         );
         $count2=$stmt2->fetch()['COUNT(id)'];
