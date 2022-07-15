@@ -6,6 +6,9 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/addi
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
 class Change_Password_Controller extends Change_Password_Model{
+    public function getEmail($username){
+        return $this->getEmailFromModel($username);
+    }
     public function changePassword($resetCondition=false,$username,$currentPassword,$password,$retypePassword){
         echo 1;
         if (!$resetCondition){

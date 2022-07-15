@@ -37,11 +37,11 @@ if(isset($_SESSION['resetCondition'])){
         <h1 id="heading" class="mb-4">Change Password</h1>
 
         <?php
-        if(isset($_GET['error']) && strcmp($_GET['error'],"edit_successful")==0){
-            echo '<div class="alert alert-success errors" role="alert">'."Successfully Edited"."</div>";
-        }
-        else if(isset($_GET['error']) && strcmp($_GET['error'],"edit_failed")==0){
-            echo '<div class="alert alert-danger errors" role="alert">'."Edditing Process Failed"."</div>";
+        if(isset($_GET['error'])&& strcmp($_GET['error'],"change_successful")==0){
+          echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
+            Password Changed Successfully!!!
+            <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
+          </div>";
         }
 
         ?>

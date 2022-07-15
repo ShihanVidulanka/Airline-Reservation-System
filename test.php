@@ -10,3 +10,6 @@ $time = date("H:i:s");
 
 print_array($_SESSION);
 
+$cpc = new Change_Password_Controller();
+echo $cpc->getEmail("thiranjana");
+

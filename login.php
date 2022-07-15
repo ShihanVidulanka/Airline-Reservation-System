@@ -3,7 +3,7 @@
 
     // include_once('include/login.inc.php');
     session_start();
-    print_r($_SESSION);
+
     ?> <!DOCTYPE html>
     <html lang="en">
 
@@ -42,11 +42,8 @@
                         <input type="password" id="password" class="fadeIn third" name="password" placeholder="Enter the Password" />
                         <i class="bi bi-eye-fill fadeIn third" id="togglePassword"></i>
                     </div>
-                    
-
-                    
-
-                    <input type="submit" name="login" id="submit" class="fadeIn fourth" value="Log In">
+                    <input type="submit" name="login" id="submit" class="fadeIn fourth" value="Log In"><br>
+                    <a href="forget_password.php">Forget Password?</a>
                 </form>
 
                 <!-- Remind Passowrd -->

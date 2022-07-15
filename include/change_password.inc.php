@@ -21,8 +21,6 @@ if($_POST['password']){
         $current_password=$_POST['current_password'];
     }
 
-
-
     $change_password_controller = new Change_Password_Controller();
     $change_password_controller->changePassword($reset_condition,$username,$current_password,$password,$retypePassword);
 

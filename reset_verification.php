@@ -6,6 +6,8 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/addi
 require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
 
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +21,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/forget_password.css">
+    <link rel="stylesheet" href="css/reset_verification.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -27,39 +29,30 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 </head>
 <body>
 
-<div class="container pt-5">
+<div class="container pt-3">
     <div class="wrapper p-3">
         <h1 id="heading" class="mb-4">Change Password</h1>
 
-        <?php
-        if(isset($_GET['error'])&& strcmp($_GET['error'],"verification_failed")==0){
-            echo "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">
-            Incorrect Verifiction code!!!
-            <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
-          </div>";
-        }else if(isset($_GET['error'])&& strcmp($_GET['error'],"invalid_username")==0){
-            echo "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">
-            Invalid Username!!!
-            <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
-          </div>";
-        }
-
-        ?>
 
 
-        <form id="signup_form" action="include/forget_password.inc.php" class="was-validated" method="post">
+        <form id="signup_form" action="include/reset_verification.inc.php" class="was-validated" method="post">
+
+            <div class="alert alert-info errors" role="alert">
+                Please Check your email for verification code!!!<br>
+                <div class="timer" id="timer"></div>
+            </div>
             <div class="row mb-3">
                 <div class="col-sm-12">
-                    <label for="username" class="form-label" >Username:</label>
-                    <input required class="form-control" type="text" name="username" id="username" placeholder="Enter User Username">
-                    <div Id="username_val" class="m-3"></div>
+                    <label for="verification" class="form-label" >Verification Code:</label>
+                    <input required class="form-control" type="text" name="verification" id="verification" placeholder="Enter the Verification Code">
+                    <div Id="verification_val" class="m-3"></div>
                 </div>
             </div>
 
             <div class="btn-group">
 
                 <button type="submit" class="btn btn-primary buttons" name="submit" value="send">Send Varification Mail</button>
-                <a class="btn btn-primary buttons" href="login.php">Back</a>
+                <a class="btn btn-primary buttons" href="forget_password.php">Back</a>
             </div>
 
         </form>
@@ -67,7 +60,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 
 </div>
 
-<script src="js/change_password.js"></script>
+<script src="js/reset_password.js"></script>
 
 </body>
 </html>

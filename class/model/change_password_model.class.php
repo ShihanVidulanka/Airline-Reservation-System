@@ -7,6 +7,22 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 
 class Change_Password_Model extends Dbh{
 
+    protected function getEmailFromModel($username){
+        $email = "empty";
+        $query="SELECT email FROM user WHERE username=:username";
+        $stmt=$this->connect()->prepare($query);
+        $stmt->execute(
+            array(
+                ':username'=>$username
+            )
+        );
+        $result = $stmt->fetch();
+        if(isset($result['email'])&& !(empty($result['email']))){
+            $email = $result['email'];
+        }
+
+        return $email;
+    }
 
     protected function checkCurrentPasswordFromModel($currentPassword,$username){
         $query = "SELECT password FROM user WHERE username=:username";
