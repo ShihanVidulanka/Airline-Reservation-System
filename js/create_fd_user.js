@@ -109,6 +109,7 @@ function fd_check_username(){
     let username = document.getElementById('fd_username').value;
     let errormsg = document.getElementById('fd_username_val');
     // console.log(username);
+    // console.log(username.length);
     if (username.length == 0) {
         errormsg.innerHTML = "Invalid Username";
         return;
@@ -117,7 +118,7 @@ function fd_check_username(){
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.responseText == 'error') {
-                    errormsg.innerHTML = 'Username is already used!'
+                    errormsg.innerHTML = 'Already used!'
                     errormsg.style.color = 'red';
                     fd_used_username = true;
                 } else {
@@ -138,6 +139,7 @@ function fd_check_username(){
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("fd_username_=" + username);
     }
+    // console.log(fd_used_username);
 }
 
 function fd_checkAll(){
@@ -176,13 +178,13 @@ function fd_checkAll(){
     if (fd_used_username){
         error_count++;
         let errormsg = document.getElementById('fd_username_val');
-        errormsg.innerHTML = 'Username is already used!';
+        errormsg.innerHTML = 'Already used!';
         errormsg.style.color = 'red';
         console.log('username used');
     }
     
     var fd_airport_code = document.getElementById('fd_airport_code');
-    console.log(typeof fd_airport_code.value);
+    // console.log(typeof fd_airport_code.value);
     if (fd_airport_code.value == 'all'){
         error_count++;
         // fd_airportCodeListener();

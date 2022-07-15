@@ -4,9 +4,9 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 
 // print_array($_POST);
 
-if(isset($_POST['username_'])){
+if(isset($_POST['fd_username_'])){
     $create_flight_dispatcher_controller = new Airline_Administrator_Controller;
-    $create_flight_dispatcher_controller->checkUsernameFromModel($_POST['username_']);
+    $create_flight_dispatcher_controller->checkUsernameFromModel($_POST['fd_username_']);
 }
 
 if(isset($_POST['fd_first_name'])){

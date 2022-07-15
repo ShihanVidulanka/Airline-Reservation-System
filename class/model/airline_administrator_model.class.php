@@ -15,7 +15,7 @@ class Airline_Administrator_Model extends Dbh
         );
         $count = $stmt->fetch()['COUNT(ID)'];
         if ($count != 0) {
-            echo "Username already used";
+            echo "error";
         }
     }
 

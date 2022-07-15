@@ -1,10 +1,18 @@
 <<?php
 
-
-    // include_once('include/login.inc.php');
     session_start();
+    if (isset($_GET['error'])) {
 
+        if ($_GET['error'] == "emptyfield") {
+            $text = "Emplty field exist!!";
+        } else if ($_GET['error'] == "UserNotFound1" || $_GET['error'] == "UserNotFound2" || $_GET['error'] == "UserNotFound3" || $_GET['error'] == "UserNotFound4" || $_GET['error'] == "WrongPassword") {
+            $text = "Username or Password is incorrect!!";
+        } else if ($_GET['error'] == "ConnectionFails" || $_GET['error'] == "ConnectionFail2" || $_GET['error'] == "ConnectionFail3") {
+            $text = "Connection Failed!!";
+        }
+    }
     ?> <!DOCTYPE html>
+
     <html lang="en">
 
     <head>
@@ -24,14 +32,24 @@
     </head>
 
     <body>
-
-
         <div class="wrapper fadeInDown">
             <div id="formContent">
                 <!-- Icon -->
                 <div class="fadeIn first">
                     <img src="img/logo5.png" id="icon" alt="User Icon" />
                 </div>
+
+                <!-- error -->
+                <?php
+                if (isset($text)) {
+                    echo "<div class='errorTag'>";
+                    echo "<p>".$text."</p>";
+                    echo "</div>";
+                } 
+                    
+                ?>
+                
+
 
                 <!-- Login Form -->
                 <form method="post" action="include/login.inc.php">
@@ -50,6 +68,8 @@
                 <div id="formFooter">
                     <a class="underlineHover" href="sign_up.php">Create New Account</a><br>
                     <a class="underlineHover" href="index.php">Back to Main Page</a>
+
+
                 </div>
 
             </div>
