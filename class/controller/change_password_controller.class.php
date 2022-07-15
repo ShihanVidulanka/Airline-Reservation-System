@@ -10,7 +10,6 @@ class Change_Password_Controller extends Change_Password_Model{
         return $this->getEmailFromModel($username);
     }
     public function changePassword($resetCondition=false,$username,$currentPassword,$password,$retypePassword){
-        echo 1;
         if (!$resetCondition){
             echo $currentPassword;
             if($this->checkCurrentPasswordFromModel($currentPassword,$username)){
@@ -21,9 +20,7 @@ class Change_Password_Controller extends Change_Password_Model{
                 }
             }
         }else{
-            echo 5;
             if ($this->validatePassword($password)&&($password==$retypePassword)){
-                echo 6;
                 $this->changePasswordFromModel($username,$password);
             }
         }
