@@ -39,3 +39,9 @@ label.form-label{
 .hide{
     display: none;
 }
+
+#error{
+    width: 100%;
+    background-color: rgb(79, 230, 79);
+    text-align: center;
+}

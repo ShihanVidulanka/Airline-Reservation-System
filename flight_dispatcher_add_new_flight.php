@@ -124,9 +124,7 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
 
         <div class="row mb-3">
           <div class="col-sm-6" id="departure_date_validation"></div>
-          <div class="col-sm-6" id="arrival_date_validation">
-
-          </div>
+          <div class="col-sm-6" id="arrival_date_validation"></div>
         </div>
 
         <div class="row mb-3">
@@ -145,7 +143,7 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
             </div>
           </div>
 
-          <!-- Airplane Tail No. -->
+          <!-- Existing Airplane Tail No. -->
           <div class="col-sm-6 hide" id="show1">
             <label class="form-label">Airplane Tail No.</label>
             <select required="" class="form-control" name="tail_no" id="tail_no">
