@@ -12,7 +12,7 @@ if(isset($_POST['username'])){
         $varification_num = rand(100000, 999999);
         $email_api = new Email_Api();
         $body = "B Airways: Your verification code is: ".$varification_num.".";
-        $subject = "Verifycation code for resetting password";
+        $subject = "Verification code for resetting password";
         $recipient = $responce;
         $email = new Email($recipient,$subject,$body);
         $email_api->sendMail($email);
