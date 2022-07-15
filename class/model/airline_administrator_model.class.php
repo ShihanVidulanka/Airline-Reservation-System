@@ -5,7 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/au
 // This class is for creating a new flight dispatcher and operations agent used by airline administrator
 class Airline_Administrator_Model extends Dbh
 {
-    public function check_username($username)
+    protected function check_username($username)
     {
         $db = $this->connect();
         $query = "SELECT COUNT(ID) FROM user WHERE username=:username";
@@ -19,7 +19,7 @@ class Airline_Administrator_Model extends Dbh
         }
     }
 
-    public function createAccount($details, $type)
+    protected function createAccount($details, $type)
     {
         try {
             $db = $this->connect();
@@ -79,7 +79,7 @@ class Airline_Administrator_Model extends Dbh
     }
 
     //get airplane details using tail_no or return null if empty
-    public function getAirplaneDetailsFromModel($tail_no)
+    protected function getAirplaneDetailsFromModel($tail_no)
     {
         $query = "SELECT * FROM airplane WHERE tail_no='{$tail_no}'";
         $stmt = $this->connect()->prepare($query);
@@ -89,7 +89,7 @@ class Airline_Administrator_Model extends Dbh
     }
 
     //add new row to airplane table
-    public function addNewAirplaneFromModel($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_type)
+    protected function addNewAirplaneFromModel($tail_no, $model, $no_platinum_seats, $no_economy_seats, $no_business_seats, $image, $file_type)
     {
         $query = "INSERT INTO airplane(tail_no, model, no_platinum_seats, no_economy_seats, no_business_seats, in_service, image, file_type)
              VALUES ( :tail_no, :model, :no_platinum_seats, :no_economy_seats, :no_business_seats, :in_service, :image, :file_type)";
@@ -113,7 +113,7 @@ class Airline_Administrator_Model extends Dbh
         }
     }
     //get no of passengers by given flight no----->generate reports
-    public function getNofPassengerByFlightNo($flight_no)
+    protected function getNofPassengerByFlightNo($flight_no)
     {
         $query = "SELECT *
         FROM booking join registered_passenger on booking.passenger_id=registered_passenger.passenger_id 
@@ -186,7 +186,7 @@ class Airline_Administrator_Model extends Dbh
         return $noofpassengers;
     }
     //get no of passenger by destination and time range----->generate reports
-    public function getNoPassengerByDaterangeDestination($destination, $starting_date, $ending_date)
+    protected function getNoPassengerByDaterangeDestination($destination, $starting_date, $ending_date)
     {
 
         $query = "SELECT * from booking join flight where booking.flight_id=flight.id 
@@ -202,7 +202,7 @@ class Airline_Administrator_Model extends Dbh
         return $passenger_list;
     }
      //get no of passenger by  time range----->generate reports
-     public function getNoPassengerByDaterange($starting_date,$ending_date){
+     protected function getNoPassengerByDaterange($starting_date,$ending_date){
         $query1="SELECT category,count(user_id) as count FROM booking join registered_passenger where booking.passenger_id=registered_passenger.passenger_id 
          and state=3 and date(booking_time)>=:starting_date and date(booking_time)<=:ending_date group by category order by category ";
         $stmt1 = $this->connect()->prepare($query1);
@@ -225,7 +225,7 @@ class Airline_Administrator_Model extends Dbh
          
      }
      //get no of passenger by  origin and destination----->generate reports
-     public function getFlightDeailsByOriginDestination($origin,$destination,$current_date,$current_time1){
+     protected function getFlightDeailsByOriginDestination($origin,$destination,$current_date,$current_time1){
          
          $query="SELECT  flight.id,destination,origin,count(booking.passenger_id) as no_of_passengerof_flight,flight.state  
          from flight left outer join booking on flight.id=booking.flight_id 
@@ -245,7 +245,7 @@ class Airline_Administrator_Model extends Dbh
 
      }
      //get total revenue----->generate reports
-     public function getRevenueByAircraft($starting_date,$ending_date)
+     protected function getRevenueByAircraft($starting_date,$ending_date)
      {
         $query="SELECT sum(ticket_price),model FROM 
         booking join flight on booking.flight_id=flight.id 
@@ -262,7 +262,7 @@ class Airline_Administrator_Model extends Dbh
         print_array($renue_list);
     }
     //get origin
-    public function getNameOfOrigins()
+    protected function getNameOfOrigins()
     {
         $query = "SELECT  distinct origin from flight order by origin";
         $stmt = $this->connect()->prepare($query);
@@ -271,7 +271,7 @@ class Airline_Administrator_Model extends Dbh
         return $origin_list;
     }
     //get destination
-    public function getNameOfDestination()
+    protected function getNameOfDestination()
     {
         $query = "SELECT  distinct destination from flight order by origin";
         $stmt = $this->connect()->prepare($query);
@@ -280,7 +280,7 @@ class Airline_Administrator_Model extends Dbh
         return $destination_list;
     }
     //get flight_no
-    public function  getFlightId()
+    protected function  getFlightId()
     {
         $query = "SELECT id as flight_id from flight order by id";
         $stmt = $this->connect()->prepare($query);
@@ -289,13 +289,13 @@ class Airline_Administrator_Model extends Dbh
         return $flightIdList;
     }
 
-    public function getFlightDispatcherDetails($search)
+    protected function getFlightDispatcherDetails($search)
     {
         if ($search != ''){
-            $query = "SELECT fd.user_id, u.username, fd.account_no, fd.airport_code, t.phone_no FROM flight_dispatcher as fd JOIN user as u JOIN telephone_no as t WHERE (u.ID = fd.user_id and t.user_id = fd.user_id) AND (fd.user_id LIKE '%{$search}%' OR u.username LIKE '%{$search}%')";
+            $query = "SELECT fd.user_id, u.username, fd.account_no, fd.airport_code, t.phone_no FROM flight_dispatcher as fd JOIN user as u JOIN telephone_no as t WHERE (u.ID = fd.user_id and t.user_id = fd.user_id) AND (fd.is_deleted = 0) AND (fd.user_id LIKE '%{$search}%' OR u.username LIKE '%{$search}%')";
         }
         else{
-            $query = "SELECT fd.user_id, u.username, fd.account_no, fd.airport_code, t.phone_no FROM flight_dispatcher as fd JOIN user as u JOIN telephone_no as t WHERE u.ID = fd.user_id and t.user_id = fd.user_id";
+            $query = "SELECT fd.user_id, u.username, fd.account_no, fd.airport_code, t.phone_no FROM flight_dispatcher as fd JOIN user as u JOIN telephone_no as t WHERE (u.ID = fd.user_id and t.user_id = fd.user_id) AND (fd.is_deleted = 0)";
         }
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
@@ -303,13 +303,13 @@ class Airline_Administrator_Model extends Dbh
         return $all_fd_details;
     }
 
-    public function getOperationsAgentDetails($search)
+    protected function getOperationsAgentDetails($search)
     {
         if ($search != ''){
-            $query = "SELECT oa.user_id, u.username, oa.account_no, oa.airport_code, t.phone_no FROM operations_agent as oa JOIN user as u JOIN telephone_no as t WHERE (u.ID = oa.user_id and t.user_id = oa.user_id) AND (oa.user_id LIKE '%{$search}%' OR u.username LIKE '%{$search}%')";
+            $query = "SELECT oa.user_id, u.username, oa.account_no, oa.airport_code, t.phone_no FROM operations_agent as oa JOIN user as u JOIN telephone_no as t WHERE (u.ID = oa.user_id and t.user_id = oa.user_id) AND (oa.is_deleted = 0) AND (oa.user_id LIKE '%{$search}%' OR u.username LIKE '%{$search}%')";
         }
         else{
-            $query = "SELECT oa.user_id, u.username, oa.account_no, oa.airport_code, t.phone_no FROM operations_agent as oa JOIN user as u JOIN telephone_no as t WHERE u.ID = oa.user_id and t.user_id = oa.user_id";
+            $query = "SELECT oa.user_id, u.username, oa.account_no, oa.airport_code, t.phone_no FROM operations_agent as oa JOIN user as u JOIN telephone_no as t WHERE (u.ID = oa.user_id and t.user_id = oa.user_id) AND (oa.is_deleted = 0)";
         }
         $stmt = $this->connect()->prepare($query);
         $stmt->execute();
@@ -317,7 +317,7 @@ class Airline_Administrator_Model extends Dbh
         return $all_oa_details;
     }
 
-    public function getAllAirports(){
+    protected function getAllAirports(){
         $pdo = $this->connect();
         $query = "SELECT airport_code,name,country FROM airport";
         $stmt = $pdo->prepare($query);
