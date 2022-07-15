@@ -10,8 +10,8 @@ class SignUp_Controller extends Signup_Model{
         $this->errors = array();
     }
     public function createRegisteredPassengerFromModel(Registered_Passenger $registeredPassenger){
-        // $this->validateDetails($registeredPassenger);
-        print_array($this->errors);
+         $this->validateDetails($registeredPassenger);
+//        print_array($this->errors);
         if(empty($this->errors)){
             $details = array(
                 'username'=>remove_unnessaries($registeredPassenger->getUsername()),
