@@ -102,25 +102,25 @@ if(isset($_SESSION['resetCondition'])){
                 $userTypeVal=$_SESSION['account_type'];
                 switch ($userTypeVal) { // Complete this wthen users are done
                     case '0':
-                        $location="location: ../airline_administrator_home.php";
+                        $location="airline_administrator_home.php";
                         break;
                     case '1':
-                        $location="location: ../operation_agent_home.php";
+                        $location="operation_agent_home.php";
                         break;
                     case '2':
-                        $location="location: ../flight_dispatcher_home.php";
+                        $location="flight_dispatcher_home.php";
                         break;
                     case '3':
-                        $location="location: ../passenger_home.php";
+                        $location="passenger_home.php";
                         break;
                     default:
-                        $location="location: ../login.php";
+                        $location="login.php";
                         break;
                 }
             }else{
-                $location="location: ../login.php";
+                $location="login.php";
             }
-            
+
         ?>
 
         <a class="btn btn-primary buttons" href="<?php echo $location ?>">Back</a>
