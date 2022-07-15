@@ -299,3 +299,7 @@ input[type=password]:placeholder {
     margin-top: auto;
     margin-bottom: auto;
   }
+
+  .errorTag{
+    background-color: rgba(255, 55, 0, 0.399);
+  }
