@@ -135,7 +135,7 @@ if(isset($_SESSION['errors'])){
                     </div>
                     <div class="col-sm-6">
                         <label for="email" class="form-label">Email:</label>
-                        <input class="form-control" type="email" name="email" id="email" placeholder="Enter Your Email Addressemail:">
+                        <input class="form-control" type="email" name="email" id="email" placeholder="Enter Your Email Address:">
                         <div Id="email_val" class="m-3"></div>
                     </div>
                 </div>

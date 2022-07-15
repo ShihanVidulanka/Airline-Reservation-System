@@ -11,7 +11,7 @@ if(isset($_POST['username'])){
     if(!(strcmp($responce,"empty")==0)){
         $varification_num = rand(100000, 999999);
         $email_api = new Email_Api();
-        $body = "B Airways: Your verification code is".$varification_num.".";
+        $body = "B Airways: Your verification code is :".$varification_num.".";
         $subject = "Verifycation code for resetting password";
         $recipient = $responce;
         $email = new Email($recipient,$subject,$body);

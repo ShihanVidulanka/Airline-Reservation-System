@@ -50,8 +50,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
             </div>
 
             <div class="btn-group">
-
-                <button type="submit" class="btn btn-primary buttons" name="submit" value="send">Send Varification Mail</button>
+                <button type="submit" class="btn btn-primary buttons" name="submit" value="send">Check</button>
                 <a class="btn btn-primary buttons" href="forget_password.php">Back</a>
             </div>
 
