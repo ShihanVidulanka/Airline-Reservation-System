@@ -9,6 +9,10 @@
             $text = "Username or Password is incorrect!!";
         } else if ($_GET['error'] == "ConnectionFails" || $_GET['error'] == "ConnectionFail2" || $_GET['error'] == "ConnectionFail3") {
             $text = "Connection Failed!!";
+        }else if(strcmp($_GET['error'],"change_successful")==0){
+            $text="Password Changed Successfully!!!";
+        }else if(strcmp($_GET['error'],"change_unsuccessful")==0){
+            $text="Password Changing Failed!!!";
         }
     }
     ?> <!DOCTYPE html>

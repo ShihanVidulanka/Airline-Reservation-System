@@ -13,7 +13,7 @@ class Seat_Reservation_Model extends Dbh{
                     on b.passenger_id=rp.passenger_id) UNION
                 (SELECT b.*,g.passport_number FROM booking AS b INNER JOIN guest as g on 
                     b.passenger_id=g.passenger_id)) AS bp 
-                WHERE passport_number=:passport_number AND flight_id=:flight_id;";
+                WHERE passport_number=:passport_number AND flight_id=:flight_id AND (state=2 or state=3);";
         $stmt=$pdo->prepare($query);
         $stmt->execute(
                 array(
