@@ -231,13 +231,13 @@ class Airline_Administrator_Model extends Dbh
          from flight left outer join booking on flight.id=booking.flight_id 
          where (booking.state=3 or booking.state is null) 
          and origin=:origin and destination=:destination 
-         and(departure_date<:current_date or(departure_date=:current_date and departure_time<:current_time1))
+         
           group by flight.id";
         $stmt=$this->connect()->prepare($query);
         $stmt->bindParam(':destination',$destination);
         $stmt->bindParam(':origin',$origin);
-        $stmt->bindParam(':current_date',$current_date);
-        $stmt->bindParam(':current_time1',$current_time1);
+        // $stmt->bindParam(':current_date',$current_date);
+        // $stmt->bindParam(':current_time1',$current_time1);
         $stmt->execute();
         $details_of_flights=$stmt->fetchAll(PDO::FETCH_ASSOC);
         return $details_of_flights;
