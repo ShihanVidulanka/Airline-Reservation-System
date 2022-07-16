@@ -6,14 +6,19 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/ad
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
 class Seat_Reservation_Model extends Dbh{
 
-    protected function checkForBookedSeatFromModel($flight_id,$passenger_id){
+    protected function checkForBookedSeatFromModel($flight_id, $passport_number){
         $pdo = $this->connect();
-        $query="SELECT * FROM booking WHERE flight_id=:flight_id AND passenger_id=:passenger_id AND state=3";
+        $query="SELECT * FROM 
+                ((SELECT b.*,rp.passport_number FROM booking AS b INNER JOIN registered_passenger as rp
+                    on b.passenger_id=rp.passenger_id) UNION
+                (SELECT b.*,g.passport_number FROM booking AS b INNER JOIN guest as g on 
+                    b.passenger_id=g.passenger_id)) AS bp 
+                WHERE passport_number=:passport_number AND flight_id=:flight_id;";
         $stmt=$pdo->prepare($query);
         $stmt->execute(
                 array(
                     ':flight_id'=>$flight_id,
-                    ':passenger_id'=>$passenger_id
+                    ':passport_number'=>$passport_number
                 )
                 );
         $rows=$stmt->rowCount();

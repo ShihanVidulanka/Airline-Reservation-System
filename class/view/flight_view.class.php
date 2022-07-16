@@ -33,7 +33,7 @@ class Flight_View extends Flight_Model{
             }
             $_SESSION['coefficient'] = $coefficient;
             //check flight['id'] and passenger_id are there in a booking
-            if(!$seat_reservation_controller->checkForBookedSeat($flight['id'],$_SESSION['passenger_id'])){
+            if(!$seat_reservation_controller->checkForBookedSeat($flight['id'],$_SESSION['passport_number'])){
                 echo "<tr>";    
                     echo '<td>'.$flight['id'].'</td>';  
                     echo '<td>'.$flight['origin'].'</td>';  
