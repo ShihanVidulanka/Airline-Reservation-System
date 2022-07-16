@@ -118,7 +118,7 @@ class Login_Model extends Dbh{
                     break;
 
                 case '3':            
-                    $_SESSION["NIC"] = $user_details["NIC"];
+//                    $_SESSION["NIC"] = $user_details["NIC"];
                     $_SESSION["dob"] = $user_details["dob"];
                     $_SESSION["passport_number"] = $user_details["passport_number"];
                     $_SESSION["category"] = $user_details["category"];

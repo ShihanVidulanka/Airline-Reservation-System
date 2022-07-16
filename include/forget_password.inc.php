@@ -17,6 +17,7 @@ if(isset($_POST['username'])){
         $email = new Email($recipient,$subject,$body);
         $email_api->sendMail($email);
         $_SESSION['verification_code']=$varification_num;
+        $_SESSION['username']=$_POST['username'];
         header("location: ../reset_verification.php");
     }else{
         header("location: ../forget_password.php?error=invalid_username");

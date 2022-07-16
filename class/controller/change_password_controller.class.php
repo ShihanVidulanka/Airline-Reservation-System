@@ -13,9 +13,7 @@ class Change_Password_Controller extends Change_Password_Model{
         if (!$resetCondition){
             echo $currentPassword;
             if($this->checkCurrentPasswordFromModel($currentPassword,$username)){
-                echo 3;
                 if ($this->validatePassword($password)&&($password==$retypePassword)){
-                    echo 4;
                     $this->changePasswordFromModel($username,$password);
                 }
             }

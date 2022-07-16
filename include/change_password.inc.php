@@ -7,6 +7,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/auto
 
 
 if($_POST['password']){
+//    print_array($_SESSION);
     $reset_condition=false;
     $current_password="";
     $password=$_POST['password'];
@@ -20,7 +21,7 @@ if($_POST['password']){
     if(!$reset_condition){
         $current_password=$_POST['current_password'];
     }
-
+//    echo $username;
     $change_password_controller = new Change_Password_Controller();
     $change_password_controller->changePassword($reset_condition,$username,$current_password,$password,$retypePassword);
 

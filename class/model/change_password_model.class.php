@@ -33,9 +33,7 @@ class Change_Password_Model extends Dbh{
             )
         );
         $result = $stmt->fetch();
-        print_array($result);
-        echo $currentPassword;
-        echo checkThePassword($currentPassword,$result['password']);
+
         return checkThePassword($currentPassword,$result['password']);
     }
     protected function changePasswordFromModel($username,$password){
@@ -47,11 +45,21 @@ class Change_Password_Model extends Dbh{
               ':username'=>$username
           )
         );
-        if(isset($_SESSION['username'])){
+        $rows=$stmt->rowCount();
+        if($rows>0){
+            if(isset($_SESSION['username'])){
                 header("location: ../change_password.php?error=change_successful");
+            }else{
+                header("location: ../login.php?error=change_successful");
+            }
         }else{
-            header("location: ../login.php?error=change_successful");
+            if(isset($_SESSION['username'])){
+                header("location: ../change_password.php?error=change_unsuccessful");
+            }else{
+                header("location: ../login.php?error=change_unsuccessful");
+            }
         }
+
     }
 
 
