@@ -15,6 +15,9 @@
           $email = $_GET['email'];
       }
   }
+if(!(isset($_SESSION['username'])&& isset($_SESSION['account_type']))){
+    header("Location: include/logout.inc.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

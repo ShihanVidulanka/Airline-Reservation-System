@@ -5,7 +5,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/additional.inc.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Airline-Reservation-System/include/autoloader.inc.php";
-
+if(!(isset($_SESSION['username'])&& isset($_SESSION['account_type']))){
+    header("Location: include/logout.inc.php");
+}
 
 $seat_reservation_view = new Seat_Reservation_View();
 $airplane = $seat_reservation_view->getPlaneDetailsFromModel($_POST['flight_id']);

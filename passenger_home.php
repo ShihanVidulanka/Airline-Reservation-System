@@ -2,7 +2,11 @@
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/additional.inc.php";
     require_once $_SERVER['DOCUMENT_ROOT']."/Airline-Reservation-System/include/autoloader.inc.php";
-    // print_array($_SESSION);
+
+    if(!(isset($_SESSION['username'])&& isset($_SESSION['account_type']))){
+        header("Location: include/logout.inc.php");
+    }
+
     $seat_reservation_controller = new Seat_Reservation_Controller();
     $seat_reservation_controller->createRegularCustomerFromModel();
     $passenger_view = new Passenger_View();

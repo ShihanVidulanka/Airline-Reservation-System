@@ -10,6 +10,9 @@ if(isset($_SESSION['errors'])){
     $errors = $_SESSION['errors'];
     unset($_SESSION['errors']);
 }
+if(!(isset($_SESSION['username'])&& isset($_SESSION['account_type']))){
+    header("Location: include/logout.inc.php");
+}
 
 $seat_reservation_controller = new Seat_Reservation_Controller();
 $seat_reservation_controller->createRegularCustomerFromModel();
