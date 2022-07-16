@@ -119,7 +119,7 @@ class Airline_Administrator_Model extends Dbh
         FROM booking join registered_passenger on booking.passenger_id=registered_passenger.passenger_id 
         where flight_id=:flight_no AND
         TIMESTAMPDIFF(year, dob, DATE(booking_time))>=18 AND
-        state=0
+        state=3
         ";
         $stmt = $this->connect()->prepare($query);
         $stmt->bindParam(':flight_no',$flight_no);
