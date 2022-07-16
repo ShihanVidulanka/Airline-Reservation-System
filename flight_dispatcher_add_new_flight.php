@@ -78,7 +78,7 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
   <div class="container pt-5">
     <div class="wrapper p-3">
       <h1 id="heading" class="mb-4">Add New Flight</h1>
-      <form id="add_new_flight_form" action="include/flight_dispatcher_add_new_flight2.inc.php" method="POST">
+      <form id="add_new_flight_form" action="include/flight_dispatcher_add_new_flight2.inc.php" method="POST" class="was-validated">
 
         <div class="row mb-3" id="error">
           <?php
@@ -106,6 +106,10 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
               ?>
             </select>
           </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-sm-12" id="destination_validation"></div>
         </div>
 
         <!-- Departure Date/Time -->
@@ -219,7 +223,7 @@ $destinations = $view->getDestinationsWithoutOrigin($_SESSION['airport_code']);
 
         <!-- Submit button -->
         <div class="btn-group">
-          <input onclick="checkAll();" class="btn btn-primary buttons" type="button" name='create' value="ADD">
+          <button onclick="checkAll();" class="btn btn-primary buttons" type="button" name='create'>Add</button>
 
         </div>
       </form>

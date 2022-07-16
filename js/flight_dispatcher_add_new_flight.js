@@ -2,6 +2,7 @@ var destination = document.getElementById('destination');
 var departure_date_time = document.getElementById('departure_date_time');
 var arrival_date_time = document.getElementById('arrival_date_time');
 var tail_no = document.getElementById('tail_no');
+var new_tail_no = document.getElementById('free_tail_no');
 var economy_price = document.getElementById('economy_price');
 var business_price = document.getElementById('business_price');
 var platinum_price = document.getElementById('platinum_price');
@@ -20,13 +21,13 @@ platinum_price.addEventListener("input", function () { platinumPriceListner() })
 
 function departureDateListner() {
     let responseElement = document.getElementById("departure_date_validation");
-    
-    if(checkCurrentDate(departure_date_time.value)){
+
+    if (checkCurrentDate(departure_date_time.value)) {
         incorrectDepartureDate = true;
         responseElement.innerHTML = "Invalid date";
         responseElement.style.color = 'Red';
         return;
-    }else{
+    } else {
         incorrectDepartureDate = false;
         responseElement.innerHTML = "Valid date";
         responseElement.style.color = 'Green';
@@ -42,7 +43,7 @@ function economyPriceListner() {
         responseElement.innerHTML = "Invalid Price";
         responseElement.style.color = 'Red';
         return;
-    }else{
+    } else {
         incorrectEconomyPrice = false;
         responseElement.innerHTML = "Valid Price";
         responseElement.style.color = 'Green';
@@ -52,13 +53,13 @@ function economyPriceListner() {
 
 function businessPriceListner() {
     let responseElement = document.getElementById("business_validation");
-    
+
     if (!valdiatePrice(business_price.value)) {
         incorrectBusinessPrice = true;
         responseElement.innerHTML = "Invalid Price";
         responseElement.style.color = 'Red';
         return;
-    }else{
+    } else {
         incorrectBusinessPrice = false;
         responseElement.innerHTML = "Valid Price";
         responseElement.style.color = 'Green';
@@ -68,13 +69,13 @@ function businessPriceListner() {
 
 function platinumPriceListner() {
     let responseElement = document.getElementById("platinum_validation");
-    
+
     if (!valdiatePrice(platinum_price.value)) {
         incorrectPlatinumPrice = true;
         responseElement.innerHTML = "Invalid Price";
         responseElement.style.color = 'Red';
         return;
-    }else{
+    } else {
         incorrectPlatinumPrice = false;
         responseElement.innerHTML = "Valid Price";
         responseElement.style.color = 'Green';
@@ -86,15 +87,18 @@ function arrivalDateListner() {
     let responseElement = document.getElementById("arrival_date_validation");
 
     if (checkDepartureDateEmpty(departure_date_time.value)) {
+        incorrectArrivalDate = true;
         responseElement.innerHTML = "Please select departure date";
         responseElement.style.color = 'Red';
         return;
     }
     else if (checkValidArrivalDate()) {
+        incorrectArrivalDate = true;
         responseElement.innerHTML = "Invalid Time";
         responseElement.style.color = 'Red';
         return;
     } else {
+        incorrectArrivalDate = false;
         responseElement.innerHTML = "Valid Time";
         responseElement.style.color = 'green';
         return;
@@ -127,41 +131,46 @@ function changeContent1(responseElementID, postingPage, dateTime) {
 
         let i = 0;
         let arrayLength = array.length;
-        do {
-            var row = tBody.insertRow(0);
+        console.log(arrayLength);
 
-            let arrayElement = array[i];
+        if (arrayLength > 0) {
+            do {
+                var row = tBody.insertRow(0);
 
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            var cell5 = row.insertCell(4);
-            var cell6 = row.insertCell(5);
-            var cell7 = row.insertCell(6);
-            var cell8 = row.insertCell(7);
+                let arrayElement = array[i];
 
-            var arrival_timedate = arrayElement['arrival_time'];
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
+                var cell6 = row.insertCell(5);
+                var cell7 = row.insertCell(6);
+                var cell8 = row.insertCell(7);
 
-            var dateTime = new Date(arrival_timedate);
-            var arrival_date = dateTime.toLocaleDateString();
-            var arrival_time = dateTime.toLocaleTimeString();
+                var arrival_timedate = arrayElement['arrival_time'];
 
-            var tail_no = arrayElement['tail_no'];
-            console.log(tail_no);
-            addOptionToFreePlanesDropDown(tail_no);
+                var dateTime = new Date(arrival_timedate);
+                var arrival_date = dateTime.toLocaleDateString();
+                var arrival_time = dateTime.toLocaleTimeString();
 
-            cell1.innerHTML = tail_no;
-            cell2.innerHTML = arrayElement['origin'];
-            cell3.innerHTML = arrayElement['destination'];
-            cell4.innerHTML = arrayElement['departure_date'];
-            cell5.innerHTML = arrayElement['departure_time'];
-            cell6.innerHTML = arrayElement['flight_time'];
-            cell7.innerHTML = arrival_date;
-            cell8.innerHTML = arrival_time;
+                var tail_no = arrayElement['tail_no'];
+                console.log(tail_no);
+                addOptionToFreePlanesDropDown(tail_no);
 
-            i++;
-        } while (i < arrayLength);
+                cell1.innerHTML = tail_no;
+                cell2.innerHTML = arrayElement['origin'];
+                cell3.innerHTML = arrayElement['destination'];
+                cell4.innerHTML = arrayElement['departure_date'];
+                cell5.innerHTML = arrayElement['departure_time'];
+                cell6.innerHTML = arrayElement['flight_time'];
+                cell7.innerHTML = arrival_date;
+                cell8.innerHTML = arrival_time;
+
+                i++;
+            } while (i < arrayLength);
+        }
+
 
     }
 
@@ -195,13 +204,17 @@ function changeContent2(freeResponseElementID, postingPage, freeDateTime) {
 
         let freeIndex = 0;
         let free_arrayLength = freeArray.length;
+        console.log(free_arrayLength);
 
-        do {
-            let freeArrayElement = freeArray[freeIndex];
-            var new_plane_tail_no = freeArrayElement['tail_no'];
-            addOptionToNewPlanesDropDown(new_plane_tail_no);
-            freeIndex++;
-        } while (freeIndex < free_arrayLength);
+        if (free_arrayLength > 0) {
+            do {
+                let freeArrayElement = freeArray[freeIndex];
+                var new_plane_tail_no = freeArrayElement['tail_no'];
+                addOptionToNewPlanesDropDown(new_plane_tail_no);
+                freeIndex++;
+            } while (freeIndex < free_arrayLength);
+        }
+
     }
 
     xhttp.open("POST", postingPage, true);
@@ -242,8 +255,9 @@ function checkValidArrivalDate() {
     let aTime = arrival.getTime();
 
     if (dTime > aTime || (aTime - dTime) > 86400000 || checkCurrentDate(departure)) {
+        // console.log('ddddd');
         return true;
-    }else {
+    } else {
         return false;
     }
 }
@@ -263,7 +277,13 @@ function checkCurrentDate(date) {
 }
 
 function checkAll() {
+    // console.log('c');
     let error_count = 0;
+
+    if (destination.value.length == 0 || departure_date_time.value.length == 0 || arrival_date_time.value.length == 0 ||
+        economy_price.value.length == 0 || business_price.value.length == 0 || platinum_price.value.length == 0 || (tail_no.value.length == 0 && new_tail_no.value.length == 0)) {
+        error_count++;
+    }
 
     if (incorrectDepartureDate) {
         error_count++;
@@ -280,10 +300,12 @@ function checkAll() {
     if (incorrectBusinessPrice) {
         error_count++;
     }
-    console.log(error_count);
-    if (error_count != 0) {
+    // console.log(error_count);
+    // console.log(error_count);
+    if (error_count == 0) {
+        document.getElementById('add_new_flight_form').submit();
+    } else {
+        // console.log(error_count);
         alert('Enter the correct details')
-    }else{
-        document.getElementById("add_new_flight_form").submit();
     }
 }
